@@ -1,0 +1,11 @@
+{
+  // tanmaypractice.com · hlavní web
+  // Stejný postup jako tanmay-web (apka):
+  // GitHub repo → Cloudflare Workers & Pages → custom domain tanmaypractice.com
+  "name": "tanmay-site",
+  "compatibility_date": "2026-07-01",
+  "assets": {
+    "directory": "./dist"
+  },
+  "workers_dev": false
+}
