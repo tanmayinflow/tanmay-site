@@ -33,11 +33,19 @@ const CSS = `
   --sand:#C5B49A; --linen:#F4F0EB; --bone:#F5F2EE; --copper:#B87333;
   --taupe:#8C7B6E; --stone:#BFB0A3; --ivory:#F7F2E9;
   --ff-display:'Cormorant Garamond',Georgia,serif;
+  --ff-logo:'Cormorant Garamond',Georgia,serif;
   --ff-body:'DM Sans',system-ui,sans-serif;
   --ff-tag:'Barlow Condensed',sans-serif;
   --ff-hand:'Caveat',cursive;
   --maxw:1180px;
 }
+/* CZ display · EB Garamond Regular 400 (brand rule §6)
+   Cormorant háčky/čárky čtou v češtině jako šum. Logo zůstává Cormorant (--ff-logo). */
+html[lang="cs"]{ --ff-display:'EB Garamond',Georgia,serif; }
+html[lang="cs"] .h-display{ letter-spacing:normal; }
+html[lang="cs"] .qa .q, html[lang="cs"] .vitem h3, html[lang="cs"] .card h3,
+html[lang="cs"] .card .price, html[lang="cs"] .event h3, html[lang="cs"] .post-card h3,
+html[lang="cs"] .reader h2{ font-weight:400; }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 section[id]{scroll-margin-top:70px}
@@ -107,7 +115,7 @@ section{position:relative}
 .btn.onlight:hover{background:var(--moss); color:var(--linen)}
 
 /* wordmark */
-.wm{font-family:var(--ff-display); font-weight:300; letter-spacing:.14em; position:relative; display:inline-block}
+.wm{font-family:var(--ff-logo); font-weight:300; letter-spacing:.14em; position:relative; display:inline-block}
 .wm .a1{position:relative}
 .wm .a1 .bindu{position:absolute; left:50%; transform:translateX(-50%); top:-.38em; width:.14em; height:.14em; border-radius:50%; background:var(--copper)}
 
