@@ -21,6 +21,18 @@ const detectLang = () => {
 };
 const L = (cs: string, en: string) => (LANG === "cs" ? cs : en);
 
+// ----------------------------------------------------------------------
+// ROUTER · hash (#/pribeh …), zpět v prohlížeči funguje zdarma
+// ----------------------------------------------------------------------
+const PAGES = ["pribeh", "praxe", "spoluprace", "denik", "udalosti", "kontakt"];
+const parseRoute = () => {
+  try {
+    const m = (window.location.hash || "").match(/^#\/([a-z]+)/);
+    if (m && PAGES.indexOf(m[1]) !== -1) return m[1];
+  } catch (e) {}
+  return "home";
+};
+
 const FONT_DISPLAY = "'Cormorant Garamond', Georgia, serif";
 const FONT_HAND = "'Caveat', cursive";
 
@@ -96,9 +108,20 @@ section{position:relative}
 .rv{opacity:0; transform:translateY(26px); transition:opacity .95s ease,transform .95s cubic-bezier(.2,.65,.25,1)}
 .rv.on{opacity:1; transform:none}
 .d1{transition-delay:.12s}.d2{transition-delay:.24s}.d3{transition-delay:.36s}.d4{transition-delay:.48s}
+
+/* page transition · quiet fade-rise on route change */
+@keyframes pageIn{from{opacity:0; transform:translateY(14px)}to{opacity:1; transform:none}}
+main.page{animation:pageIn .6s cubic-bezier(.22,.61,.36,1) both}
+
+/* bindu breathes · 6s cycle, barely there */
+@keyframes breathe{0%,100%{transform:translateX(-50%) scale(1); opacity:.92}50%{transform:translateX(-50%) scale(1.22); opacity:1}}
+.wm .a1 .bindu{animation:breathe 6s ease-in-out infinite}
+
 @media (prefers-reduced-motion:reduce){
   .rv{opacity:1;transform:none;transition:none}
   .blob,.blob2{animation:none!important}
+  main.page{animation:none}
+  .wm .a1 .bindu{animation:none}
 }
 
 /* buttons */
@@ -131,6 +154,22 @@ section{position:relative}
 .topbar .lang span{cursor:pointer; transition:color .3s}
 .topbar .lang span.act{color:var(--copper)}
 .topbar .lang span:hover{color:var(--copper)}
+.topnav{display:flex; align-items:center; gap:clamp(16px,2.2vw,30px); margin-left:auto}
+.topnav a{font-family:var(--ff-tag); font-weight:400; text-transform:uppercase; letter-spacing:.22em; font-size:12px; color:rgba(244,240,235,.72); transition:color .3s; position:relative; padding-top:8px}
+.topnav a:hover{color:var(--linen)}
+.topnav a.act{color:var(--copper)}
+.topnav a.act::before{content:""; position:absolute; top:0; left:50%; transform:translateX(-50%); width:4px; height:4px; border-radius:50%; background:var(--copper)}
+.topbar.scrolled .topnav a{color:var(--taupe)}
+.topbar.scrolled .topnav a:hover{color:var(--forest)}
+.topbar.scrolled .topnav a.act{color:var(--copper)}
+.topbar.on-light:not(.scrolled) .logo{color:var(--forest)}
+.topbar.on-light:not(.scrolled) .lang{color:var(--taupe)}
+.topbar.on-light:not(.scrolled) .topnav a{color:var(--taupe)}
+.topbar.on-light:not(.scrolled) .topnav a:hover{color:var(--forest)}
+.topbar.on-light:not(.scrolled) .topnav a.act{color:var(--copper)}
+.topbar.on-light:not(.scrolled) .burger span{background:var(--forest)}
+@media (max-width:940px){ .topnav{display:none} }
+@media (min-width:941px){ .burger{display:none} .topbar .right{margin-left:0} }
 .topbar .btn{padding:10px 22px 9px; font-size:12px}
 .topbar.scrolled{background:rgba(244,240,235,.93); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); padding:13px 0; box-shadow:0 1px 0 rgba(88,72,52,.14)}
 .topbar.scrolled .logo{color:var(--forest)}
@@ -369,6 +408,32 @@ section{position:relative}
 .contact .socials a{font-family:var(--ff-tag); letter-spacing:.24em; font-size:12.5px; text-transform:uppercase; color:var(--stone); transition:color .3s}
 .contact .socials a:hover{color:var(--copper)}
 
+/* ---------- page head · dark lintel above each room ---------- */
+.pagehead{background:var(--forest); color:var(--linen); padding:clamp(108px,14vh,150px) 0 clamp(26px,4vw,44px)}
+.pagehead .row{display:flex; align-items:baseline; justify-content:space-between; gap:18px; flex-wrap:wrap}
+.pagehead .back{font-family:var(--ff-tag); text-transform:uppercase; letter-spacing:.26em; font-size:12px; color:var(--stone); transition:color .3s}
+.pagehead .back:hover{color:var(--copper)}
+.pagehead .tag{color:var(--sand)}
+
+/* ---------- doors · home crossroads ---------- */
+.doors{background:var(--linen); padding:clamp(70px,9vw,120px) 0 clamp(90px,12vw,160px)}
+.doors .dgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:0 clamp(28px,4vw,56px)}
+.door{display:block; text-align:left; padding:clamp(26px,3.5vw,38px) 0 clamp(28px,4vw,42px); border-top:1px solid rgba(88,72,52,.22); position:relative}
+.door .dnum{font-family:var(--ff-tag); font-weight:400; letter-spacing:.28em; font-size:11.5px; color:var(--taupe)}
+.door h3{font-family:var(--ff-display); font-weight:400; font-size:clamp(1.5rem,2.6vw,1.95rem); line-height:1.15; margin-top:14px; color:var(--forest); transition:color .35s}
+.door .dline{font-size:13.5px; color:var(--taupe); margin-top:10px; line-height:1.6}
+.door .darr{display:inline-block; margin-top:18px; color:var(--copper); font-size:1.05rem; transition:transform .35s ease}
+.door::after{content:""; position:absolute; top:-1px; left:0; width:0; height:1px; background:var(--copper); transition:width .5s ease}
+.door:hover::after{width:44px}
+.door:hover h3{color:var(--copper)}
+.door:hover .darr{transform:translateX(8px)}
+
+/* ---------- next door · quiet path onward ---------- */
+.nextdoor{background:var(--ink); text-align:center; padding:clamp(64px,9vw,110px) 0}
+.nextdoor .nline{font-family:var(--ff-display); font-style:italic; font-weight:400; font-size:clamp(1.15rem,2.4vw,1.55rem); color:var(--stone); line-height:1.6}
+.nextdoor .ngo{display:inline-block; margin-top:22px; font-family:var(--ff-tag); text-transform:uppercase; letter-spacing:.28em; font-size:12.5px; color:var(--copper); transition:letter-spacing .4s ease}
+.nextdoor .ngo:hover{letter-spacing:.36em}
+
 /* ---------- closing · the name (brand book 12) ---------- */
 .closing{background:var(--ink); text-align:center; padding:clamp(84px,11vw,150px) 0 clamp(56px,8vw,100px)}
 .closing .cwm{margin-top:clamp(24px,3vw,36px)}
@@ -390,10 +455,14 @@ footer .fnote{font-size:12.5px; color:#6a625a; margin-top:26px; text-align:cente
 /* responsive */
 @media (max-width:920px){
   .cards,.notes .grid{grid-template-columns:1fr; gap:40px}
+  .doors .dgrid{grid-template-columns:1fr 1fr}
   .appband .inner{grid-template-columns:1fr}
   .event{grid-template-columns:1fr; gap:12px}
   .event .date{text-align:left; display:flex; gap:12px; align-items:baseline}
   .vitem{grid-template-columns:44px 1fr; gap:16px}
+}
+@media (max-width:600px){
+  .doors .dgrid{grid-template-columns:1fr}
 }
 `;
 
@@ -598,14 +667,18 @@ const POSTS = [
 ];
 
 const MENU = [
-  { num: "01", cs: "Tanmay", en: "Tanmay", href: "#tanmay" },
-  { num: "02", cs: "Praxe", en: "Practice", href: "#praxe" },
-  { num: "03", cs: "Spolupráce", en: "Work with me", href: "#spoluprace" },
-  { num: "04", cs: "Kruh", en: "The circle", href: "#kruh" },
-  { num: "05", cs: "Kdy & kde", en: "When & where", href: "#kdy" },
-  { num: "06", cs: "Deník praxe", en: "Practice log", href: "#zapisky" },
-  { num: "07", cs: "Poezie", en: "Poetry", href: "#poezie" },
-  { num: "08", cs: "Kontakt", en: "Contact", href: "#kontakt" },
+  { num: "01", cs: "Příběh", en: "The story", href: "#/pribeh", page: "pribeh",
+    lcs: "Pád, sestup, návrat.", len: "The fall, the descent, the return." },
+  { num: "02", cs: "Praxe", en: "The practice", href: "#/praxe", page: "praxe",
+    lcs: "Tři kotvy, jedna cesta.", len: "Three anchors, one path." },
+  { num: "03", cs: "Spolupráce", en: "Work with me", href: "#/spoluprace", page: "spoluprace",
+    lcs: "Málo lidí, do hloubky.", len: "Few people, in depth." },
+  { num: "04", cs: "Deník praxe", en: "Practice log", href: "#/denik", page: "denik",
+    lcs: "Praxe, jaká byla.", len: "The practice as it was." },
+  { num: "05", cs: "Kdy & kde", en: "When & where", href: "#/udalosti", page: "udalosti",
+    lcs: "Základna Praha. Učebna les.", len: "Base: Prague. Classroom: the forest." },
+  { num: "06", cs: "Kontakt", en: "Contact", href: "#/kontakt", page: "kontakt",
+    lcs: "Začíná to rozhovorem.", len: "It begins with a conversation." },
 ];
 
 const MAIL = "tanmay.in.flow@gmail.com";
@@ -613,13 +686,71 @@ const APP_URL = "https://app.tanmaypractice.com";
 const IG_URL = "https://www.instagram.com/tanmayflow/";
 
 // ----------------------------------------------------------------------
+// PAGES · shared parts
+// ----------------------------------------------------------------------
+/** Tmavý překlad nade dveřmi každé samostatné stránky. */
+function PageHead({ item, waveFill = null, waveVariant = 0 }: any) {
+  return (
+    <div className="pagehead">
+      <div className="wrap">
+        <div className="row">
+          <a className="back" href="#/">‹ {L("Domů", "Home")}</a>
+          <div className="tag">{item.num} · {L(item.cs, item.en)}</div>
+        </div>
+      </div>
+      {waveFill ? <Wave fill={waveFill} variant={waveVariant} /> : null}
+    </div>
+  );
+}
+
+/** Rozcestí na domovské stránce — šest dveří, čísla nesou pořadí menu. */
+function Doors() {
+  return (
+    <section className="doors">
+      <div className="wrap">
+        <div className="dgrid">
+          {MENU.map((m, i) => (
+            <a key={m.num} className={"door rv" + (i % 3 ? " d" + (i % 3) : "")} href={m.href}>
+              <div className="dnum">{m.num}</div>
+              <h3>{L(m.cs, m.en)}</h3>
+              <div className="dline">{L(m.lcs, m.len)}</div>
+              <span className="darr" aria-hidden="true">→</span>
+            </a>
+          ))}
+        </div>
+      </div>
+      <Wave fill="#1A1612" variant={3} />
+    </section>
+  );
+}
+
+/** Tichý pás na konci stránky — cesta dál. */
+function NextDoor({ toHref, cs, en, gocs, goen }: any) {
+  return (
+    <div className="nextdoor">
+      <div className="wrap">
+        <div className="nline rv">{L(cs, en)}</div>
+        <div className="rv d1">
+          <a className="ngo" href={toHref}>{L(gocs, goen)} →</a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ----------------------------------------------------------------------
 // SECTIONS
 // ----------------------------------------------------------------------
-function TopBar({ scrolled, menuOpen, onBurger, lang, onLang }: any) {
+function TopBar({ scrolled, menuOpen, onBurger, lang, onLang, page }: any) {
   return (
     <div className={"topbar" + (scrolled ? " scrolled" : "") + (menuOpen ? " menu-open" : "")}>
       <div className="wrap">
-        <a href="#top" className="logo"><Wordmark /></a>
+        <a href="#/" className="logo"><Wordmark /></a>
+        <nav className="topnav" aria-label="main">
+          {MENU.map((m) => (
+            <a key={m.num} className={page === m.page ? "act" : ""} href={m.href}>{L(m.cs, m.en)}</a>
+          ))}
+        </nav>
         <div className="right">
           <span className="lang">
             <span className={lang === "cs" ? "act" : ""} onClick={() => onLang("cs")}>CZ</span>
@@ -687,8 +818,8 @@ function Hero() {
              "I teach what I live. Movement, meditation, wild nature. Prague.")}
         </div>
         <div className="cta rv d3">
-          <a className="btn solid" href="#spoluprace">{L("Spolupráce", "Work with me")}</a>
-          <a className="btn" href="#tanmay">{L("Můj příběh", "My story")}</a>
+          <a className="btn solid" href="#/spoluprace">{L("Spolupráce", "Work with me")}</a>
+          <a className="btn" href="#/pribeh">{L("Můj příběh", "My story")}</a>
         </div>
       </div>
       <div className="scrolldn">
@@ -769,7 +900,7 @@ function Letter() {
           </div>
         </div>
       </div>
-      <Wave fill="#1C1C1A" variant={1} abs />
+      <Wave fill="#1A1612" variant={1} abs />
       <div className="wave-spacer" />
     </section>
   );
@@ -1009,7 +1140,7 @@ function Kruh() {
              "The circle is small on purpose. Clients' words will appear here when they are theirs — not mine.")}
         </div>
       </div>
-      <Wave fill="#F4F0EB" variant={3} abs />
+      <Wave fill="#1A1612" variant={3} abs />
       <div className="wave-spacer" />
     </section>
   );
@@ -1074,7 +1205,7 @@ function KdyKde() {
           <a href={"mailto:" + MAIL + "?subject=" + L("Udalosti", "Events")}>{L("Napiš mi", "Write to me")}</a>.
         </div>
       </div>
-      <Wave fill="#F5F2EE" variant={4} abs />
+      <Wave fill="#1A1612" variant={4} abs />
       <div className="wave-spacer" />
     </section>
   );
@@ -1185,15 +1316,13 @@ function Poetry() {
           <Squig w={180} variant={0} cls="center" />
         </div>
       </div>
-      <Wave fill="#F4F0EB" variant={2} abs />
-      <div className="wave-spacer" />
     </section>
   );
 }
 
-function Contact() {
+function Contact({ standalone = false }: any) {
   return (
-    <section className="contact sec-pad" id="kontakt">
+    <section className="contact sec-pad" id="kontakt" style={standalone ? { clipPath: "none" } : undefined}>
       <div className="wrap">
         <div className="rv">
           <SectionTag num="08" cs="Kontakt" en="Contact" />
@@ -1268,9 +1397,21 @@ function Footer() {
 export default function App() {
   const [lang, setLangState] = useState(detectLang());
   LANG = lang;
+  const [page, setPage] = useState(parseRoute());
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [post, setPost] = useState<any>(null);
+
+  useEffect(() => {
+    const onHash = () => {
+      setPage(parseRoute());
+      setMenuOpen(false);
+      setPost(null);
+      window.scrollTo({ top: 0, behavior: "instant" as any });
+    };
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, []);
 
   const setLang = (l: string) => {
     setLangState(l);
@@ -1304,9 +1445,9 @@ export default function App() {
       }),
       { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
     );
-    document.querySelectorAll(".rv").forEach((el) => io.observe(el));
+    document.querySelectorAll(".rv:not(.on)").forEach((el) => io.observe(el));
     return () => io.disconnect();
-  }, []);
+  }, [page]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -1321,20 +1462,65 @@ export default function App() {
         onBurger={() => setMenuOpen((o) => !o)}
         lang={lang}
         onLang={setLang}
+        page={page}
       />
       <Menu open={menuOpen} onClose={() => setMenuOpen(false)} />
-      <Hero />
-      <Letter />
-      <Praxe />
-      <Values />
-      <Offer />
-      <AppBand />
-      <Kruh />
-      <KdyKde />
-      <Notes onOpen={setPost} />
-      <Poetry />
-      <Contact />
-      <Closing />
+      <main className="page" key={page}>
+        {page === "home" && (<>
+          <Hero />
+          <Doors />
+          <Closing />
+        </>)}
+        {page === "pribeh" && (<>
+          <PageHead item={MENU[0]} waveFill="#F4F0EB" waveVariant={0} />
+          <Letter />
+          <Poetry />
+          <NextDoor toHref="#/praxe"
+            cs="Příběh je pozadí. Práce je praxe."
+            en="The story is the background. The work is the practice."
+            gocs="Dál · Praxe" goen="Next · The practice" />
+        </>)}
+        {page === "praxe" && (<>
+          <PageHead item={MENU[1]} />
+          <Praxe />
+          <Values />
+          <Wave fill="#1A1612" variant={2} />
+          <NextDoor toHref="#/spoluprace"
+            cs="Chceš praktikovat se mnou?"
+            en="Want to practice with me?"
+            gocs="Dál · Spolupráce" goen="Next · Work with me" />
+        </>)}
+        {page === "spoluprace" && (<>
+          <PageHead item={MENU[2]} waveFill="#F4F0EB" waveVariant={4} />
+          <Offer />
+          <AppBand />
+          <Kruh />
+          <NextDoor toHref="#/denik"
+            cs="Ještě nevíš? Čti deník praxe."
+            en="Not sure yet? Read the practice log."
+            gocs="Dál · Deník praxe" goen="Next · Practice log" />
+        </>)}
+        {page === "denik" && (<>
+          <PageHead item={MENU[3]} waveFill="#F5F2EE" waveVariant={1} />
+          <Notes onOpen={setPost} />
+          <NextDoor toHref="#/udalosti"
+            cs="Nejpoctivější seznámení je den v lese."
+            en="The most honest introduction is a day in the forest."
+            gocs="Dál · Kdy & kde" goen="Next · When & where" />
+        </>)}
+        {page === "udalosti" && (<>
+          <PageHead item={MENU[4]} waveFill="#F4F0EB" waveVariant={2} />
+          <KdyKde />
+          <NextDoor toHref="#/kontakt"
+            cs="Začíná to rozhovorem."
+            en="It begins with a conversation."
+            gocs="Dál · Kontakt" goen="Next · Contact" />
+        </>)}
+        {page === "kontakt" && (<>
+          <PageHead item={MENU[5]} />
+          <Contact standalone />
+        </>)}
+      </main>
       <Footer />
       <Reader post={post} onClose={() => setPost(null)} />
     </>
