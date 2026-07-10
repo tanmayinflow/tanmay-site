@@ -235,6 +235,7 @@ section{position:relative}
 .qa .q{font-family:var(--ff-display); font-weight:500; font-size:clamp(1.35rem,2.6vw,1.8rem); color:var(--linen)}
 .qa .q .qm{color:var(--copper)}
 .qa .a{font-size:15.5px; color:var(--stone); margin-top:12px; line-height:1.8; max-width:38em}
+.praxe .anchorline{font-family:var(--ff-display); font-style:italic; font-weight:400; font-size:clamp(1.05rem,2.1vw,1.3rem); line-height:1.7; color:var(--sand); text-align:center; max-width:30em; margin:clamp(44px,6vw,64px) auto 0}
 .qa .qsep{height:20px}
 .qa .qsep path{stroke:rgba(124,140,110,.45); stroke-width:1.3; fill:none; stroke-linecap:round}
 
@@ -368,14 +369,16 @@ section{position:relative}
 .contact .socials a{font-family:var(--ff-tag); letter-spacing:.24em; font-size:12.5px; text-transform:uppercase; color:var(--stone); transition:color .3s}
 .contact .socials a:hover{color:var(--copper)}
 
-/* ---------- signoff (Ido: MOVE!) ---------- */
-.signoff{background:var(--ink); text-align:center; padding:clamp(70px,10vw,130px) 0 clamp(50px,7vw,90px)}
-.signoff .big{
-  font-family:var(--ff-display); font-style:italic; font-weight:400;
-  font-size:clamp(3rem,10vw,7rem); color:var(--linen); line-height:1;
-}
-.signoff .big .dotend{color:var(--copper)}
-.signoff .mantra{font-family:var(--ff-tag); letter-spacing:.5em; font-size:clamp(10px,1.5vw,13px); color:var(--taupe); text-transform:uppercase; margin-top:26px}
+/* ---------- closing · the name (brand book 12) ---------- */
+.closing{background:var(--ink); text-align:center; padding:clamp(84px,11vw,150px) 0 clamp(56px,8vw,100px)}
+.closing .cwm{margin-top:clamp(24px,3vw,36px)}
+.closing .cwm .wm{font-size:clamp(46px,8vw,78px); color:var(--linen)}
+.closing .cmean{font-family:var(--ff-display); font-style:italic; color:var(--sand); font-size:clamp(.95rem,1.8vw,1.1rem); margin-top:18px}
+.closing .cpoem{font-family:var(--ff-display); font-style:italic; font-weight:400; font-size:clamp(1.1rem,2.3vw,1.45rem); line-height:1.8; color:var(--stone); max-width:26em; margin:clamp(30px,4vw,44px) auto 0}
+.closing .cdiv{width:44px; height:1px; background:var(--copper); opacity:.7; margin:clamp(44px,6vw,64px) auto clamp(26px,4vw,38px)}
+.closing .big{font-family:var(--ff-display); font-weight:400; font-size:clamp(2rem,6.5vw,4.2rem); color:var(--linen); line-height:1.15; margin-top:18px}
+.closing .cecho{font-family:var(--ff-display); font-style:italic; color:var(--taupe); font-size:clamp(1rem,2vw,1.25rem); margin-top:14px}
+.closing .mantra{font-family:var(--ff-tag); letter-spacing:.5em; font-size:clamp(10px,1.5vw,13px); color:var(--taupe); text-transform:uppercase; margin-top:clamp(36px,5vw,50px)}
 
 /* ---------- footer ---------- */
 footer{background:var(--ink); color:var(--stone); padding:0 0 44px}
@@ -444,8 +447,8 @@ const SectionTag = ({ num, cs, en, cls = "" }: { num: string; cs: string; en: st
 // DATA
 // ----------------------------------------------------------------------
 const QUOTES = [
-  { cs: "Důvěřuj tělu.", en: "Trust the body.", scs: "Je to první učitel.", sen: "It is the first teacher." },
-  { cs: "Praktikuj poctivě.", en: "Practice honestly.", scs: "Bez publika. Bez pointy.", sen: "No audience. No punchline." },
+  { cs: "Důvěřuj tělu.", en: "Trust the body.", scs: "Půda, která nelže.", sen: "The ground that does not lie." },
+  { cs: "Drž svou praxi.", en: "Hold the practice.", scs: "Den za dnem. I když se nic neděje.", sen: "Day after day. Even when nothing happens." },
   { cs: "Naslouchej divočině.", en: "Listen to the wild.", scs: "Les je první zrcadlo.", sen: "The forest is the first mirror." },
 ];
 
@@ -456,9 +459,9 @@ const VALUES = [
     pen: "I don't train the body to look good in a photo. I care for it like a house I want to grow old in.",
   },
   {
-    cs: "Vedu zepředu.", en: "I lead from the front.",
-    pcs: "Praktikuju víc, než učím. Každý den, i když se nikdo nedívá. Učitel, který přestal praktikovat, nemá co předat.",
-    pen: "I practice more than I teach. Every day, even when no one is watching. A teacher who stopped practicing has nothing left to give.",
+    cs: "Praktikuju víc, než učím.", en: "I practice more than I teach.",
+    pcs: "Každý den, i když se nikdo nedívá. Učitel, který přestal praktikovat, nemá co předat.",
+    pen: "Every day, even when no one is watching. A teacher who stopped practicing has nothing left to give.",
   },
   {
     cs: "Stín patří ke světlu.", en: "Shadow belongs with the light.",
@@ -485,18 +488,18 @@ const VALUES = [
 const QA = [
   {
     qcs: "Co je to praxe", qen: "What is the practice",
-    acs: "Denní práce s tělem a myslí, držená pohromadě divočinou. Kalistenika a jóga jako řemeslo. Meditace jako základ. Návraty na stejná místa v lese napříč ročními dobami. Tři kotvy, jedna cesta.",
-    aen: "Daily work with body and mind, held together by the wild. Calisthenics and yoga as the craft. Meditation as the ground. Returning to the same places in the forest across seasons. Three anchors, one path.",
+    acs: "Denní práce s tělem a myslí, držená pohromadě divočinou. Kalistenika a jóga jako brána. Meditace a psychologická práce jako propojení. Návraty na stejná místa v lese napříč ročními dobami. Tři kotvy, jedna cesta.",
+    aen: "Daily work with body and mind, held together by the wild. Calisthenics and yoga as the gateway. Meditation and psychological work as the integrator. Returning to the same places in the forest across seasons. Three anchors, one path.",
   },
   {
     qcs: "Co praxe není", qen: "What the practice is not",
-    acs: "Fitness. Wellness. Seberozvoj na výkon. Nebudeš tu sbírat certifikáty ani honit metriky. Přítomnost není pocit — je to, co vzniká, když tělo, praxe a divočina drží pohromadě.",
-    aen: "Fitness. Wellness. Self-development as performance. You will not collect certificates or chase metrics here. Presence is not a feeling — it is what arises when body, practice and the wild are held together.",
+    acs: "Fitness. Wellness. Seberozvoj na výkon. Nebudeš tu sbírat certifikáty ani honit metriky. Žádné před a po — praxe je výsledek.",
+    aen: "Fitness. Wellness. Self-development as performance. You will not collect certificates or chase metrics here. No before and after — the practice is the result.",
   },
   {
     qcs: "Jak začít", qen: "How to begin",
-    acs: "Rozhovorem. Třicet minut, zdarma, bez závazku. Nebo přijď na událost — den v lese je nejpoctivější seznámení. A nebo prostě čti zápisky a rozhodni se, až to bude zrát.",
-    aen: "With a conversation. Thirty minutes, free, no strings. Or come to an event — a day in the forest is the most honest introduction. Or simply read the field notes and decide when it ripens.",
+    acs: "Rozhovorem. Třicet minut, zdarma, bez závazku. Nebo přijď na událost — den v lese je nejpoctivější seznámení. A nebo prostě čti deník praxe a rozhodni se, až to bude zrát.",
+    aen: "With a conversation. Thirty minutes, free, no strings. Or come to an event — a day in the forest is the most honest introduction. Or simply read the practice log and decide when it ripens.",
   },
 ];
 
@@ -600,7 +603,7 @@ const MENU = [
   { num: "03", cs: "Spolupráce", en: "Work with me", href: "#spoluprace" },
   { num: "04", cs: "Kruh", en: "The circle", href: "#kruh" },
   { num: "05", cs: "Kdy & kde", en: "When & where", href: "#kdy" },
-  { num: "06", cs: "Zápisky", en: "Field notes", href: "#zapisky" },
+  { num: "06", cs: "Deník praxe", en: "Practice log", href: "#zapisky" },
   { num: "07", cs: "Poezie", en: "Poetry", href: "#poezie" },
   { num: "08", cs: "Kontakt", en: "Contact", href: "#kontakt" },
 ];
@@ -680,8 +683,8 @@ function Hero() {
           ))}
         </div>
         <div className="sub rv d2">
-          {L("Pohybová a kontemplativní praxe. Praha a divočina.",
-             "Movement and contemplative practice. Prague and the wild.")}
+          {L("Učím to, co žiju. Pohyb, meditace, divoká příroda. Praha.",
+             "I teach what I live. Movement, meditation, wild nature. Prague.")}
         </div>
         <div className="cta rv d3">
           <a className="btn solid" href="#spoluprace">{L("Spolupráce", "Work with me")}</a>
@@ -704,7 +707,7 @@ function Letter() {
         <div className="head rv">
           <SectionTag num="01" cs="Tanmay" en="Tanmay" />
           <h2 className="h-display h-lg" style={{ marginTop: 24 }}>
-            {L("Zemřel jsem. Vrátil jsem se.", "I died. I came back.")}<br />
+            {L("Málem jsem zemřel. Vrátil jsem se.", "I almost died. I came back.")}<br />
             <span className="it copper">{L("Něco zůstalo.", "Something stayed.")}</span>
           </h2>
         </div>
@@ -712,14 +715,14 @@ function Letter() {
         <div className="prose">
           <p className="rv">
             {L(
-              "Jmenuji se Tanmay. To jméno znamená „ten, kdo je plně pohlcen“. Nedostal jsem ho — vybral jsem si ho, když starý život skončil a začal jiný.",
-              "My name is Tanmay. The name means “one who is fully absorbed”. I was not given it — I chose it when an old life ended and another began."
+              "Jmenuji se Tanmay. To jméno jsem nedostal — vybral jsem si ho, když starý život skončil a začal jiný.",
+              "My name is Tanmay. I was not given the name — I chose it when an old life ended and another began."
             )}
           </p>
           <p className="rv">
             {L(
-              "Měl jsem všechno. Tělo, mysl, disciplínu, lásku, práci. Jedna vteřina to vzala. Nehoda, kóma, půlka lebky. Lékaři říkali, že už se nebudu hýbat.",
-              "I had everything. Body, mind, discipline, love, work. One second took it all. An accident, a coma, half a skull. The doctors said I would not move again."
+              "Měl jsem všechno. Tělo, mysl, disciplínu, lásku, naplňující práci. Téměř smrtelná nehoda to vzala v jediném okamžiku. Kóma. Chybějící půlka lebky. Lékaři řekli, že už se nikdy nebudu hýbat.",
+              "I had everything. Body, mind, discipline, love, fulfilling work. A near-fatal accident took all of it in one moment. A coma. Half a skull missing. The doctors said I would not move again."
             )}
           </p>
         </div>
@@ -734,14 +737,14 @@ function Letter() {
         <div className="prose">
           <p className="rv">
             {L(
-              "Následovaly dva roky stavění z ničeho. Tělo, které neposlouchalo. Mysl, která se ztrácela. Identita rozpuštěná. Učil jsem se znovu věci, o kterých zdravý člověk ani neví, že je umí.",
-              "What followed were two years of building from nothing. A body that did not obey. A mind that kept slipping. Identity dissolved. I relearned things a healthy person doesn't even know they know."
+              "Následovaly dva roky stavění od nuly. Tělo, které nefungovalo. Pokřivená mysl. Rozpuštěná identita. Naučil jsem se, co většina nikdy nemusí: že všechno, čím si člověk myslí, že je, může být vzato v jediné vteřině. Ale za tím leží velká jistota.",
+              "What followed were two years of rebuilding from nothing. A body that did not work. A mind distorted. Identity dissolved. I learned what most never have to: that everything a person thinks they are can be taken in a second. But beyond it lies a great certainty."
             )}
           </p>
           <p className="rv">
             {L(
-              "Dnes stojím na rukou v lesích. Praktikuji denně — kalisteniku a jógu, meditaci, návraty do divočiny. To, co učím, je starší než já: jsem student tradice, ne její autor.",
-              "Today I stand on my hands in forests. I practice daily — calisthenics and yoga, meditation, returns to the wild. What I teach is older than me: I am a student of a tradition, not its author."
+              "Otázka už nezní, co od tohoto života chci. Ale co tento život žádá ode mě. Dnes stojím na rukou v lesích. Praktikuji denně — kalisteniku a jógu, meditaci, návraty do divočiny. To, co učím, je starší než já: jsem student tradice, ne její autor.",
+              "The question is no longer what I want from this life. It is what this life is asking of me. Today I stand on my hands in forests. I practice daily — calisthenics and yoga, meditation, returns to the wild. What I teach is older than me: I am a student of a tradition, not its author."
             )}
           </p>
         </div>
@@ -749,15 +752,15 @@ function Letter() {
         <div className="interrupt rv" style={{ background: "var(--forest)" }}>
           <div className="iq">
             {L("Tělo, které nefungovalo,", "The body that would not work")}<br />
-            <span className="hl">{L("je můj nejpřísnější učitel.", "is my most authoritative teacher.")}</span>
+            <span className="hl">{L("je dnes můj největší učitel.", "is my most authoritative teacher.")}</span>
           </div>
         </div>
 
         <div className="prose">
           <p className="rv">
             {L(
-              "A proč učím? Potkávám disciplinované, chytré lidi, kteří dělají všechno správně — a přesto cítí, že něco podstatného chybí. Spojení těla, hlavy a srdce. To, co jim chybí, se nedá přečíst. Dá se jen praktikovat.",
-              "And why do I teach? I keep meeting disciplined, intelligent people doing everything right — who still feel something essential is missing. The connection of body, head and heart. The thing they are missing cannot be read. It can only be practiced."
+              "A proč učím? Potkávám lidi, kteří to myslí vážně. Dělají všechno správně — a přesto cítí, že něco podstatného chybí. To, co jim chybí, se nedá přečíst. Dá se to jen praktikovat.",
+              "And why do I teach? I keep meeting committed, intelligent people doing everything right — who still feel something essential is missing. The thing they are missing cannot be read. It can only be practiced."
             )}
           </p>
           <div className="rv" style={{ textAlign: "center" }}>
@@ -780,8 +783,8 @@ function Praxe() {
           <SectionTag num="02" cs="Praxe" en="The practice" cls="sand" />
         </div>
         <div className="bigline rv" style={{ marginTop: 34 }}>
-          {L("Tělo. Pozornost. Divočina.", "Body. Attention. Wilderness.")}<br />
-          <span className="it">{L("Jedna cesta.", "One path.")}</span>
+          {L("Přítomnost není pocit.", "Presence is not a feeling.")}<br />
+          <span className="it">{L("Vzniká, když tělo, praxe a divočina drží pohromadě.", "It arises when body, practice and the wild are held together.")}</span>
         </div>
 
         <div className="qa">
@@ -799,6 +802,13 @@ function Praxe() {
             </div>
           ))}
         </div>
+
+        <div className="anchorline rv">
+          {L(
+            "Tělo uzemňuje. Praxe propojuje. Divočina zrcadlí — a učí člověka nechat se zrcadlit všude jinde.",
+            "Body grounds. Practice integrates. The wild reflects — and teaches a person to be reflected everywhere else."
+          )}
+        </div>
       </div>
       <Wave fill="#F4F0EB" variant={2} abs />
       <div className="wave-spacer" />
@@ -813,7 +823,7 @@ function Values() {
         <div className="rv" style={{ textAlign: "center" }}>
           <div className="tag sage">{L("Čemu věřím", "What I believe")}</div>
           <h2 className="h-display h-lg" style={{ marginTop: 20 }}>
-            {L("Značku dělá to,", "A practice is made")}<br />
+            {L("Praxi dělá to,", "A practice is made")}<br />
             <span className="it sagec">{L("co odmítne.", "by what it refuses.")}</span>
           </h2>
         </div>
@@ -953,7 +963,7 @@ function AppBand() {
           <div className="mtitle">app.tanmaypractice.com</div>
           <div className="mrow"><span className="dot" /><span className="mt">{L("Tréninkový plán · týden 7 / 12", "Training plan · week 7 / 12")}</span></div>
           <div className="mrow"><span className="dot s" /><span className="mt">{L("Progress · stoj na rukou 22 s", "Progress · handstand 22 s")}</span></div>
-          <div className="mrow"><span className="dot n" /><span className="mt">{L("Deník praxe · 4 zápisy tento týden", "Practice journal · 4 entries this week")}</span></div>
+          <div className="mrow"><span className="dot n" /><span className="mt">{L("Deník praxe · 4 zápisy tento týden", "Practice log · 4 entries this week")}</span></div>
           <div className="mrow"><span className="dot" /><span className="mt">{L("Poznámky ze setkání · středa", "Session notes · Wednesday")}</span></div>
         </div>
       </div>
@@ -974,8 +984,8 @@ function Kruh() {
         <div className="who rv">
           <p>
             {L(
-              "Lidé, kteří mají za sebou roky práce na sobě. Trénují, čtou, meditují, byli v terapii. Disciplinovaní a chytří — a přesto cítí, že něco podstatného chybí.",
-              "People with years of inner work behind them. They train, read, meditate, have been to therapy. Disciplined and intelligent — and still they feel something essential is missing."
+              "Lidé, kteří to myslí vážně a mají za sebou roky práce na sobě. Trénují, čtou, meditují, byli v terapii. A přesto cítí, že něco podstatného chybí.",
+              "Committed people with years of inner work behind them. They train, read, meditate, have been to therapy. And still they feel something essential is missing."
             )}
           </p>
           <p>
@@ -989,8 +999,8 @@ function Kruh() {
           <div className="tag sand ptag">{L("Nepsaná smlouva", "The unspoken contract")}</div>
           <div className="ptxt">
             {L(
-              "Nebudu ti lhát. Nebudu předstírat, že to mám vyřešené. Budu sdílet, čím jsem skutečně prošel — a nechám na tobě, co s tím uděláš.",
-              "I will not lie to you. I will not pretend I have it figured out. I will share what I have actually walked through — and let you decide what to do with it."
+              "Nebudu ti lhát. Nebudu předstírat, že to mám vyřešené. Budu sdílet to, čím jsem skutečně prošel, a budu respektovat tvou inteligenci natolik, že se sám rozhodneš, co s tím uděláš.",
+              "I will not lie to you. I will not pretend I have it figured out. I will share what I have actually walked through, and I will respect your intelligence enough to let you decide what to do with it."
             )}
           </div>
         </div>
@@ -1075,7 +1085,7 @@ function Notes({ onOpen }: any) {
     <section className="notes" id="zapisky" style={{ paddingBottom: "clamp(84px,11vw,150px)" }}>
       <div className="wrap">
         <div className="rv" style={{ textAlign: "center" }}>
-          <SectionTag num="06" cs="Zápisky z praxe" en="Field notes" />
+          <SectionTag num="06" cs="Deník praxe" en="Practice log" />
           <h2 className="h-display h-lg" style={{ marginTop: 22 }}>
             {L("Píšu o tom,", "I write about")} <span className="it copper">{L("co žiju.", "what I live.")}</span>
           </h2>
@@ -1209,11 +1219,27 @@ function Contact() {
   );
 }
 
-function SignOff() {
+function Closing() {
   return (
-    <div className="signoff">
-      <div className="big rv">{L("Praktikuj", "Practice")}<span className="dotend">.</span></div>
-      <div className="mantra rv d1">move · practice · listen</div>
+    <div className="closing">
+      <div className="wrap">
+        <div className="tag sand rv">{L("Jméno", "The name")}</div>
+        <div className="cwm rv d1"><Wordmark /></div>
+        <div className="cmean rv d1">
+          {L("sanskrt tan-maya · „stvořen z toho“", "Sanskrit tan-maya · “made of that”")}
+        </div>
+        <div className="cpoem rv d2">
+          {L(
+            "Stav úplného pohroužení. Když se rozpustí hranice mezi tím, kdo praktikuje, a praxí samotnou.",
+            "The state of complete absorption — when the boundary between the one who practices and the practice dissolves."
+          )}
+        </div>
+        <div className="cdiv rv" />
+        <div className="tag rv">{L("Není to jméno · je to postoj", "Not a name · a stance")}</div>
+        <div className="big rv d1">{L("Staň se tím, co praktikuješ.", "Become what you practice.")}</div>
+        <div className="cecho rv d2">{L("Become what you practice.", "Staň se tím, co praktikuješ.")}</div>
+        <div className="mantra rv d2">move · practice · listen</div>
+      </div>
     </div>
   );
 }
@@ -1252,9 +1278,7 @@ export default function App() {
   };
 
   useEffect(() => {
-    document.title = lang === "en"
-      ? "tanmay · body · soul · wild nature"
-      : "tanmay · tělo · duše · divoká příroda";
+    document.title = "tanmay · body · soul · wild nature";
     document.documentElement.lang = lang;
   }, [lang]);
 
@@ -1310,7 +1334,7 @@ export default function App() {
       <Notes onOpen={setPost} />
       <Poetry />
       <Contact />
-      <SignOff />
+      <Closing />
       <Footer />
       <Reader post={post} onClose={() => setPost(null)} />
     </>
