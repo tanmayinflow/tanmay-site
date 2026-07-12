@@ -682,7 +682,7 @@ const MENU = [
 ];
 
 const MAIL = "tanmay.in.flow@gmail.com";
-const APP_URL = "https://app.tanmaypractice.com";
+const APP_URL = "https://klient.tanmaypractice.com";
 const IG_URL = "https://www.instagram.com/tanmayflow/";
 
 // ----------------------------------------------------------------------
@@ -1091,7 +1091,7 @@ function AppBand() {
           </div>
         </div>
         <div className="mock rv d1">
-          <div className="mtitle">app.tanmaypractice.com</div>
+          <div className="mtitle">klient.tanmaypractice.com</div>
           <div className="mrow"><span className="dot" /><span className="mt">{L("Tréninkový plán · týden 7 / 12", "Training plan · week 7 / 12")}</span></div>
           <div className="mrow"><span className="dot s" /><span className="mt">{L("Progress · stoj na rukou 22 s", "Progress · handstand 22 s")}</span></div>
           <div className="mrow"><span className="dot n" /><span className="mt">{L("Deník praxe · 4 zápisy tento týden", "Practice log · 4 entries this week")}</span></div>
