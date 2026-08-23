@@ -5,7 +5,11 @@
   "name": "tanmay-site",
   "compatibility_date": "2026-07-01",
   "assets": {
-    "directory": "./dist"
+    "directory": "./dist",
+    // Každá veřejná adresa je předrenderovaný soubor, takže sdílený
+    // odkaz nese správná metadata i pro robota, který nespustí skript.
+    // Neznámá adresa dostane skutečnou 404, ne domovskou stránku.
+    "not_found_handling": "404-page"
   },
   "workers_dev": false
 }

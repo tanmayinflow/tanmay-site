@@ -3,18 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>tanmay · koučink pohybu a praxe · Praha</title>
-  <meta name="description" content="Koučink pohybu a praxe. Pomáhám lidem obnovit spolehlivý vztah k tělu a postavit praxi, která drží i v běžném životě. Praha a divoká příroda.">
-  <meta name="theme-color" content="#F4F0EB">
-  <link rel="canonical" href="https://tanmaypractice.com">
 
-  <meta property="og:site_name" content="tanmay">
-  <meta property="og:title" content="tanmay · koučink pohybu a praxe">
-  <meta property="og:description" content="Důvěřuj tělu. Drž svou praxi. Naslouchej divočině.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://tanmaypractice.com">
-  <meta property="og:locale" content="cs_CZ">
-  <meta property="og:locale:alternate" content="en_US">
+  <!--
+    Everything between the two TM:HEAD markers is rewritten per route by
+    scripts/postbuild.mjs, so that a shared URL carries correct metadata
+    even for a crawler that never runs the JavaScript. What is here is
+    the Czech home page, which is also what `vite dev` serves.
+  -->
+  <!-- TM:HEAD:START -->
+  <meta name="tm-route" content="home:cs">
+  <title>tanmay · koučink pohybu a praxe · Praha</title>
+  <meta name="description" content="Pomáhám lidem obnovit spolehlivý vztah k tělu a postavit praxi, která drží i v běžném životě. Osobní práce v Praze. Pohyb, meditace a přímý kontakt s divokou přírodou.">
+  <link rel="canonical" href="https://tanmaypractice.com/">
+  <!-- TM:HEAD:END -->
+
+  <meta name="theme-color" content="#F4F0EB">
+  <meta name="color-scheme" content="light">
 
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -22,16 +26,17 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
   <!--
-    Písma podle type spec V2:
+    Písma podle type spec V2, hostovaná z vlastní domény:
       Cormorant Garamond  · anglický editorial display a wordmark
       EB Garamond         · český editorial display
-      DM Sans             · text, rozhraní, funkce (400 / 500 / 600)
-      Barlow Condensed    · metadata a struktura (400 / 500)
+      DM Sans             · text, rozhraní, funkce
+      Barlow Condensed    · metadata a struktura
     Caveat je odstraněný. Rukopis se nesimuluje písmem.
+    Soubory a licence: public/fonts/, generuje scripts/build-fonts.mjs.
+    V produkci postbuild tenhle odkaz nahradí vloženým stylem.
   -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Barlow+Condensed:wght@400;500&display=swap" rel="stylesheet">
+  <!-- TM:FONTS -->
+  <link rel="stylesheet" href="/fonts/tanmay-fonts.css">
 </head>
 <body>
   <div id="root"></div>

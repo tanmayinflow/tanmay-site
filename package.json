@@ -1,13 +1,19 @@
 {
   "name": "tanmay-site",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
     "typecheck": "tsc --noEmit",
-    "preview": "vite preview"
+    "build": "tsc --noEmit && vite build && node scripts/postbuild.mjs",
+    "test": "node --test \"tests/**/*.test.mjs\"",
+    "check": "npm run build && npm test",
+    "preview": "vite preview",
+    "browser:setup": "npm install --no-save playwright-core@^1.56.0",
+    "media": "python3 scripts/build-media.py",
+    "og": "python3 scripts/build-og.py",
+    "fonts": "python3 scripts/build-fonts.py"
   },
   "dependencies": {
     "react": "^18.3.1",
