@@ -21,10 +21,16 @@ practice-handstand-trunk-{480,720,1080}.{avif,webp}   home, practice proof
 practice-handstand-trunk.jpg                          fallback, 720
 practice-sitting-pine-{360,480,720}.{avif,webp}       denik
 practice-sitting-pine.jpg                             fallback, 480
-edge-linen-torn.png                                   the one organic edge, alpha mask
 surface-ink-cotton.webp                               material in the dark bands
 manifest.json                                         what was built, checked by the tests
+material/                                             Material Landscape set, see below
 ```
+
+`material/` is written by `scripts/build-material.py` from the selected
+generated sources in `Work/website/Assets/Generated/`. Its contract —
+what shipped, what was rejected, budgets and fallbacks — is
+`../../MATERIAL-ASSET-MANIFEST.md`. The retired `edge-linen-torn.png`
+must not come back; a test enforces that.
 
 ## Rules
 

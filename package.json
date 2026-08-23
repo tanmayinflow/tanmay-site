@@ -12,6 +12,7 @@
     "preview": "vite preview",
     "browser:setup": "npm install --no-save playwright-core@^1.56.0",
     "media": "python3 scripts/build-media.py",
+    "material": "python3 scripts/build-material.py",
     "og": "python3 scripts/build-og.py",
     "fonts": "python3 scripts/build-fonts.py"
   },

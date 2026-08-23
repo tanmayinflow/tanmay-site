@@ -3,7 +3,12 @@
 build-media.py · authoring tool, never part of `npm run build`
 ----------------------------------------------------------------------
 Turns the photographic masters into the responsive derivatives that live
-in `public/media/`, and synthesises the two material assets.
+in `public/media/`, and synthesises the ink cotton tile.
+
+The torn-linen edge this script used to draw was retired on 2026-08-23:
+the hero portrait now ends in the stone aperture mask from the Material
+Landscape wave (see scripts/build-material.py), so a second organic
+edge under the same photograph had no job left.
 
 Masters are NOT in this repository. They live in the Tanmay-Cowork
 workspace at:
@@ -177,84 +182,6 @@ def build_photos(masters):
 
 
 # ----------------------------------------------------------------------
-# Generated material asset A · edge-linen-torn.png
-# ----------------------------------------------------------------------
-def build_edge():
-    """
-    A production alpha mask, not artwork.
-
-    2400 x 1200. The top 84 percent is fully opaque white with no
-    gradient and no texture. The bottom 16 percent carries one restrained
-    irregular torn linen fibre edge, predominantly horizontal. Below the
-    edge is fully transparent.
-    """
-    W, H = 2400, 1200
-    solid_to = int(H * 0.84)
-    band = H - solid_to
-    rnd = random.Random(20260823)
-
-    # The edge sits a little below the start of the band. Its shape is
-    # three low amplitude sinusoids, so it is never a wave and never a
-    # scallop: across the whole 2400 px it moves by about 14 px.
-    def line(x):
-        return (
-            5.0 * math.sin(x / 431.0 + 0.7)
-            + 3.0 * math.sin(x / 149.0 + 2.1)
-            + 1.6 * math.sin(x / 47.0 + 4.4)
-        )
-
-    # Torn fibre: dense small jitter, plus a few short tips. Nothing here
-    # is deep enough to read as a drip or a tooth.
-    jitter = [rnd.uniform(-1.4, 1.4) for _ in range(W)]
-    for _ in range(3):  # smooth it so single pixels do not spike
-        jitter = [
-            (jitter[max(0, i - 1)] + jitter[i] + jitter[min(W - 1, i + 1)]) / 3.0
-            for i in range(W)
-        ]
-
-    fibre = [0.0] * W
-    x = rnd.randint(0, 60)
-    while x < W:
-        run = rnd.randint(4, 13)
-        depth = rnd.uniform(1.5, 6.5)
-        if rnd.random() < 0.55:      # more than half the width has no tip
-            depth = 0.0
-        for i in range(run):
-            if x + i < W:
-                t = i / max(1, run - 1)
-                fibre[x + i] = depth * math.sin(math.pi * t) ** 1.4
-        x += run + rnd.randint(6, 40)
-
-    mask = Image.new("L", (W, H), 0)
-    px = mask.load()
-    feather = 2.6
-    for x in range(W):
-        edge = solid_to + band * 0.55 + line(x) + jitter[x] + fibre[x]
-        lo_y = int(edge - feather) - 1
-        for y in range(0, min(H, max(0, lo_y))):
-            px[x, y] = 255
-        for y in range(max(0, lo_y), H):
-            d = (edge - y) / feather
-            px[x, y] = int(max(0, min(255, 255 * (0.5 + 0.5 * max(-1.0, min(1.0, d))))))
-
-    out = Image.merge("RGBA", (
-        Image.new("L", (W, H), 255),
-        Image.new("L", (W, H), 255),
-        Image.new("L", (W, H), 255),
-        mask,
-    ))
-    out.save(OUT / "edge-linen-torn.png", "PNG", optimize=True)
-
-    a = out.getchannel("A")
-    top = a.crop((0, 0, W, solid_to))
-    bottom = a.crop((0, int(H * 0.995), W, H))
-    print(f"  edge-linen-torn.png: top84 min alpha {top.getextrema()[0]} "
-          f"(must be 255), bottom row max alpha {bottom.getextrema()[1]} (must be 0)")
-    assert top.getextrema()[0] == 255, "top 84 percent is not fully opaque"
-    assert bottom.getextrema()[1] == 0, "bottom row is not fully transparent"
-
-
-# ----------------------------------------------------------------------
 # Generated material asset B · surface-ink-cotton.webp
 # ----------------------------------------------------------------------
 def build_cotton():
@@ -340,7 +267,6 @@ def main():
         manifest = build_photos(Path(args.masters))
     if args.only != "photos":
         print("material:")
-        build_edge()
         build_cotton()
 
     if manifest:

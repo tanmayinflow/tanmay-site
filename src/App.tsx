@@ -89,8 +89,17 @@ const MEDIA = {
   portrait: { base: "/media/portrait-tanmay", widths: [480, 720, 960, 1280], w: 3024, h: 3780 } as Pic,
   handstand: { base: "/media/practice-handstand-trunk", widths: [480, 720, 1080], w: 2160, h: 3024 } as Pic,
   pine: { base: "/media/practice-sitting-pine", widths: [360, 480, 720], w: 720, h: 900 } as Pic,
-  edgeMask: "/media/edge-linen-torn.png",
   texCotton: "/media/surface-ink-cotton.webp",
+
+  /* Material Landscape · kontrakty v MATERIAL-ASSET-MANIFEST.md.
+     Každý soubor je volitelný. Chybějící soubor vrátí rovnou hranu,
+     obdélníkovou fotografii a plnou barvu, nikdy prázdné místo. */
+  strata: "/media/material/edge-strata.png",
+  aperture: "/media/material/mask-aperture.png",
+  texSandstone: "/media/material/surface-sandstone.webp",
+  cutout: { src: "/media/material/handstand-cutout-bw.webp", w: 522, h: 1400 },
+  earthField: "/media/material/field-earth.webp",
+  copperLine: "/media/material/line-copper.png",
 };
 
 // ----------------------------------------------------------------------
@@ -124,12 +133,30 @@ const CSS = `
   --ff-body:'DM Sans',system-ui,sans-serif;
   --ff-meta:'Barlow Condensed','DM Sans',system-ui,sans-serif;
 
-  --maxw:1120px;
+  /* Material Landscape · rozšíření webu, ne Brand Canonical.
+     Burnt Earth smí nést širokou plochu; Copper zůstává přesný a vzácný. */
+  --earth:#754437;
+  --sandstone:#E5D8C4;
+  --on-earth:#F4F0EB;
+  --on-earth-2:rgba(244,240,235,.86);
+  --rule-earth:rgba(244,240,235,.24);
+  --text-sand:#1C1C1A;
+  --text-sand-2:rgba(28,28,26,.78);
+  --rule-sand:rgba(28,28,26,.16);
+
+  --maxw:1180px;
   --measure:33em;
   --track:.18em;
 
-  --edge:url("${MEDIA.edgeMask}");
+  /* Rytmus stránky. Mezery reagují na obsah, ne na jeden obří viewport. */
+  --sp-chapter:clamp(48px,6.5vw,88px);
+  --sp-section:clamp(36px,5vw,64px);
+  --sp-block:clamp(26px,3.4vw,44px);
+
   --tex-cotton:url("${MEDIA.texCotton}");
+  --tex-sand:url("${MEDIA.texSandstone}");
+  --strata:url("${MEDIA.strata}");
+  --aperture:url("${MEDIA.aperture}");
 }
 
 /* České vydání: EB Garamond nese diakritiku tiše. Logo zůstává Cormorant. */
@@ -166,8 +193,10 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 clamp(22px,5vw,56px) }
 .wrap.limit > *{ max-width:640px }
 .wrap.limit--wide > *{ max-width:760px }
-.sec{ padding:clamp(50px,7vw,92px) 0 }
-.sec--tight{ padding:clamp(40px,5.5vw,70px) 0 }
+.sec{ padding:var(--sp-chapter) 0 }
+.sec--tight{ padding:var(--sp-section) 0 }
+/* Kapitola s hranou: pruh hrany nahrazuje horní polstrování. */
+.sec--edged{ padding-top:0 }
 .prose{ max-width:var(--measure) }
 .prose p + p{ margin-top:1.15em }
 .center{ text-align:center }
@@ -183,6 +212,54 @@ html[data-surface="on"] .band--dark{ background-image:var(--tex-cotton) }
 .band--dark .body-txt{ color:var(--on-dark-2) }
 .band--dark .label{ color:var(--sand) }
 .band--dark .rule{ background:var(--rule-dark) }
+
+/* ---------- material surfaces ---------- */
+.surf--earth{
+  background-color:var(--earth);
+  color:var(--on-earth);
+}
+.surf--earth .h-display{ color:var(--on-earth) }
+.surf--earth .body-txt{ color:var(--on-earth-2) }
+.surf--earth .label{ color:var(--sand) }
+.surf--earth .rule{ background:var(--rule-earth) }
+.surf--earth .go{ color:var(--on-earth); border-color:var(--rule-earth) }
+.surf--earth .go:hover{ border-color:var(--sand) }
+.surf--earth :focus-visible{ outline-color:var(--sand) }
+
+.surf--sand{
+  background-color:var(--sandstone);
+  color:var(--text-sand);
+  background-repeat:repeat;
+  background-size:384px 384px;
+}
+html[data-sand="on"] .surf--sand{ background-image:var(--tex-sand) }
+.surf--sand .h-display{ color:var(--text-sand) }
+.surf--sand .body-txt{ color:var(--text-sand-2) }
+.surf--sand .label{ color:var(--text-sand-2) }
+.surf--sand .rule{ background:var(--rule-sand) }
+.surf--sand .deflist li,
+.surf--sand .steps li{ border-top-color:var(--rule-sand) }
+.surf--sand .deflist p,
+.surf--sand .steps p{ color:var(--text-sand-2) }
+
+/* ---------- strata edge ---------- */
+/* Jedna geologická hrana mezi dvěma poli. Pruh nese barvu předchozí
+   plochy a rozpouští se do plochy nové. Bez assetu se nevykreslí a
+   hranice zůstane rovná. */
+.strata{
+  height:clamp(34px,5vw,72px);
+  margin-bottom:clamp(14px,2.4vw,30px);
+  -webkit-mask-image:var(--strata); mask-image:var(--strata);
+  -webkit-mask-size:100% 100%; mask-size:100% 100%;
+  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+  pointer-events:none;
+}
+/* Bez assetu se maska nenačte: Chromium pruh vykreslí plný, Firefox
+   vůbec. Obojí je rovná hranice. Pruh má pevnou výšku vždy, takže
+   pozdní načtení masky nikdy neposune layout. */
+.strata--linen{ background:var(--linen) }
+.strata--ink{ background:var(--forest) }
+.strata--sand{ background:var(--sandstone) }
 
 .rule{ height:1px; background:var(--rule); border:0 }
 
@@ -250,9 +327,15 @@ html[data-surface="on"] .band--dark{ background-image:var(--tex-cotton) }
   position:sticky; top:0; z-index:900;
   background:var(--linen);
   border-bottom:1px solid transparent;
-  transition:border-color .3s ease;
+  transition:border-color .3s ease, background-color .3s ease;
 }
-.topbar[data-scrolled="1"]{ border-bottom-color:var(--rule) }
+/* Při scrollu lišta lehce zprůhlední, aby obraz pod ní procházel
+   záměrně, ne jako odříznutý. */
+.topbar[data-scrolled="1"]{
+  border-bottom-color:var(--rule);
+  background:rgba(244,240,235,.90);
+  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+}
 .topbar .row{ display:flex; align-items:center; gap:clamp(12px,2vw,26px); padding-top:14px; padding-bottom:14px }
 .topbar .logo{ font-size:22px; line-height:1; display:inline-flex; align-items:center; min-height:30px }
 .topnav{ display:flex; gap:clamp(13px,1.9vw,26px); margin-left:auto }
@@ -308,37 +391,49 @@ html[data-surface="on"] .band--dark{ background-image:var(--tex-cotton) }
 .mmenu .extra .lang{ display:flex }
 
 /* ---------- první obrazovka ---------- */
-.opening{ padding:clamp(30px,5vw,64px) 0 clamp(26px,4vw,48px) }
+/* Hero je velkorysý, ale neprodukuje prázdnou druhou polovinu
+   viewportu: spodní polstrování je malé a další kapitola začíná hned. */
+.opening{ padding:clamp(28px,4.4vw,56px) 0 clamp(20px,3vw,40px) }
 .opening .grid{ display:grid; grid-template-columns:1fr; gap:clamp(30px,4.5vw,52px); align-items:start }
 .opening .h1{ margin-top:clamp(18px,2.8vw,28px); max-width:11em }
 .opening .body-txt{ margin-top:clamp(18px,2.4vw,24px) }
 .opening .act{ margin-top:clamp(26px,3.4vw,36px); display:flex; flex-wrap:wrap; gap:16px 28px; align-items:baseline }
-.opening .stance{ margin-top:clamp(26px,3.6vw,38px); font-family:var(--ff-meta); text-transform:uppercase; letter-spacing:var(--track); font-size:12.5px; color:var(--text-3) }
+.opening .stance{ margin-top:clamp(24px,3.2vw,34px); font-family:var(--ff-meta); text-transform:uppercase; letter-spacing:var(--track); font-size:12.5px; color:var(--text-3) }
 @media (min-width:880px){
-  .opening.has-portrait .grid{ grid-template-columns:1fr .70fr; gap:clamp(40px,5vw,72px) }
+  .opening.has-portrait .grid{ grid-template-columns:1fr .72fr; gap:clamp(40px,5vw,72px) }
 }
 
-/* portrét · jeden organický okraj na celém webu */
-.portrait{ position:relative; justify-self:end; width:100%; max-width:430px }
+/* portrét · fotografie končí ve skutečném materiálu */
+.portrait{ position:relative; justify-self:end; width:100%; max-width:440px }
 @media (min-width:880px){ .opening.has-portrait .portrait{ margin-top:4px } }
+/* tichý pás Burnt Earth za částí portrétu · plocha, ne dekorace */
+.portrait::before{
+  content:""; position:absolute; z-index:-1;
+  top:14%; right:clamp(-30px,-2.2vw,-12px); bottom:-5%; left:58%;
+  background:var(--earth);
+}
 .portrait img{
   width:100%; height:auto; object-fit:cover;
   aspect-ratio:4 / 5;
   object-position:50% 22%;
 }
-html[data-edge="on"] .portrait img{
-  -webkit-mask-image:var(--edge); mask-image:var(--edge);
-  -webkit-mask-size:100% 100%; mask-size:100% 100%;
-  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
-}
 @media (max-width:879px){
   .portrait{ justify-self:stretch; max-width:none; order:-1 }
+  .portrait::before{ top:24%; right:-14px; bottom:-4%; left:66% }
   .portrait img{ aspect-ratio:auto; height:clamp(250px,42svh,420px); object-position:50% 20% }
+}
+
+/* kamenná apertura · jedna maska pro fotografie, které ji unesou */
+html[data-ap="on"] .ap img{
+  -webkit-mask-image:var(--aperture); mask-image:var(--aperture);
+  -webkit-mask-size:100% 100%; mask-size:100% 100%;
+  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
 }
 
 /* ---------- hlavička místnosti ---------- */
 .roomhead{ padding:clamp(30px,4.5vw,58px) 0 clamp(20px,2.6vw,32px) }
 .roomhead + .sec{ padding-top:clamp(26px,3.6vw,46px) }
+.roomhead + .sec--edged{ padding-top:0 }
 .roomhead .back{ display:inline-block; padding:5px 0; font-family:var(--ff-meta); text-transform:uppercase; letter-spacing:var(--track); font-size:12.5px; color:var(--text-2) }
 .roomhead .back:hover{ color:var(--text) }
 .roomhead .h1{ margin-top:clamp(20px,2.8vw,30px) }
@@ -425,9 +520,10 @@ html[data-edge="on"] .portrait img{
 .article .after{ margin-top:clamp(40px,6vw,64px); border-top:1px solid var(--rule); padding-top:clamp(22px,3vw,30px); display:flex; flex-wrap:wrap; gap:16px 30px }
 
 /* ---------- obraz jako důkaz ---------- */
-.figure{ margin-top:clamp(30px,4.4vw,50px) }
+.figure{ margin-top:var(--sp-block) }
 .figure img{ width:100%; object-fit:cover }
 .figure figcaption{ font-family:var(--ff-meta); text-transform:uppercase; letter-spacing:var(--track); font-size:12px; color:var(--text-3); margin-top:12px }
+.surf--sand .figure figcaption{ color:var(--text-sand-2) }
 /* Ne každý obraz končí ve stejném obdélníku. Poměr určuje předloha. */
 .figure--tall{ max-width:560px }
 .figure--tall img{ aspect-ratio:5 / 7 }
@@ -437,11 +533,80 @@ html[data-edge="on"] .portrait img{
   .figure--tall, .figure--pine{ max-width:none; margin-left:0 }
 }
 
-/* ---------- proužek pro klienty ---------- */
-.strip{
-  border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
-  padding:clamp(26px,3.6vw,40px) 0; margin-top:clamp(46px,6vw,74px);
+/* ---------- kapitola Pro koho · Ink, výřez postavy, zemitá deska ---------- */
+.who{ position:relative; overflow:hidden }
+.who .grid{ display:grid; grid-template-columns:1fr; gap:clamp(26px,4vw,44px); align-items:end }
+.who .prose{ position:relative; z-index:2 }
+.cutwrap{ position:relative; z-index:1; justify-self:center; width:min(300px,68vw) }
+.cutwrap .slab{
+  position:absolute; z-index:0; left:-14%; right:-20%; top:16%; bottom:-8%;
+  width:auto; height:auto; object-fit:cover; opacity:.96;
 }
+.cutwrap .cut{ position:relative; z-index:1; width:100%; height:auto }
+.who .terrain{
+  position:absolute; z-index:0; right:-4%; top:6%;
+  width:min(52vw,680px); opacity:.20; pointer-events:none;
+}
+@media (min-width:880px){
+  .who .grid{ grid-template-columns:1.15fr .85fr; gap:clamp(36px,5vw,72px) }
+  .cutwrap{ justify-self:end; width:clamp(240px,24vw,330px); margin-top:calc(-1 * clamp(48px,9vw,120px)) }
+}
+@media (max-width:879px){
+  .who .terrain{ display:none }
+  .cutwrap{ margin-top:-32px }
+}
+
+/* ---------- pískovcová kapitola · editorial řádky ---------- */
+.chapter{ display:grid; gap:0; margin-top:var(--sp-block) }
+.chapter .row{
+  display:grid; grid-template-columns:1fr; gap:10px clamp(22px,3.4vw,44px);
+  padding:clamp(20px,2.8vw,30px) 0; border-top:1px solid var(--rule-sand);
+}
+.chapter .row:first-child{ border-top:0; padding-top:0 }
+.chapter .row h3{ font-family:var(--ff-display); font-weight:400; font-size:clamp(1.3rem,2.3vw,1.66rem); line-height:1.2 }
+.chapter .row p{ font-size:15.5px; line-height:1.75; color:var(--text-sand-2); max-width:36em }
+.chapter .row .num{ padding-top:6px }
+@media (min-width:820px){
+  .chapter .row{ grid-template-columns:3.2em 15em 1fr; align-items:start }
+  .chapter .row p{ margin-top:0 }
+}
+
+/* obraz smí přesáhnout textový measure · pravý přesah na desktopu */
+.bleed-r{ margin-left:auto }
+@media (min-width:1024px){
+  .bleed-r{ margin-right:calc(-1 * clamp(0px,4.5vw,64px)) }
+}
+
+/* svislá zemitá linka u procesního bloku */
+.railed{ border-left:3px solid var(--earth); padding-left:clamp(18px,2.6vw,30px) }
+
+/* kompaktní pětikrokový rytmus vedle textu o spolupráci */
+.collab{ display:grid; grid-template-columns:1fr; gap:clamp(24px,3.4vw,44px); align-items:start }
+.minirail{ list-style:none; counter-reset:mr; max-width:19em; margin-top:22px }
+.minirail li{
+  counter-increment:mr;
+  display:flex; align-items:baseline; gap:14px;
+  padding:12px 0; border-top:1px solid var(--rule);
+  font-family:var(--ff-display); font-size:clamp(1.1rem,1.8vw,1.3rem); line-height:1.3;
+}
+.minirail li:first-child{ border-top:0 }
+.minirail li::before{
+  content:counter(mr,decimal-leading-zero);
+  font-family:var(--ff-meta); letter-spacing:.16em; font-size:12px; color:var(--text-3);
+}
+@media (min-width:880px){
+  .collab{ grid-template-columns:1.2fr .8fr; gap:clamp(40px,6vw,88px) }
+  .minirail{ justify-self:end; width:100%; margin-top:10px }
+}
+
+/* ---------- proužek pro klienty · ohraničený pískovec ---------- */
+.strip{
+  background:var(--sandstone);
+  border-top:1px solid var(--rule-sand); border-bottom:1px solid var(--rule-sand);
+  padding:clamp(26px,3.6vw,40px) 0; margin-top:var(--sp-chapter);
+}
+html[data-sand="on"] .strip{ background-image:var(--tex-sand); background-size:384px 384px }
+.strip p{ color:var(--text-sand-2) }
 .strip .in{ display:grid; gap:14px }
 .strip h2{ font-family:var(--ff-display); font-weight:400; font-size:clamp(1.35rem,2.5vw,1.75rem); line-height:1.2 }
 .strip p{ font-size:15.5px; color:var(--text-2); max-width:34em }
@@ -712,13 +877,15 @@ const ClientEntry = ({ className = "centry" }: any) => (
  * šířka. Když soubor chybí, `onError` prvek odstraní. Nikdy nevznikne
  * prázdný rám ani rozbitá ikona a nic se nestahuje dvakrát.
  */
-function Evidence({ pic, alt, caption, sizes, variant = "tall", eager = false }: any) {
+function Evidence({ pic, alt, caption, sizes, variant = "tall", eager = false, ap = false, bleed = false }: any) {
   const [gone, setGone] = useState(false);
   if (gone) return null;
   const set = (ext: string) =>
     pic.widths.map((w: number) => `${pic.base}-${w}.${ext} ${w}w`).join(", ");
   return (
-    <figure className={"figure figure--" + variant + (eager ? "" : " rv")}>
+    <figure className={
+      "figure figure--" + variant + (ap ? " ap" : "") + (bleed ? " bleed-r" : "") + (eager ? "" : " rv")
+    }>
       <picture>
         <source type="image/avif" srcSet={set("avif")} sizes={sizes} />
         <source type="image/webp" srcSet={set("webp")} sizes={sizes} />
@@ -936,7 +1103,7 @@ function Opening({ lang }: any) {
           </p>
         </div>
         {noPortrait ? null : (
-          <div className="portrait rv d1">
+          <div className="portrait ap rv d1">
             <picture>
               <source type="image/avif" srcSet={set("avif")} sizes="(min-width:880px) 430px, 100vw" />
               <source type="image/webp" srcSet={set("webp")} sizes="(min-width:880px) 430px, 100vw" />
@@ -961,23 +1128,42 @@ function Opening({ lang }: any) {
   );
 }
 
+/**
+ * Pro koho to je · Ink Cotton, černobílý výřez skutečného stoje na rukou.
+ * Postava přemosťuje hranu: chodidla stoupají přes stratovou hranu do
+ * Linen nad sekcí. Výřez je na celém webu jen jednou, tady.
+ */
 function HomeAudience() {
+  const [noCut, setNoCut] = useState(false);
   return (
-    <section className="sec--tight" aria-labelledby="h-audience">
-      <div className="wrap">
-        <hr className="rule" />
-        <div style={{ paddingTop: "clamp(30px,4vw,44px)" }}>
+    <section className="band--dark sec sec--edged who" aria-labelledby="h-audience">
+      <div className="strata strata--linen" aria-hidden="true" />
+      {noCut ? null : (
+        <img
+          className="terrain"
+          src={MEDIA.copperLine}
+          alt=""
+          aria-hidden="true"
+          width={1800}
+          height={272}
+          loading="lazy"
+          decoding="async"
+          onError={() => {}}
+        />
+      )}
+      <div className="wrap grid">
+        <div className="prose">
           <h2 className="h-display h2 rv" id="h-audience">
             {L("Pro koho to je", "Who this is for")}
           </h2>
-          <div className="prose rv d1" style={{ marginTop: 18 }}>
+          <div className="rv d1" style={{ marginTop: 18 }}>
             <p className="body-txt">
               {L(
                 "Umíš vytrvat v tom, pro co se rozhodneš. Přesto je mezi tím, čemu rozumíš, a tím, jak doopravdy žiješ, kus vzdálenosti.",
                 "You know how to commit to what you decide. And still there is a distance between what you understand and how you actually live."
               )}
             </p>
-            <p className="body-txt">
+            <p className="body-txt" style={{ marginTop: "1.15em" }}>
               {L(
                 "Nehledáš další identitu, kterou bys předváděl. Nehledáš gurua. Chceš praxi, která bude spolehlivější, tělesnější a víc tvoje.",
                 "You are not looking for another identity to perform. You are not looking for a guru. You want a practice that is more reliable, more physical and more your own."
@@ -985,6 +1171,34 @@ function HomeAudience() {
             </p>
           </div>
         </div>
+        {noCut ? null : (
+          <div className="cutwrap rv d1">
+            <img
+              className="slab"
+              src={MEDIA.earthField}
+              alt=""
+              aria-hidden="true"
+              width={684}
+              height={1100}
+              loading="lazy"
+              decoding="async"
+              onError={(e: any) => { e.currentTarget.style.display = "none"; }}
+            />
+            <img
+              className="cut"
+              src={MEDIA.cutout.src}
+              alt={L(
+                "Stoj na rukou, černobílá fotografie celé postavy.",
+                "A handstand, black-and-white photograph of the whole figure."
+              )}
+              width={MEDIA.cutout.w}
+              height={MEDIA.cutout.h}
+              loading="lazy"
+              decoding="async"
+              onError={() => setNoCut(true)}
+            />
+          </div>
+        )}
       </div>
     </section>
   );
@@ -992,49 +1206,44 @@ function HomeAudience() {
 
 function HomeWork({ lang }: any) {
   return (
-    <section className="sec" aria-labelledby="h-work">
+    <section className="surf--sand sec sec--edged" aria-labelledby="h-work">
+      <div className="strata strata--ink" aria-hidden="true" />
       <div className="wrap">
         <h2 className="h-display h2 rv" id="h-work">
           {L("Co se v té práci děje", "What actually happens in the work")}
         </h2>
-        <ul className="deflist rv d1">
-          <li>
+        <div className="chapter rv d1">
+          <div className="row">
+            <span className="num">01</span>
             <h3>{L("Co trénujeme", "What we train")}</h3>
             <p>{L(
               "Páteří je trénink s vlastní vahou a kalistenika. Pohybová dovednost, síla v celém rozsahu pohybu, kontrola, postup od jednodušší varianty ke složitější. Kruhy, činky a nářadí tam, kde posunou konkrétní cíl. Parkour a jóga jsou zázemí, ze kterého se čerpá.",
               "The spine of the work is bodyweight training and calisthenics. Movement skill, strength through full range, control, progression from a simpler variant to a harder one. Rings, weights and apparatus where they move a specific goal. Parkour and yoga are the background it draws on."
             )}</p>
-          </li>
-          <li>
+          </div>
+          <div className="row">
+            <span className="num">02</span>
             <h3>{L("Jak se to drží", "How it is held")}</h3>
             <p>{L(
               "Setkání je z většiny pohyb. Z toho, co se v něm ukáže, vznikne plán na další období: co trénovat, kolik toho unese tvůj týden a čeho se v horším týdnu držet. Praxe mezi setkáními je vlastní produkt, ne domácí úkol.",
               "A session is mostly movement. What shows up in it becomes the plan for the period that follows: what to train, how much your week can carry, and what to hold on to in a worse week. The practice between sessions is the actual product, not homework."
             )}</p>
-          </li>
-          <li>
+          </div>
+          <div className="row">
+            <span className="num">03</span>
             <h3>{L("Co se mění mezi setkáními", "What changes between sessions")}</h3>
             <p>{L(
               "Zapisuješ, co se skutečně dělo, ne co mělo. Podle toho se plán upraví. Reflexe a zápis nejsou rituál. Jsou to nástroje, které rozhodují o tom, co se bude dělat příště.",
               "You record what actually happened, not what was supposed to. The plan is adjusted from that. Reflection and logging are not a ritual. They are the tools that decide what happens next time."
             )}</p>
-          </li>
-        </ul>
-        <p className="rv d2" style={{ marginTop: "clamp(26px,3.4vw,34px)" }}>
-          <Go href={routePath("praxe", lang)} cs="Celá praxe" en="The whole practice" />
-        </p>
-      </div>
-    </section>
-  );
-}
+          </div>
+        </div>
 
-function HomeProof() {
-  return (
-    <section className="sec--tight" aria-label={L("Praxe venku", "Practice outdoors")}>
-      <div className="wrap">
         <Evidence
           pic={MEDIA.handstand}
           variant="tall"
+          ap
+          bleed
           sizes="(min-width:760px) 560px, calc(100vw - 44px)"
           alt={L(
             "Stoj na rukou na padlém kmeni v lese, obě dlaně na mechu.",
@@ -1042,6 +1251,10 @@ function HomeProof() {
           )}
           caption={L("Praxe venku · jarní les · padlý kmen", "Practice outdoors · spring forest · a fallen trunk")}
         />
+
+        <p className="rv d2" style={{ marginTop: "clamp(26px,3.4vw,34px)" }}>
+          <Go href={routePath("praxe", lang)} cs="Celá praxe" en="The whole practice" />
+        </p>
       </div>
     </section>
   );
@@ -1054,7 +1267,8 @@ function HomeCollab({ lang }: any) {
         <h2 className="h-display h2 rv" id="h-collab">
           {L("Jak se dá pracovat spolu", "How we can work together")}
         </h2>
-        <div className="prose rv d1" style={{ marginTop: 18 }}>
+        <div className="collab">
+        <div className="prose railed rv d1" style={{ marginTop: 22 }}>
           <p className="body-txt">
             {L(
               "Osobní práce probíhá jeden na jednoho v Praze. Scházíme se pravidelně, mezi setkáními vedeš svoji praxi sám a spolu ji upravujeme podle toho, co se doopravdy stalo.",
@@ -1067,6 +1281,14 @@ function HomeCollab({ lang }: any) {
               "I work with few people, closely. Guidance, not dependence. The aim is that one day you run the practice yourself."
             )}
           </p>
+        </div>
+        <ol className="minirail rv d2" aria-label={L("Průběh spolupráce", "How the collaboration runs")}>
+          <li>{L("První rozhovor", "First conversation")}</li>
+          <li>{L("Vstupní setkání", "First session")}</li>
+          <li>{L("Směr a plán", "Direction and plan")}</li>
+          <li>{L("Praxe a zápis", "Practice and record")}</li>
+          <li>{L("Revize", "Review")}</li>
+        </ol>
         </div>
         <p className="rv d2" style={{ marginTop: "clamp(26px,3.4vw,34px)" }}>
           <Go href={routePath("spoluprace", lang)} cs="Jak to probíhá a jak začít" en="How it runs and how to start" />
@@ -1134,7 +1356,6 @@ function PageHome({ lang }: any) {
       <Opening lang={lang} />
       <HomeAudience />
       <HomeWork lang={lang} />
-      <HomeProof />
       <HomeCollab lang={lang} />
       <ClientStrip lang={lang} />
       <HomeTeasers lang={lang} />
@@ -1207,7 +1428,8 @@ function PagePraxe({ lang }: any) {
         </div>
       </section>
 
-      <section className="sec">
+      <section className="surf--sand sec sec--edged">
+        <div className="strata strata--ink" aria-hidden="true" />
         <div className="wrap">
           <h2 className="h-display h2 rv">{L("Co může setkání obsahovat", "What a session can contain")}</h2>
           <p className="body-txt rv d1" style={{ marginTop: 16 }}>
@@ -1246,6 +1468,19 @@ function PagePraxe({ lang }: any) {
               )}</p>
             </li>
           </ul>
+
+          <Evidence
+            pic={MEDIA.handstand}
+            variant="tall"
+            ap
+            bleed
+            sizes="(min-width:760px) 560px, calc(100vw - 44px)"
+            alt={L(
+              "Stoj na rukou na padlém kmeni v lese, obě dlaně na mechu.",
+              "A handstand on a fallen trunk in the forest, both palms on the moss."
+            )}
+            caption={L("Takhle to venku vypadá doopravdy", "This is what it actually looks like outdoors")}
+          />
         </div>
       </section>
 
@@ -1597,7 +1832,8 @@ function PageSpoluprace({ lang }: any) {
         leadEn="I work with few people, closely. Guidance, not dependence."
       />
 
-      <section className="sec--tight">
+      <section className="surf--earth sec sec--edged" aria-label={L("Pro koho", "For whom")}>
+        <div className="strata strata--linen" aria-hidden="true" />
         <div className="wrap">
           <div className="prose rv">
             <p className="body-txt">
@@ -1631,9 +1867,9 @@ function PageSpoluprace({ lang }: any) {
             </p>
           </div>
 
-          <div style={{ marginTop: "clamp(40px,5.6vw,64px)" }}>
+          <div className="procwrap" style={{ marginTop: "clamp(40px,5.6vw,64px)" }}>
             <h2 className="h-display h2 rv">{L("Jak to probíhá", "How it runs")}</h2>
-            <ol className="steps rv d1">
+            <ol className="steps railed rv d1">
               <li>
                 <div>
                   <h3>{L("První rozhovor", "First conversation")}</h3>
@@ -1892,6 +2128,7 @@ function PageDenik({ lang }: any) {
           <Evidence
             pic={MEDIA.pine}
             variant="pine"
+            ap
             sizes="(min-width:600px) 470px, calc(100vw - 44px)"
             alt={L(
               "Sezení na lavici pod borovicí, zády ke kameře, nízké odpolední slunce nad polem.",
@@ -2162,21 +2399,29 @@ export default function App() {
   }, [loc]);
 
   /**
-   * Volitelné povrchy. Když soubor chybí, plocha zůstane plná barva.
-   * Stahují se jen tam, kde je stránka doopravdy použije: maska na domovské
-   * stránce s portrétem, textura v místnostech s tmavým pásem.
+   * Volitelné povrchy a masky. Když soubor chybí, plocha zůstane plná
+   * barva, hranice rovná a fotografie obdélníková. Stahuje se jen to,
+   * co daná místnost skutečně použije.
    */
-  const hasEdge = useAsset(MEDIA.edgeMask, loc.routeId === "home");
+  const r = loc.routeId;
   const hasCotton = useAsset(
     MEDIA.texCotton,
-    ["home", "praxe", "pribeh", "spoluprace"].indexOf(loc.routeId) !== -1
+    ["home", "praxe", "pribeh", "spoluprace"].indexOf(r) !== -1
   );
-  useEffect(() => {
-    document.documentElement.setAttribute("data-edge", hasEdge ? "on" : "off");
-  }, [hasEdge]);
+  const hasSand = useAsset(MEDIA.texSandstone, ["home", "praxe"].indexOf(r) !== -1);
+  const hasAperture = useAsset(
+    MEDIA.aperture,
+    ["home", "praxe", "denik"].indexOf(r) !== -1
+  );
   useEffect(() => {
     document.documentElement.setAttribute("data-surface", hasCotton ? "on" : "off");
   }, [hasCotton]);
+  useEffect(() => {
+    document.documentElement.setAttribute("data-sand", hasSand ? "on" : "off");
+  }, [hasSand]);
+  useEffect(() => {
+    document.documentElement.setAttribute("data-ap", hasAperture ? "on" : "off");
+  }, [hasAperture]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
