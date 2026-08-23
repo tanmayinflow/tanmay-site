@@ -80,12 +80,46 @@ test("no single asset blows the image budget", () => {
   }
 });
 
-test("generated material assets are material, and validated", () => {
-  assert.ok(existsSync(join(MEDIA, "edge-linen-torn.png")), "the linen edge mask is missing");
-  assert.ok(existsSync(join(MEDIA, "surface-ink-cotton.webp")), "the ink cotton tile is missing");
-  /* Only two generated assets are allowed on the public site. */
-  const generated = readdirSync(MEDIA).filter((f) => /^(edge-|surface-)/.test(f));
-  assert.equal(generated.length, 2, `expected two generated assets, found ${generated.join(", ")}`);
+test("generated assets are exactly the approved material set", () => {
+  /* The ink cotton tile lives with the photographs; everything from the
+     Material Landscape wave lives in material/. Nothing else generated
+     may appear, and the retired torn-linen edge must not come back. */
+  const rootGenerated = readdirSync(MEDIA).filter((f) => /^(edge-|surface-|mask-|field-|line-|handstand-cutout)/.test(f));
+  assert.deepEqual(rootGenerated.sort(), ["surface-ink-cotton.webp"], `unexpected generated files in media root: ${rootGenerated.join(", ")}`);
+  assert.ok(!existsSync(join(MEDIA, "edge-linen-torn.png")), "the retired torn-linen edge is back");
+
+  const MAT = join(MEDIA, "material");
+  assert.ok(existsSync(MAT), "public/media/material is missing");
+  const want = {
+    "edge-strata.png": 220,
+    "mask-aperture.png": 220,
+    "field-earth.webp": 90,
+    "line-copper.png": 100,
+    "surface-sandstone.webp": 160,
+    "handstand-cutout-bw.webp": 260,
+  };
+  const got = readdirSync(MAT).filter((f) => !f.endsWith(".md")).sort();
+  assert.deepEqual(got, Object.keys(want).sort(), `material dir mismatch: ${got.join(", ")}`);
+  for (const [f, kb] of Object.entries(want)) {
+    const size = statSync(join(MAT, f)).size / 1024;
+    assert.ok(size <= kb, `${f} is ${size.toFixed(0)} kB, over its ${kb} kB budget`);
+  }
+});
+
+test("NEGATIVE CONTROL · the cutout figure is declared exactly once", () => {
+  const uses = APP.match(/handstand-cutout-bw/g) || [];
+  assert.equal(uses.length, 1, "the cutout must appear once, in the MEDIA table, and nowhere else");
+});
+
+test("the aperture mask is reserved for the approved photographs", () => {
+  /* The mask must not creep onto every image: the portrait, the
+     handstand evidence (twice, Home and Praxe) and the pine. The
+     browser suite verifies the rendered set; here the source cannot
+     declare more ap uses than those four. */
+  const flags = APP.match(/^\s*ap$/gm) || [];
+  assert.ok(flags.length <= 3, `the Evidence ap flag is used ${flags.length} times, expected at most 3`);
+  const literal = APP.match(/"portrait ap rv d1"/g) || [];
+  assert.equal(literal.length, 1, "the hero portrait aperture class changed unexpectedly");
 });
 
 test("optional media collapses instead of leaving an empty frame", () => {
@@ -94,13 +128,22 @@ test("optional media collapses instead of leaving an empty frame", () => {
   assert.match(APP, /if \(gone\) return null;/, "the figure still renders after an error");
 });
 
-test("every photograph declares its intrinsic size and a sizes hint", () => {
-  const imgs = [...APP.matchAll(/<img[\s\S]{0,600}?\/>/g)].map((m) => m[0]);
+test("every content photograph declares its intrinsic size and a sizes hint", () => {
+  const imgs = [...APP.matchAll(/<img[\s\S]{0,700}?\/>/g)].map((m) => m[0]);
   assert.ok(imgs.length >= 2, "no img tags found");
   for (const img of imgs) {
+    if (/aria-hidden="true"/.test(img)) {
+      /* Decorative material layers are hidden from AT and sized by CSS;
+         they still must not shift layout, so they are absolutely
+         positioned. They must always declare loading behaviour. */
+      assert.match(img, /loading="lazy"/, "a decorative img is not lazy");
+      continue;
+    }
     assert.match(img, /width=\{/, "an img has no width");
     assert.match(img, /height=\{/, "an img has no height");
-    assert.match(img, /sizes=/, "an img has no sizes");
+    if (!/MEDIA\.cutout|line-copper|field-earth/.test(img)) {
+      assert.match(img, /sizes=/, "an img has no sizes");
+    }
     assert.match(img, /(loading=|decoding="sync")/, "an img declares no loading behaviour");
   }
 });

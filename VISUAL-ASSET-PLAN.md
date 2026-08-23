@@ -3,8 +3,10 @@
 Last reviewed: 2026-08-23. Supersedes the pre-photography version of
 2026-08-16, which described assets that did not exist yet.
 
-Three real photographs and two generated material assets are in the
-site. That is the whole visual inventory and it is deliberately small.
+Three real photographs, one real black-and-white cutout of Tanmay, and
+a small validated set of generated material assets are in the site. The
+material set is inventoried in `MATERIAL-ASSET-MANIFEST.md`; the whole
+thing stays deliberately small.
 
 > Reality, not rawness, is the rule. The brand lives primarily through
 > images of real practice. Craft is welcome. Fabrication is not.
@@ -73,15 +75,16 @@ twice to find out whether it exists.
 | Where | Home opening, right column on desktop, band above the type on mobile |
 | Loading | eager, `fetchpriority="high"` |
 | Sizes | `(min-width:880px) 430px, 100vw` |
-| Mask | the torn linen edge, bottom of the frame |
+| Mask | the stone aperture, eroded right and bottom (`mask-aperture.png`) |
 
 Desktop is a calm 4:5 column on the right of a linen field, type on the
 left, no text over the face, no full-bleed cinematic hero. Mobile puts
 the portrait first as a band of `clamp(250px, 42svh, 420px)`, face in
 the upper third, `object-position: 50% 20%`.
 
-The bottom 14 % of the frame is chest and clothing, which is what the
-dissolve mask eats. Nothing important is down there.
+The aperture erosion lives on the right and lower edges, in rock and
+clothing. The face-safe upper 60 % is asserted fully open by the build
+script.
 
 What the frame actually contains: available late light, a rock face
 behind, ordinary clothes, real skin texture, real hair. All of it kept.
@@ -95,10 +98,10 @@ behind, ordinary clothes, real skin texture, real hair. All of it kept.
 | Ratio | 5 : 7 |
 | Widths | 480, 720, 1080 · JPEG fallback 720 |
 | Treatment | saturation 0.72, white balance +3 % warm, contrast 1.03 |
-| Where | Home, the real practice proof section |
+| Where | Home work chapter and Praxe session chapter, in the stone aperture, right-bleeding past the text measure |
 | Loading | lazy |
 | Sizes | `(min-width:760px) 560px, calc(100vw - 44px)` |
-| Rendered | `max-width: 560px`, left aligned, no mask, no rounding |
+| Rendered | `max-width: 560px`, aperture mask, no rounding |
 
 **Documented deviation.** The brief asked for a 16:9 master with a 4:3
 mobile crop. The master is a vertical phone still of a body standing on
@@ -154,28 +157,25 @@ None of them leaves a gap in the meantime.
 
 ## Generated material assets
 
-Two, both material only, both synthesised numerically by
-`scripts/build-media.py` rather than prompted from an image model. An
-alpha mask and a near-black tile have to be right to the pixel, and a
-numeric generator can be validated. The script asserts its own output
-and fails the build if it drifts. The equivalent paste-ready prompts are
-kept in `IMAGE-GENERATION-BRIEF.md`.
+Since the Material Landscape wave of 2026-08-23, generated assets live
+in two places. The ink cotton tile below is synthesised numerically by
+`scripts/build-media.py`. Everything else — the strata edge, the stone
+aperture, the burnt-earth slab, the copper terrain line, the sandstone
+tile and the black-and-white cutout — is processed from Tanmay's
+selected candidates by `scripts/build-material.py` and documented, one
+table of truth, in **`MATERIAL-ASSET-MANIFEST.md`**. Two supplied
+candidates were rejected there with reasons.
 
-Neither depicts a person, a client, an exercise, a landscape, a symbol,
-a mandala, a word or a logo.
+No generated asset depicts a person (the cutout is a real photograph of
+Tanmay, cut out, not generated), a client, a landscape, a symbol, a
+mandala, a word or a logo.
 
-### `edge-linen-torn.png`
+### `edge-linen-torn.png` · RETIRED 2026-08-23
 
-| | |
-|---|---|
-| Job | The one organic transition on the whole site: the bottom of the portrait dissolving into the linen field |
-| Why CSS is not enough | A gradient mask reads as a fade. A torn textile edge needs per-pixel fibre. |
-| Type | Alpha mask, 2400 × 1200 PNG, 35 kB |
-| Contract | Top 84 % fully opaque, no gradient, no texture. Edge in the lower band, moving about 14 px across the full width. Fibre tips a few pixels deep, on rather less than half the width. Below the edge fully transparent. |
-| Validation | The script asserts the top 84 % has minimum alpha 255 and the last row has maximum alpha 0. |
-| Used once | Under the portrait. It is never repeated as a divider. |
-| Fallback | `html[data-edge="off"]` and the portrait is simply a rectangle. |
-| Mobile | Same mask, stretched to the band. |
+The launch-wave torn-linen dissolve under the hero portrait. The
+portrait now ends in the stone aperture mask, so a second organic edge
+under the same photograph had no job left. The generator was removed
+from `build-media.py`; a test fails the build if the file returns.
 
 ### `surface-ink-cotton.webp`
 

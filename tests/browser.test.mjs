@@ -260,7 +260,7 @@ test("every rendered image actually loads and reserves its space", { skip: SKIP 
       await page.goto(base + path, { waitUntil: "load" });
       await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
       await page.waitForTimeout(700);
-      const imgs = await page.$$eval("img", (ns) =>
+      const imgs = await page.$$eval('img:not([aria-hidden="true"])', (ns) =>
         ns.map((n) => ({
           src: n.currentSrc || n.src,
           ok: n.complete && n.naturalWidth > 0,
@@ -341,17 +341,68 @@ test("tap targets in the header are large enough on a phone", { skip: SKIP }, as
 });
 
 test("the site works with the media folder empty", { skip: SKIP }, async () => {
-  /* Optional media must collapse, never leave an empty frame. */
+  /* Optional media must collapse, never leave an empty frame: the
+     photographs, the cutout with its earth slab, the strata edges and
+     the aperture masks all fall back to plain surfaces. */
   await withPage(async (page) => {
     await page.route("**/media/**", (r) => r.abort());
     await page.goto(base + "/", { waitUntil: "load" });
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(600);
     assert.equal(await page.locator(".portrait").count(), 0, "an empty portrait frame is left behind");
     assert.equal(await page.locator("figure.figure").count(), 0, "an empty figure frame is left behind");
+    assert.equal(await page.locator(".cutwrap").count(), 0, "an empty cutout frame is left behind");
     assert.equal(await page.locator("h1").count(), 1, "the page broke without media");
+    /* The strata band keeps its fixed height with or without the mask,
+       so a late-loading asset can never shift layout; without the asset
+       it degrades to a straight boundary. */
+    const strataHeights = await page.$$eval(".strata", (ns) =>
+      ns.map((n) => n.getBoundingClientRect().height)
+    );
+    for (const h of strataHeights) {
+      assert.ok(h > 0 && h <= 100, `a strata band has an unexpected height ${h}px`);
+    }
     const over = await page.evaluate(
       () => document.documentElement.scrollWidth - document.documentElement.clientWidth
     );
     assert.ok(over <= 1, "layout breaks without media");
+  });
+});
+
+test("material surfaces carry the chapters, the cutout appears once", { skip: SKIP }, async () => {
+  await withPage(async (page) => {
+    await page.goto(base + "/", { waitUntil: "load" });
+    await page.waitForTimeout(400);
+    assert.equal(await page.locator('img[src*="handstand-cutout"]').count(), 1, "the cutout is not on Home exactly once");
+    assert.ok((await page.locator(".surf--sand").count()) >= 1, "no sandstone chapter on Home");
+    assert.ok((await page.locator(".band--dark").count()) >= 1, "no ink chapter on Home");
+    for (const path of ["/praxe", "/pribeh", "/spoluprace", "/denik"]) {
+      await page.goto(base + path, { waitUntil: "load" });
+      assert.equal(
+        await page.locator('img[src*="handstand-cutout"]').count(), 0,
+        `${path}: the cutout must appear only on Home`
+      );
+    }
+    await page.goto(base + "/spoluprace", { waitUntil: "load" });
+    assert.equal(await page.locator(".surf--earth").count(), 1, "Spolupráce lost its Burnt Earth chapter");
+    await page.goto(base + "/denik", { waitUntil: "load" });
+    assert.equal(await page.locator(".surf--earth").count(), 0, "Deník must stay calm, no Burnt Earth");
+    assert.equal(await page.locator(".surf--sand").count(), 0, "Deník must stay calm, no Sandstone");
+  });
+});
+
+test("the aperture mask lands only on the approved photographs", { skip: SKIP }, async () => {
+  await withPage(async (page) => {
+    for (const path of ["/", "/praxe", "/denik"]) {
+      await page.goto(base + path, { waitUntil: "load" });
+      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+      await page.waitForTimeout(500);
+      const srcs = await page.$$eval(".ap img", (ns) => ns.map((n) => n.currentSrc || n.src));
+      for (const src of srcs) {
+        assert.match(
+          src, /portrait-tanmay|practice-handstand-trunk|practice-sitting-pine/,
+          `${path}: the aperture mask crept onto ${src}`
+        );
+      }
+    }
   });
 });

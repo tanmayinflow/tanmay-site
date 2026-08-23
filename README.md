@@ -18,10 +18,12 @@ Read it before adding any factual claim to the site.
 | `src/site.js` | The public surface contract: routes, per-route metadata, journal entries, aliases. Plain JavaScript because the build reads it too. **There is no second copy of the route map.** |
 | `src/App.tsx` | The whole site: stylesheet, content, components. |
 | `scripts/postbuild.mjs` | Turns the one built shell into a real pre-rendered file per route, plus `404.html`, `sitemap.xml` and `robots.txt`. Runs inside `npm run build`. |
-| `scripts/build-media.py` | Photographic derivatives and the two generated material assets. Authoring tool, run by hand. |
+| `scripts/build-media.py` | Photographic derivatives and the ink cotton tile. Authoring tool, run by hand. |
+| `scripts/build-material.py` | The Material Landscape set from Tanmay's selected sources; see `MATERIAL-ASSET-MANIFEST.md`. Authoring tool. |
 | `scripts/build-fonts.py` | The four Brand V2 typefaces, subset, as first party woff2. Authoring tool. |
 | `scripts/build-og.py` | The 18 social preview cards. Authoring tool. |
 | `tests/` | The launch gate. See `PUBLIC-LAUNCH-CHECKLIST.md`. |
+| `MATERIAL-ASSET-MANIFEST.md` | One table of truth for every generated and cutout asset: accepted, rejected, budgets, fallbacks. |
 | `public/_redirects` | Old public paths, kept alive. |
 | `wrangler.jsonc` | Cloudflare: assets from `./dist`, unknown paths get `404.html`. |
 
@@ -161,6 +163,7 @@ npm run check            # build then test, this is the one that matters
 npm run browser:setup    # installs playwright-core --no-save, for the browser suite
 npm run fonts            # regenerate public/fonts/
 npm run media            # regenerate public/media/
+npm run material         # regenerate public/media/material/
 npm run og               # regenerate public/og/
 ```
 

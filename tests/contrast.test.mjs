@@ -55,9 +55,17 @@ const PAIRS = [
   ["on-dark-2", "forest", 4.5, "body text inside the dark bands"],
   ["on-dark-3", "forest", 4.5, "metadata inside the dark bands"],
   ["sand", "forest", 4.5, "anchor roles and dark-band labels"],
+  /* Material Landscape surfaces. */
+  ["on-earth", "earth", 4.5, "headings and body on Burnt Earth"],
+  ["on-earth-2", "earth", 4.5, "secondary body on Burnt Earth"],
+  ["sand", "earth", 3.0, "labels on Burnt Earth, large text"],
+  ["text-sand", "sandstone", 4.5, "headings on Sandstone Paper"],
+  ["text-sand-2", "sandstone", 4.5, "body on Sandstone Paper"],
+  ["text-3", "sandstone", 4.5, "captions on Sandstone Paper"],
   /* Non-text contrast, WCAG 1.4.11: 3:1 is the bar. */
   ["copper", "linen", 3.0, "focus ring and the copper bindu"],
   ["rule-3", "linen", 3.0, "the border of the client entry control"],
+  ["earth", "linen", 3.0, "the earth rail beside the process blocks"],
 ];
 
 for (const [fg, bg, min, use] of PAIRS) {
@@ -71,6 +79,17 @@ test("the six Brand V2 colours are unchanged", () => {
   const want = { forest: "#1C1C1A", linen: "#F4F0EB", copper: "#B87333", sage: "#7C8C6E", sand: "#C5B49A" };
   for (const [name, value] of Object.entries(want)) {
     assert.match(APP, new RegExp("--" + name + ":\\s*" + value + ";"), `--${name} is not ${value}`);
+  }
+});
+
+test("Burnt Earth is the website extension, not a Copper replacement", () => {
+  assert.match(APP, /--earth:#754437;/, "the Burnt Earth token drifted from #754437");
+  assert.match(APP, /rozšíření webu, ne Brand Canonical/, "the token is not recorded as a website extension");
+  /* Copper never becomes a broad background: as a background colour it
+     may appear only on the bindu and the wordmark dot. */
+  const rules = APP.match(/[^{}]+\{[^{}]*background:var\(--copper\)[^{}]*\}/g) || [];
+  for (const r of rules) {
+    assert.ok(/\.bindu|\.wm \.a1 i|\.diagram \.b|::selection/.test(r), `copper is a broad background in: ${r.slice(0, 90)}`);
   }
 });
 
