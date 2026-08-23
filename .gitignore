@@ -1,0 +1,10 @@
+node_modules/
+dist/
+
+# Authoring scratch. scripts/build-fonts.mjs and scripts/build-og.py
+# fetch full font packages with --no-save; nothing here is source.
+.fonts-tmp/
+.og-fonts/
+
+.DS_Store
+*.log

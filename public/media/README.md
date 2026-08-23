@@ -1,26 +1,42 @@
 # public/media
 
-Optional runtime assets. The site is complete and correct with this folder
-empty, which is its current state.
+Committed derivatives. Cloudflare serves these files straight from the
+repository, so they belong in Git. The masters do not: they live in the
+workspace at `Work/website/Assets/Masters/`.
 
-Drop a file here with the exact name below and the matching component
-appears on the next build. Remove it and the component disappears cleanly.
-No code change either way.
+Everything here is written by `scripts/build-media.py`. Do not add,
+rename or hand-edit a file. Run the script instead:
 
 ```
-portrait-tanmay.jpg              home, opening portrait
-practice-handstand-trunk.jpg     practice
-practice-sitting-pine.jpg        practice log
-practice-walking-forest.jpg      work with me
-mat-unroll-poster.jpg            practice, poster for the clip
-mat-unroll.mp4                   practice, the clip itself
-edge-linen-torn.png              portrait dissolve mask
-surface-forest-cotton.png        texture on the dark bands
+pip install pillow pillow-avif-plugin
+npm run media -- --masters ../Assets/Masters
 ```
 
-Crops, aspect ratios, resolutions, size targets, alt text and generation
-prompts are specified in `../../VISUAL-ASSET-PLAN.md` and
+## What is here
+
+```
+portrait-tanmay-{480,720,960,1280}.{avif,webp}        home, opening
+portrait-tanmay.jpg                                   fallback, 960
+practice-handstand-trunk-{480,720,1080}.{avif,webp}   home, practice proof
+practice-handstand-trunk.jpg                          fallback, 720
+practice-sitting-pine-{360,480,720}.{avif,webp}       denik
+practice-sitting-pine.jpg                             fallback, 480
+edge-linen-torn.png                                   the one organic edge, alpha mask
+surface-ink-cotton.webp                               material in the dark bands
+manifest.json                                         what was built, checked by the tests
+```
+
+## Rules
+
+1. Nothing is upscaled past its master. The script refuses.
+2. Every derivative is stripped of EXIF. Phone stills carry GPS.
+3. No file goes over 600 kB. A test fails if one does.
+4. Exactly two generated assets, and both are material. A test fails if
+   a third appears.
+5. No placeholder or stand-in image, ever. An absent file is the correct
+   state until the real one exists: the component removes itself and the
+   page stays intentional.
+
+Crops, aspect ratios, treatment, alt text and the generation prompts are
+specified in `../../VISUAL-ASSET-PLAN.md` and
 `../../IMAGE-GENERATION-BRIEF.md`.
-
-Do not commit placeholder or stand-in images here. An absent file is the
-correct state until the real one exists.

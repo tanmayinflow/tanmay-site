@@ -1,0 +1,33 @@
+{
+  "portrait-tanmay": {
+    "fallback": 960,
+    "height": 3780,
+    "width": 3024,
+    "widths": [
+      480,
+      720,
+      960,
+      1280
+    ]
+  },
+  "practice-handstand-trunk": {
+    "fallback": 720,
+    "height": 3024,
+    "width": 2160,
+    "widths": [
+      480,
+      720,
+      1080
+    ]
+  },
+  "practice-sitting-pine": {
+    "fallback": 480,
+    "height": 900,
+    "width": 720,
+    "widths": [
+      360,
+      480,
+      720
+    ]
+  }
+}
