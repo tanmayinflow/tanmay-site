@@ -1,0 +1,214 @@
+/**
+ * Launch gate · public truth.
+ *
+ * These run against the shipped bundle, which is what a visitor actually
+ * receives. Every negative control here corresponds to a rule in
+ * PUBLIC-FACTS-LEDGER.md. If a rule changes, change the ledger first.
+ */
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { readFileSync, readdirSync, existsSync } from "node:fs";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+import { CLIENT_APP_URL, MAIL, IG_URL } from "../src/site.js";
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
+const DIST = join(ROOT, "dist");
+
+/**
+ * Everything a visitor can receive that this project actually authored:
+ * the app chunk and every HTML, XML and CSS file. The React vendor chunk
+ * is skipped, otherwise the library's own minified strings answer for us.
+ */
+function shipped() {
+  let out = "";
+  const walk = (dir) => {
+    for (const e of readdirSync(dir, { withFileTypes: true })) {
+      const p = join(dir, e.name);
+      if (e.isDirectory()) { if (e.name !== "fonts") walk(p); continue; }
+      else if (/^vendor-.*\.js$/.test(e.name)) continue;
+      else if (/\.(js|html|xml|css)$/.test(e.name) || e.name === "robots.txt") {
+        out += readFileSync(p, "utf8") + "\n";
+      }
+    }
+  };
+  walk(DIST);
+  return out;
+}
+
+const BUNDLE = existsSync(DIST) ? shipped() : "";
+
+test("dist exists — run `npm run build` first", () => {
+  assert.ok(BUNDLE.length > 1000, "no build output to check");
+});
+
+// ---------------------------------------------------------------- client
+test("the client entry points at the client app and nowhere else", () => {
+  assert.ok(BUNDLE.includes(CLIENT_APP_URL), "klient.tanmaypractice.com is not in the bundle");
+  assert.ok(BUNDLE.includes("Vstup pro klienty"), "the Czech client label is missing");
+  assert.ok(BUNDLE.includes("Client login"), "the English client label is missing");
+});
+
+test("NEGATIVE CONTROL · the Main App is never linked publicly", () => {
+  assert.ok(!/app\.tanmaypractice\.com/.test(BUNDLE), "the public site links to the Main App");
+});
+
+test("NEGATIVE CONTROL · no invitation mechanics are exposed", () => {
+  for (const re of [/pozv[aá]nk/i, /\binvite\b/i, /invitation/i, /zvac[ií]/i]) {
+    assert.ok(!re.test(BUNDLE), `the bundle mentions invitation mechanics: ${re}`);
+  }
+});
+
+// ----------------------------------------------------------------- offer
+test("NEGATIVE CONTROL · no price is published", () => {
+  const priced = BUNDLE.match(/\d[\d\s .,]{2,}\s?(?:K[čc]|CZK|EUR|€)/gi) || [];
+  assert.deepEqual(priced, [], `a price reached the public bundle: ${priced.join(", ")}`);
+  for (const n of ["5 200", "9 600", "1 500", "30 000", "5200", "9600"]) {
+    assert.ok(!BUNDLE.includes(n), `the offer figure ${n} reached the public bundle`);
+  }
+});
+
+test("NEGATIVE CONTROL · no package name, capacity or scarcity", () => {
+  for (const re of [
+    /[Rr]ytmus\s+[AB]\b/, /[Rr]hythm\s+[AB]\b/,
+    /posledn[ií]ch?\s+\d+\s+m[ií]st/i, /only\s+\d+\s+(spots?|places?)/i,
+    /omezen[ýy]\s+po[čc]et\s+m[ií]st/i, /sleva/i, /discount/i,
+    /z[áa]ruk[au]\s+v[ýy]sledku/i, /guarantee/i,
+  ]) {
+    assert.ok(!re.test(BUNDLE), `offer language that is not approved: ${re}`);
+  }
+});
+
+// ----------------------------------------------------------------- proof
+test("NEGATIVE CONTROL · no fabricated client proof", () => {
+  for (const re of [
+    /testimonial/i, /reference\s+klient/i, /co\s+[řr][ií]kaj[ií]\s+klienti/i,
+    /hodnocen[ií]\s*:\s*\d/i, /★/,     /p[řr]ed\s+a\s+po\b/i, /before\s+and\s+after/i,
+  ]) {
+    assert.ok(!re.test(BUNDLE), `fabricated or unapproved client proof: ${re}`);
+  }
+  assert.ok(
+    BUNDLE.includes("Ohlasy klientů sem přibudou, až budou jejich, ne moje."),
+    "the honest statement about client words is missing"
+  );
+});
+
+test("NEGATIVE CONTROL · no credential is claimed before it exists", () => {
+  for (const re of [/certifikovan/i, /diplomovan/i, /akreditovan/i, /\bcertified\b/i, /\baccredited\b/i]) {
+    assert.ok(!re.test(BUNDLE), `an unearned credential word appears: ${re}`);
+  }
+});
+
+test("the unfinished education is described as unfinished, with its safeguard", () => {
+  assert.ok(
+    BUNDLE.includes("Aktuálně si dodělávám další odborné trenérské vzdělání"),
+    "the approved in-progress wording is missing"
+  );
+  assert.ok(
+    BUNDLE.includes("neznamená, že poskytuju rehabilitaci"),
+    "the safeguard sentence next to the rehabilitation wording is missing"
+  );
+  assert.ok(
+    BUNDLE.includes("Neposkytuju rehabilitaci"),
+    "the boundary does not say rehabilitation is out of scope"
+  );
+});
+
+test("the professional boundary is stated in both editions", () => {
+  assert.ok(
+    BUNDLE.includes("Koučink není psychoterapie, diagnóza ani lékařská léčba."),
+    "the Czech boundary sentence is missing"
+  );
+  assert.ok(
+    BUNDLE.includes("Coaching is not psychotherapy, diagnosis or medical treatment."),
+    "the English boundary sentence is missing"
+  );
+});
+
+// -------------------------------------------------------------- brand V2
+test("NEGATIVE CONTROL · retired Brand V1 wording stays retired", () => {
+  for (const re of [
+    /prvn[ií]\s+zrcadlo/i, /first\s+mirror/i,
+    /t[ěe]lo\s*[·.,]\s*du[šs]e/i, /body\s*[·.,]\s*soul/i,
+    /Caveat/,
+    /integr[áa]tor/i, /poj[ií]tko/i,
+  ]) {
+    assert.ok(!re.test(BUNDLE), `retired Brand V1 wording is back: ${re}`);
+  }
+});
+
+test("NEGATIVE CONTROL · no wellness or funnel vocabulary", () => {
+  for (const re of [
+    /odemkni?\s+(sv[ůu]j\s+)?potenci[áa]l/i, /unlock\s+your\s+potential/i,
+    /nejlep[šs][ií]\s+verze\s+sebe/i, /best\s+version\s+of\s+yourself/i,
+    /nastartuj/i, /transformac[ei]\s+[žz]ivota/i, /life\s+transformation/i,
+    /discovery\s+call/i, /apply\s+now/i, /join\s+the\s+journey/i,
+    /biohack/i, /holistick/i,
+  ]) {
+    assert.ok(!re.test(BUNDLE), `wellness or funnel vocabulary: ${re}`);
+  }
+});
+
+// -------------------------------------------------------- completeness
+test("NEGATIVE CONTROL · nothing unfinished is visible", () => {
+  for (const re of [
+    /\bTODO\b/, /\bFIXME\b/, /lorem ipsum/i,
+    /coming\s+soon/i, /brzy\s+p[řr]ibude/i, /p[řr]ipravujeme/i,
+    /placeholder/i, /\bTBD\b/, /\bXXX\b/,
+    /undefined<\//, /\[object Object\]/,
+  ]) {
+    assert.ok(!re.test(BUNDLE), `unfinished content is visible: ${re}`);
+  }
+});
+
+test("NEGATIVE CONTROL · no invented contact detail", () => {
+  const mails = [...new Set(BUNDLE.match(/[\w.+-]+@[\w-]+\.[\w.]+/g) || [])];
+  assert.deepEqual(mails, [MAIL], `unexpected e-mail addresses: ${mails.join(", ")}`);
+  const phones = BUNDLE.match(/\+420[\s ]?\d/g) || [];
+  assert.deepEqual(phones, [], "a phone number appears on the public site");
+  for (const re of [/otev[řr]ac[ií]\s+doba/i, /opening\s+hours/i, /Praha\s+\d/, /\b\d{3}\s?\d{2}\s+Praha/]) {
+    assert.ok(!re.test(BUNDLE), `an unverified location or hours claim: ${re}`);
+  }
+});
+
+test("only the approved outbound destinations are linked", () => {
+  const hosts = [...new Set(
+    (BUNDLE.match(/https?:\/\/[a-z0-9.-]+/gi) || []).map((u) => u.replace(/^https?:\/\//i, "").toLowerCase())
+  )];
+  const allowed = new Set([
+    "tanmaypractice.com",
+    "klient.tanmaypractice.com",
+    "www.instagram.com",
+    "schema.org",
+    "www.w3.org",
+    "www.sitemaps.org",
+  ]);
+  const extra = hosts.filter((h) => !allowed.has(h));
+  assert.deepEqual(extra, [], `unexpected outbound hosts: ${extra.join(", ")}`);
+  assert.ok(BUNDLE.includes(IG_URL), "the Instagram link is missing");
+});
+
+test("no third party asset host, so the privacy statement stays true", () => {
+  for (const re of [/fonts\.googleapis\.com/, /fonts\.gstatic\.com/, /cdn\.jsdelivr/, /unpkg\.com/, /googletagmanager/, /google-analytics/]) {
+    assert.ok(!re.test(BUNDLE), `a third party host is referenced: ${re}`);
+  }
+  assert.ok(BUNDLE.includes("Žádné třetí strany"), "the privacy claim is missing from the footer");
+});
+
+test("no secret or internal identifier leaks", () => {
+  for (const re of [
+    /CLOUDFLARE_[A-Z_]+/, /API_KEY/i, /SECRET/i, /BEARER\s+[A-Za-z0-9]/i,
+    /sk_live/, /-----BEGIN/,
+  ]) {
+    assert.ok(!re.test(BUNDLE), `a secret-looking string is in the bundle: ${re}`);
+  }
+  const walkMaps = (dir) => readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
+    e.isDirectory() ? walkMaps(join(dir, e.name)) : (e.name.endsWith(".map") ? [e.name] : []));
+  assert.deepEqual(walkMaps(DIST), [], "a source map shipped");
+});
+
+test("the retired winter event is held back, the announced one is published", () => {
+  assert.ok(BUNDLE.includes("Den v lese"), "the announced October event is missing");
+  assert.ok(!BUNDLE.includes("Zimní tichá praxe"), "an unverified future event is published");
+  assert.ok(!/Připravuje se/.test(BUNDLE), "an in-preparation state is visible");
+});

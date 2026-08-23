@@ -1,195 +1,242 @@
-# tanmay-site · Image Generation Brief
+# IMAGE GENERATION BRIEF
 
-Last updated: 2026-08-16
-Scope: design implementation support. **Not brand authority.**
-Authority: `Context/Brand/Canonical/` in the Tanmay-Cowork workspace.
-Asset contracts: `VISUAL-ASSET-PLAN.md` in this repository.
+Last reviewed: 2026-08-23.
 
-Two generated assets. Both are surface or edge. Neither depicts a subject.
-Neither contains lettering. Everything else the site needs is either a real
-photograph or CSS.
+Two things live here:
 
----
+1. The **photographic edit direction** for the three real masters, so
+   that anyone re-editing them stays inside what the brand permits.
+2. The **paste-ready generation prompts** for the two material assets.
+   The shipped files are not prompted, they are synthesised numerically
+   by `scripts/build-media.py`. These prompts are the specification the
+   script implements, and the fallback if the assets ever have to be
+   produced somewhere else.
 
-## Rules that apply to every prompt here
-
-1. No text, letters, numbers, watermarks or signatures inside any generated image.
-2. No gradients, no glow, no metallic simulation, no three-dimensional rendering, no photorealism.
-3. No representational content. These are materials, not pictures.
-4. Nothing generated may be presented as documentary evidence of practice.
-5. Every result is reviewed against the intensity numbers in `VISUAL-ASSET-PLAN.md` before it ships.
-6. Do not over-specify. Two documented failures from the Quiet Print experiment apply here: over-constrained prompts produced measurably deader output, and individually attractive assets never proved a direction. Anchor on one reference and keep one continuous conversation per asset rather than adding more rules to the prompt.
+Nothing here asks any model to generate a person, a client, a practice
+scene, a landscape or a place. Real photography outranks generated
+imagery, always.
 
 ---
 
-## Prompt 01 · `edge-linen-torn.png`
+# Part 1 · Photographic edit direction
 
-**Visual role.** An alpha mask. It is never seen as an image. Its only job
-is to dissolve the bottom of one photograph into the Linen page ground so
-the site has one organic transition instead of a hard rectangle or a wavy
-SVG divider.
+The masters are phone stills. They do not need rescuing, they need
+leaving alone. `scripts/build-media.py` applies the whole treatment; if
+someone re-edits a master by hand instead, these are the limits.
 
-**Paste this into ChatGPT image generation:**
+## Universal limits
 
-```
-A pure greyscale alpha map, not a picture of anything.
+**Allowed**
 
-The top 84 percent of the frame is solid, even, pure white with no texture,
-no grain and no variation whatsoever.
+Exposure correction. White balance. Conservative noise reduction.
+Conservative local contrast. Global saturation change. Crop. Natural
+texture recovery. Conservative upscaling, only if a master is replaced
+by a larger one.
 
-The bottom 16 percent is a dissolve from that solid white to solid black.
-The dissolve is not a straight line and not a wave. It is the profile of a
-torn edge of heavy natural linen cloth: an irregular horizontal boundary
-that wanders up and down by a small amount, with individual threads and
-fibres pulling downward from it at uneven intervals and uneven lengths.
-Some fibres are long and thin, most are short. The gaps between them are
-irregular. Below the fibres the tone falls off quickly to solid black.
+**Not allowed**
 
-Two scales of variation only: a slow undulation of the boundary across the
-width, and fine thread detail at the boundary itself. Nothing else.
+A new face. Beauty retouch. Skin smoothing. Teeth whitening. Eye
+recolouring. A fitness-model body. Changed hair. Changed clothes. A fake
+studio. A fake landscape. Cinematic fog. Dramatic rim light. Artificial
+bokeh. Added sunlight. Added mist. An aura or halo. Any symbol. Split
+toning, teal and orange, or any cinematic grade. Redrawing a body,
+adding missing anatomy, or altering the position of a limb.
 
-Flat, even, printed quality. No lighting, no shadow, no depth, no
-perspective, no paper, no photograph of cloth, no colour, no text.
+## portrait-tanmay
 
-Vertical format, tall, roughly 4 by 5.
-```
+Keep identity, skin texture, hair, ordinary clothing and the available
+light exactly as they are. The rock face behind is the real place; do
+not replace it and do not blur it into a studio backdrop.
 
-**Aspect ratio.** 4 : 5 vertical, approximately 1200 × 1500.
-**Transparency required.** No. Deliver greyscale. Convert white to opaque
-and black to transparent when saving the PNG.
-**Edge behaviour.** Left and right edges must reach the frame. Do not let
-the fibre detail stop short of either side.
-**Background behaviour.** Not applicable. There is no background.
+The frame is already 4:5 with the face in the upper third. Do not
+recompose it. Background distraction cleanup is allowed only where it
+removes a literal distraction and does not invent a new place.
 
-**Post-processing before it ships.**
-1. Check the top 84 percent is a flat 255. Any gradient there will fade the whole photograph and is a fail.
-2. Convert to an alpha channel: luminance becomes alpha, image becomes white.
-3. Save as PNG with alpha, under 90 kB.
-4. Drop into `public/media/`, reload the site, look at the home page at 390 px and at 1440 px.
+Current treatment: saturation 0.97, contrast 1.02.
 
-**Reject if.** The boundary reads as a wave. The tear looks like torn paper
-rather than woven cloth. The dissolve is symmetrical or repeats. There is
-any texture inside the opaque area. There is a soft grey haze instead of a
-clean falloff.
+If a replacement master is ever shot: 4:5, at least 1600 × 2000, face in
+the upper third, bottom 14 % free of anything that matters because the
+dissolve mask eats it, natural or available light, ordinary clothes.
 
----
+**ChatGPT image-edit prompt, if the master ever needs a repair pass**
 
-## Prompt 02 · `surface-forest-cotton.png`
+> Correct exposure and white balance on this photograph only. Keep the
+> person's face, skin texture, pores, hair and clothing exactly as they
+> are. Do not smooth skin, do not slim or reshape anything, do not
+> whiten teeth, do not change eye colour, do not add makeup. Keep the
+> real rock face behind him sharp and unaltered; do not add depth of
+> field, fog, rim light, sun flare or any colour grade. Do not crop. The
+> result must be recognisably the same photograph, only correctly
+> exposed.
 
-**Visual role.** A seamless tile that gives the site's two dark bands the
-material named in the brand's own master surface system, so Forest Night
-reads as cloth rather than as flat digital black. It must be felt before
-it is noticed.
+## practice-handstand-trunk
 
-**Paste this into ChatGPT image generation:**
+Keep the real trunk, the moss, the imperfect balance, the actual weather
+and the ordinary clothes. Do not redraw the body, do not change the
+handstand, do not add missing anatomy, do not replace the trunk, do not
+add sunlight, do not make the forest epic, do not over-sharpen foliage.
 
-```
-A seamless tileable square texture of plain-weave organic cotton, viewed
-flat and straight on, filling the whole frame.
+Current treatment: crop y 88 to 3112 for a 5:7 frame, saturation 0.72,
+white balance +3 % warm, contrast 1.03. The saturation move exists
+because the public field must not read primarily green; it is one global
+value, not a grade.
 
-The colour is a single very dark warm near-black, hex 1C1C1A. The weave is
-visible only as an extremely subtle variation in that same tone. The
-lightest thread and the darkest gap differ by only a few levels of
-brightness. There is no second colour anywhere.
+**ChatGPT image-edit prompt, if the master ever needs a repair pass**
 
-Regular over-under plain weave, with slight natural irregularity in thread
-spacing and thickness so it does not look like a digital grid.
+> Reduce noise conservatively and recover natural texture in this
+> photograph. Do not change the person's body, position, limbs or
+> clothing in any way. Do not alter the fallen trunk or the forest
+> behind. Do not add sunbeams, god rays, lens flare, mist or bokeh. Do
+> not apply a cinematic colour grade. Keep the spring foliage as it is;
+> global saturation may come down slightly but hue must not shift. The
+> result must be the same moment, only cleaner.
 
-Completely even lighting across the whole frame. No highlight, no shadow,
-no vignette, no fold, no drape, no depth, no fibres standing up, no slubs,
-no dust, no noise, no colour cast, no text.
+## practice-sitting-pine
 
-Square format. The pattern must tile seamlessly with no visible seam at any
-edge.
-```
+Keep the back-facing figure, the scale of the pine, the bench, the real
+ground and the actual low sun including its natural flare. Do not add an
+aura, a halo, extra mist, a meditation symbol or a perfect lotus. Do not
+build a new landscape and do not intensify the sunset.
 
-**Aspect ratio.** 1 : 1 square, delivered large and downscaled to 520 × 520.
-**Transparency required.** No.
-**Edge behaviour.** Must tile seamlessly on all four edges. Verify by
-placing four copies in a two-by-two grid and looking for a seam.
-**Background behaviour.** The texture is the background.
+Current treatment: crop y 190 to 1090 for a 4:5 frame, saturation 0.88,
+contrast 1.02.
 
-**Post-processing before it ships.**
-1. Downscale to 520 × 520.
-2. Measure. No pixel may differ from `#1C1C1A` by more than 6 levels in any channel. If it does, reduce contrast until it does not. This is the measurable review gate, not a matter of taste.
-3. Confirm the mean colour is `#1C1C1A` within 1 level per channel, so the band does not shift hue.
-4. Save as PNG, under 60 kB.
-5. Drop into `public/media/`, reload, and look at the practice page dark band at 1× and at 2×. If you can see a pattern from normal reading distance, it is too strong.
+The master is a 720 px wide video still. It is displayed at most 470 px
+so that it stays above 1×. It is never upscaled. If a photographic
+master of the same scene appears, drop it in as
+`practice-sitting-pine-master.png` and re-run `npm run media`; the
+widths in `scripts/build-media.py` and `src/App.tsx` can then go up.
 
-**Reject if.** It reads as fabric photography. It has any warm or cool cast.
-It shows a fold, a highlight or a shadow. It tiles with a visible seam. It
-adds perceptible noise to the type sitting on it.
+**ChatGPT image-edit prompt, if the master ever needs a repair pass**
 
----
-
-## Editing prompts for real photographs
-
-These are **edit** prompts for Tanmay's own images. They are never used to
-generate a person. The person in every photograph on this site is the real
-Tanmay in a real place. Anything else would be fabricated documentary
-evidence, which the brand forbids outright.
-
-### Allowed operations
-
-Exposure. Contrast. White balance. Necessary colour correction. Crop.
-Straighten. Sensor dust removal. Compression for the web.
-
-### Forbidden operations
-
-Reshaping the body. Smoothing skin. Enhancing muscle definition. Slimming
-or enlarging anything. Replacing the sky. Adding light, flare, haze, mist
-or god rays. Removing sweat, dirt, scars or strain. Any warm wellness
-filter. Any cinematic teal-and-orange grade. Generating or replacing the
-person, the place or the weather.
-
-### Prompt template for a still from footage
-
-```
-Edit this photograph of me. Keep it recognisably the same person, the same
-body, the same place and the same weather. Do not change my face, my
-proportions or anything in the scene.
-
-Only do this:
-- Lift the exposure slightly if the frame is underexposed from the video.
-- Recover shadow detail without flattening the image.
-- Correct the white balance to neutral. Do not warm it.
-- Reduce video compression artefacts and mild motion softness.
-- Keep the grain, the weather and the imperfection.
-
-Do not smooth skin. Do not enhance muscle definition. Do not change my body
-shape. Do not replace or brighten the sky. Do not add glow, flare, mist or
-any filter. Do not remove sweat, dirt or marks. Do not make it look like a
-fitness or wellness photograph.
-
-Return it at the original framing and aspect ratio.
-```
-
-### Per-image notes
-
-**B1 · handstand on the trunk.** Video stills of movement are usually one
-to two stops under and slightly soft. Lift and sharpen only. Wet wood must
-stay wet. Cold hands must stay red.
-
-**B2 · sitting under the pine at sunset.** The one image most likely to be
-pushed into a wellness photograph. Add nothing to the sun. If the frame is
-already saturated from the camera profile, pull saturation **down** towards
-neutral. A quieter sunset is the correct result.
-
-**B3 · walking in the forest.** Do not raise green saturation. Flat winter
-or early-spring light is preferred over an attractive autumn frame.
-
-**A1 · portrait.** Skin retouching is not permitted beyond removing a
-transient blemish. Do not even out skin tone. Do not brighten the eyes. Do
-not sharpen the iris. If the portrait needs work to be usable, take another
-photograph instead of editing this one further.
+> Reduce digital compression artefacts and recover shadow detail in this
+> photograph. Lower saturation slightly and hold the highlights around
+> the sun. Do not add mist, glow, halo, god rays or lens flare beyond
+> what is already in the frame. Do not change the seated person, the
+> bench, the tree or the field. Do not add any symbol. Do not intensify
+> the sunset. The result must be the same quiet evening, only cleaner.
 
 ---
 
-## Review gate before anything ships
+# Part 2 · Material assets
 
-1. Does the asset do a job named in `VISUAL-ASSET-PLAN.md`?
-2. Would CSS, typography or whitespace have done that job?
-3. Does it pass its measured intensity threshold?
-4. Does the site still read correctly with the file deleted?
+## Rules for anything generated
 
-If any answer is no, the asset does not ship.
+A generated asset on this site may not depict people, clients, exercise
+scenes, nature, landscapes, spiritual imagery, mandalas, symbols, words
+or logos. It is material, or it is not made.
+
+For each one the plan records: the job, why CSS cannot do it, where it
+is used, dimensions, format, size target, mobile behaviour, fallback,
+the prompt, and the negative constraints. That record is in
+`VISUAL-ASSET-PLAN.md`.
+
+## A · `edge-linen-torn.png`
+
+**Job.** The single organic transition on the whole site: the bottom of
+the portrait dissolving into the linen field.
+
+**Why not CSS.** A `linear-gradient` mask reads as a fade. A torn
+textile edge needs per-pixel fibre at the boundary.
+
+**Where.** Under the portrait on Home, once. Never as a repeated
+divider. 2400 × 1200 PNG with alpha, about 35 kB, stretched to the
+element with `mask-size: 100% 100%`. On mobile the same mask covers the
+portrait band. Fallback: `html[data-edge="off"]`, the portrait is a
+plain rectangle.
+
+**Prompt**
+
+> Generate a production alpha mask only, no visible artwork. A
+> 2400 × 1200 transparent PNG whose top 84 % is fully opaque pure white
+> with no gradient and no texture. In the bottom 16 %, create one
+> restrained irregular torn-linen fibre edge, predominantly horizontal,
+> with small natural fibre variation and no large waves, scallops,
+> drips, mountains, leaves or repeated pattern. Below the edge is fully
+> transparent. The transition is crisp enough for CSS masking but
+> carries microscopic textile fibres at the boundary. No colour, no
+> shadows, no lettering, no objects, no grey haze across the opaque
+> field.
+
+**Negative constraints.** No scallops. No drips or comb teeth. No wave.
+No repeat. No colour. No shadow. No lettering. No grey haze in the
+opaque field. No soft gradient more than about three pixels deep.
+
+**Numeric validation, which the script performs and asserts**
+
+* minimum alpha across the top 84 % must be 255;
+* maximum alpha in the last row must be 0;
+* the edge line must move by no more than about 14 px across the full
+  2400 px, and fibre tips by no more than about 7 px.
+
+**Note on the first attempt.** The first version put fibre tips 30 % of
+the band deep. On the page it read as drips, which the prompt forbids.
+Depth was cut to a few pixels and the line irregularity to three low
+amplitude sinusoids. Judge this asset on the rendered page, never on the
+mask.
+
+## B · `surface-ink-cotton.webp`
+
+**Job.** Keeps the dark bands from reading as flat digital black.
+
+**Why not CSS.** A gradient is a gradient. This needs material grain
+with no direction and no findable repeat.
+
+**Where.** The single dark band on Home, Praxe, Příběh and Spolupráce.
+1024 × 1024 seamless WebP, about 11 kB, drawn at 512 px. Not fetched on
+routes without a dark band. Fallback: `html[data-surface="off"]`, the
+band is flat Forest Night.
+
+**Prompt**
+
+> Generate a seamless 1024 × 1024 WebP texture tile for a near-black
+> editorial website surface. Base colour #1C1C1A. Extremely subtle
+> organic cotton pressure and fibre density, perceived before it is
+> consciously seen. Pixel variation restrained to approximately ±6 RGB
+> levels from the base. No visible weave grid, folds, wrinkles, stains,
+> speckles, noise overlay, paper grain, leaves, bark, symbols, light
+> beams, gradient, vignette, metallic effect or lettering. Seamless on
+> all four edges. Flat diffuse material, no directional light.
+
+**Negative constraints.** No weave grid. No plaid. No diagonal. No
+visible tile boundary. No vignette. No gradient. No motif of any kind.
+
+**Numeric validation, which the script performs and asserts**
+
+* peak deviation from the base colour must be ≤ 6 RGB levels; the
+  shipped tile is ±3;
+* the wrap-around difference between the first and last column, and
+  between the first and last row, must be no larger than the difference
+  between two adjacent columns one pixel inside the tile.
+
+**Note on the first attempt.** The first version summed low frequency
+sinusoids. Mathematically seamless, but once tiled across a wide band it
+read as a plaid, which the prompt forbids. It was replaced by smoothed
+wrapped white noise with no low frequency component. Judge this asset on
+a wide dark band at 1:1, not on the tile.
+
+## C · `surface-stone-shadow.webp`
+
+Not generated, deliberately. The brief allows it only if the finished
+render proves a specific section needs one more quiet material
+transition. After the photography went in, no section did.
+
+Do not generate it by default. If it is ever needed: very low contrast,
+non-representational, no identifiable rock, no leaves, no horizon, no
+symbolism, and it goes through the same numeric validation.
+
+---
+
+# Part 3 · Social preview cards
+
+`scripts/build-og.py`, run with `npm run og`. It draws 18 cards from the
+route table and the journal entries, in the real Brand V2 typefaces.
+
+Nothing on a card is generated imagery. The headline on a card is the
+visible H1 of the route, so a card can never promise something the page
+does not say. Linen ground, ink type, one copper bindu, one hairline
+rule, the domain. No gradients.
+
+The two home cards carry the real portrait. If the portrait were ever
+unavailable, the card falls back to typography only. A generated
+portrait is never acceptable, on a card or anywhere else.
