@@ -37,6 +37,7 @@ function shipped() {
 }
 
 const BUNDLE = existsSync(DIST) ? shipped() : "";
+const APP = readFileSync(join(ROOT, "src", "App.tsx"), "utf8");
 
 test("dist exists — run `npm run build` first", () => {
   assert.ok(BUNDLE.length > 1000, "no build output to check");
@@ -69,8 +70,12 @@ test("approved Czech Home copy and removals reached the shipped build", () => {
     "První krok",
     "Napiš mi.",
     "tanmaya · „tím prostoupený“",
-    "© " + new Date().getFullYear() + " Kryštof Švec · Tanmay Practice",
+    "Kryštof Švec · Tanmay Practice",
   ]) assert.ok(BUNDLE.includes(text), `approved Home text is missing: ${text}`);
+  /* The footer year is interpolated at runtime, so the shipped bundle never
+     carries "© <year> Kryštof Švec" as one literal. Check the two halves. */
+  assert.match(APP, /© \{new Date\(\)\.getFullYear\(\)\} Kryštof Švec · Tanmay Practice/,
+    "the footer copyright line changed unexpectedly");
 });
 
 test("NEGATIVE CONTROL · no invitation mechanics are exposed", () => {
