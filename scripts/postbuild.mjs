@@ -18,7 +18,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { ORIGIN, ROUTES, POSTS, LANGS, allPages, IG_URL } from "../src/site.js";
+import { ORIGIN, ROUTES, POSTS, LANGS, allPages, IG_URL, isLaunchReady, GATE_META } from "../src/site.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DIST = join(ROOT, "dist");
@@ -50,18 +50,31 @@ const ogFor = (slug, lang) => {
 
 /* ---------------------------------------------------------------- head  */
 function head(page) {
-  const { lang, path, title, description, alternates, ogSlug } = page;
+  const { lang, path, alternates, ogSlug } = page;
+  /* DOČASNÁ BRÁNA SPUŠTĚNÍ · nedokončená stránka existuje jako URL,
+     ale ven jde jen neutrální metadata, noindex a žádná strukturovaná
+     data — nic nesmí tvrdit, že skrytý obsah je živý. 404 branou
+     neprochází, je to hotová stránka. */
+  const gated = page.routeId !== "notfound" && !isLaunchReady(page.routeId, lang);
+  const title = gated ? GATE_META[lang].title : page.title;
+  const description = gated ? GATE_META[lang].description : page.description;
   const url = ORIGIN + path;
-  const og = ORIGIN + ogFor(ogSlug, lang);
+  const og = ORIGIN + ogFor(gated ? "home" : ogSlug, lang);
   const out = [];
   out.push(`<meta name="tm-route" content="${page.routeId}:${lang}${page.postId ? ":" + page.postId : ""}">`);
   out.push(`<title>${esc(title)}</title>`);
   out.push(`<meta name="description" content="${esc(description)}">`);
+  if (gated) out.push(`<meta name="robots" content="noindex, nofollow">`);
   out.push(`<link rel="canonical" href="${esc(url)}">`);
-  for (const l of LANGS) {
-    out.push(`<link rel="alternate" hreflang="${l === "cs" ? "cs-CZ" : "en"}" href="${esc(ORIGIN + alternates[l])}">`);
+  /* hreflang jen mezi vydáními, která jsou opravdu venku: brána nemá
+     alternativy a hotová stránka neukazuje na noindex protějšek. */
+  if (!gated) {
+    const readyAlt = LANGS.filter((l) => isLaunchReady(page.routeId, l));
+    for (const l of readyAlt) {
+      out.push(`<link rel="alternate" hreflang="${l === "cs" ? "cs-CZ" : "en"}" href="${esc(ORIGIN + alternates[l])}">`);
+    }
+    if (readyAlt.includes("cs")) out.push(`<link rel="alternate" hreflang="x-default" href="${esc(ORIGIN + alternates.cs)}">`);
   }
-  out.push(`<link rel="alternate" hreflang="x-default" href="${esc(ORIGIN + alternates.cs)}">`);
   out.push(`<meta property="og:site_name" content="tanmay">`);
   out.push(`<meta property="og:type" content="${page.routeId === "post" ? "article" : "website"}">`);
   out.push(`<meta property="og:locale" content="${lang === "cs" ? "cs_CZ" : "en_US"}">`);
@@ -80,7 +93,7 @@ function head(page) {
   for (const f of PRELOAD[lang]) {
     out.push(`<link rel="preload" as="font" type="font/woff2" href="${f}" crossorigin>`);
   }
-  const ld = jsonLd(page);
+  const ld = gated ? null : jsonLd(page);
   if (ld) out.push(`<script type="application/ld+json">${JSON.stringify(ld)}</script>`);
   return out.join("\n  ");
 }
@@ -204,11 +217,15 @@ const SITEMAP_NS =
   'xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" ' +
   'xmlns:xhtml="http://www.w3.org/1999/xhtml"';
 
+/* Do sitemap patří jen to, co se má indexovat. Vygenerovaná adresa
+   a indexovatelná adresa jsou během dočasného spuštění dvě různé věci:
+   brány existují jako soubory, ale v sitemap nestojí. */
+const indexable = pages.filter((p) => isLaunchReady(p.routeId, p.lang));
 const sitemap =
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset ${SITEMAP_NS}>\n` +
-  pages
+  indexable
     .map((p) => {
-      const alts = LANGS.map(
+      const alts = LANGS.filter((l) => isLaunchReady(p.routeId, l)).map(
         (l) =>
           `    <xhtml:link rel="alternate" hreflang="${l === "cs" ? "cs-CZ" : "en"}" href="${esc(ORIGIN + p.alternates[l])}"/>`
       ).join("\n");
@@ -223,4 +240,4 @@ writeFileSync(
   `User-agent: *\nAllow: /\n\nSitemap: ${ORIGIN}/sitemap.xml\n`
 );
 
-console.log(`postbuild: ${written} routes, 404.html, sitemap.xml, robots.txt`);
+console.log(`postbuild: ${written} routes (${written - indexable.length} gated noindex), sitemap ${indexable.length} URL, 404.html, robots.txt`);

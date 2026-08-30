@@ -30,6 +30,8 @@ import {
   otherLangPath,
   routePath,
   postPath,
+  isLaunchReady,
+  GATE_META,
 } from "./site.js";
 
 // ----------------------------------------------------------------------
@@ -3069,6 +3071,28 @@ function PagePrivacy({ lang }: any) {
 // ----------------------------------------------------------------------
 // 404
 // ----------------------------------------------------------------------
+/**
+ * DOČASNÁ STRÁNKA ROZPRACOVANOSTI · sdílí ji každá zatím neschválená
+ * místnost. Záměrně nejjednodušší možná: schválená věta a cesta domů,
+ * ve vizuálním systému domu (třídy 404). Žádné datum, žádný sběr
+ * e-mailů, žádné nové CTA — odstraní se místnost po místnosti tím,
+ * že v LAUNCH_READY přibude její "routeId:lang".
+ */
+function PageInProgress({ lang }: any) {
+  return (
+    <section className="nf">
+      <div className="wrap">
+        <h1 className="h-display h1 rv" style={{ marginTop: 16 }}>
+          {L("Na této stránce právě pracuji.", "This page is currently being prepared.")}
+        </h1>
+        <p className="act rv d1">
+          <Go href={routePath("home", lang)} cs="Zpět na hlavní stránku" en="Back to home" />
+        </p>
+      </div>
+    </section>
+  );
+}
+
 function PageNotFound({ lang }: any) {
   return (
     <section className="nf">
@@ -3204,7 +3228,12 @@ export default function App() {
     const route = ROUTES.find((r: any) => r.id === loc.routeId);
     let title: string;
     let desc: string;
-    if (loc.routeId === "post") {
+    const gated = loc.routeId !== "notfound" && !isLaunchReady(loc.routeId, loc.lang);
+    if (gated) {
+      /* Brána spuštění: neutrální titulek, žádný popis skrytého obsahu. */
+      title = GATE_META[loc.lang].title;
+      desc = GATE_META[loc.lang].description;
+    } else if (loc.routeId === "post") {
       const p = POSTS.find((x) => x.id === loc.postId);
       const room = loc.lang === "cs" ? "Deník praxe" : "Practice log";
       title = p.title[loc.lang] + " · " + room + " · tanmay";
@@ -3229,6 +3258,18 @@ export default function App() {
     set('meta[property="og:description"]', "content", desc);
     set('meta[property="og:url"]', "content", "https://tanmaypractice.com" + window.location.pathname);
     set('link[rel="canonical"]', "href", "https://tanmaypractice.com" + window.location.pathname);
+    /* noindex drží krok s bránou i při přechodech uvnitř aplikace. */
+    let robots = document.querySelector('meta[name="robots"]');
+    if (gated) {
+      if (!robots) {
+        robots = document.createElement("meta");
+        robots.setAttribute("name", "robots");
+        document.head.appendChild(robots);
+      }
+      robots.setAttribute("content", "noindex, nofollow");
+    } else if (robots) {
+      robots.remove();
+    }
   }, [loc]);
 
   /**
@@ -3275,14 +3316,25 @@ export default function App() {
       <Menu open={menuOpen} onClose={() => setMenuOpen(false)} loc={loc} />
 
       <main id="main" key={loc.routeId + lang + (loc.postId || "")}>
-        {loc.routeId === "home" && <PageHome lang={lang} />}
-        {loc.routeId === "praxe" && <PagePraxe lang={lang} />}
-        {loc.routeId === "pribeh" && <PagePribeh lang={lang} />}
-        {loc.routeId === "spoluprace" && <PageSpoluprace lang={lang} />}
-        {loc.routeId === "denik" && <PageDenik lang={lang} />}
-        {loc.routeId === "post" && <PagePost lang={lang} postId={loc.postId} />}
-        {loc.routeId === "soukromi" && <PagePrivacy lang={lang} />}
-        {loc.routeId === "notfound" && <PageNotFound lang={lang} />}
+        {/* DOČASNÁ BRÁNA SPUŠTĚNÍ · hotové je jen české Home. Ostatní
+            místnosti si nechávají adresu i komponentu, ale kreslí
+            sdílenou stránku rozpracovanosti — viz LAUNCH_READY
+            v src/site.js, jediný zdroj pravdy. Neznámá adresa zůstává
+            skutečnou 404. */}
+        {loc.routeId !== "notfound" && !isLaunchReady(loc.routeId, lang) ? (
+          <PageInProgress lang={lang} />
+        ) : (
+          <>
+            {loc.routeId === "home" && <PageHome lang={lang} />}
+            {loc.routeId === "praxe" && <PagePraxe lang={lang} />}
+            {loc.routeId === "pribeh" && <PagePribeh lang={lang} />}
+            {loc.routeId === "spoluprace" && <PageSpoluprace lang={lang} />}
+            {loc.routeId === "denik" && <PageDenik lang={lang} />}
+            {loc.routeId === "post" && <PagePost lang={lang} postId={loc.postId} />}
+            {loc.routeId === "soukromi" && <PagePrivacy lang={lang} />}
+            {loc.routeId === "notfound" && <PageNotFound lang={lang} />}
+          </>
+        )}
       </main>
 
       <Footer lang={lang} />

@@ -19,7 +19,7 @@ import { createServer } from "node:http";
 import { readFileSync, existsSync, statSync, readdirSync } from "node:fs";
 import { join, dirname, extname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { ORIGIN, allPages, CLIENT_APP_URL } from "../src/site.js";
+import { ORIGIN, allPages, CLIENT_APP_URL, GATE_META } from "../src/site.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DIST = join(ROOT, "dist");
@@ -194,12 +194,15 @@ test("the mobile menu opens, closes on Escape, and keeps the client entry out of
 
 test("old hash links still land on the right room", { skip: SKIP }, async () => {
   await withPage(async (page) => {
+    /* Cílové místnosti jsou během dočasného spuštění za bránou, takže
+       správná odpověď je adresa místnosti + věta brány. Staré adresy
+       Deníku (zapisky) končí na /praxe. */
     for (const [hash, path, heading] of [
-      ["#/praxe", "/praxe", /praxe/i],
-      ["#/udalosti", "/spoluprace", /spolupr/i],
-      ["#/kontakt", "/spoluprace", /spolupr/i],
-      ["#/zapisky", "/denik", /den[ií]k/i],
-      ["#/poezie", "/pribeh", /p[řr][ií]b[ěe]h/i],
+      ["#/praxe", "/praxe", /pracuji/i],
+      ["#/udalosti", "/spoluprace", /pracuji/i],
+      ["#/kontakt", "/spoluprace", /pracuji/i],
+      ["#/zapisky", "/praxe", /pracuji/i],
+      ["#/poezie", "/pribeh", /pracuji/i],
     ]) {
       await page.goto(base + "/" + hash, { waitUntil: "load" });
       await page.waitForTimeout(120);
@@ -215,7 +218,7 @@ test("internal navigation updates the address, the title and history", { skip: S
     await page.click('a[href="/praxe"]');
     await page.waitForTimeout(120);
     assert.ok(page.url().endsWith("/praxe"), "pushState did not change the address");
-    assert.match(await page.title(), /Praxe/, "the title did not follow the route");
+    assert.equal(await page.title(), GATE_META.cs.title, "the title did not follow the gated route");
     assert.equal(
       await page.getAttribute('link[rel="canonical"]', "href"),
       ORIGIN + "/praxe",
@@ -277,9 +280,14 @@ test("every rendered image actually loads and reserves its space", { skip: SKIP 
 });
 
 test("the browser picks a modern format, not the JPEG fallback", { skip: SKIP }, async () => {
+  /* Od Wave 25 nemá Home fotografii .portrait — hrdina je výřez s alfou.
+     Moderní formát se posuzuje na pražském portrétu v bloku O mně,
+     který je líný pod ohybem, takže se k němu nejdřív doroluje. */
   await withPage(async (page) => {
     await page.goto(base + "/", { waitUntil: "load" });
-    const src = await page.$eval(".portrait img", (n) => n.currentSrc);
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await page.waitForTimeout(700);
+    const src = await page.$eval("figure.figure img", (n) => n.currentSrc);
     assert.match(src, /\.(avif|webp)$/, `the portrait fell back to ${src}`);
   });
 });
@@ -347,7 +355,10 @@ test("the site works with the media folder empty", { skip: SKIP }, async () => {
   await withPage(async (page) => {
     await page.route("**/media/**", (r) => r.abort());
     await page.goto(base + "/", { waitUntil: "load" });
-    await page.waitForTimeout(600);
+    /* Líné obrázky pod ohybem se o načtení pokusí až při dorolování —
+       teprve pak se smí počítat, co po chybě zmizelo. */
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await page.waitForTimeout(800);
     assert.equal(await page.locator(".portrait").count(), 0, "an empty portrait frame is left behind");
     assert.equal(await page.locator("figure.figure").count(), 0, "an empty figure frame is left behind");
     assert.equal(await page.locator(".cutwrap").count(), 0, "an empty cutout frame is left behind");
@@ -374,19 +385,34 @@ test("material surfaces carry the chapters, the cutout appears once", { skip: SK
     await page.waitForTimeout(400);
     assert.equal(await page.locator('img[src*="handstand-cutout"]').count(), 1, "the cutout is not on Home exactly once");
     assert.ok((await page.locator(".surf--sand").count()) >= 1, "no sandstone chapter on Home");
-    assert.ok((await page.locator(".band--dark").count()) >= 1, "no ink chapter on Home");
+    /* Inkoustové a Burnt Earth kapitoly žijí v místnostech, které jsou
+       během dočasného spuštění za bránou — brána je klidná, bez
+       materiálových povrchů a bez výřezu. Až se místnosti odemknou,
+       vrátí se sem jejich původní kontrola. */
     for (const path of ["/praxe", "/pribeh", "/spoluprace", "/denik"]) {
       await page.goto(base + path, { waitUntil: "load" });
       assert.equal(
         await page.locator('img[src*="handstand-cutout"]').count(), 0,
         `${path}: the cutout must appear only on Home`
       );
+      for (const sel of [".surf--earth", ".surf--sand", ".band--dark"]) {
+        assert.equal(await page.locator(sel).count(), 0, `${path}: a material surface on the launch gate (${sel})`);
+      }
     }
-    await page.goto(base + "/spoluprace", { waitUntil: "load" });
-    assert.equal(await page.locator(".surf--earth").count(), 1, "Spolupráce lost its Burnt Earth chapter");
-    await page.goto(base + "/denik", { waitUntil: "load" });
-    assert.equal(await page.locator(".surf--earth").count(), 0, "Deník must stay calm, no Burnt Earth");
-    assert.equal(await page.locator(".surf--sand").count(), 0, "Deník must stay calm, no Sandstone");
+  });
+});
+
+test("the launch gate shows the approved copy and a way home", { skip: SKIP }, async () => {
+  await withPage(async (page) => {
+    await page.goto(base + "/praxe", { waitUntil: "load" });
+    assert.equal((await page.textContent("h1")).trim(), "Na této stránce právě pracuji.");
+    const zpet = page.locator('main a:has-text("Zpět na hlavní stránku")');
+    assert.equal(await zpet.count(), 1, "the way home is missing");
+    assert.equal(await zpet.getAttribute("href"), "/", "the way home does not lead home");
+    assert.equal(await page.locator("main a").count(), 1, "the gate must offer no other CTA");
+    await page.goto(base + "/en/practice", { waitUntil: "load" });
+    assert.equal((await page.textContent("h1")).trim(), "This page is currently being prepared.");
+    assert.equal(await page.locator('main a:has-text("Back to home")').count(), 1);
   });
 });
 

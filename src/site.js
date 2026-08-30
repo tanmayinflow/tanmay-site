@@ -18,7 +18,16 @@
 
 export const ORIGIN = "https://tanmaypractice.com";
 
-/** Client application. Never link publicly to app.tanmaypractice.com. */
+/**
+ * Client application entry. Every client-entry link and CTA points here.
+ *
+ * Main App policy (changed by Tanmay's explicit decision, 2026-08-30):
+ * an INTENTIONAL public app/product link to https://app.tanmaypractice.com
+ * is now permitted. No such link exists yet, none may be added just
+ * because the URL is allowed, and a client-entry link must never be
+ * replaced with the Main App URL — tests/content-truth.test.mjs keeps
+ * guarding the shipped bundle until an intentional link is approved.
+ */
 export const CLIENT_APP_URL = "https://klient.tanmaypractice.com";
 
 export const MAIL = "tanmay.in.flow@gmail.com";
@@ -27,6 +36,24 @@ export const IG_URL = "https://www.instagram.com/tanmayflow/";
 export const WHATSAPP_URL = "https://wa.me/420774121475";
 
 export const LANGS = ["cs", "en"];
+
+/**
+ * DOČASNÁ BRÁNA SPUŠTĚNÍ (2026-08-30)
+ * ----------------------------------------------------------------------
+ * Jediný zdroj pravdy o tom, co je hotový, schválený veřejný obsah.
+ * Všechno ostatní si nechává svou adresu a vygenerovaný soubor, ale
+ * kreslí sdílenou stránku rozpracovanosti, nese noindex a nestojí
+ * v sitemap. Až bude další stránka schválená, přidá se sem její
+ * "routeId:lang" — nic jiného se odemykat nemusí.
+ */
+export const LAUNCH_READY = new Set(["home:cs"]);
+export const isLaunchReady = (routeId, lang) => LAUNCH_READY.has(routeId + ":" + lang);
+
+/** Neutrální metadata bran — nikdy nepopisují skrytý nedokončený obsah. */
+export const GATE_META = {
+  cs: { title: "Stránka se připravuje · Tanmay Practice", description: "Na této stránce právě pracuji." },
+  en: { title: "Page in progress · Tanmay Practice", description: "This page is currently being prepared." },
+};
 
 /**
  * Journal entries. Titles, dates and excerpts are real authored text.

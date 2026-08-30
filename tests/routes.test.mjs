@@ -7,11 +7,15 @@ import assert from "node:assert/strict";
 import { readFileSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { ORIGIN, LANGS, allPages, ROUTES } from "../src/site.js";
+import { ORIGIN, LANGS, allPages, ROUTES, isLaunchReady, GATE_META } from "../src/site.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DIST = join(ROOT, "dist");
 const PAGES = allPages();
+/* Dočasná brána spuštění: vygenerovaná adresa a indexovatelná adresa
+   jsou dvě různé věci. READY jsou hotové stránky, GATED brány. */
+const READY = PAGES.filter((p) => isLaunchReady(p.routeId, p.lang));
+const GATED = PAGES.filter((p) => !isLaunchReady(p.routeId, p.lang));
 
 const fileFor = (path) =>
   join(DIST, path === "/" ? "index.html" : path.replace(/^\//, "").replace(/\/$/, "") + "/index.html");
@@ -33,9 +37,9 @@ test("every public route is a real pre-rendered file", () => {
   }
 });
 
-test("each route carries its own title and description", () => {
+test("each finished route carries its own title and description", () => {
   const seen = new Map();
-  for (const p of PAGES) {
+  for (const p of READY) {
     const s = html(p.path);
     const title = one(s, /<title>([^<]+)<\/title>/);
     const desc = one(s, /<meta name="description" content="([^"]*)"/);
@@ -45,6 +49,27 @@ test("each route carries its own title and description", () => {
     const key = p.lang + "|" + title;
     assert.ok(!seen.has(key), `${p.path}: title identical to ${seen.get(key)}`);
     seen.set(key, p.path);
+  }
+});
+
+test("the launch gate: generated, neutral, noindex, out of discovery", () => {
+  /* Brána existuje jako skutečný soubor na své adrese, ale nese jen
+     neutrální metadata a noindex — nikdy popis skrytého obsahu. */
+  for (const p of GATED) {
+    const s = html(p.path);
+    const meta = GATE_META[p.lang];
+    assert.match(s, /<meta name="robots" content="noindex, nofollow">/, `${p.path}: missing noindex`);
+    assert.equal(one(s, /<title>([^<]+)<\/title>/), meta.title, `${p.path}: gate title`);
+    assert.equal(one(s, /<meta name="description" content="([^"]*)"/), meta.description, `${p.path}: gate description`);
+    assert.equal(one(s, /<meta property="og:title" content="([^"]*)"/), meta.title, `${p.path}: gate og:title`);
+    assert.ok(!s.includes("application/ld+json"), `${p.path}: structured data on a gated page`);
+    assert.ok(!s.includes('hreflang='), `${p.path}: hreflang on a gated page`);
+    /* Popis nedokončené stránky z route mapy nesmí uniknout ven. */
+    const r = ROUTES.find((x) => x.id === p.routeId);
+    if (r) assert.ok(!s.includes(r.description[p.lang].slice(0, 40)), `${p.path}: unfinished description leaked`);
+  }
+  for (const p of READY) {
+    assert.ok(!html(p.path).includes('name="robots"'), `${p.path}: a finished page must stay indexable`);
   }
 });
 
@@ -59,21 +84,23 @@ test("canonical, og:url and the served path agree", () => {
   }
 });
 
-test("every route declares both editions and an x-default", () => {
-  for (const p of PAGES) {
+test("hreflang links only between editions that are really out", () => {
+  /* Hotová stránka neukazuje na noindex protějšek; brána nemá
+     alternativy vůbec. Až bude druhé vydání hotové, vrátí se pár. */
+  for (const p of READY) {
     const s = html(p.path);
     for (const l of LANGS) {
       const tag = l === "cs" ? "cs-CZ" : "en";
-      assert.ok(
-        s.includes(`hreflang="${tag}" href="${ORIGIN + p.alternates[l]}"`),
-        `${p.path}: missing hreflang ${tag}`
-      );
+      const has = s.includes(`hreflang="${tag}" href="${ORIGIN + p.alternates[l]}"`);
+      assert.equal(has, isLaunchReady(p.routeId, l), `${p.path}: hreflang ${tag}`);
     }
-    assert.ok(s.includes('hreflang="x-default"'), `${p.path}: missing x-default`);
+    assert.equal(s.includes('hreflang="x-default"'), isLaunchReady(p.routeId, "cs"), `${p.path}: x-default`);
   }
 });
 
 test("the alternate of the alternate is the page itself", () => {
+  /* Struktura alternativ platí pro všechny vygenerované stránky,
+     i když se hreflang během brány nevypisuje. */
   for (const p of PAGES) {
     const other = p.alternates[p.lang === "cs" ? "en" : "cs"];
     const back = PAGES.find((q) => q.path === other);
@@ -132,12 +159,17 @@ test("404 is a real page, not the home page", () => {
   assert.match(w, /"not_found_handling"\s*:\s*"404-page"/, "Cloudflare would not serve 404.html");
 });
 
-test("sitemap lists exactly the pages that exist", () => {
+test("sitemap lists exactly the indexable pages, gates stay out", () => {
   const s = readFileSync(join(DIST, "sitemap.xml"), "utf8");
   const locs = [...s.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-  const want = PAGES.map((p) => ORIGIN + p.path).sort();
+  const want = READY.map((p) => ORIGIN + p.path).sort();
   assert.deepEqual(locs.slice().sort(), want);
   assert.equal(new Set(locs).size, locs.length, "sitemap has duplicates");
+  for (const p of GATED) {
+    assert.ok(!locs.includes(ORIGIN + p.path), `gated ${p.path} is in the sitemap`);
+  }
+  /* Dnešní stav natvrdo: jediná indexovatelná adresa je české Home. */
+  assert.deepEqual(locs, [ORIGIN + "/"]);
 });
 
 test("robots allows crawling and names the sitemap", () => {
