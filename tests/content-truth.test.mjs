@@ -10,7 +10,7 @@ import assert from "node:assert/strict";
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { CLIENT_APP_URL, MAIL, IG_URL } from "../src/site.js";
+import { CLIENT_APP_URL, MAIL, IG_URL, WHATSAPP_URL } from "../src/site.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DIST = join(ROOT, "dist");
@@ -37,6 +37,7 @@ function shipped() {
 }
 
 const BUNDLE = existsSync(DIST) ? shipped() : "";
+const APP = readFileSync(join(ROOT, "src", "App.tsx"), "utf8");
 
 test("dist exists — run `npm run build` first", () => {
   assert.ok(BUNDLE.length > 1000, "no build output to check");
@@ -51,6 +52,30 @@ test("the client entry points at the client app and nowhere else", () => {
 
 test("NEGATIVE CONTROL · the Main App is never linked publicly", () => {
   assert.ok(!/app\.tanmaypractice\.com/.test(BUNDLE), "the public site links to the Main App");
+});
+
+test("approved Czech Home copy and removals reached the shipped build", () => {
+  for (const text of [
+    "Osobní trenér v Praze | Kryštof Švec · Tanmay Practice",
+    "Osobní trénink a pohybová praxe · Praha",
+    "Jak spolupracovat",
+    "Nechceš pokaždé začínat znovu.",
+    "Jak spolu pracujeme",
+    "Síla, kterou umíš použít",
+    "Co má teď smysl",
+    "Plán podle reality",
+    "Od setkání k vlastní praxi",
+    "Možnosti spolupráce",
+    "Vlastní praxe. Zkušenost s lidmi. Odborné vzdělání.",
+    "První krok",
+    "Napiš mi.",
+    "tanmaya · „tím prostoupený“",
+    "Kryštof Švec · Tanmay Practice",
+  ]) assert.ok(BUNDLE.includes(text), `approved Home text is missing: ${text}`);
+  /* The footer year is interpolated at runtime, so the shipped bundle never
+     carries "© <year> Kryštof Švec" as one literal. Check the two halves. */
+  assert.match(APP, /© \{new Date\(\)\.getFullYear\(\)\} Kryštof Švec · Tanmay Practice/,
+    "the footer copyright line changed unexpectedly");
 });
 
 test("NEGATIVE CONTROL · no invitation mechanics are exposed", () => {
@@ -80,17 +105,16 @@ test("NEGATIVE CONTROL · no package name, capacity or scarcity", () => {
 });
 
 // ----------------------------------------------------------------- proof
-test("NEGATIVE CONTROL · no fabricated client proof", () => {
-  for (const re of [
-    /testimonial/i, /reference\s+klient/i, /co\s+[řr][ií]kaj[ií]\s+klienti/i,
-    /hodnocen[ií]\s*:\s*\d/i, /★/,     /p[řr]ed\s+a\s+po\b/i, /before\s+and\s+after/i,
-  ]) {
-    assert.ok(!re.test(BUNDLE), `fabricated or unapproved client proof: ${re}`);
-  }
+test("the Home reference module remains visibly demo and non-production", () => {
+  assert.ok(BUNDLE.includes("Co říkají klienti"), "the approved Home references heading is missing");
   assert.ok(
-    BUNDLE.includes("Ohlasy klientů sem přibudou, až budou jejich, ne moje."),
-    "the honest statement about client words is missing"
+    BUNDLE.includes("Ukázkový obsah pro návrh. Před zveřejněním bude nahrazen skutečnými referencemi a videi se souhlasem jejich autorů."),
+    "the Home demo warning is missing"
   );
+  assert.ok(BUNDLE.includes("Fiktivní ukázka"), "the video demo badge is missing");
+  for (const re of [/hodnocen[ií]\s*:\s*\d/i, /★/, /p[řr]ed\s+a\s+po\b/i, /before\s+and\s+after/i]) {
+    assert.ok(!re.test(BUNDLE), `unapproved proof pattern: ${re}`);
+  }
 });
 
 test("NEGATIVE CONTROL · no credential is claimed before it exists", () => {
@@ -161,11 +185,11 @@ test("NEGATIVE CONTROL · nothing unfinished is visible", () => {
   }
 });
 
-test("NEGATIVE CONTROL · no invented contact detail", () => {
+test("only verified contact details are public", () => {
   const mails = [...new Set(BUNDLE.match(/[\w.+-]+@[\w-]+\.[\w.]+/g) || [])];
   assert.deepEqual(mails, [MAIL], `unexpected e-mail addresses: ${mails.join(", ")}`);
-  const phones = BUNDLE.match(/\+420[\s ]?\d/g) || [];
-  assert.deepEqual(phones, [], "a phone number appears on the public site");
+  assert.ok(BUNDLE.includes(WHATSAPP_URL), "the approved WhatsApp link is missing");
+  assert.ok(!BUNDLE.includes("+420 774 121 475"), "the phone number should remain icon-only in page copy");
   for (const re of [/otev[řr]ac[ií]\s+doba/i, /opening\s+hours/i, /Praha\s+\d/, /\b\d{3}\s?\d{2}\s+Praha/]) {
     assert.ok(!re.test(BUNDLE), `an unverified location or hours claim: ${re}`);
   }
@@ -179,6 +203,7 @@ test("only the approved outbound destinations are linked", () => {
     "tanmaypractice.com",
     "klient.tanmaypractice.com",
     "www.instagram.com",
+    "wa.me",
     "schema.org",
     "www.w3.org",
     "www.sitemaps.org",

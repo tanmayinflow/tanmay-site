@@ -223,3 +223,17 @@ And the structural ones, which are easier to break by accident: not
 every section gets an image, not every image is the same aspect ratio,
 not every image ends in the same rounded rectangle, and no two routes
 are paced the same way.
+
+
+## Home hero material integration · Wave 5
+
+The approved hero now uses the real transparent portrait plus three independent alpha masks: `hero-ink-monolith-mask.png`, `hero-mineral-shoulder-mask.png`, and `hero-sandstone-foreground-mask.png`. Colour, texture, rotation and responsive crop remain CSS-controlled. The portrait itself is not baked into any generated artwork.
+
+The Home work chapter replaces the rectangular forest handstand evidence with `salto-cutout.webp`, derived from the user-supplied transparent action photograph. It is shown directly on Ink, with restrained saturation only, and no repeated material frame.
+
+
+## Home hero enlargement · Wave 6
+
+The hero now uses the user-supplied `hero shot bez pozadí.png` master. The production WebP keeps the full 1153×1364 alpha canvas. On desktop the portrait stage bleeds to the viewport edge, its bottom aligns with the end of the Sandstone hero, and the Ink monolith continues through the lower-right corner. The Sandstone foreground mask is deliberately constrained to the lower centre so it cannot reopen a Sandstone gap at the right edge. Tablet and mobile use separate positioning rather than inherited desktop coordinates.
+
+The user-supplied `salto bez pozadí(1).png` is rebuilt as `salto-cutout.webp`, shown once in the Home work chapter, without a caption and with a CSS grayscale treatment matching the handstand cutout.

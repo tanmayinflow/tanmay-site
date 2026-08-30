@@ -1,6 +1,6 @@
 # PUBLIC FACTS LEDGER
 
-Last reviewed: 2026-08-23
+Last reviewed: 2026-08-30
 
 Every factual claim the public site could carry, with its source and its
 status. **Only rows marked `VERIFIED AND APPROVED PUBLIC` are published.**
@@ -29,12 +29,12 @@ Sources are paths inside the Tanmay-Cowork workspace.
 |---|---|---|---|---|
 | Name `tanmay`, always lowercase | Brand glossary V2, §1 | tanmay | `VERIFIED AND APPROVED PUBLIC` | Wordmark, title, footer |
 | Public descriptor | Brand Book V2, message hierarchy | tělo · praxe · divoká příroda | `VERIFIED AND APPROVED PUBLIC` | Home, opening |
-| Category line | Website source since Brand V2 | Koučink pohybu a praxe · Praha | `VERIFIED AND APPROVED PUBLIC` | Home kicker, all titles |
+| Category line | `TANMAY_WEBSITE_COPY_IMPLEMENTATION_HANDOFF_GPT.md` §5 | Osobní trénink a pohybová praxe · Praha | `VERIFIED AND APPROVED PUBLIC` | Home kicker |
 | Brand essence | Brand Book V2, p. 02 | He lives what he passes on → „To, co učím, sám žiju.“ | `VERIFIED AND APPROVED PUBLIC` | Home H1 |
 | Practical definition | Brand Book V2, p. 02 | Rebuild a reliable relationship with the body … | `VERIFIED AND APPROVED PUBLIC` | Home lead, meta description |
 | North Star, three lines | Brand Book V2, p. 03; glossary §1 | Důvěřuj tělu. Drž svou praxi. Naslouchej divočině. | `VERIFIED AND APPROVED PUBLIC` | Home closing |
 | Closing stance | Brand Book V2 | Staň se tím, co praktikuješ. | `VERIFIED AND APPROVED PUBLIC` | Home closing |
-| Name meaning | Brand Book V2 | sanskrt tanmaya · „utkán z toho“ | `VERIFIED AND APPROVED PUBLIC` | Home closing |
+| Name meaning, short Home form | `TANMAY_WEBSITE_COPY_IMPLEMENTATION_HANDOFF_GPT.md` §5 | tanmaya · „tím prostoupený“ | `VERIFIED AND APPROVED PUBLIC` | Home closing |
 | Three Anchors, roles and functions | Brand Book V2, p. 07–09; glossary §2 | Tělo/Brána, Praxe/Most, Divoká příroda/Zrcadlo | `VERIFIED AND APPROVED PUBLIC` | Praxe, dark band |
 | Presence is not a fourth anchor | Brand Canonical README | Přítomnost není čtvrtá kotva. | `VERIFIED AND APPROVED PUBLIC` | Praxe |
 | „Divočina je **první** zrcadlo“ | Brand Canonical README, retired terms | — | `RETIRED` | Never. Negative control. |
@@ -60,16 +60,19 @@ published in exactly the source wording, with no rounding and no title.
 | Claim | Source | Current wording | Status | Public use |
 |---|---|---|---|---|
 | Trainer and yoga instructor | OFFER.md §3.1.1 | Jsem trenér a lektor jógy. | `VERIFIED AND APPROVED PUBLIC` | Příběh, Spolupráce |
+| Professional qualification and yoga instruction, Home wording | `TANMAY_WEBSITE_COPY_IMPLEMENTATION_HANDOFF_GPT.md` §5, §8 | Jsem držitelem profesní kvalifikace Osobní trenér ve fitness a instruktorem jógy. | `VERIFIED AND APPROVED PUBLIC` | Home About |
 | More than three hundred clients | OFFER.md §3.1.2 | Přímo jsem pracoval s více než třemi sty klienty. | `VERIFIED AND APPROVED PUBLIC` | Příběh, Spolupráce |
+| Conservative Home client count | `TANMAY_WEBSITE_COPY_IMPLEMENTATION_HANDOFF_GPT.md` §5, §8 | zkušeností s více než 200 klienty | `VERIFIED AND APPROVED PUBLIC` | Home About |
 | Roughly a year as head trainer and studio manager | OFFER.md §3.1.3 | zhruba rok jsem dělal hlavního trenéra a vedoucího studia | `VERIFIED AND APPROVED PUBLIC` | Příběh, Spolupráce |
 | Bodyweight training and calisthenics as the spine | OFFER.md §3.1.4, §4 | Těžištěm je trénink s vlastní vahou a kalistenika. | `VERIFIED AND APPROVED PUBLIC` | Home, Praxe, Příběh |
 | Parkour and yoga as background | OFFER.md §3.1.5 | Parkour a jóga jsou zázemí, ze kterého se čerpá. | `VERIFIED AND APPROVED PUBLIC` | Home, Příběh |
 | Further trainer education **in progress** | OFFER.md §3.1.6, approved phrasing | Aktuálně si dodělávám další odborné trenérské vzdělání zaměřené na rehabilitační, kondiční a fitness trénink. | `VERIFIED AND APPROVED PUBLIC` | Příběh, with the safeguard below |
+| Additional education, Home wording | `TANMAY_WEBSITE_COPY_IMPLEMENTATION_HANDOFF_GPT.md` §5, §8 | Další odborné vzdělání mám v oblasti kondičního a funkčního tréninku, zdravotní tělesné výchovy a rehabilitačního tréninku. | `VERIFIED AND APPROVED PUBLIC` | Home About; education only, not a healthcare service claim |
 | Safeguard next to the word rehabilitation | OFFER.md §3.1, „Pojistka“ | To zaměření neznamená, že poskytuju rehabilitaci. Rehabilitace, diagnostika a léčba zůstávají mimo můj rozsah. | `VERIFIED AND APPROVED PUBLIC` | Příběh, Spolupráce boundary |
 | The exact name of that education | OFFER.md §3.2 | — | `PENDING` external verification | Not published. The site says out loud that there is no title yet. |
 | Any title, „certifikovaný“, „diplomovaný“, „akreditovaný“ | OFFER.md §11.5 | — | `RETIRED` | Never. Negative control. |
-| Years of movement practice, as a number | no source | — | `UNKNOWN` | Not published |
-| Psychology study | no source beyond „meditace a psychologická práce“ | — | `UNKNOWN` as a qualification | The phrase is published as a description of practice, never as a credential |
+| Ten years of own movement practice | `TANMAY_WEBSITE_COPY_IMPLEMENTATION_HANDOFF_GPT.md` §5, §8 | deseti let vlastní pohybové praxe | `VERIFIED AND APPROVED PUBLIC` | Home About |
+| Psychology study at Palacký University, 2019–2024 | `TANMAY_WEBSITE_COPY_IMPLEMENTATION_HANDOFF_GPT.md` §5, §8 | V letech 2019 až 2024 jsem studoval psychologii na Univerzitě Palackého. | `VERIFIED AND APPROVED PUBLIC` | Home About |
 | International yoga or meditation training | no source | — | `UNKNOWN` | Not published |
 | Vajrayana or any contemplative lineage | Website DECISIONS.md, locked | — | `VERIFIED BUT NOT APPROVED PUBLIC` | Never public. Public wording stays „meditace a psychologická práce“. |
 
@@ -124,7 +127,8 @@ in `tests/content-truth.test.mjs` and record it here.
 | Prague | Brand Strategy V2, Buyer Now; Offers PROJECT.md | `VERIFIED AND APPROVED PUBLIC` | Everywhere |
 | Training happens indoors and outdoors, exact place agreed at the start | OFFER.md §8.1.02 is undecided, so no venue is named | `VERIFIED AND APPROVED PUBLIC` as written | Spolupráce, „Kde“ |
 | A named studio, an address, a map point, opening hours | no source, and §8.1.02 open | `UNKNOWN` | Not published. Negative control. |
-| Remote or online work | Brand Strategy V2 places it at a later level; Offers PROJECT.md out of scope | `PENDING` | **Not published.** The site never says online. |
+| Remote or online work | `TANMAY_WEBSITE_COPY_IMPLEMENTATION_HANDOFF_GPT.md` §5, §12 | online | `VERIFIED AND APPROVED PUBLIC` | Home collaboration preview; Spolupráce final copy still pending |
+| Individual, smaller group, one-off and long-term formats | `TANMAY_WEBSITE_COPY_IMPLEMENTATION_HANDOFF_GPT.md` §5, §12 | individuálně i s menšími skupinami, jednorázově i dlouhodobě | `VERIFIED AND APPROVED PUBLIC` | Home collaboration preview |
 | English speaking clients in Prague | OFFER.md §12.07 | `PENDING` Tanmay | Not published as an offer. The English edition exists as a brand layer. |
 
 ## 7 · Events
@@ -141,6 +145,7 @@ in `tests/content-truth.test.mjs` and record it here.
 |---|---|---|---|
 | Testimonials, reviews, ratings, client results, before and after | OFFER.md §3.3: none collected, and inventing them is forbidden | `UNKNOWN` | Never. Negative control on `testimonial`, `★`, „před a po“, and rating patterns. |
 | The honest statement that client words will appear when they are theirs | Already on the site; Brand Book V2 client proof | `VERIFIED AND APPROVED PUBLIC` | Spolupráce, dark band |
+| Visibly labelled fictional examples used to review the Home reference carousel | Tanmay instruction, 2026-08-26 | `PENDING` | Development preview only. Must be replaced by consented client material or removed before public launch. |
 
 ## 9 · Contact
 
@@ -148,7 +153,7 @@ in `tests/content-truth.test.mjs` and record it here.
 |---|---|---|---|
 | `tanmay.in.flow@gmail.com` | Website STATUS.md, confirmed 2026-08-15 | `VERIFIED AND APPROVED PUBLIC` | Header menu, Spolupráce, footer, privacy |
 | Instagram `tanmayflow` | Website STATUS.md, confirmed 2026-08-15 | `VERIFIED AND APPROVED PUBLIC` | Menu, footer |
-| WhatsApp as the channel between sessions | OFFER.md §9, approved | `VERIFIED AND APPROVED PUBLIC` as a description, but no number exists in the workspace | The site says „běžně jsme v kontaktu“ and names no number |
+| WhatsApp `+420 774 121 475` | User confirmation, 2026-08-24 | `VERIFIED AND APPROVED PUBLIC` | Footer icon links to `https://wa.me/420774121475`; the formatted number is not printed in page copy |
 | Phone number | no source | `UNKNOWN` | Not published. Negative control. |
 | Postal or home address | private | `VERIFIED BUT NOT APPROVED PUBLIC` | Never |
 
@@ -187,7 +192,7 @@ The launch gate fails the build if any of these appear:
 `první zrcadlo` / `first mirror` · `tělo · duše` / `body · soul` ·
 `Caveat` · `app.tanmaypractice.com` · invitation vocabulary ·
 `odemkni potenciál` / `unlock your potential` · `discovery call` ·
-`holistick*` · a phone number · opening hours.
+`holistick*` · unverified phone numbers · opening hours.
 
 `rehabilitace` and `diagnóza` are allowed only inside the two sentences
 recorded in section 3, and the tests assert that both of those sentences

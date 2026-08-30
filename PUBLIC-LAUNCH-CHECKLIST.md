@@ -17,7 +17,7 @@ output in `dist/`, never the source's intentions.
 | Suite | What it holds | Count |
 |---|---|---|
 | `tests/routes.test.mjs` | Every route is a real file. Per-route title, description, canonical, hreflang, Open Graph, Twitter card. Symmetric alternates. Structured data carries no Offer, Review, rating, address, hours, credential or Event. 404 is a real page and Cloudflare is configured to serve it. Sitemap equals the pages that exist. Robots allows crawling. Old paths redirect, targets exist, no loops. | 16 |
-| `tests/content-truth.test.mjs` | Every negative control in PUBLIC-FACTS-LEDGER.md §12. No price, no package name, no scarcity, no testimonial, no unearned credential, no retired Brand V1 wording, no wellness vocabulary, no placeholder, no invented contact, no Main App link, no invitation vocabulary, no third party host, no secret, no source map. Plus positive controls: the boundary sentence in both editions, the in-progress education wording and its safeguard. | 18 |
+| `tests/content-truth.test.mjs` | Public truth controls plus the approved Home implementation contract. Demo references are allowed only while the visible demo warning and badge remain; they are still a public-launch blocker until replaced with consented material. | implementation gate |
 | `tests/media.test.mjs` | The manifest matches real files. Nothing is upscaled past its master. The CSS aspect ratio matches the file, so media cannot shift the layout. No EXIF or GPS survives. No asset over 600 kB. Exactly two generated assets. Optional media collapses instead of leaving a frame. | 11 |
 | `tests/contrast.test.mjs` | Every text token against the surface it is used on, computed from the stylesheet itself. Copper is never a text colour. The six Brand V2 colours are unchanged. | 11 |
 | `tests/browser.test.mjs` | The site as Chromium renders it: one H1 per route, landmarks, skip link, client entry visible in the header at 390 and 1280, no link to the Main App, keyboard menu with Escape, old hash links, pushState navigation with history, language switch, one language per page, images that actually load, a modern format chosen, reduced motion, visible focus, no sideways scroll at 390/834/1440, tap targets, and the whole site with the media folder blocked. | 17 |
@@ -37,7 +37,7 @@ Every visible block on every route, classified.
 
 | Route | Blocks | Classification |
 |---|---|---|
-| Home | opening, audience, the work, practice photograph, collaboration, client strip, two teasers, closing | FINAL · APPROVED · one OPTIONAL MEDIA |
+| Home | opening, audience, work, collaboration preview, demo references, short About, first contact, client strip, reduced closing | COPY APPROVED · IMPLEMENTED · references DEMO / NOT PRODUCTION-READY |
 | Praxe | what practice means, three anchors, what a session contains, direction to practice, what it is not | FINAL · APPROVED, anchors are canonical |
 | Příběh | present day, roots, what I can actually do, three beats, the accident line, notebook poem | FINAL · APPROVED · REAL AUTHORED |
 | Spolupráce | who it is for, personal work, where, how it runs, field practice, the application, experience, contract and boundary, FAQ, contact | FINAL · APPROVED |
@@ -104,6 +104,10 @@ be lower. LCP on Home is the portrait.
 Lighthouse was **not** run. No Lighthouse score is claimed anywhere.
 
 ---
+
+## DEMO REFERENCES BLOCK PUBLIC LAUNCH
+
+The Home reference carousel is intentionally present for working review, but its names, quotes and videos are demo content. The site is not public-launch ready until those items are replaced with real material and publication consent.
 
 ## Visual review
 

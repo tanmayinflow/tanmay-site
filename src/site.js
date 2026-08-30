@@ -23,6 +23,8 @@ export const CLIENT_APP_URL = "https://klient.tanmaypractice.com";
 
 export const MAIL = "tanmay.in.flow@gmail.com";
 export const IG_URL = "https://www.instagram.com/tanmayflow/";
+/** Public WhatsApp contact, approved by Tanmay on 2026-08-24. */
+export const WHATSAPP_URL = "https://wa.me/420774121475";
 
 export const LANGS = ["cs", "en"];
 
@@ -70,7 +72,7 @@ export const POSTS = [
 ];
 
 /**
- * Public routes. `nav` marks the four rooms that appear in the header.
+ * Public routes. `nav` marks the deliberately short primary header navigation.
  * Titles and descriptions are written from the visible content of each
  * route, never from keywords.
  */
@@ -81,11 +83,11 @@ export const ROUTES = [
     path: { cs: "/", en: "/en/" },
     label: { cs: "Domů", en: "Home" },
     title: {
-      cs: "tanmay · koučink pohybu a praxe · Praha",
+      cs: "Osobní trenér v Praze | Kryštof Švec · Tanmay Practice",
       en: "tanmay · movement and practice coaching · Prague",
     },
     description: {
-      cs: "Pomáhám lidem obnovit spolehlivý vztah k tělu a postavit praxi, která drží i v běžném životě. Osobní práce v Praze. Pohyb, meditace a přímý kontakt s divokou přírodou.",
+      cs: "Osobní trénink v Praze pro sílu, pohybovou jistotu a praxi, která drží. Individuálně, v menší skupině nebo online. Jednorázově i dlouhodobě.",
       en: "I help people rebuild a reliable relationship with the body and build a practice that holds in ordinary life. Personal work in Prague. Movement, meditation and direct contact with wild nature.",
     },
   },
@@ -109,7 +111,7 @@ export const ROUTES = [
     nav: true,
     num: "02",
     path: { cs: "/pribeh", en: "/en/story" },
-    label: { cs: "Příběh", en: "The story" },
+    label: { cs: "O mně", en: "The story" },
     title: { cs: "Příběh · tanmay", en: "The story · tanmay" },
     description: {
       cs: "Kdo jsem teď, odkud tahle práce vyrostla, co doopravdy umím a co na tom změnila nehoda. Příběh vysvětluje závazek. Nedokazuje nadřazenost.",
@@ -133,7 +135,7 @@ export const ROUTES = [
   },
   {
     id: "denik",
-    nav: true,
+    nav: false,
     num: "04",
     path: { cs: "/denik", en: "/en/journal" },
     label: { cs: "Deník praxe", en: "Practice log" },
@@ -178,6 +180,7 @@ export const POST_ROUTES = POSTS.flatMap((p) =>
 export function allPages() {
   const out = [];
   for (const r of ROUTES) {
+    if (r.public === false) continue;
     for (const lang of LANGS) {
       out.push({
         routeId: r.id,

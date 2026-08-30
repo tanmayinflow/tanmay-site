@@ -89,6 +89,15 @@ def build_strata(src):
     out.save(f, "PNG", optimize=True)
     save_report(f, 220)
 
+    # The hero-to-Ink transition uses the same geological edge, but its
+    # alpha must face upward so a wide Copper current can be clipped to the
+    # real Ink silhouette instead of starting below a rectangular gap.
+    # This is a deterministic mirror of the approved source, not a second
+    # generated visual language.
+    f_top = OUT / "edge-strata-top.png"
+    out.transpose(Image.Transpose.FLIP_TOP_BOTTOM).save(f_top, "PNG", optimize=True)
+    save_report(f_top, 220)
+
 
 def build_aperture(src):
     """
@@ -250,6 +259,75 @@ def build_cutout(src):
     return im2.size
 
 
+
+def build_mobile_hero_monolith(src):
+    """Create the mobile one-edge mask from the approved monolith alpha.
+
+    Mobile keeps the same diagonal composition, but the visible boundary
+    must retain the source slab's broad recesses and ledges. The earlier
+    derivative kept mostly high-frequency erosion and made the edge too
+    smooth at phone scale. This version resamples the actual central 76%
+    of the approved left boundary, preserving its large arcs, deep cuts
+    and fine mineral breaks. Only that one boundary enters the viewport;
+    opacity continues to the lower, right and bottom sides.
+    """
+    from PIL import ImageDraw
+
+    alpha = Image.open(src).convert("RGBA").getchannel("A")
+    a = np.array(alpha)
+    h, _ = a.shape
+
+    left = []
+    for y in range(h):
+        xs = np.flatnonzero(a[y] > 12)
+        left.append(float(xs[0]) if xs.size else np.nan)
+    left = np.array(left, dtype=float)
+    idx = np.arange(h)
+    valid = np.isfinite(left)
+    left = np.interp(idx, idx[valid], left[valid])
+
+    # Skip the finite slab corners and sample a longer real section of the
+    # approved left edge. This keeps the broad shelves, deep recess and
+    # torn-slate arcs that make the desktop monolith feel geological.
+    # The wider source span also prevents a repeated/flat-looking crest.
+    y0 = round(.18 * (h - 1))
+    y1 = round(.96 * (h - 1))
+    profile = left[y0:y1 + 1]
+
+    W, H, S = 1200, 1500, 3
+    sample = np.interp(
+        np.linspace(0, len(profile) - 1, W),
+        np.arange(len(profile)),
+        profile,
+    )
+
+    # Remove only the source edge's overall drift. Preserve the macro shape
+    # at stronger amplitude so the phone composition reads as torn slate /
+    # mineral strata rather than a mildly noisy diagonal.
+    sample -= np.linspace(sample[0], sample[-1], W)
+    low, high = np.percentile(sample, [1, 99])
+    scale = max(abs(low), abs(high), 1.0)
+    organic = sample / scale * 250.0
+
+    # Keep the whole organic boundary safely inside the canvas. The visible
+    # edge now travels from low-left to roughly the middle of the right side,
+    # so no top slab edge can ever be clipped into view.
+    t = np.linspace(0.0, 1.0, W)
+    baseline = ((.72 * (1.0 - t) + .10 * t) * H)
+    boundary = baseline + organic
+
+    mask = Image.new("L", (W * S, H * S), 0)
+    draw = ImageDraw.Draw(mask)
+    points = [(x * S, round(y * S)) for x, y in enumerate(boundary)]
+    draw.polygon(points + [(W * S, H * S), (0, H * S)], fill=255)
+    mask = mask.resize((W, H), Image.Resampling.LANCZOS)
+
+    out = Image.new("RGBA", (W, H), (255, 255, 255, 0))
+    out.putalpha(mask)
+    f = OUT / "hero-ink-monolith-mobile-mask.png"
+    out.save(f, "PNG", optimize=True)
+    save_report(f, 80)
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--sources", default=str(ROOT.parent.parent / "Assets" / "Generated"))
@@ -265,6 +343,9 @@ def main():
     build_sandstone(src / "sandstone-src.png")
     size = build_cutout(src / "cutout-src.png")
     print(f"  cutout intrinsic {size[0]}x{size[1]}")
+    # The approved hero mask is checked into the repository; derive the
+    # narrow-screen one-edge version from that production alpha.
+    build_mobile_hero_monolith(OUT / "hero-ink-monolith-mask.png")
 
     total = sum(f.stat().st_size for f in OUT.iterdir() if f.is_file())
     print(f"public/media/material total: {total / 1024:.0f} kB")

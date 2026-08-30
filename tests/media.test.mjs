@@ -92,11 +92,20 @@ test("generated assets are exactly the approved material set", () => {
   assert.ok(existsSync(MAT), "public/media/material is missing");
   const want = {
     "edge-strata.png": 220,
+    "edge-strata-top.png": 220,
     "mask-aperture.png": 220,
     "field-earth.webp": 90,
     "line-copper.png": 100,
+    "line-copper-current.png": 220,
     "surface-sandstone.webp": 160,
+    "surface-ink-mineral.webp": 80,
     "handstand-cutout-bw.webp": 260,
+    "portrait-cutout.webp": 380,
+    "hero-ink-monolith-mask.png": 80,
+    "hero-ink-monolith-mobile-mask.png": 80,
+    "hero-mineral-shoulder-mask.png": 60,
+    "hero-sandstone-foreground-mask.png": 60,
+    "salto-cutout.webp": 260,
   };
   const got = readdirSync(MAT).filter((f) => !f.endsWith(".md")).sort();
   assert.deepEqual(got, Object.keys(want).sort(), `material dir mismatch: ${got.join(", ")}`);
@@ -118,8 +127,10 @@ test("the aperture mask is reserved for the approved photographs", () => {
      declare more ap uses than those four. */
   const flags = APP.match(/^\s*ap$/gm) || [];
   assert.ok(flags.length <= 3, `the Evidence ap flag is used ${flags.length} times, expected at most 3`);
-  const literal = APP.match(/"portrait ap rv d1"/g) || [];
-  assert.equal(literal.length, 1, "the hero portrait aperture class changed unexpectedly");
+  assert.match(APP, /className="portrait-stage rv d1"/, "the hero portrait stage changed unexpectedly");
+  for (const layer of ["portrait-monolith", "portrait-shoulder", "portrait-foreground"]) {
+    assert.match(APP, new RegExp(`className="${layer}"`), `the hero lost ${layer}`);
+  }
 });
 
 test("optional media collapses instead of leaving an empty frame", () => {

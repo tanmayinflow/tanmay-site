@@ -184,7 +184,7 @@ test("no redirect loops", () => {
   }
 });
 
-test("the four rooms are the navigation, and nothing else is", () => {
+test("the primary navigation stays deliberately short", () => {
   const nav = ROUTES.filter((r) => r.nav).map((r) => r.id);
-  assert.deepEqual(nav, ["praxe", "pribeh", "spoluprace", "denik"]);
+  assert.deepEqual(nav, ["praxe", "pribeh", "spoluprace"]);
 });
