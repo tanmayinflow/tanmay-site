@@ -153,7 +153,7 @@ test("old public paths still resolve", () => {
   for (const [from, to] of [
     ["/udalosti", "/spoluprace"],
     ["/kontakt", "/spoluprace"],
-    ["/zapisky", "/denik"],
+    ["/zapisky", "/praxe"],
     ["/poezie", "/pribeh"],
   ]) {
     const line = s.split("\n").find((l) => l.trim().startsWith(from + " "));

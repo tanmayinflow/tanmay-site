@@ -97,6 +97,7 @@ const MEDIA = {
   portrait: { base: "/media/portrait-tanmay", widths: [480, 720, 960, 1280], w: 3024, h: 3780 } as Pic,
   handstand: { base: "/media/practice-handstand-trunk", widths: [480, 720, 1080], w: 2160, h: 3024 } as Pic,
   pine: { base: "/media/practice-sitting-pine", widths: [360, 480, 720], w: 720, h: 900 } as Pic,
+  aboutPrague: { base: "/media/about-prague", widths: [360, 480, 720], w: 1080, h: 1350 } as Pic,
   texCotton: "/media/surface-ink-cotton.webp",
   texMineral: "/media/material/surface-ink-mineral.webp",
 
@@ -113,7 +114,7 @@ const MEDIA = {
   heroMonolithMask: "/media/material/hero-ink-monolith-mask.png",
   heroShoulderMask: "/media/material/hero-mineral-shoulder-mask.png",
   heroForegroundMask: "/media/material/hero-sandstone-foreground-mask.png",
-  saltoCutout: { src: "/media/material/salto-cutout.webp", w: 1385, h: 862 },
+  saltoCutout: { src: "/media/material/salto-cutout.webp", w: 1536, h: 1024 },
 };
 
 // ----------------------------------------------------------------------
@@ -883,7 +884,7 @@ html[data-surface="on"] .home-dark-field{ background-image:var(--tex-cotton) }
 .salto-field img{
   position:relative; z-index:1; width:100%; max-width:none; height:auto;
   transform:translateX(2%) rotate(-1.5deg); transform-origin:58% 55%;
-  filter:grayscale(1) saturate(0) contrast(1.12) brightness(1.04);
+  filter:none;
 }
 @media (min-width:980px){
   .salto-field{ width:min(100%,420px); min-height:300px; margin-right:0 }
@@ -1049,7 +1050,7 @@ html[data-surface="on"] .home-dark-field{ background-image:var(--tex-cotton) }
 }
 .home-about .figure img{
   aspect-ratio:4 / 5; object-position:50% 45%;
-  filter:grayscale(1) contrast(1.06) brightness(.92);
+  filter:saturate(.94) contrast(1.02) brightness(.96);
 }
 @media (min-width:860px){
   .about-short-grid{ grid-template-columns:minmax(0,1.08fr) minmax(300px,.72fr); gap:clamp(58px,8vw,118px) }
@@ -2101,10 +2102,10 @@ function HomeAbout({ lang }: any) {
           </p>
         </div>
         <Evidence
-          pic={MEDIA.pine}
+          pic={MEDIA.aboutPrague}
           alt={L(
-            "Tanmay sedí venku u borovice během vlastní praxe.",
-            "Tanmay sitting outside by a pine tree during his own practice."
+            "Kryštof Švec na vyhlídce v Praze s Pražským hradem v pozadí.",
+            "Kryštof Švec at a Prague viewpoint with Prague Castle in the background."
           )}
           sizes="(min-width:860px) 390px, (min-width:521px) 430px, calc(100vw - 36px)"
           variant="pine"

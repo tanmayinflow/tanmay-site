@@ -19,11 +19,7 @@ import { createServer } from "node:http";
 import { readFileSync, existsSync, statSync, readdirSync } from "node:fs";
 import { join, dirname, extname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { ORIGIN, allPages, CLIENT_APP_URL, ROUTES } from "../src/site.js";
-
-/** Deník is currently withheld from the public route table. The checks that
-    depend on it follow that decision instead of hard-coding either answer. */
-const DENIK_PUBLIC = ROUTES.some((r) => r.id === "denik" && r.public !== false);
+import { ORIGIN, allPages, CLIENT_APP_URL } from "../src/site.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DIST = join(ROOT, "dist");
@@ -202,7 +198,7 @@ test("old hash links still land on the right room", { skip: SKIP }, async () => 
       ["#/praxe", "/praxe", /praxe/i],
       ["#/udalosti", "/spoluprace", /spolupr/i],
       ["#/kontakt", "/spoluprace", /spolupr/i],
-      ["#/zapisky", DENIK_PUBLIC ? "/denik" : "/praxe", DENIK_PUBLIC ? /den[ií]k/i : /praxe/i],
+      ["#/zapisky", "/denik", /den[ií]k/i],
       ["#/poezie", "/pribeh", /p[řr][ií]b[ěe]h/i],
     ]) {
       await page.goto(base + "/" + hash, { waitUntil: "load" });
@@ -283,7 +279,7 @@ test("every rendered image actually loads and reserves its space", { skip: SKIP 
 test("the browser picks a modern format, not the JPEG fallback", { skip: SKIP }, async () => {
   await withPage(async (page) => {
     await page.goto(base + "/", { waitUntil: "load" });
-    const src = await page.$eval(".portrait-stage img", (n) => n.currentSrc);
+    const src = await page.$eval(".portrait img", (n) => n.currentSrc);
     assert.match(src, /\.(avif|webp)$/, `the portrait fell back to ${src}`);
   });
 });
@@ -351,13 +347,8 @@ test("the site works with the media folder empty", { skip: SKIP }, async () => {
   await withPage(async (page) => {
     await page.route("**/media/**", (r) => r.abort());
     await page.goto(base + "/", { waitUntil: "load" });
-    /* Lazy media is only requested once it is reached, and a figure can
-       only collapse on the error of a request that was actually made. */
-    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-    await page.waitForTimeout(900);
-    await page.evaluate(() => window.scrollTo(0, 0));
     await page.waitForTimeout(600);
-    assert.equal(await page.locator(".portrait, .portrait-stage").count(), 0, "an empty portrait frame is left behind");
+    assert.equal(await page.locator(".portrait").count(), 0, "an empty portrait frame is left behind");
     assert.equal(await page.locator("figure.figure").count(), 0, "an empty figure frame is left behind");
     assert.equal(await page.locator(".cutwrap").count(), 0, "an empty cutout frame is left behind");
     assert.equal(await page.locator("h1").count(), 1, "the page broke without media");
@@ -383,8 +374,8 @@ test("material surfaces carry the chapters, the cutout appears once", { skip: SK
     await page.waitForTimeout(400);
     assert.equal(await page.locator('img[src*="handstand-cutout"]').count(), 1, "the cutout is not on Home exactly once");
     assert.ok((await page.locator(".surf--sand").count()) >= 1, "no sandstone chapter on Home");
-    assert.ok((await page.locator(".band--dark, .home-dark-field").count()) >= 1, "no ink chapter on Home");
-    for (const path of ["/praxe", "/pribeh", "/spoluprace", ...(DENIK_PUBLIC ? ["/denik"] : [])]) {
+    assert.ok((await page.locator(".band--dark").count()) >= 1, "no ink chapter on Home");
+    for (const path of ["/praxe", "/pribeh", "/spoluprace", "/denik"]) {
       await page.goto(base + path, { waitUntil: "load" });
       assert.equal(
         await page.locator('img[src*="handstand-cutout"]').count(), 0,
@@ -393,11 +384,9 @@ test("material surfaces carry the chapters, the cutout appears once", { skip: SK
     }
     await page.goto(base + "/spoluprace", { waitUntil: "load" });
     assert.equal(await page.locator(".surf--earth").count(), 1, "Spolupráce lost its Burnt Earth chapter");
-    if (DENIK_PUBLIC) {
-      await page.goto(base + "/denik", { waitUntil: "load" });
-      assert.equal(await page.locator(".surf--earth").count(), 0, "Deník must stay calm, no Burnt Earth");
-      assert.equal(await page.locator(".surf--sand").count(), 0, "Deník must stay calm, no Sandstone");
-    }
+    await page.goto(base + "/denik", { waitUntil: "load" });
+    assert.equal(await page.locator(".surf--earth").count(), 0, "Deník must stay calm, no Burnt Earth");
+    assert.equal(await page.locator(".surf--sand").count(), 0, "Deník must stay calm, no Sandstone");
   });
 });
 

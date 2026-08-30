@@ -136,6 +136,7 @@ export const ROUTES = [
   {
     id: "denik",
     nav: false,
+    public: false,
     num: "04",
     path: { cs: "/denik", en: "/en/journal" },
     label: { cs: "Deník praxe", en: "Practice log" },
@@ -193,7 +194,7 @@ export function allPages() {
       });
     }
   }
-  for (const p of POST_ROUTES) {
+  for (const p of []) {
     const post = POSTS.find((x) => x.id === p.postId);
     out.push({
       routeId: "post",
@@ -222,10 +223,10 @@ export const HASH_ALIASES = {
   praxe: "praxe",
   pribeh: "pribeh",
   spoluprace: "spoluprace",
-  denik: "denik",
+  denik: "praxe",
   udalosti: "spoluprace",
   kontakt: "spoluprace",
-  zapisky: "denik",
+  zapisky: "praxe",
   poezie: "pribeh",
 };
 
@@ -234,6 +235,8 @@ export function matchPath(pathname) {
   let p = pathname.replace(/\/+$/, "");
   if (p === "") p = "/";
   if (p === "/en") p = "/en/";
+  if (p === "/denik" || p === "/zapisky" || p.startsWith("/denik/")) return { routeId: "praxe", lang: "cs", postId: null };
+  if (p === "/en/journal" || p.startsWith("/en/journal/")) return { routeId: "praxe", lang: "en", postId: null };
   for (const r of ROUTES) {
     for (const lang of LANGS) {
       if (r.path[lang].replace(/\/+$/, "") === p.replace(/\/+$/, "")) {
@@ -251,20 +254,17 @@ export function matchPath(pathname) {
 /** The counterpart URL in the other language, for the toggle and hreflang. */
 export function otherLangPath(routeId, lang, postId) {
   const other = lang === "cs" ? "en" : "cs";
-  if (routeId === "post") {
-    const post = POSTS.find((p) => p.id === postId);
-    return DENIK.path[other] + "/" + post.slug[other];
-  }
+  if (routeId === "denik" || routeId === "post") return routePath("praxe", other);
   const r = ROUTES.find((x) => x.id === routeId);
   return r ? r.path[other] : ROUTES[0].path[other];
 }
 
 export function routePath(routeId, lang) {
+  if (routeId === "denik") routeId = "praxe";
   const r = ROUTES.find((x) => x.id === routeId);
   return r ? r.path[lang] : ROUTES[0].path[lang];
 }
 
 export function postPath(postId, lang) {
-  const post = POSTS.find((p) => p.id === postId);
-  return DENIK.path[lang] + "/" + post.slug[lang];
+  return routePath("praxe", lang);
 }
