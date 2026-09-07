@@ -1,6 +1,6 @@
 # MATERIAL ASSET MANIFEST
 
-Last reviewed: 2026-08-23, Material Landscape wave.
+Last reviewed: 2026-09-07, secondary-page V3 wave.
 
 One table of truth for every generated or cutout asset on the public
 site: what was supplied, what shipped, what was rejected and why.
@@ -29,9 +29,11 @@ in this repository. Production derivatives live in
 | hero-shoulder | `hero-mineral-shoulder-mask-source.png` 1122×1402 | `hero-mineral-shoulder-mask.png` 1122×1402, alpha PNG, 23 kB | One low secondary Ink fragment behind the outside shoulder | ≤60 kB | Home hero, once | Missing mask removes the depth fragment only |
 | hero-foreground | `hero-sandstone-foreground-mask-source.png` 1774×887 | `hero-sandstone-foreground-mask.png` 1774×887, alpha PNG, 17 kB | Returns the exact Sandstone surface in front of the lowest portrait edge | ≤60 kB | Home hero, once | Missing mask leaves the transparent portrait edge visible |
 | salto-cutout | `salto bez pozadí(1).png` 1536×1024 | `salto-cutout.webp` 1385×862, alpha WebP, ~186 kB | A real airborne movement cutout replacing the rectangular forest handstand on Home, rendered monochrome in CSS and without a caption | ≤260 kB | Home, What happens in the work, once | `onError` removes the figure and leaves the editorial text column complete |
+| strata-wide | `edge-strata-wide-alpha.png` 1906×825 supplied with the V3 overlay | `edge-strata-wide-alpha.png` 1200×519, alpha-only LA PNG, 119 kB | The full-width eroded transition between secondary-page fields | ≤160 kB | Praxe, O mně, Spolupráce, Soukromí, 404 · section edges | The band keeps its fixed height with no mask and degrades to a straight boundary, so a missing file cannot shift layout |
+| burnt-earth-field | `field-burnt-earth-source.png` 1070×1470 supplied with the V3 overlay | `field-burnt-earth.webp` 745×1024, 30 kB | Mineral texture over the flat Burnt Earth field on secondary pages | ≤60 kB | Secondary-page Burnt Earth chapters, at 28 % under soft-light | Missing file leaves the flat `--earth` colour, which is the same chapter |
 
 The ink cotton tile from the launch wave (`public/media/surface-ink-cotton.webp`, 11 kB)
-remains the Ink Cotton materiality. Total shipped material is now approximately **1.0 MB**
+remains the Ink Cotton materiality. Total shipped material is now approximately **1.15 MB**
 in `material/` plus that tile.
 
 Validation each build run performs: strata top field min alpha 255 and
@@ -74,3 +76,12 @@ numeric check fails the build of that asset instead of shipping it.
 
 ### `hero-ink-monolith-mobile-mask.png`
 Deterministic mobile-only derivative of the approved hero monolith mask. It resamples the actual macro-rich central portion of the original eroded left edge at full scale, preserving its broad arcs, mineral ledges and deep recesses, then remaps that edge to one diagonal boundary. Opacity continues to the lower, right and bottom sides, so the original slab's top, bottom and right edges cannot appear at 390 px. It is not a newly generated visual asset.
+
+## V3 secondary-page note (2026-09-07)
+
+The two assets above arrived as authoring sources inside the V3 overlay and were
+committed as production derivatives, not as sources: the earth field went from a
+2.3 MB RGBA PNG to a 30 kB WebP, and the wide strata edge was reduced to the alpha
+channel it is actually read for. The originals belong in `Assets/Generated/`, which
+is local-only, and neither is reproducible by `npm run material` until they are
+placed there.

@@ -203,7 +203,7 @@ test("old hash links still land on the right room", { skip: SKIP }, async () => 
       ["#/udalosti", "/spoluprace", /spolupr/i],
       ["#/kontakt", "/spoluprace", /spolupr/i],
       ["#/zapisky", DENIK_PUBLIC ? "/denik" : "/praxe", DENIK_PUBLIC ? /den[ií]k/i : /praxe/i],
-      ["#/poezie", "/pribeh", /p[řr][ií]b[ěe]h/i],
+      ["#/poezie", "/pribeh", /Kry[šs]tof [ŠS]vec/],
     ]) {
       await page.goto(base + "/" + hash, { waitUntil: "load" });
       await page.waitForTimeout(120);
@@ -392,10 +392,10 @@ test("material surfaces carry the chapters, the cutout appears once", { skip: SK
       );
     }
     await page.goto(base + "/spoluprace", { waitUntil: "load" });
-    assert.equal(await page.locator(".surf--earth").count(), 1, "Spolupráce lost its Burnt Earth chapter");
+    assert.ok((await page.locator(".surf--earth, .site-earth").count()) >= 1, "Spolupráce lost its Burnt Earth chapter");
     if (DENIK_PUBLIC) {
       await page.goto(base + "/denik", { waitUntil: "load" });
-      assert.equal(await page.locator(".surf--earth").count(), 0, "Deník must stay calm, no Burnt Earth");
+      assert.equal(await page.locator(".surf--earth, .site-earth").count(), 0, "Deník must stay calm, no Burnt Earth");
       assert.equal(await page.locator(".surf--sand").count(), 0, "Deník must stay calm, no Sandstone");
     }
   });

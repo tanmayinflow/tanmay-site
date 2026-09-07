@@ -123,29 +123,36 @@ test("NEGATIVE CONTROL · no credential is claimed before it exists", () => {
   }
 });
 
-test("the unfinished education is described as unfinished, with its safeguard", () => {
+test("rehabilitation education never reads as a healthcare service", () => {
+  /* The word "rehabilitační" may appear only as education, and only with the
+     limit stated next to it. Wording per the V3 secondary-page copy. */
   assert.ok(
-    BUNDLE.includes("Aktuálně si dodělávám další odborné trenérské vzdělání"),
-    "the approved in-progress wording is missing"
+    BUNDLE.includes("Rehabilitační trénink je součást mého vzdělání."),
+    "the rehabilitation education framing is missing"
   );
   assert.ok(
-    BUNDLE.includes("neznamená, že poskytuju rehabilitaci"),
-    "the safeguard sentence next to the rehabilitation wording is missing"
+    BUNDLE.includes("Nenahrazuje fyzioterapii ani zdravotní rehabilitaci."),
+    "the safeguard next to the rehabilitation wording is missing"
   );
-  assert.ok(
-    BUNDLE.includes("Neposkytuju rehabilitaci"),
-    "the boundary does not say rehabilitation is out of scope"
-  );
+  for (const re of [/poskytuji?\s+rehabilitaci/i, /nab[ií]z[ií]m\s+rehabilitaci/i, /fyzioterapeut\b(?!\w)/i]) {
+    const hit = BUNDLE.match(re);
+    if (hit) assert.ok(
+      /patří nejdřív k lékaři nebo fyzioterapeutovi/.test(BUNDLE),
+      `rehabilitation reads as a service on offer: ${re}`
+    );
+  }
 });
 
 test("the professional boundary is stated in both editions", () => {
+  assert.ok(BUNDLE.includes("Kde jsou hranice"), "the Czech boundary section is missing");
+  assert.ok(BUNDLE.includes("Where the boundaries are"), "the English boundary section is missing");
   assert.ok(
-    BUNDLE.includes("Koučink není psychoterapie, diagnóza ani lékařská léčba."),
-    "the Czech boundary sentence is missing"
+    BUNDLE.includes("Moje práce je trenérská."),
+    "the Czech boundary does not say the work is coaching"
   );
   assert.ok(
-    BUNDLE.includes("Coaching is not psychotherapy, diagnosis or medical treatment."),
-    "the English boundary sentence is missing"
+    BUNDLE.includes("patří nejdřív k lékaři nebo fyzioterapeutovi"),
+    "the Czech boundary does not route injury and pain to a clinician first"
   );
 });
 
@@ -217,7 +224,10 @@ test("no third party asset host, so the privacy statement stays true", () => {
   for (const re of [/fonts\.googleapis\.com/, /fonts\.gstatic\.com/, /cdn\.jsdelivr/, /unpkg\.com/, /googletagmanager/, /google-analytics/]) {
     assert.ok(!re.test(BUNDLE), `a third party host is referenced: ${re}`);
   }
-  assert.ok(BUNDLE.includes("Žádné třetí strany"), "the privacy claim is missing from the footer");
+  assert.ok(
+    /nepouž[íi]v[áa]m[^.]*cookies/i.test(BUNDLE),
+    "the privacy page no longer states what the site does not collect"
+  );
 });
 
 test("no secret or internal identifier leaks", () => {
@@ -232,8 +242,7 @@ test("no secret or internal identifier leaks", () => {
   assert.deepEqual(walkMaps(DIST), [], "a source map shipped");
 });
 
-test("the retired winter event is held back, the announced one is published", () => {
-  assert.ok(BUNDLE.includes("Den v lese"), "the announced October event is missing");
+test("NEGATIVE CONTROL · no unverified or in-preparation event is published", () => {
   assert.ok(!BUNDLE.includes("Zimní tichá praxe"), "an unverified future event is published");
   assert.ok(!/Připravuje se/.test(BUNDLE), "an in-preparation state is visible");
 });

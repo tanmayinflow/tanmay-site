@@ -98,12 +98,12 @@ export const ROUTES = [
     path: { cs: "/praxe", en: "/en/practice" },
     label: { cs: "Praxe", en: "The practice" },
     title: {
-      cs: "Praxe · co tahle práce je · tanmay",
-      en: "The practice · what this work is · tanmay",
+      cs: "Praxe | tanmay practice",
+      en: "Practice | tanmay practice",
     },
     description: {
-      cs: "Tři kotvy, jedna praxe. Co může setkání obsahovat, jak se ze směru stane plán a jak ten plán potká skutečný den.",
-      en: "Three anchors, one practice. What a session can contain, how a direction becomes a plan and how that plan meets a real day.",
+      cs: "Praxe, ke které se dá vracet. Tělo, praxe a divoká příroda, společná práce, reflexe a význam jména tanmay.",
+      en: "A practice you can return to. Body, practice and wild nature, working together, reflection and the meaning of the name tanmay.",
     },
   },
   {
@@ -112,10 +112,10 @@ export const ROUTES = [
     num: "02",
     path: { cs: "/pribeh", en: "/en/story" },
     label: { cs: "O mně", en: "The story" },
-    title: { cs: "Příběh · tanmay", en: "The story · tanmay" },
+    title: { cs: "O mně | Kryštof Švec · tanmay practice", en: "About me | Kryštof Švec · tanmay practice" },
     description: {
-      cs: "Kdo jsem teď, odkud tahle práce vyrostla, co doopravdy umím a co na tom změnila nehoda. Příběh vysvětluje závazek. Nedokazuje nadřazenost.",
-      en: "Who I am now, where this work grew from, what I can actually do and what the accident changed about it. The story explains the commitment. It does not prove superiority.",
+      cs: "Kryštof Švec, osobní trenér v Praze. Deset let vlastní pohybové praxe, zkušenost s více než 200 klienty a odborné zázemí v tréninku, józe a psychologii.",
+      en: "Kryštof Švec, personal trainer in Prague. Ten years of personal movement practice, experience with more than 200 clients, and professional grounding in training, yoga and psychology.",
     },
   },
   {
@@ -125,12 +125,12 @@ export const ROUTES = [
     path: { cs: "/spoluprace", en: "/en/work-with-me" },
     label: { cs: "Spolupráce", en: "Work with me" },
     title: {
-      cs: "Spolupráce · osobní práce v Praze · tanmay",
-      en: "Work with me · personal work in Prague · tanmay",
+      cs: "Spolupráce | Trénink v Praze a online · tanmay practice",
+      en: "Work with me | Training in Prague and online · tanmay practice",
     },
     description: {
-      cs: "Pro koho je osobní práce, jak probíhá, kde se trénuje a jak začít. Koučink pohybu a praxe v Praze. Není to psychoterapie, diagnóza ani léčba.",
-      en: "Who the personal work is for, how it runs, where we train and how to start. Movement and practice coaching in Prague. It is not psychotherapy, diagnosis or treatment.",
+      cs: "Jednorázový trénink nebo delší vedení individuálně, v menší skupině či online. Síla, dovednost, volnost v pohybu a praxe, která se dá držet.",
+      en: "A single session or longer-term guidance one-to-one, in a small group or online. Strength, skill, freedom in movement and a practice you can sustain.",
     },
   },
   {
@@ -152,10 +152,10 @@ export const ROUTES = [
     nav: false,
     path: { cs: "/soukromi", en: "/en/privacy" },
     label: { cs: "Soukromí", en: "Privacy" },
-    title: { cs: "Soukromí · tanmay", en: "Privacy · tanmay" },
+    title: { cs: "Soukromí | tanmay practice", en: "Privacy | tanmay practice" },
     description: {
-      cs: "Co tenhle web sbírá. Nic. Žádné cookies, žádná analytika, žádné třetí strany.",
-      en: "What this site collects. Nothing. No cookies, no analytics, no third parties.",
+      cs: "Jak tanmay practice nakládá s údaji při návštěvě webu, osobním kontaktu a přechodu do klientské aplikace.",
+      en: "How tanmay practice handles data when you visit the site, make personal contact or move into the client application.",
     },
   },
 ];

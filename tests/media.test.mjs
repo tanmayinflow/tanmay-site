@@ -106,6 +106,8 @@ test("generated assets are exactly the approved material set", () => {
     "hero-mineral-shoulder-mask.png": 60,
     "hero-sandstone-foreground-mask.png": 60,
     "salto-cutout.webp": 260,
+    "edge-strata-wide-alpha.png": 160,
+    "field-burnt-earth.webp": 60,
   };
   const got = readdirSync(MAT).filter((f) => !f.endsWith(".md")).sort();
   assert.deepEqual(got, Object.keys(want).sort(), `material dir mismatch: ${got.join(", ")}`);
