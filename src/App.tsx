@@ -1502,6 +1502,131 @@ footer .socials .icon-link:hover{ color:var(--text-sand); border-color:var(--ear
   body{ background:#fff; color:#000 }
   .band--dark{ background:#fff !important; color:#000 !important }
 }
+
+/* ======================================================================
+   SECONDARY PAGES · V6.1 consolidated implementation
+   Explicit opt-in only. Home, its loader and all legacy styles stay intact.
+   "Linen" uses the actual Home paper asset (historical filename sandstone).
+   ====================================================================== */
+[data-secondary-v6]{
+  --secondary-paper-color:var(--sandstone);
+  --secondary-paper-image:var(--tex-sand);
+  --secondary-ashes-image:var(--tex-cotton);
+  background-color:var(--secondary-paper-color);
+  background-image:var(--secondary-paper-image);
+  background-size:384px 384px;background-repeat:repeat;
+}
+[data-secondary-v6] .site-linen,
+[data-secondary-v6].site-linen,
+footer.footer--linen[data-secondary-v6]{
+  background-color:var(--secondary-paper-color);
+  background-image:var(--secondary-paper-image);
+  background-repeat:repeat;background-size:384px 384px;
+}
+[data-secondary-v6] .site-ink{
+  background-color:var(--forest);background-image:var(--secondary-ashes-image);
+  background-repeat:repeat;background-size:512px 512px;
+}
+[data-secondary-v6] .site-ink .section-head .page-intro{color:var(--on-dark-2)}
+[data-secondary-v6] .material-edge{
+  -webkit-mask-image:var(--strata);mask-image:var(--strata);
+}
+[data-secondary-v6] .material-edge--linen{
+  background-color:var(--secondary-paper-color);background-image:var(--secondary-paper-image);
+  background-repeat:repeat;background-size:384px 384px;
+}
+[data-secondary-v6] .material-edge--ink{
+  background-color:var(--forest);background-image:var(--secondary-ashes-image);
+  background-repeat:repeat;background-size:512px 512px;
+}
+/* The edge touches the preceding field; never float it inside top padding. */
+[data-secondary-v6] :is(.page-section,.page-section--tight,.contact-coda):has(> .material-edge){padding-top:0}
+[data-secondary-v6] .material-edge + .wrap{padding-top:clamp(20px,3.5vw,44px)}
+[data-secondary-v6] .site-linen :is(.num,.scan-line){color:var(--text-sand-2)}
+[data-secondary-v6] .site-ink :is(.num,.scan-line){color:var(--on-dark-2)}
+
+/* Media disappears as a whole figure. The layout defaults to one column;
+   a second column exists only while a direct child figure exists. */
+[data-secondary-v6] .page-hero-grid,
+[data-secondary-v6] .practice-work-layout,
+[data-secondary-v6] .secondary-illustrated{grid-template-columns:minmax(0,1fr)}
+[data-secondary-v6] .secondary-illustrated{
+  display:grid;gap:clamp(28px,5vw,64px);align-items:center;
+}
+[data-secondary-v6] .secondary-illustrated > *,
+[data-secondary-v6] .page-hero-grid > *{min-width:0}
+[data-secondary-v6] .secondary-illustration{
+  margin:0;width:min(100%,220px);justify-self:center;align-self:center;
+}
+[data-secondary-v6] .secondary-illustration img{width:100%;height:auto;object-fit:contain}
+[data-secondary-v6] .secondary-illustration--squat{width:min(100%,260px)}
+[data-secondary-v6] .secondary-illustration--pine{width:min(100%,200px)}
+[data-secondary-v6] .practice-work-layout .editorial-row,
+[data-secondary-v6] .about-approach .editorial-row{grid-template-columns:2.8em minmax(0,1fr);gap:8px 18px}
+[data-secondary-v6] .practice-work-layout .editorial-row p,
+[data-secondary-v6] .about-approach .editorial-row p{grid-column:2}
+/* Existing real photo, no retouch. Only its non-critical outer material edge. */
+html[data-ap="on"] [data-secondary-v6] .practice-hero .ap img{
+  -webkit-mask-size:100% 110%;mask-size:100% 110%;
+  -webkit-mask-position:0 0;mask-position:0 0;
+}
+[data-secondary-v6] .practice-hero .figure{max-width:500px;width:100%;justify-self:center;margin:0}
+[data-secondary-v6] .practice-hero .figure img{width:100%;height:auto}
+[data-secondary-v6] .practice-anchors-layout{display:grid;grid-template-columns:minmax(0,1fr);gap:28px;align-items:center}
+[data-secondary-v6] .practice-anchors-layout .diagram{width:min(100%,280px);margin:0 auto}
+[data-secondary-v6] .reflection-block{max-width:var(--maxw)}
+[data-secondary-v6] .reflection-columns{display:grid;gap:26px}
+[data-secondary-v6] .reflection-columns > .body-txt{margin-top:0;max-width:38em}
+
+/* A three-part history, not a chart of recovery, dates or invented milestones. */
+[data-secondary-v6] .story-beats{border-top:0}
+[data-secondary-v6] .story-beat{
+  position:relative;border:0;padding:28px 0 28px 30px;
+}
+[data-secondary-v6] .story-beat::before{
+  content:"";position:absolute;left:4px;top:36px;bottom:-36px;width:1px;
+  background:var(--on-dark);opacity:.3;
+}
+[data-secondary-v6] .story-beat:last-child::before{display:none}
+[data-secondary-v6] .story-point{position:absolute;top:31px;left:0;overflow:visible;color:var(--on-dark)}
+[data-secondary-v6] .story-beat:last-child .story-point{color:var(--copper)}
+
+/* One SVG loop; its labels remain the existing HTML beside it. */
+[data-secondary-v6] .secondary-loop{
+  display:block;width:190px;max-width:65%;height:auto;margin:24px 0 0;color:var(--on-dark);
+}
+[data-secondary-v6] .secondary-loop-track{fill:none;stroke:currentColor;stroke-width:1;opacity:.52}
+[data-secondary-v6] .secondary-loop-bindu{fill:var(--copper)}
+/* Existing reveal mechanism, smaller shift only on secondary pages. */
+[data-secondary-v6] .rv{transform:translateY(8px);transition-duration:.5s}
+[data-secondary-v6] .rv.on{transform:none}
+[data-secondary-v6] .rv.on .secondary-loop-track{animation:secondary-loop-trace .65s ease-out both}
+@keyframes secondary-loop-trace{from{stroke-dasharray:1;stroke-dashoffset:1}to{stroke-dasharray:1;stroke-dashoffset:0}}
+
+@media(min-width:900px){
+  [data-secondary-v6] .page-hero-grid:has(> figure){grid-template-columns:minmax(0,1.02fr) minmax(340px,.78fr)}
+  [data-secondary-v6] .practice-hero .figure{justify-self:end}
+  [data-secondary-v6] .secondary-illustrated:has(> .secondary-illustration){grid-template-columns:minmax(0,1fr) minmax(180px,260px)}
+  [data-secondary-v6] .secondary-illustrated--needs:has(> .secondary-illustration){grid-template-columns:minmax(210px,290px) minmax(0,1fr)}
+  [data-secondary-v6] .secondary-illustrated--needs:has(> .secondary-illustration) > .editorial-grid{grid-column:2;grid-row:1}
+  [data-secondary-v6] .secondary-illustrated--needs > .secondary-illustration{grid-column:1;grid-row:1}
+  [data-secondary-v6] .secondary-illustration{width:100%;max-width:300px}
+  [data-secondary-v6] .secondary-illustration--squat{max-width:290px}
+  [data-secondary-v6] .secondary-illustration--pine{max-width:260px}
+  [data-secondary-v6] .practice-work-layout:has(> .secondary-illustration){grid-template-columns:minmax(0,1.1fr) minmax(220px,.5fr)}
+  [data-secondary-v6] .practice-work-layout > .secondary-illustration{justify-self:end}
+  [data-secondary-v6] .practice-anchors-layout{grid-template-columns:minmax(0,1.15fr) minmax(230px,.65fr);gap:clamp(48px,7vw,100px)}
+  [data-secondary-v6] .reflection-columns{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(48px,7vw,100px)}
+  [data-secondary-v6] .story-beat{padding:36px clamp(26px,3vw,44px) 0 0;border:0}
+  [data-secondary-v6] .story-beat:last-child{padding-right:0}
+  [data-secondary-v6] .story-beat::before{left:5px;right:-5px;top:4px;bottom:auto;width:auto;height:1px}
+  [data-secondary-v6] .story-point{top:0;left:0}
+}
+@media(prefers-reduced-motion:reduce){
+  [data-secondary-v6] .rv{opacity:1;transform:none;transition:none}
+  [data-secondary-v6] .secondary-loop-track{animation:none!important;stroke-dasharray:none!important;stroke-dashoffset:0!important}
+}
+
 `;
 
 // ----------------------------------------------------------------------
@@ -2429,6 +2554,42 @@ function PageHome({ lang }: any) {
 }
 
 // ----------------------------------------------------------------------
+
+// SECONDARY MEDIA · V6.1. These helpers are never used by Home.
+function SecondaryIllustration({ src, width, height, sizes, alt = "", decorative = false, className = "" }: any) {
+  const [gone, setGone] = useState(false);
+  if (gone) return null;
+  return <figure className={"secondary-illustration rv d1 " + className} aria-hidden={decorative ? true : undefined}>
+    <img src={src} width={width} height={height} sizes={sizes}
+      alt={decorative ? "" : alt} aria-hidden={decorative ? true : undefined}
+      loading="lazy" decoding="async" onError={() => setGone(true)} />
+  </figure>;
+}
+function SecondaryHeroPhoto({ src, width, height, sizes, alt, className }: any) {
+  const [gone, setGone] = useState(false);
+  if (gone) return null;
+  return <figure className={className + " rv d1"}>
+    <img src={src} width={width} height={height} sizes={sizes} alt={alt}
+      loading="eager" decoding="async" fetchPriority="high" onError={() => setGone(true)} />
+  </figure>;
+}
+function SecondaryStoryPoint() {
+  return <svg className="story-point" width="9" height="9" viewBox="0 0 9 9" aria-hidden="true" focusable="false">
+    <circle cx="4.5" cy="4.5" r="3" fill="currentColor" />
+  </svg>;
+}
+function SecondaryPracticeLoop() {
+  return <div className="rv" aria-hidden="true"><svg className="secondary-loop" width="240" height="240" viewBox="0 0 240 240" focusable="false" aria-hidden="true">
+    <circle className="secondary-loop-track" cx="120" cy="120" r="80" pathLength="1" />
+    <g fill="none" stroke="currentColor" strokeWidth="1" opacity=".52">
+      <path d="M179 62 L185 76 L170 74" /><path d="M159 185 L144 193 L146 178" /><path d="M40 105 L43 90 L55 100" />
+    </g>
+    <circle cx="120" cy="40" r="3" fill="currentColor" />
+    <circle cx="189.282" cy="160" r="3" fill="currentColor" />
+    <circle className="secondary-loop-bindu" cx="50.718" cy="160" r="3" />
+  </svg></div>;
+}
+
 // 01 · PRAXE · V2
 // ----------------------------------------------------------------------
 function PagePraxe({ lang }: any) {
@@ -2443,8 +2604,8 @@ function PagePraxe({ lang }: any) {
     ["03", "Rozsah a kontrola", "Pracujeme tam, kde pohyb ztrácí jistotu, rozsah nebo kontrolu. Nejde o co největší rozsah, ale o ten, který dokážeš skutečně ovládat.", "Range and control", "We work where movement loses confidence, range or control. The aim is not the greatest possible range, but the range you can genuinely control."],
     ["04", "Dech a pozornost", "Nejsou odděleným rituálem. Pomáhají vnímat napětí, úsilí, únavu a chvíli, kdy má smysl přidat nebo ubrat.", "Breath and attention", "They are not a separate ritual. They help you notice tension, effort, fatigue and the moment when it makes sense to add or take away."],
   ];
-  return <div className="site-page">
-    <header className="site-linen page-hero">
+  return <div className="site-page" data-secondary-v6="">
+    <header className="site-linen page-hero practice-hero">
       <div className="wrap page-hero-grid">
         <div>
           <p className="label rv">{L("Praxe","Practice")}</p>
@@ -2452,7 +2613,7 @@ function PagePraxe({ lang }: any) {
           <p className="lead rv d2">{L("Nejde o dokonalou rutinu ani plán, který funguje jen v dobrých dnech. Praxe dává pohybu směr, ale umí měnit podobu podle toho, co je právě možné.","It is not a perfect routine or a plan that only works on good days. Practice gives movement direction while changing shape according to what is actually possible.")}</p>
           <p className="hero-dominant rv d3">{L("Forma se mění. Směr zůstává.","The form changes. The direction remains.")}</p>
         </div>
-        <Evidence pic={MEDIA.handstand} alt={L("Kryštof Švec při stoji na rukou na padlém kmeni.","Kryštof Švec in a handstand on a fallen tree trunk.")} sizes="(min-width:900px) 500px, calc(100vw - 36px)" variant="tall" />
+        <Evidence pic={MEDIA.handstand} alt={L("Kryštof Švec při stoji na rukou na padlém kmeni.","Kryštof Švec in a handstand on a fallen tree trunk.")} sizes="(min-width:900px) 500px, calc(100vw - 36px)" variant="tall" eager ap />
       </div>
     </header>
 
@@ -2475,10 +2636,10 @@ function PagePraxe({ lang }: any) {
           <div><p className="label rv">{L("Tři kotvy","Three anchors")}</p><h2 id="p-anchors" className="h-display h2 rv d1" style={{marginTop:12}}>{L("Tělo, praxe a divoká příroda","Body, practice and wild nature")}</h2></div>
           <p className="page-intro rv d1">{L("Nejsou to tři oddělené oblasti. Tělo ukazuje, co se skutečně děje, praxe tomu dává směr a divoká příroda připomíná, že ne všechno lze řídit.","They are not three separate areas. The body shows what is actually happening, practice gives it direction, and wild nature reminds us that not everything can be controlled.")}</p>
         </div>
-        <div>
+        <div className="practice-anchors-layout"><div>
           {anchors.map((a:any)=><article className="anchor-light rv" key={a[0]}><div className="meta"><span className="num">{a[0]}</span><span className="role">{L(a[1],a[4])}</span><h3>{L(a[2],a[5])}</h3></div><p>{L(a[3],a[6])}</p></article>)}
         </div>
-        <AnchorDiagram />
+        <AnchorDiagram /></div>
         <p className="stance-line rv" style={{margin:"clamp(28px,4vw,44px) auto 0",textAlign:"center"}}>{L("Přítomnost není čtvrtá kotva. Vzniká, když se ty tři drží pohromadě.","Presence is not a fourth anchor. It emerges when the three are held together.")}</p>
       </div>
     </section>
@@ -2490,15 +2651,19 @@ function PagePraxe({ lang }: any) {
           <p className="scan-line rv">{L("DOVEDNOST · SÍLA · ROZSAH · POZORNOST","SKILL · STRENGTH · RANGE · ATTENTION")}</p>
           <div className="editorial-list" style={{marginTop:22}}>{session.map((x:any)=><article className="editorial-row rv" key={x[0]}><span className="num">{x[0]}</span><h3>{L(x[1],x[3])}</h3><p>{L(x[2],x[4])}</p></article>)}</div>
         </div>
-        <figure className="practice-work-cutout rv d1"><picture><source type="image/avif" srcSet={MEDIA.handstand.widths.map((w:number)=>`${MEDIA.handstand.base}-${w}.avif ${w}w`).join(", ")} sizes="(min-width:980px) 420px, calc(100vw - 44px)" /><source type="image/webp" srcSet={MEDIA.handstand.widths.map((w:number)=>`${MEDIA.handstand.base}-${w}.webp ${w}w`).join(", ")} sizes="(min-width:980px) 420px, calc(100vw - 44px)" /><img src={MEDIA.handstand.base + ".jpg"} width={MEDIA.handstand.w} height={MEDIA.handstand.h} sizes="(min-width:980px) 420px, calc(100vw - 44px)" loading="lazy" decoding="async" alt={L("Stoj na rukou na padlém kmeni v lese, obě dlaně na mechu.","A handstand on a fallen trunk in the forest, both palms on the moss.")} /></picture></figure>
+        <SecondaryIllustration src="/media/illustration/atlas-one-arm-handstand.webp" width={1254} height={1254}
+          sizes="(min-width:900px) 300px, 220px" className="secondary-illustration--handstand"
+          alt={L("Stojka na jedné ruce s roznožením, technická kresba zepředu.","One-arm straddle handstand, technical front-view drawing.")} />
       </div>
     </section>
 
     <section className="site-linen page-section--tight">
       <div className="wrap reflection-block">
-        <h2 className="h-display h2 rv">{L("Reflexe","Reflection")}</h2>
+        <div className="reflection-columns"><div><h2 className="h-display h2 rv">{L("Reflexe","Reflection")}</h2>
         <p className="stance-line rv d1" style={{marginTop:18}}>{L("Ne všechno, co se projeví v tréninku, vzniká v tréninku.","Not everything that shows up in training begins in training.")}</p>
+        </div>
         <p className="body-txt rv d2">{L("Spánek, práce, vztahy, stres i důvod, proč člověk trénuje, se promítají do toho, co tělo unese a jak se k praxi vrací. Reflexe pomáhá tyto souvislosti vidět a podle nich zvolit další krok.","Sleep, work, relationships, stress and the reason a person trains all affect what the body can carry and how they return to practice. Reflection helps make those connections visible and choose the next step accordingly.")}</p>
+        </div>
         <p className="reflection-closing rv d2">{L("Praxe nezačíná v jiném těle ani v jiném životě.\nZačíná v tomhle.","Practice does not begin in another body or another life.\nIt begins in this one.")}</p>
       </div>
     </section>
@@ -2531,14 +2696,12 @@ function PagePribeh({ lang }: any) {
     ["02","Plán musí potkat skutečný den","Plán nevnímám jako neměnný předpis. Má dávat směr a zároveň reagovat na to, co se skutečně děje.","A plan has to meet the real day","I do not see a plan as a fixed prescription. It should give direction while responding to what is actually happening."],
     ["03","Praxe má být vlastní","Nechci, aby člověk jen plnil moje pokyny. Chci, aby rozuměl svému tréninku a dokázal svou praxi držet sám.","Practice should become your own","I do not want someone to simply follow my instructions. I want them to understand their training and be able to hold their practice themselves."],
   ];
-  return <div className="site-page">
+  return <div className="site-page" data-secondary-v6="">
     <header className="site-linen page-hero">
       <div className="wrap">
         <div className="page-hero-grid">
           <div><p className="label rv">{L("O mně","About me")}</p><h1 className="h-display h1 rv d1">Kryštof Švec</h1><p className="lead rv d2">{L("Jsem osobní trenér v Praze. Síla, kalistenika a schopnost dobře ovládat vlastní tělo tvoří základ mé práce. Nejvíc mě ale zajímá, jak z jednotlivých tréninků vzniká praxe, kterou člověk dokáže držet sám.","I am a personal trainer in Prague. Strength, calisthenics and the ability to control your own body form the foundation of my work. What interests me most, though, is how individual training sessions become a practice a person can sustain on their own.")}</p><p className="act rv d3"><Go href={routePath("spoluprace",lang)} cs="Možnosti spolupráce" en="Ways to work together" /></p></div>
-          <figure className="about-hero-photo rv d1">
-            <img src="/media/site/about-portrait-sunset.jpg" width={2048} height={1655} sizes="(min-width:900px) 420px, calc(100vw - 44px)" loading="eager" decoding="async" fetchPriority="high" alt={L("Kryštof Švec, barevný portrét v teplém večerním světle.","Kryštof Švec, colour portrait in warm evening light.")} />
-          </figure>
+          <SecondaryHeroPhoto className="about-hero-photo" src="/media/site/about-portrait-sunset.jpg" width={2048} height={1655} sizes="(min-width:900px) 420px, calc(100vw - 44px)" alt={L("Kryštof Švec, barevný portrét v teplém večerním světle.","Kryštof Švec, colour portrait in warm evening light.")} />
         </div>
         <div className="proof-row rv"><div className="proof-item"><strong>{L("10 LET","10 YEARS")}</strong><span>{L("vlastní pohybové praxe","of personal movement practice")}</span></div><div className="proof-item"><strong>200+</strong><span>{L("klientů","clients")}</span></div><div className="proof-item"><strong>{L("PROFESNÍ KVALIFIKACE","PROFESSIONAL QUALIFICATION")}</strong><span>{L("Osobní trenér ve fitness","Personal Trainer in Fitness")}</span></div></div>
       </div>
@@ -2546,13 +2709,16 @@ function PagePribeh({ lang }: any) {
 
     <section className="site-linen page-section"><div className="wrap"><div className="section-head section-head--split"><div><p className="label rv">{L("Kořeny","Roots")}</p><h2 className="h-display h2 rv d1" style={{marginTop:12}}>{L("Co mě formovalo","What shaped me")}</h2></div><p className="page-intro rv d1">{L("Moje práce nevychází z jedné metody. Vznikala mezi pohybem, pozorností a časem stráveným venku.","My work does not come from a single method. It formed between movement, attention and time spent outdoors.")}</p></div><div className="editorial-list">{roots.map((x:any)=><article className="editorial-row rv" key={x[0]}><span className="num">{x[0]}</span><h3>{L(x[1],x[3])}</h3><p>{L(x[2],x[4])}</p></article>)}</div></div></section>
 
-    <section className="site-ink page-section story-return"><div className="material-edge material-edge--linen" aria-hidden="true"/><div className="wrap"><div className="section-head"><p className="label rv">{L("Pád · sestup · návrat","Fall · descent · return")}</p><h2 className="h-display h2 rv d1">{L("Když tělo i život přestaly být samozřejmostí","When body and life stopped being something I could take for granted")}</h2><p className="page-intro rv d1">{L("Návrat neznamenal pokračovat tam, kde jsem skončil. Znamenal znovu se učit, co tělo unese, čemu můžu věřit a o co se dá opřít, když výkon ani jistota nejsou k dispozici.","Returning did not mean continuing where I had left off. It meant learning again what my body could carry, what I could trust, and what remained to lean on when performance and certainty were gone.")}</p></div><div className="story-beats"><article className="story-beat rv"><span className="num">01</span><h3>{L("Pád","The fall")}</h3><p>{L("Pohyb, fyzická kapacita a disciplína byly dlouho tím, o co jsem se opíral. Těžká nehoda a následné kóma ten život během jediného okamžiku přerušily.","Movement, physical capacity and discipline were what I relied on for a long time. A serious accident and the coma that followed interrupted that life in a single moment.")}</p></article><article className="story-beat rv d1"><span className="num">02</span><h3>{L("Sestup","The descent")}</h3><p>{L("Návrat trval dva roky. Po nehodě jsem ztratil kontrolu nad vlastním tělem, rok strávil na vozíku a dlouhé měsíce se zotavoval po operacích. Změnilo se nejen to, co tělo dokázalo, ale i to, jak jsem vnímal sám sebe. Učil jsem se znovu rozpoznat, co je možné, co už je příliš a co zůstává, když výkon zmizí.","The return took two years. After the accident I lost control of my own body, spent a year in a wheelchair and long months recovering from operations. What changed was not only what my body could do, but also how I saw myself. I had to learn again what was possible, what was too much, and what remained when performance disappeared.")}</p></article><article className="story-beat rv d2"><span className="num">03</span><h3>{L("Návrat","The return")}</h3><p>{L("Nevrátil jsem se do stejného těla ani ke stejnému pohledu na trénink. Začal jsem víc vnímat kapacitu, podmínky a malé kroky, které se dají skutečně opakovat. Tělo se z nástroje výkonu stalo učitelem.","I did not return to the same body or the same view of training. I became more attentive to capacity, conditions and small steps that can actually be repeated. The body changed from a tool of performance into a teacher.")}</p></article></div><p className="stance-line rv" style={{marginTop:"clamp(30px,4vw,48px)"}}>{L("Nehoda není moje kvalifikace. Vysvětluje, proč tuhle práci beru vážně.","The accident is not my qualification. It explains why I take this work seriously.")}</p></div></section>
+    <section className="site-ink page-section story-return"><div className="material-edge material-edge--linen" aria-hidden="true"/><div className="wrap"><div className="section-head"><p className="label rv">{L("Pád · sestup · návrat","Fall · descent · return")}</p><h2 className="h-display h2 rv d1">{L("Když tělo i život přestaly být samozřejmostí","When body and life stopped being something I could take for granted")}</h2><p className="page-intro rv d1">{L("Návrat neznamenal pokračovat tam, kde jsem skončil. Znamenal znovu se učit, co tělo unese, čemu můžu věřit a o co se dá opřít, když výkon ani jistota nejsou k dispozici.","Returning did not mean continuing where I had left off. It meant learning again what my body could carry, what I could trust, and what remained to lean on when performance and certainty were gone.")}</p></div><div className="story-beats"><article className="story-beat rv"><SecondaryStoryPoint /><span className="num">01</span><h3>{L("Pád","The fall")}</h3><p>{L("Pohyb, fyzická kapacita a disciplína byly dlouho tím, o co jsem se opíral. Těžká nehoda a následné kóma ten život během jediného okamžiku přerušily.","Movement, physical capacity and discipline were what I relied on for a long time. A serious accident and the coma that followed interrupted that life in a single moment.")}</p></article><article className="story-beat rv d1"><SecondaryStoryPoint /><span className="num">02</span><h3>{L("Sestup","The descent")}</h3><p>{L("Návrat trval dva roky. Po nehodě jsem ztratil kontrolu nad vlastním tělem, rok strávil na vozíku a dlouhé měsíce se zotavoval po operacích. Změnilo se nejen to, co tělo dokázalo, ale i to, jak jsem vnímal sám sebe. Učil jsem se znovu rozpoznat, co je možné, co už je příliš a co zůstává, když výkon zmizí.","The return took two years. After the accident I lost control of my own body, spent a year in a wheelchair and long months recovering from operations. What changed was not only what my body could do, but also how I saw myself. I had to learn again what was possible, what was too much, and what remained when performance disappeared.")}</p></article><article className="story-beat rv d2"><SecondaryStoryPoint /><span className="num">03</span><h3>{L("Návrat","The return")}</h3><p>{L("Nevrátil jsem se do stejného těla ani ke stejnému pohledu na trénink. Začal jsem víc vnímat kapacitu, podmínky a malé kroky, které se dají skutečně opakovat. Tělo se z nástroje výkonu stalo učitelem.","I did not return to the same body or the same view of training. I became more attentive to capacity, conditions and small steps that can actually be repeated. The body changed from a tool of performance into a teacher.")}</p></article></div><p className="stance-line rv" style={{marginTop:"clamp(30px,4vw,48px)"}}>{L("Nehoda není moje kvalifikace. Vysvětluje, proč tuhle práci beru vážně.","The accident is not my qualification. It explains why I take this work seriously.")}</p></div></section>
 
-    <section className="site-linen page-section"><div className="material-edge material-edge--ink" aria-hidden="true"/><div className="wrap"><h2 className="h-display h2 rv">{L("Co si z toho nesu do praxe","What I carry from it into my work")}</h2><div className="editorial-list" style={{marginTop:30}}>{approach.map((x:any)=><article className="editorial-row rv" key={x[0]}><span className="num">{x[0]}</span><h3>{L(x[1],x[3])}</h3><p>{L(x[2],x[4])}</p></article>)}</div></div></section>
+    <section className="site-linen page-section"><div className="material-edge material-edge--ink" aria-hidden="true"/><div className="wrap secondary-illustrated about-approach"><div><h2 className="h-display h2 rv">{L("Co si z toho nesu do praxe","What I carry from it into my work")}</h2><div className="editorial-list" style={{marginTop:30}}>{approach.map((x:any)=><article className="editorial-row rv" key={x[0]}><span className="num">{x[0]}</span><h3>{L(x[1],x[3])}</h3><p>{L(x[2],x[4])}</p></article>)}</div></div>
+      <SecondaryIllustration src="/media/illustration/illustration-pine.webp" width={640} height={960}
+        sizes="(min-width:900px) 260px, 200px" className="secondary-illustration--pine" decorative />
+    </div></section>
 
     <section className="site-linen page-section"><div className="wrap"><div className="section-head section-head--split"><div><p className="label rv">{L("Odborné zázemí","Professional background")}</p><h2 className="h-display h2 rv d1" style={{marginTop:12}}>{L("Vlastní zkušenost je důležitá. Sama ale nestačí.","Personal experience matters. On its own, it is not enough.")}</h2></div><p className="page-intro rv d1">{L("Proto svou práci opírám také o profesní kvalifikaci a další vzdělání v tréninku, józe a psychologii.","That is why I also ground my work in professional qualifications and further education in training, yoga and psychology.")}</p></div><div className="education-list rv"><div className="education-item"><p className="label">{L("Profesní kvalifikace","Professional qualification")}</p><p>{L("Osobní trenér ve fitness","Personal Trainer in Fitness")}</p></div><div className="education-item"><p className="label">{L("Pohyb a trénink","Movement and training")}</p><p>{L("Kondiční a funkční trénink · zdravotní tělesná výchova · rehabilitační trénink","Conditioning and functional training · health-oriented physical education · rehabilitation training")}</p></div><div className="education-item"><p className="label">{L("Jóga","Yoga")}</p><p>{L("Instruktor jógy","Yoga instructor")}</p></div><div className="education-item"><p className="label">{L("Studium","Study")}</p><p>{L("Psychologie · Univerzita Palackého · 2019 až 2024","Psychology · Palacký University · 2019 to 2024")}</p></div></div><p className="small rv" style={{marginTop:24}}>{L("Rehabilitační trénink je součást mého vzdělání. Nenahrazuje fyzioterapii ani zdravotní rehabilitaci.","Rehabilitation training is part of my education. It does not replace physiotherapy or medical rehabilitation.")}</p></div></section>
 
-    <section className="site-earth contact-coda"><div className="wrap"><h2 className="h-display h2 rv">{L("Co nabízím dnes","What I offer today")}</h2><p className="body-txt rv d1" style={{margin:"18px auto 0"}}>{L("Pracuji individuálně i s menšími skupinami, osobně v Praze nebo online. Může jít o jedno setkání nebo delší vedení.","I work one-to-one and with small groups, in person in Prague or online. It can be one session or longer-term guidance.")}</p><p className="rv d2" style={{marginTop:28}}><Go href={routePath("spoluprace",lang)} cs="Možnosti spolupráce" en="Ways to work together" /></p></div></section>
+    <section className="site-earth contact-coda"><div className="material-edge material-edge--linen" aria-hidden="true"/><div className="wrap"><h2 className="h-display h2 rv">{L("Co nabízím dnes","What I offer today")}</h2><p className="body-txt rv d1" style={{margin:"18px auto 0"}}>{L("Pracuji individuálně i s menšími skupinami, osobně v Praze nebo online. Může jít o jedno setkání nebo delší vedení.","I work one-to-one and with small groups, in person in Prague or online. It can be one session or longer-term guidance.")}</p><p className="rv d2" style={{marginTop:28}}><Go href={routePath("spoluprace",lang)} cs="Možnosti spolupráce" en="Ways to work together" /></p></div></section>
   </div>;
 }
 
@@ -2580,7 +2746,7 @@ function PageSpoluprace({ lang }: any) {
   const whatsappText=encodeURIComponent(L("Ahoj Kryštofe, mám zájem o spolupráci.\n\nCo chci rozvíjet:\n\nJakou spolupráci hledám:\n\nKdy mám obvykle čas:","Hi Kryštof, I am interested in working together.\n\nWhat I want to develop:\n\nWhat kind of collaboration I am looking for:\n\nWhen I am usually available:"));
   const mailSubject=encodeURIComponent(L("Zájem o spolupráci","Working together"));
   const mailBody=encodeURIComponent(L("Ahoj Kryštofe,\n\nmám zájem o spolupráci.\n\nCo chci rozvíjet:\n\nJakou spolupráci hledám:\n\nKdy mám obvykle čas:","Hi Kryštof,\n\nI am interested in working together.\n\nWhat I want to develop:\n\nWhat kind of collaboration I am looking for:\n\nWhen I am usually available:"));
-  return <div className="site-page">
+  return <div className="site-page" data-secondary-v6="">
     <header className="site-linen page-hero">
       <div className="wrap">
         <div className="page-hero-grid collaboration-hero-grid">
@@ -2591,20 +2757,22 @@ function PageSpoluprace({ lang }: any) {
             <p className="lead rv d2">{L("Individuálně, v menší skupině, osobně v Praze nebo online. Zvolíme formu podle toho, co chceš rozvíjet a co se dá skutečně držet.","One-to-one, in a small group, in person in Prague or online. We choose the format according to what you want to develop and what you can realistically sustain.")}</p>
             <p className="act rv d3"><Go href="#kontakt" cs="Napiš mi" en="Write to me" /></p>
           </div>
-          <figure className="collaboration-hero-cutout rv d1">
-            <img src="/media/site/collaboration-hero-cutout.png" width={1086} height={1448} sizes="(min-width:900px) 430px, calc(100vw - 44px)" loading="eager" decoding="async" fetchPriority="high" alt={L("Kryštof Švec sedící na lavičce vedle paraletek.","Kryštof Švec seated on a bench beside parallettes.")} />
-          </figure>
+          <SecondaryHeroPhoto className="collaboration-hero-cutout" src="/media/site/collaboration-hero-cutout.png" width={1086} height={1448} sizes="(min-width:900px) 430px, calc(100vw - 44px)" alt={L("Kryštof Švec sedící na lavičce vedle paraletek.","Kryštof Švec seated on a bench beside parallettes.")} />
         </div>
       </div>
     </header>
 
     <section className="site-linen page-section"><div className="wrap"><h2 className="h-display h2 rv">{L("Možnosti spolupráce","Ways to work together")}</h2><div className="editorial-list" style={{marginTop:30}}>{formats.map((x:any)=><article className="editorial-row rv" key={x[0]}><span className="num">{x[0]}</span><h3>{L(x[1],x[3])}</h3><p>{L(x[2],x[4])}</p></article>)}</div></div></section>
 
-    <section className="site-linen page-section"><div className="wrap"><div className="section-head section-head--split"><h2 className="h-display h2 rv">{L("S čím můžeš přijít","What you can come with")}</h2><p className="page-intro rv d1">{L("Nemusíš přesně vědět, co potřebuješ. Stačí vědět, co chceš zvládnout, co tě omezuje nebo kde ztrácíš směr.","You do not need to know exactly what you need. It is enough to know what you want to be able to do, what limits you, or where you are losing direction.")}</p></div><div className="editorial-grid">{needs.map((x:any)=><article className="rv" key={x[0]}><span className="num">{x[0]}</span><h3>{L(x[1],x[3])}</h3><p>{L(x[2],x[4])}</p></article>)}</div></div></section>
+    <section className="site-linen page-section"><div className="wrap"><div className="section-head section-head--split"><h2 className="h-display h2 rv">{L("S čím můžeš přijít","What you can come with")}</h2><p className="page-intro rv d1">{L("Nemusíš přesně vědět, co potřebuješ. Stačí vědět, co chceš zvládnout, co tě omezuje nebo kde ztrácíš směr.","You do not need to know exactly what you need. It is enough to know what you want to be able to do, what limits you, or where you are losing direction.")}</p></div><div className="secondary-illustrated secondary-illustrated--needs"><div className="editorial-grid">{needs.map((x:any)=><article className="rv" key={x[0]}><span className="num">{x[0]}</span><h3>{L(x[1],x[3])}</h3><p>{L(x[2],x[4])}</p></article>)}</div>
+      <SecondaryIllustration src="/media/illustration/atlas-squat.webp" width={1254} height={1254}
+        sizes="(min-width:900px) 290px, 260px" className="secondary-illustration--squat"
+        alt={L("Kontrolovaný dřep, technická kresba z boku.","Controlled squat, technical side-view drawing.")} />
+      </div></div></section>
 
     <section className="site-ink page-section"><div className="material-edge material-edge--linen" aria-hidden="true"/><div className="wrap"><h2 className="h-display h2 rv">{L("Jak to probíhá","How it works")}</h2><div className="process-three">{process.map((x:any)=><article className="rv" key={x[0]}><span className="num">{x[0]}</span><h3>{L(x[1],x[3])}</h3><p>{L(x[2],x[4])}</p></article>)}</div><p className="stance-line rv" style={{marginTop:"clamp(30px,4vw,48px)"}}>{L("Jedno setkání může stát samo o sobě.","One session can stand on its own.")}</p></div></section>
 
-    <section className="site-ink page-section--tight"><div className="wrap between-grid"><div><p className="label rv">{L("Mezi setkáními","Between sessions")}</p><h2 className="h-display h2 rv d1" style={{marginTop:12}}>{L("Plán, záznam, úprava.","Plan, record, adjust.")}</h2><p className="body-txt rv d1" style={{marginTop:18}}>{L("Při delší spolupráci máš v klientské aplikaci svůj plán, termíny, záznamy a zpětnou vazbu na jednom místě.","In longer-term work, your plan, sessions, records and feedback live together in the client app.")}</p><p className="scan-line rv d2" style={{marginTop:24}}>{L("PLÁN · ZÁZNAM · ÚPRAVA","PLAN · RECORD · ADJUST")}</p></div><div className="between-items"><div className="between-item rv"><h3>{L("Jasný plán","A clear plan")}</h3><p>{L("Víš, co má teď prioritu a čeho se držet.","You know what matters now and what to keep hold of.")}</p></div><div className="between-item rv d1"><h3>{L("Skutečný záznam","A real record")}</h3><p>{L("Zapisuješ, co jsi opravdu udělal a jak na to tělo reagovalo.","You record what you actually did and how your body responded.")}</p></div><div className="between-item rv d2"><h3>{L("Průběžná úprava","Ongoing adjustment")}</h3><p>{L("Další krok vychází ze skutečného průběhu, ne z toho, jak měl týden vypadat.","The next step comes from what actually happened, not from how the week was supposed to look.")}</p></div></div></div></section>
+    <section className="site-ink page-section--tight"><div className="wrap between-grid"><div><p className="label rv">{L("Mezi setkáními","Between sessions")}</p><h2 className="h-display h2 rv d1" style={{marginTop:12}}>{L("Plán, záznam, úprava.","Plan, record, adjust.")}</h2><p className="body-txt rv d1" style={{marginTop:18}}>{L("Při delší spolupráci máš v klientské aplikaci svůj plán, termíny, záznamy a zpětnou vazbu na jednom místě.","In longer-term work, your plan, sessions, records and feedback live together in the client app.")}</p><p className="scan-line rv d2" style={{marginTop:24}}>{L("PLÁN · ZÁZNAM · ÚPRAVA","PLAN · RECORD · ADJUST")}</p><SecondaryPracticeLoop /></div><div className="between-items"><div className="between-item rv"><h3>{L("Jasný plán","A clear plan")}</h3><p>{L("Víš, co má teď prioritu a čeho se držet.","You know what matters now and what to keep hold of.")}</p></div><div className="between-item rv d1"><h3>{L("Skutečný záznam","A real record")}</h3><p>{L("Zapisuješ, co jsi opravdu udělal a jak na to tělo reagovalo.","You record what you actually did and how your body responded.")}</p></div><div className="between-item rv d2"><h3>{L("Průběžná úprava","Ongoing adjustment")}</h3><p>{L("Další krok vychází ze skutečného průběhu, ne z toho, jak měl týden vypadat.","The next step comes from what actually happened, not from how the week was supposed to look.")}</p></div></div></div></section>
 
     <section className="site-linen page-section"><div className="material-edge material-edge--ink" aria-hidden="true"/><div className="wrap"><div className="section-head section-head--split"><h2 className="h-display h2 rv">{L("Zkušenost a vzdělání","Experience and education")}</h2><p className="page-intro rv d1">{L("Vycházím z deseti let vlastní pohybové praxe a zkušeností s více než 200 klienty. Jsem držitelem profesní kvalifikace Osobní trenér ve fitness a instruktorem jógy. Další vzdělání mám v kondičním a funkčním tréninku, zdravotní tělesné výchově a rehabilitačním tréninku.","My work draws on ten years of personal movement practice and experience with more than 200 clients. I hold the professional qualification Personal Trainer in Fitness and I am a yoga instructor. I also have further education in conditioning and functional training, health-oriented physical education and rehabilitation training.")}</p></div><div className="trust-scan rv"><div className="trust-stat"><strong>{L("10 LET","10 YEARS")}</strong><span>{L("vlastní pohybové praxe","of personal movement practice")}</span></div><div className="trust-stat"><strong>200+</strong><span>{L("klientů","clients")}</span></div><div className="trust-stat"><strong>{L("PROFESNÍ KVALIFIKACE","PROFESSIONAL QUALIFICATION")}</strong><span>{L("Osobní trenér ve fitness","Personal Trainer in Fitness")}</span></div></div></div></section>
 
@@ -2714,7 +2882,7 @@ function PagePost({ lang, postId }: any) {
 // SOUKROMÍ
 // ----------------------------------------------------------------------
 function PagePrivacy({ lang }: any) {
-  return <div className="site-page">
+  return <div className="site-page" data-secondary-v6="">
     <header className="site-linen page-hero"><div className="wrap"><p className="label rv">{L("Soukromí","Privacy")}</p><h1 className="h-display h1 rv d1">{L("Soukromí","Privacy")}</h1><p className="lead rv d2">{L("Tento web je postavený tak, aby o návštěvnících sbíral co nejméně údajů. Tady najdeš stručně a přesně, co se děje při návštěvě webu, když mi napíšeš a při přechodu do klientské aplikace.","This site is built to collect as little visitor data as possible. Here is a concise account of what happens when you visit the site, contact me, or move into the client application.")}</p></div></header>
     <section className="site-linen page-section--tight legal"><div className="wrap limit">
       <h2>{L("Kdo za web odpovídá","Who is responsible for the site")}</h2><p>{L("Správcem osobních údajů je Kryštof Švec. Kontaktovat mě můžeš na e-mailu ","The data controller is Kryštof Švec. You can contact me at ")}<a href={"mailto:"+MAIL}>{MAIL}</a>{L(".",".")}</p>
@@ -2734,7 +2902,7 @@ function PagePrivacy({ lang }: any) {
 // 404
 // ----------------------------------------------------------------------
 function PageNotFound({ lang }: any) {
-  return <section className="site-linen nf"><div className="wrap"><p className="label rv">404</p><h1 className="h-display h1 rv d1" style={{marginTop:16}}>{L("Tahle stránka tady není.","This page is not here.")}</h1><p className="body-txt rv d2">{L("Buď se adresa změnila, nebo se do ní vloudil překlep. Odsud se dostaneš dál.","Either the address changed or a typo slipped in. You can continue from here.")}</p><p className="act rv d2"><Go href={routePath("home",lang)} cs="Domů" en="Home"/><Go href={routePath("spoluprace",lang)} cs="Spolupráce" en="Work with me" quiet/><Go href={routePath("pribeh",lang)} cs="O mně" en="About me" quiet/><Go href={routePath("praxe",lang)} cs="Praxe" en="Practice" quiet/></p></div></section>;
+  return <section className="site-linen nf" data-secondary-v6=""><div className="wrap"><p className="label rv">404</p><h1 className="h-display h1 rv d1" style={{marginTop:16}}>{L("Tahle stránka tady není.","This page is not here.")}</h1><p className="body-txt rv d2">{L("Buď se adresa změnila, nebo se do ní vloudil překlep. Odsud se dostaneš dál.","Either the address changed or a typo slipped in. You can continue from here.")}</p><p className="act rv d2"><Go href={routePath("home",lang)} cs="Domů" en="Home"/><Go href={routePath("spoluprace",lang)} cs="Spolupráce" en="Work with me" quiet/><Go href={routePath("pribeh",lang)} cs="O mně" en="About me" quiet/><Go href={routePath("praxe",lang)} cs="Praxe" en="Practice" quiet/></p></div></section>;
 }
 
 // ----------------------------------------------------------------------
@@ -2743,7 +2911,7 @@ function PageNotFound({ lang }: any) {
 // ----------------------------------------------------------------------
 function Footer({ lang, variant = "linen" }: any) {
   return (
-    <footer className={variant === "sand" ? "footer--sand" : "footer--linen"}>
+    <footer className={variant === "sand" ? "footer--sand" : "footer--linen"} data-secondary-v6={variant === "sand" ? undefined : ""}>
       <div className="wrap">
         <div className="frow">
           <a href={routePath("home", lang)} aria-label="tanmay"><Wordmark /></a>
