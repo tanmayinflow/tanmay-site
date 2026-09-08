@@ -11,8 +11,8 @@
  * Vizuální zásady, které tenhle soubor drží:
  *   - Hlavní plocha je Linen. Forest Night nejvýš jeden pás na místnost.
  *   - Jedno měděné gesto na kompozici. Copper nikdy nenese drobný text.
- *   - Žádné přechody, žádná záře, žádné vlnovky, žádné dekorativní křivky.
- *   - Jeden organický okraj na celém webu, a ten vychází ze skutečné masky.
+ *   - Žádná záře nebo přechodové barvy. Nové typově jednotné materiálové tvary ve V8.
+ *   - Home zamčená; vedlejší stránky používají vlastní schválené obrysy, ne kopie Home.
  *   - Obraz je důkaz. Když soubor chybí, prvek zmizí. Nikdy nezůstane prázdný rám.
  *   - Každá místnost má jednu vizuální událost. Domů má dvě.
  * ----------------------------------------------------------------------
@@ -1627,6 +1627,94 @@ html[data-ap="on"] [data-secondary-v6] .practice-hero .ap img{
   [data-secondary-v6] .secondary-loop-track{animation:none!important;stroke-dasharray:none!important;stroke-dashoffset:0!important}
 }
 
+/* V8 · consolidated V7 composition + approved replacement hero photos.
+   These rules opt in only on secondary pages. Home and font tokens are unchanged. */
+[data-secondary-v8] .v8-art{display:block;position:absolute;pointer-events:none;mask-repeat:no-repeat;-webkit-mask-repeat:no-repeat;mask-size:100% 100%;-webkit-mask-size:100% 100%}
+[data-secondary-v8] .v8-art--earth{background:var(--earth) url('/media/secondary-v8/burnt-earth-interior.webp') center/cover no-repeat}
+[data-secondary-v8] .v8-art--mineral{background:var(--forest) url('/media/material/surface-ink-mineral.webp') center/cover no-repeat}
+[data-secondary-v8] .v8-art--mobile{display:none}
+[data-secondary-v8] .collaboration-hero-v8{padding:30px 0 0}
+[data-secondary-v8] .collaboration-hero-v8 .wrap{max-width:1360px}
+[data-secondary-v8] .collaboration-hero-v8 .page-hero-grid{position:relative;isolation:isolate;gap:32px;align-items:center}
+[data-secondary-v8] .collaboration-hero-v8 .v8-art{z-index:-1;inset:0 calc(-1 * (max(0px,(100vw - 1360px)/2) + var(--gutter))) 0 auto;width:max(56vw,680px)}
+[data-secondary-v8] .collaboration-hero-copy{padding:48px 0 60px}
+[data-secondary-v8] .collaboration-hero-cutout{max-width:590px;position:relative;z-index:1;align-self:end;margin:0;overflow:visible}
+[data-secondary-v8] .collaboration-hero-cutout img{height:auto;width:100%;object-fit:contain;filter:none;display:block}
+[data-secondary-v8] .collaboration-hero-v8 .hero-dominant{max-width:15em}
+[data-secondary-v8] .collaboration-hero-v8 .lead{max-width:28em}
+[data-secondary-v8] .collaboration-hero-v8 .page-hero-grid:not(:has(>.collaboration-hero-cutout)) .v8-art{display:none}
+[data-secondary-v8] .secondary-illustration--squat{width:min(100%,300px);max-width:340px}
+[data-secondary-v8] .secondary-illustration--handstand{width:min(100%,280px);max-width:350px}
+[data-secondary-v8] .process-v8 .process-three{display:block;border:0;margin:0}
+[data-secondary-v8] .process-v8 .process-three article{padding:26px 0;border:0;border-top:1px solid var(--rule-dark)}
+[data-secondary-v8] .process-v8 .process-three article:first-child{padding-top:0;border-top:0}
+[data-secondary-v8] .process-v8 .process-three h3{margin:10px 0 12px}
+[data-secondary-v8] .process-v8 .process-three p{max-width:38em}
+[data-secondary-v8] .process-v8-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:40px}
+[data-secondary-v8] .process-v8 .stance-line{border-left:3px solid var(--earth);padding-left:24px;max-width:16em;margin-top:32px}
+[data-secondary-v8] .v8-terrain{margin:28px 0 0;pointer-events:none;line-height:0}
+[data-secondary-v8] .v8-terrain img{display:block;width:100%;height:auto;max-height:210px;object-fit:fill}
+[data-secondary-v8] .process-v8 .v8-terrain{margin-top:14px;max-width:1500px;margin-left:auto;margin-right:auto}
+[data-secondary-v8] .process-v8{padding-bottom:10px}
+[data-secondary-v8] .between-v8{padding-top:34px}
+[data-secondary-v8] .secondary-loop{width:120px;height:120px;margin:16px 0 0}
+[data-secondary-v8] .contact-coda.site-linen{border-top:1px solid var(--rule-sand)}
+[data-secondary-v8] .contact-coda.site-linen .contact-action:not(.contact-action--primary){color:var(--text);background:transparent}
+[data-secondary-v8] .contact-coda.site-linen .contact-action--primary{background:var(--forest);color:var(--linen);border-color:var(--forest)}
+[data-secondary-v8] .practice-hero-photo{margin:0;width:100%;max-width:530px;justify-self:center;overflow:visible}
+[data-secondary-v8] .practice-hero-photo img{width:100%;height:auto;aspect-ratio:1080/1070;object-fit:contain;display:block;filter:none;mask:none;-webkit-mask:none}
+[data-secondary-v8] .practice-hero .page-hero-grid{align-items:center}
+[data-secondary-v8] .v8-edge{height:clamp(48px,7vw,110px);position:relative;overflow:hidden;isolation:isolate;pointer-events:none}
+[data-secondary-v8] .v8-edge--practice{background-color:var(--sandstone);background-image:var(--tex-sand);background-size:384px 384px;margin-bottom:clamp(24px,4vw,52px)}
+[data-secondary-v8] .v8-edge--story{background:var(--forest) var(--tex-cotton) repeat;background-size:512px 512px;margin-bottom:clamp(24px,4vw,52px)}
+[data-secondary-v8] .v8-edge .v8-art{inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px)}
+[data-secondary-v8] .v8-edge--practice .v8-art{background:var(--forest) var(--tex-cotton) repeat;background-size:512px 512px}
+[data-secondary-v8] .v8-edge--story .v8-art{background:var(--sandstone) var(--tex-sand) repeat;background-size:384px 384px}
+[data-secondary-v8] .practice-anchors.site-ink{padding-top:0}
+[data-secondary-v8] .practice-anchors.site-ink .anchor-light{border-color:var(--rule-dark)}
+[data-secondary-v8] .practice-anchors.site-ink :is(.anchor-light p,.role){color:var(--on-dark-2)}
+[data-secondary-v8] .practice-anchors.site-ink .diagram circle.c{stroke:var(--on-dark-3)}
+[data-secondary-v8] .practice-anchors.site-ink .diagram text{fill:var(--on-dark-2)}
+[data-secondary-v8] .practice-anchors.site-ink .diagram text.p{fill:var(--sand)}
+[data-secondary-v8] .practice-anchors-layout .diagram{width:min(100%,330px)}
+[data-secondary-v8] .practice-work-v8{padding-top:0}
+[data-secondary-v8] .reflection-v8 .v8-terrain{max-width:1100px;margin:0 auto}
+[data-secondary-v8] .reflection-v8 .v8-terrain img{height:clamp(64px,7vw,100px);object-fit:fill}
+[data-secondary-v8] .about-hero-v8 .page-hero-grid{gap:64px}
+[data-secondary-v8] .about-hero-photo{isolation:isolate;position:relative;overflow:visible;margin-bottom:36px}
+[data-secondary-v8] .about-hero-photo img{position:relative;z-index:1;object-fit:contain}
+[data-secondary-v8] .about-hero-photo .v8-art{z-index:0;top:12%;left:-5%;right:-10%;width:115%;height:110%}
+[data-secondary-v8] .story-return{padding-top:0}
+@media(min-width:900px){
+ [data-secondary-v8] .collaboration-hero-grid:has(>figure){grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ [data-secondary-v8] .process-v8-grid{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(52px,8vw,120px)}
+ [data-secondary-v8] .secondary-illustrated--needs:has(>.secondary-illustration){grid-template-columns:minmax(260px,360px) minmax(0,1fr);gap:64px}
+ [data-secondary-v8] .secondary-illustration--squat{width:100%}
+ [data-secondary-v8] .secondary-illustration--handstand{width:100%}
+ [data-secondary-v8] .practice-work-layout:has(>.secondary-illustration){grid-template-columns:minmax(0,1fr) minmax(260px,350px);gap:64px}
+ [data-secondary-v8] .practice-hero-photo{justify-self:end}
+ [data-secondary-v8] .practice-anchors-layout{grid-template-columns:minmax(0,1.2fr) minmax(290px,.8fr)}
+ [data-secondary-v8] .story-beats{grid-template-columns:.85fr 1.3fr 1fr;gap:0}
+}
+@media(max-width:899px){
+ [data-secondary-v8] .collaboration-hero-v8{padding-top:38px}
+ [data-secondary-v8] .collaboration-hero-copy{padding:0}
+ [data-secondary-v8] .collaboration-hero-v8 .page-hero-grid{display:grid;grid-template-columns:1fr;gap:24px}
+ [data-secondary-v8] .collaboration-hero-cutout{max-width:420px;justify-self:center}
+ [data-secondary-v8] .collaboration-hero-v8 .v8-art--desktop{display:none}
+ [data-secondary-v8] .collaboration-hero-v8 .v8-art--mobile{display:block;top:auto;bottom:0;height:min(540px,calc((100vw - 36px)*1.33));width:calc(100% + 2*var(--gutter));left:calc(-1*var(--gutter));right:auto}
+ [data-secondary-v8] .about-hero-v8 .page-hero-grid{gap:34px}
+ [data-secondary-v8] .about-hero-photo{width:94%;margin:0 0 30px;justify-self:start}
+ [data-secondary-v8] .v8-edge{height:62px}
+ [data-secondary-v8] .practice-anchors-layout .diagram{width:min(100%,290px)}
+ [data-secondary-v8] .process-v8 .v8-terrain img{height:94px;object-fit:fill}
+ [data-secondary-v8] .secondary-illustration--squat{width:270px}
+}
+@media(prefers-reduced-motion:reduce){[data-secondary-v8] .rv{opacity:1;transform:none;transition:none}}
+
+[data-secondary-v8] .collaboration-hero-v8 .h1{font-size:clamp(3rem,6.5vw,6rem)}
+[data-secondary-v8] .collaboration-hero-v8 .hero-dominant{font-size:clamp(1.7rem,3vw,2.8rem)}
+
 `;
 
 // ----------------------------------------------------------------------
@@ -2565,13 +2653,40 @@ function SecondaryIllustration({ src, width, height, sizes, alt = "", decorative
       loading="lazy" decoding="async" onError={() => setGone(true)} />
   </figure>;
 }
-function SecondaryHeroPhoto({ src, width, height, sizes, alt, className }: any) {
-  const [gone, setGone] = useState(false);
+function SecondaryHeroPhoto({ src, srcSet, width, height, sizes, alt, className, material = false }: any) {
+  const [failedSrc, setFailedSrc] = useState<string | null>(null);
+  const gone = failedSrc === src;
+  const setGone = (failed:boolean) => setFailedSrc(failed ? src : null);
   if (gone) return null;
   return <figure className={className + " rv d1"}>
-    <img src={src} width={width} height={height} sizes={sizes} alt={alt}
+    {material && <SecondaryMaterialMask src="/media/secondary-v8/m02.svg" className="v8-art--mineral" />}
+    <img src={src} srcSet={srcSet} width={width} height={height} sizes={sizes} alt={alt}
       loading="eager" decoding="async" fetchPriority="high" onError={() => setGone(true)} />
   </figure>;
+}
+/** Decorative masks are opt-in only after successful load. Missing artwork never hides content. */
+function SecondaryMaterialMask({ src, className = "" }: {src:string;className?:string}) {
+  const [ready,setReady] = useState(false);
+  useEffect(() => {
+    let active = true; const img = new Image(); setReady(false);
+    img.onload = () => {if(active) setReady(true)};
+    img.onerror = () => {if(active) setReady(false)}; img.src=src;
+    return () => {active=false;img.onload=null;img.onerror=null;};
+  }, [src]);
+  if (!ready) return null;
+  return <span className={"v8-art " + className} aria-hidden="true"
+    style={{maskImage:`url("${src}")`,WebkitMaskImage:`url("${src}")`}} />;
+}
+function SecondaryTransition({kind}:{kind:"practice"|"story"}) {
+  return <div className={"v8-edge v8-edge--"+kind} aria-hidden="true">
+    <SecondaryMaterialMask src={"/media/secondary-v8/"+(kind==="practice"?"e01":"e02")+".svg"} />
+  </div>;
+}
+function SecondaryTerrain({kind}:{kind:"l01"|"l02"}) {
+  const [gone,setGone]=useState(false);
+  if(gone)return null;
+  return <div className="v8-terrain" aria-hidden="true"><img src={"/media/secondary-v8/"+kind+".svg"}
+    width={2048} height={682} sizes="100vw" alt="" aria-hidden="true" loading="lazy" decoding="async" onError={()=>setGone(true)}/></div>;
 }
 function SecondaryStoryPoint() {
   return <svg className="story-point" width="9" height="9" viewBox="0 0 9 9" aria-hidden="true" focusable="false">
@@ -2604,7 +2719,7 @@ function PagePraxe({ lang }: any) {
     ["03", "Rozsah a kontrola", "Pracujeme tam, kde pohyb ztrácí jistotu, rozsah nebo kontrolu. Nejde o co největší rozsah, ale o ten, který dokážeš skutečně ovládat.", "Range and control", "We work where movement loses confidence, range or control. The aim is not the greatest possible range, but the range you can genuinely control."],
     ["04", "Dech a pozornost", "Nejsou odděleným rituálem. Pomáhají vnímat napětí, úsilí, únavu a chvíli, kdy má smysl přidat nebo ubrat.", "Breath and attention", "They are not a separate ritual. They help you notice tension, effort, fatigue and the moment when it makes sense to add or take away."],
   ];
-  return <div className="site-page" data-secondary-v6="">
+  return <div className="site-page" data-secondary-v6="" data-secondary-v8="">
     <header className="site-linen page-hero practice-hero">
       <div className="wrap page-hero-grid">
         <div>
@@ -2613,7 +2728,10 @@ function PagePraxe({ lang }: any) {
           <p className="lead rv d2">{L("Nejde o dokonalou rutinu ani plán, který funguje jen v dobrých dnech. Praxe dává pohybu směr, ale umí měnit podobu podle toho, co je právě možné.","It is not a perfect routine or a plan that only works on good days. Practice gives movement direction while changing shape according to what is actually possible.")}</p>
           <p className="hero-dominant rv d3">{L("Forma se mění. Směr zůstává.","The form changes. The direction remains.")}</p>
         </div>
-        <Evidence pic={MEDIA.handstand} alt={L("Kryštof Švec při stoji na rukou na padlém kmeni.","Kryštof Švec in a handstand on a fallen tree trunk.")} sizes="(min-width:900px) 500px, calc(100vw - 36px)" variant="tall" eager ap />
+        <SecondaryHeroPhoto className="practice-hero-photo" src="/media/secondary-v8/practice-pines-hero-1080.webp"
+          srcSet="/media/secondary-v8/practice-pines-hero-540.webp 540w, /media/secondary-v8/practice-pines-hero-720.webp 720w, /media/secondary-v8/practice-pines-hero-1080.webp 1080w"
+          width={1080} height={1070} sizes="(min-width:1240px) 470px, (min-width:900px) 40vw, (min-width:600px) 530px, calc(100vw - 36px)"
+          alt={L("Pohled ze země vzhůru mezi borovice, část postavy v teplém večerním světle.","View from the ground up among pine trees, with part of a figure in warm evening light.")} />
       </div>
     </header>
 
@@ -2630,7 +2748,7 @@ function PagePraxe({ lang }: any) {
       </div>
     </section>
 
-    <section className="site-linen page-section practice-anchors" aria-labelledby="p-anchors">
+    <section className="site-ink page-section practice-anchors" aria-labelledby="p-anchors"><SecondaryTransition kind="practice" />
       <div className="wrap">
         <div className="section-head section-head--split">
           <div><p className="label rv">{L("Tři kotvy","Three anchors")}</p><h2 id="p-anchors" className="h-display h2 rv d1" style={{marginTop:12}}>{L("Tělo, praxe a divoká příroda","Body, practice and wild nature")}</h2></div>
@@ -2644,7 +2762,7 @@ function PagePraxe({ lang }: any) {
       </div>
     </section>
 
-    <section className="site-linen page-section">
+    <section className="site-linen page-section practice-work-v8"><div className="material-edge material-edge--ink" aria-hidden="true"/>
       <div className="wrap practice-work-layout">
         <div>
           <div className="section-head"><div><p className="label rv">{L("Společná práce","Working together")}</p><h2 className="h-display h2 rv d1" style={{marginTop:12}}>{L("Co může setkání obsahovat","What a session may include")}</h2></div><p className="page-intro rv d1">{L("Většinu času se hýbeme. Ne všechno ale patří do každého setkání. Vybíráme jen to, co slouží tomu, na čem právě pracujeme.","Most of the time we move. Not everything belongs in every session. We choose only what serves the work in front of us.")}</p></div>
@@ -2652,19 +2770,19 @@ function PagePraxe({ lang }: any) {
           <div className="editorial-list" style={{marginTop:22}}>{session.map((x:any)=><article className="editorial-row rv" key={x[0]}><span className="num">{x[0]}</span><h3>{L(x[1],x[3])}</h3><p>{L(x[2],x[4])}</p></article>)}</div>
         </div>
         <SecondaryIllustration src="/media/illustration/atlas-one-arm-handstand.webp" width={1254} height={1254}
-          sizes="(min-width:900px) 300px, 220px" className="secondary-illustration--handstand"
+          sizes="(min-width:900px) 350px, 280px" className="secondary-illustration--handstand"
           alt={L("Stojka na jedné ruce s roznožením, technická kresba zepředu.","One-arm straddle handstand, technical front-view drawing.")} />
       </div>
     </section>
 
-    <section className="site-linen page-section--tight">
+    <section className="site-linen page-section--tight reflection-v8">
       <div className="wrap reflection-block">
         <div className="reflection-columns"><div><h2 className="h-display h2 rv">{L("Reflexe","Reflection")}</h2>
         <p className="stance-line rv d1" style={{marginTop:18}}>{L("Ne všechno, co se projeví v tréninku, vzniká v tréninku.","Not everything that shows up in training begins in training.")}</p>
         </div>
         <p className="body-txt rv d2">{L("Spánek, práce, vztahy, stres i důvod, proč člověk trénuje, se promítají do toho, co tělo unese a jak se k praxi vrací. Reflexe pomáhá tyto souvislosti vidět a podle nich zvolit další krok.","Sleep, work, relationships, stress and the reason a person trains all affect what the body can carry and how they return to practice. Reflection helps make those connections visible and choose the next step accordingly.")}</p>
         </div>
-        <p className="reflection-closing rv d2">{L("Praxe nezačíná v jiném těle ani v jiném životě.\nZačíná v tomhle.","Practice does not begin in another body or another life.\nIt begins in this one.")}</p>
+        <p className="reflection-closing rv d2">{L("Praxe nezačíná v jiném těle ani v jiném životě.\nZačíná v tomhle.","Practice does not begin in another body or another life.\nIt begins in this one.")}</p><SecondaryTerrain kind="l02" />
       </div>
     </section>
 
@@ -2696,12 +2814,12 @@ function PagePribeh({ lang }: any) {
     ["02","Plán musí potkat skutečný den","Plán nevnímám jako neměnný předpis. Má dávat směr a zároveň reagovat na to, co se skutečně děje.","A plan has to meet the real day","I do not see a plan as a fixed prescription. It should give direction while responding to what is actually happening."],
     ["03","Praxe má být vlastní","Nechci, aby člověk jen plnil moje pokyny. Chci, aby rozuměl svému tréninku a dokázal svou praxi držet sám.","Practice should become your own","I do not want someone to simply follow my instructions. I want them to understand their training and be able to hold their practice themselves."],
   ];
-  return <div className="site-page" data-secondary-v6="">
-    <header className="site-linen page-hero">
+  return <div className="site-page" data-secondary-v6="" data-secondary-v8="">
+    <header className="site-linen page-hero about-hero-v8">
       <div className="wrap">
         <div className="page-hero-grid">
           <div><p className="label rv">{L("O mně","About me")}</p><h1 className="h-display h1 rv d1">Kryštof Švec</h1><p className="lead rv d2">{L("Jsem osobní trenér v Praze. Síla, kalistenika a schopnost dobře ovládat vlastní tělo tvoří základ mé práce. Nejvíc mě ale zajímá, jak z jednotlivých tréninků vzniká praxe, kterou člověk dokáže držet sám.","I am a personal trainer in Prague. Strength, calisthenics and the ability to control your own body form the foundation of my work. What interests me most, though, is how individual training sessions become a practice a person can sustain on their own.")}</p><p className="act rv d3"><Go href={routePath("spoluprace",lang)} cs="Možnosti spolupráce" en="Ways to work together" /></p></div>
-          <SecondaryHeroPhoto className="about-hero-photo" src="/media/site/about-portrait-sunset.jpg" width={2048} height={1655} sizes="(min-width:900px) 420px, calc(100vw - 44px)" alt={L("Kryštof Švec, barevný portrét v teplém večerním světle.","Kryštof Švec, colour portrait in warm evening light.")} />
+          <SecondaryHeroPhoto material className="about-hero-photo" src="/media/site/about-portrait-sunset.jpg" width={2048} height={1655} sizes="(min-width:900px) 420px, calc(100vw - 44px)" alt={L("Kryštof Švec, barevný portrét v teplém večerním světle.","Kryštof Švec, colour portrait in warm evening light.")} />
         </div>
         <div className="proof-row rv"><div className="proof-item"><strong>{L("10 LET","10 YEARS")}</strong><span>{L("vlastní pohybové praxe","of personal movement practice")}</span></div><div className="proof-item"><strong>200+</strong><span>{L("klientů","clients")}</span></div><div className="proof-item"><strong>{L("PROFESNÍ KVALIFIKACE","PROFESSIONAL QUALIFICATION")}</strong><span>{L("Osobní trenér ve fitness","Personal Trainer in Fitness")}</span></div></div>
       </div>
@@ -2709,7 +2827,7 @@ function PagePribeh({ lang }: any) {
 
     <section className="site-linen page-section"><div className="wrap"><div className="section-head section-head--split"><div><p className="label rv">{L("Kořeny","Roots")}</p><h2 className="h-display h2 rv d1" style={{marginTop:12}}>{L("Co mě formovalo","What shaped me")}</h2></div><p className="page-intro rv d1">{L("Moje práce nevychází z jedné metody. Vznikala mezi pohybem, pozorností a časem stráveným venku.","My work does not come from a single method. It formed between movement, attention and time spent outdoors.")}</p></div><div className="editorial-list">{roots.map((x:any)=><article className="editorial-row rv" key={x[0]}><span className="num">{x[0]}</span><h3>{L(x[1],x[3])}</h3><p>{L(x[2],x[4])}</p></article>)}</div></div></section>
 
-    <section className="site-ink page-section story-return"><div className="material-edge material-edge--linen" aria-hidden="true"/><div className="wrap"><div className="section-head"><p className="label rv">{L("Pád · sestup · návrat","Fall · descent · return")}</p><h2 className="h-display h2 rv d1">{L("Když tělo i život přestaly být samozřejmostí","When body and life stopped being something I could take for granted")}</h2><p className="page-intro rv d1">{L("Návrat neznamenal pokračovat tam, kde jsem skončil. Znamenal znovu se učit, co tělo unese, čemu můžu věřit a o co se dá opřít, když výkon ani jistota nejsou k dispozici.","Returning did not mean continuing where I had left off. It meant learning again what my body could carry, what I could trust, and what remained to lean on when performance and certainty were gone.")}</p></div><div className="story-beats"><article className="story-beat rv"><SecondaryStoryPoint /><span className="num">01</span><h3>{L("Pád","The fall")}</h3><p>{L("Pohyb, fyzická kapacita a disciplína byly dlouho tím, o co jsem se opíral. Těžká nehoda a následné kóma ten život během jediného okamžiku přerušily.","Movement, physical capacity and discipline were what I relied on for a long time. A serious accident and the coma that followed interrupted that life in a single moment.")}</p></article><article className="story-beat rv d1"><SecondaryStoryPoint /><span className="num">02</span><h3>{L("Sestup","The descent")}</h3><p>{L("Návrat trval dva roky. Po nehodě jsem ztratil kontrolu nad vlastním tělem, rok strávil na vozíku a dlouhé měsíce se zotavoval po operacích. Změnilo se nejen to, co tělo dokázalo, ale i to, jak jsem vnímal sám sebe. Učil jsem se znovu rozpoznat, co je možné, co už je příliš a co zůstává, když výkon zmizí.","The return took two years. After the accident I lost control of my own body, spent a year in a wheelchair and long months recovering from operations. What changed was not only what my body could do, but also how I saw myself. I had to learn again what was possible, what was too much, and what remained when performance disappeared.")}</p></article><article className="story-beat rv d2"><SecondaryStoryPoint /><span className="num">03</span><h3>{L("Návrat","The return")}</h3><p>{L("Nevrátil jsem se do stejného těla ani ke stejnému pohledu na trénink. Začal jsem víc vnímat kapacitu, podmínky a malé kroky, které se dají skutečně opakovat. Tělo se z nástroje výkonu stalo učitelem.","I did not return to the same body or the same view of training. I became more attentive to capacity, conditions and small steps that can actually be repeated. The body changed from a tool of performance into a teacher.")}</p></article></div><p className="stance-line rv" style={{marginTop:"clamp(30px,4vw,48px)"}}>{L("Nehoda není moje kvalifikace. Vysvětluje, proč tuhle práci beru vážně.","The accident is not my qualification. It explains why I take this work seriously.")}</p></div></section>
+    <section className="site-ink page-section story-return"><SecondaryTransition kind="story" /><div className="wrap"><div className="section-head"><p className="label rv">{L("Pád · sestup · návrat","Fall · descent · return")}</p><h2 className="h-display h2 rv d1">{L("Když tělo i život přestaly být samozřejmostí","When body and life stopped being something I could take for granted")}</h2><p className="page-intro rv d1">{L("Návrat neznamenal pokračovat tam, kde jsem skončil. Znamenal znovu se učit, co tělo unese, čemu můžu věřit a o co se dá opřít, když výkon ani jistota nejsou k dispozici.","Returning did not mean continuing where I had left off. It meant learning again what my body could carry, what I could trust, and what remained to lean on when performance and certainty were gone.")}</p></div><div className="story-beats"><article className="story-beat rv"><SecondaryStoryPoint /><span className="num">01</span><h3>{L("Pád","The fall")}</h3><p>{L("Pohyb, fyzická kapacita a disciplína byly dlouho tím, o co jsem se opíral. Těžká nehoda a následné kóma ten život během jediného okamžiku přerušily.","Movement, physical capacity and discipline were what I relied on for a long time. A serious accident and the coma that followed interrupted that life in a single moment.")}</p></article><article className="story-beat rv d1"><SecondaryStoryPoint /><span className="num">02</span><h3>{L("Sestup","The descent")}</h3><p>{L("Návrat trval dva roky. Po nehodě jsem ztratil kontrolu nad vlastním tělem, rok strávil na vozíku a dlouhé měsíce se zotavoval po operacích. Změnilo se nejen to, co tělo dokázalo, ale i to, jak jsem vnímal sám sebe. Učil jsem se znovu rozpoznat, co je možné, co už je příliš a co zůstává, když výkon zmizí.","The return took two years. After the accident I lost control of my own body, spent a year in a wheelchair and long months recovering from operations. What changed was not only what my body could do, but also how I saw myself. I had to learn again what was possible, what was too much, and what remained when performance disappeared.")}</p></article><article className="story-beat rv d2"><SecondaryStoryPoint /><span className="num">03</span><h3>{L("Návrat","The return")}</h3><p>{L("Nevrátil jsem se do stejného těla ani ke stejnému pohledu na trénink. Začal jsem víc vnímat kapacitu, podmínky a malé kroky, které se dají skutečně opakovat. Tělo se z nástroje výkonu stalo učitelem.","I did not return to the same body or the same view of training. I became more attentive to capacity, conditions and small steps that can actually be repeated. The body changed from a tool of performance into a teacher.")}</p></article></div><p className="stance-line rv" style={{marginTop:"clamp(30px,4vw,48px)"}}>{L("Nehoda není moje kvalifikace. Vysvětluje, proč tuhle práci beru vážně.","The accident is not my qualification. It explains why I take this work seriously.")}</p></div></section>
 
     <section className="site-linen page-section"><div className="material-edge material-edge--ink" aria-hidden="true"/><div className="wrap secondary-illustrated about-approach"><div><h2 className="h-display h2 rv">{L("Co si z toho nesu do praxe","What I carry from it into my work")}</h2><div className="editorial-list" style={{marginTop:30}}>{approach.map((x:any)=><article className="editorial-row rv" key={x[0]}><span className="num">{x[0]}</span><h3>{L(x[1],x[3])}</h3><p>{L(x[2],x[4])}</p></article>)}</div></div>
       <SecondaryIllustration src="/media/illustration/illustration-pine.webp" width={640} height={960}
@@ -2746,10 +2864,12 @@ function PageSpoluprace({ lang }: any) {
   const whatsappText=encodeURIComponent(L("Ahoj Kryštofe, mám zájem o spolupráci.\n\nCo chci rozvíjet:\n\nJakou spolupráci hledám:\n\nKdy mám obvykle čas:","Hi Kryštof, I am interested in working together.\n\nWhat I want to develop:\n\nWhat kind of collaboration I am looking for:\n\nWhen I am usually available:"));
   const mailSubject=encodeURIComponent(L("Zájem o spolupráci","Working together"));
   const mailBody=encodeURIComponent(L("Ahoj Kryštofe,\n\nmám zájem o spolupráci.\n\nCo chci rozvíjet:\n\nJakou spolupráci hledám:\n\nKdy mám obvykle čas:","Hi Kryštof,\n\nI am interested in working together.\n\nWhat I want to develop:\n\nWhat kind of collaboration I am looking for:\n\nWhen I am usually available:"));
-  return <div className="site-page" data-secondary-v6="">
-    <header className="site-linen page-hero">
+  return <div className="site-page" data-secondary-v6="" data-secondary-v8="">
+    <header className="site-linen page-hero collaboration-hero-v8">
       <div className="wrap">
         <div className="page-hero-grid collaboration-hero-grid">
+          <SecondaryMaterialMask src="/media/secondary-v8/m01.svg" className="v8-art--earth v8-art--desktop" />
+          <SecondaryMaterialMask src="/media/secondary-v8/m01-m.svg" className="v8-art--earth v8-art--mobile" />
           <div className="collaboration-hero-copy">
             <p className="label rv">{L("Spolupráce","Work with me")}</p>
             <h1 className="h-display h1 rv d1">{L("Spolupráce","Work with me")}</h1>
@@ -2757,7 +2877,10 @@ function PageSpoluprace({ lang }: any) {
             <p className="lead rv d2">{L("Individuálně, v menší skupině, osobně v Praze nebo online. Zvolíme formu podle toho, co chceš rozvíjet a co se dá skutečně držet.","One-to-one, in a small group, in person in Prague or online. We choose the format according to what you want to develop and what you can realistically sustain.")}</p>
             <p className="act rv d3"><Go href="#kontakt" cs="Napiš mi" en="Write to me" /></p>
           </div>
-          <SecondaryHeroPhoto className="collaboration-hero-cutout" src="/media/site/collaboration-hero-cutout.png" width={1086} height={1448} sizes="(min-width:900px) 430px, calc(100vw - 44px)" alt={L("Kryštof Švec sedící na lavičce vedle paraletek.","Kryštof Švec seated on a bench beside parallettes.")} />
+          <SecondaryHeroPhoto className="collaboration-hero-cutout" src="/media/secondary-v8/collaboration-hero-1086.webp"
+            srcSet="/media/secondary-v8/collaboration-hero-540.webp 540w, /media/secondary-v8/collaboration-hero-720.webp 720w, /media/secondary-v8/collaboration-hero-1086.webp 1086w"
+            width={1086} height={1448} sizes="(min-width:1440px) 590px, (min-width:900px) 44vw, (min-width:600px) 420px, calc(100vw - 36px)"
+            alt={L("Kryštof Švec sedící na černých bradlech, vedle jsou dvě malé dřevěné paraletky.","Kryštof Švec seated on black parallel bars, with two small wooden parallettes beside him.")} />
         </div>
       </div>
     </header>
@@ -2766,13 +2889,17 @@ function PageSpoluprace({ lang }: any) {
 
     <section className="site-linen page-section"><div className="wrap"><div className="section-head section-head--split"><h2 className="h-display h2 rv">{L("S čím můžeš přijít","What you can come with")}</h2><p className="page-intro rv d1">{L("Nemusíš přesně vědět, co potřebuješ. Stačí vědět, co chceš zvládnout, co tě omezuje nebo kde ztrácíš směr.","You do not need to know exactly what you need. It is enough to know what you want to be able to do, what limits you, or where you are losing direction.")}</p></div><div className="secondary-illustrated secondary-illustrated--needs"><div className="editorial-grid">{needs.map((x:any)=><article className="rv" key={x[0]}><span className="num">{x[0]}</span><h3>{L(x[1],x[3])}</h3><p>{L(x[2],x[4])}</p></article>)}</div>
       <SecondaryIllustration src="/media/illustration/atlas-squat.webp" width={1254} height={1254}
-        sizes="(min-width:900px) 290px, 260px" className="secondary-illustration--squat"
+        sizes="(min-width:900px) 340px, 270px" className="secondary-illustration--squat"
         alt={L("Kontrolovaný dřep, technická kresba z boku.","Controlled squat, technical side-view drawing.")} />
       </div></div></section>
 
-    <section className="site-ink page-section"><div className="material-edge material-edge--linen" aria-hidden="true"/><div className="wrap"><h2 className="h-display h2 rv">{L("Jak to probíhá","How it works")}</h2><div className="process-three">{process.map((x:any)=><article className="rv" key={x[0]}><span className="num">{x[0]}</span><h3>{L(x[1],x[3])}</h3><p>{L(x[2],x[4])}</p></article>)}</div><p className="stance-line rv" style={{marginTop:"clamp(30px,4vw,48px)"}}>{L("Jedno setkání může stát samo o sobě.","One session can stand on its own.")}</p></div></section>
+    <section className="site-ink page-section process-v8"><div className="material-edge material-edge--linen" aria-hidden="true"/>
+      <div className="wrap process-v8-grid"><div><h2 className="h-display h2 rv">{L("Jak to probíhá","How it works")}</h2>
+      <p className="stance-line rv">{L("Jedno setkání může stát samo o sobě.","One session can stand on its own.")}</p></div>
+      <div className="process-three">{process.map((x:any)=><article className="rv" key={x[0]}><span className="num">{x[0]}</span><h3>{L(x[1],x[3])}</h3><p>{L(x[2],x[4])}</p></article>)}</div></div>
+      <SecondaryTerrain kind="l01" /></section>
 
-    <section className="site-ink page-section--tight"><div className="wrap between-grid"><div><p className="label rv">{L("Mezi setkáními","Between sessions")}</p><h2 className="h-display h2 rv d1" style={{marginTop:12}}>{L("Plán, záznam, úprava.","Plan, record, adjust.")}</h2><p className="body-txt rv d1" style={{marginTop:18}}>{L("Při delší spolupráci máš v klientské aplikaci svůj plán, termíny, záznamy a zpětnou vazbu na jednom místě.","In longer-term work, your plan, sessions, records and feedback live together in the client app.")}</p><p className="scan-line rv d2" style={{marginTop:24}}>{L("PLÁN · ZÁZNAM · ÚPRAVA","PLAN · RECORD · ADJUST")}</p><SecondaryPracticeLoop /></div><div className="between-items"><div className="between-item rv"><h3>{L("Jasný plán","A clear plan")}</h3><p>{L("Víš, co má teď prioritu a čeho se držet.","You know what matters now and what to keep hold of.")}</p></div><div className="between-item rv d1"><h3>{L("Skutečný záznam","A real record")}</h3><p>{L("Zapisuješ, co jsi opravdu udělal a jak na to tělo reagovalo.","You record what you actually did and how your body responded.")}</p></div><div className="between-item rv d2"><h3>{L("Průběžná úprava","Ongoing adjustment")}</h3><p>{L("Další krok vychází ze skutečného průběhu, ne z toho, jak měl týden vypadat.","The next step comes from what actually happened, not from how the week was supposed to look.")}</p></div></div></div></section>
+    <section className="site-ink page-section--tight between-v8"><div className="wrap between-grid"><div><p className="label rv">{L("Mezi setkáními","Between sessions")}</p><h2 className="h-display h2 rv d1" style={{marginTop:12}}>{L("Plán, záznam, úprava.","Plan, record, adjust.")}</h2><p className="body-txt rv d1" style={{marginTop:18}}>{L("Při delší spolupráci máš v klientské aplikaci svůj plán, termíny, záznamy a zpětnou vazbu na jednom místě.","In longer-term work, your plan, sessions, records and feedback live together in the client app.")}</p><p className="scan-line rv d2" style={{marginTop:24}}>{L("PLÁN · ZÁZNAM · ÚPRAVA","PLAN · RECORD · ADJUST")}</p><SecondaryPracticeLoop /></div><div className="between-items"><div className="between-item rv"><h3>{L("Jasný plán","A clear plan")}</h3><p>{L("Víš, co má teď prioritu a čeho se držet.","You know what matters now and what to keep hold of.")}</p></div><div className="between-item rv d1"><h3>{L("Skutečný záznam","A real record")}</h3><p>{L("Zapisuješ, co jsi opravdu udělal a jak na to tělo reagovalo.","You record what you actually did and how your body responded.")}</p></div><div className="between-item rv d2"><h3>{L("Průběžná úprava","Ongoing adjustment")}</h3><p>{L("Další krok vychází ze skutečného průběhu, ne z toho, jak měl týden vypadat.","The next step comes from what actually happened, not from how the week was supposed to look.")}</p></div></div></div></section>
 
     <section className="site-linen page-section"><div className="material-edge material-edge--ink" aria-hidden="true"/><div className="wrap"><div className="section-head section-head--split"><h2 className="h-display h2 rv">{L("Zkušenost a vzdělání","Experience and education")}</h2><p className="page-intro rv d1">{L("Vycházím z deseti let vlastní pohybové praxe a zkušeností s více než 200 klienty. Jsem držitelem profesní kvalifikace Osobní trenér ve fitness a instruktorem jógy. Další vzdělání mám v kondičním a funkčním tréninku, zdravotní tělesné výchově a rehabilitačním tréninku.","My work draws on ten years of personal movement practice and experience with more than 200 clients. I hold the professional qualification Personal Trainer in Fitness and I am a yoga instructor. I also have further education in conditioning and functional training, health-oriented physical education and rehabilitation training.")}</p></div><div className="trust-scan rv"><div className="trust-stat"><strong>{L("10 LET","10 YEARS")}</strong><span>{L("vlastní pohybové praxe","of personal movement practice")}</span></div><div className="trust-stat"><strong>200+</strong><span>{L("klientů","clients")}</span></div><div className="trust-stat"><strong>{L("PROFESNÍ KVALIFIKACE","PROFESSIONAL QUALIFICATION")}</strong><span>{L("Osobní trenér ve fitness","Personal Trainer in Fitness")}</span></div></div></div></section>
 
@@ -2780,7 +2907,7 @@ function PageSpoluprace({ lang }: any) {
 
     <section className="site-linen page-section"><div className="wrap"><h2 className="h-display h2 rv">{L("Časté otázky","Common questions")}</h2><div className="faq-list" style={{marginTop:28}}><div className="faq-item rv"><h3>{L("Potřebuji zkušenost?","Do I need experience?")}</h3><p>{L("Ne. První setkání slouží i k tomu, abychom zjistili, kde právě jsi a co má smysl jako první.","No. The first session also helps us see where you are now and what makes sense as a first step.")}</p></div><div className="faq-item rv"><h3>{L("Kde probíhají osobní tréninky?","Where do in-person sessions take place?")}</h3><p>{L("V Praze, uvnitř nebo venku podle toho, na čem pracujeme. Konkrétní místo domluvíme před prvním setkáním.","In Prague, indoors or outdoors depending on what we are working on. We agree the exact place before the first session.")}</p></div><div className="faq-item rv"><h3>{L("Jak často se budeme vídat?","How often will we meet?")}</h3><p>{L("Frekvence není předem daná. U delší spolupráce ji nastavíme podle cíle, tvého týdne a toho, co budeš dělat mezi setkáními.","The frequency is not fixed in advance. In longer-term work we set it according to the goal, your week and what you will do between sessions.")}</p></div></div></div></section>
 
-    <section className="site-earth contact-coda" id="kontakt"><div className="material-edge material-edge--linen" aria-hidden="true"/><div className="wrap"><h2 className="h-display h2 rv">{L("Napiš mi.","Write to me.")}</h2><div className="booking-actions rv d1"><a className="contact-action contact-action--primary" href={"https://wa.me/420774121475?text="+whatsappText} target="_blank" rel="noopener noreferrer">{L("Napsat na WhatsApp","Message on WhatsApp")}</a><a className="contact-action" href={"mailto:"+MAIL+"?subject="+mailSubject+"&body="+mailBody}>{L("Napsat e-mail","Send an email")}</a></div></div></section>
+    <section className="site-linen contact-coda" id="kontakt"><div className="wrap"><h2 className="h-display h2 rv">{L("Napiš mi.","Write to me.")}</h2><div className="booking-actions rv d1"><a className="contact-action contact-action--primary" href={"https://wa.me/420774121475?text="+whatsappText} target="_blank" rel="noopener noreferrer">{L("Napsat na WhatsApp","Message on WhatsApp")}</a><a className="contact-action" href={"mailto:"+MAIL+"?subject="+mailSubject+"&body="+mailBody}>{L("Napsat e-mail","Send an email")}</a></div></div></section>
   </div>;
 }
 
@@ -2882,7 +3009,7 @@ function PagePost({ lang, postId }: any) {
 // SOUKROMÍ
 // ----------------------------------------------------------------------
 function PagePrivacy({ lang }: any) {
-  return <div className="site-page" data-secondary-v6="">
+  return <div className="site-page" data-secondary-v6="" data-secondary-v8="">
     <header className="site-linen page-hero"><div className="wrap"><p className="label rv">{L("Soukromí","Privacy")}</p><h1 className="h-display h1 rv d1">{L("Soukromí","Privacy")}</h1><p className="lead rv d2">{L("Tento web je postavený tak, aby o návštěvnících sbíral co nejméně údajů. Tady najdeš stručně a přesně, co se děje při návštěvě webu, když mi napíšeš a při přechodu do klientské aplikace.","This site is built to collect as little visitor data as possible. Here is a concise account of what happens when you visit the site, contact me, or move into the client application.")}</p></div></header>
     <section className="site-linen page-section--tight legal"><div className="wrap limit">
       <h2>{L("Kdo za web odpovídá","Who is responsible for the site")}</h2><p>{L("Správcem osobních údajů je Kryštof Švec. Kontaktovat mě můžeš na e-mailu ","The data controller is Kryštof Švec. You can contact me at ")}<a href={"mailto:"+MAIL}>{MAIL}</a>{L(".",".")}</p>

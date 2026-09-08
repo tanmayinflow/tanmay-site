@@ -392,10 +392,16 @@ test("material surfaces carry the chapters, the cutout appears once", { skip: SK
       );
     }
     await page.goto(base + "/spoluprace", { waitUntil: "load" });
-    assert.ok((await page.locator(".surf--earth, .site-earth").count()) >= 1, "Spolupráce lost its Burnt Earth chapter");
+    /* V8 moved the Burnt Earth moment from the closing contact block to the
+       masked field behind the hero, so match the surface however it is built.
+       That field mounts only once its mask image has actually loaded, which is
+       the deliberate fallback rule, so wait for it instead of racing it. */
+    const earth = page.locator(".surf--earth, .site-earth, .v8-art--earth");
+    await earth.first().waitFor({ state: "attached", timeout: 5000 }).catch(() => {});
+    assert.ok((await earth.count()) >= 1, "Spolupráce lost its Burnt Earth chapter");
     if (DENIK_PUBLIC) {
       await page.goto(base + "/denik", { waitUntil: "load" });
-      assert.equal(await page.locator(".surf--earth, .site-earth").count(), 0, "Deník must stay calm, no Burnt Earth");
+      assert.equal(await page.locator(".surf--earth, .site-earth, .v8-art--earth").count(), 0, "Deník must stay calm, no Burnt Earth");
       assert.equal(await page.locator(".surf--sand").count(), 0, "Deník must stay calm, no Sandstone");
     }
   });

@@ -1,3 +1,4 @@
+// V8 update: only three V6 assertions about replaced hero photos change by explicit user instruction. Home/protected snapshots are untouched.
 /** V6.1 source/asset gate. Complements, does not replace, the production
  * build, existing tests or browser review. Home is intentionally locked.
  * Updating this snapshot requires an explicit approved change of scope.
@@ -41,18 +42,18 @@ test('V6 · drep appears once and only on Spoluprace',()=>{
  assert.equal((APP.match(/src="\/media\/illustration\/atlas-squat.webp"/g)||[]).length,1);assert.match(collab,/atlas-squat.webp/);assert.doesNotMatch(practice,/atlas-squat/);
 });
 test('V6 · one-arm handstand replaces the duplicate Praxe photograph',()=>{
- assert.match(practice,/atlas-one-arm-handstand.webp/);assert.equal((practice.match(/MEDIA\.handstand/g)||[]).length,1);assert.doesNotMatch(practice,/practice-work-cutout/);
+ assert.match(practice,/atlas-one-arm-handstand.webp/);assert.equal((practice.match(/MEDIA\.handstand/g)||[]).length,0);assert.doesNotMatch(practice,/practice-work-cutout/);
 });
-test('V6 · Praxe hero is eager and opts into the existing mask',()=>assert.match(practice,/variant="tall" eager ap/));
+test('V8 approved replacement · Praxe full-frame pine photograph',()=>{assert.match(practice,/practice-pines-hero-1080.webp/);assert.match(practice,/width=\{1080\} height=\{1070\}/);assert.doesNotMatch(practice,/<Evidence/);});
 test('V6 · pine is decorative and restricted to About approach',()=>{
  assert.match(about,/illustration-pine.webp[\s\S]{0,190}decorative/);assert.match(about,/about-approach/);assert.equal((APP.match(/src="\/media\/illustration\/illustration-pine.webp"/g)||[]).length,1);
 });
 test('V6 · About has one real portrait, no handstand',()=>{
  assert.equal((about.match(/<SecondaryHeroPhoto/g)||[]).length,1);assert.doesNotMatch(about,/MEDIA\.handstand|cutout-bw/);
 });
-test('V6 · existing real photos and their localized alternatives are preserved',()=>{
- assert.match(about,/about-portrait-sunset.jpg/);assert.match(collab,/collaboration-hero-cutout.png/);
- assert.match(collab,/Kryštof Švec seated on a bench beside parallettes/);
+test('V8 approved replacement · About preserved, Collaboration correct equipment alt',()=>{
+ assert.match(about,/about-portrait-sunset.jpg/);assert.match(collab,/collaboration-hero-1086.webp/);
+ assert.match(collab,/Kryštof Švec seated on black parallel bars/);assert.doesNotMatch(collab,/seated on a bench/);
 });
 test('V6 · exactly three timeline points',()=>assert.equal((about.match(/<SecondaryStoryPoint \/>/g)||[]).length,3));
 test('V6 · only one workflow loop, on Spoluprace',()=>{
