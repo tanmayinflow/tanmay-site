@@ -28,12 +28,16 @@ import './mobile-motion-m10.css';
 import './mobile-hero-m10.css';
 import './mobile-review-m10.css';
 import './mobile-focus-m10.css';
+import './mobile-composition-review.css';
+import './mobile-surfaces-review.css';
 import { MobileLanguageSwitch, MobileMenuLines } from './MobileHeaderDetails';
 import { useMobileContactScroll } from './mobile-contact-scroll';
 import { useMobileMotion } from './useMobileMotion';
+import { useMobileStoryScroll } from './mobile-story-scroll';
 import { MobileContact } from './MobileShared';
 import { useMobileDisclosures } from './useMobileDisclosures';
 import { useMobileInputFocus } from './mobile-input-focus';
+import { useMobileSurfacePhase } from './mobile-surface-phase';
 
 export function useMobileViewport() {
   const [mobile, setMobile] = useState(() => typeof window !== 'undefined' && window.matchMedia('(max-width: 899px)').matches);
@@ -54,8 +58,10 @@ export default function MobileSite({ loc, children }: { loc: Location; children:
   const root = useRef<HTMLDivElement>(null);
   const closeTimer = useRef<number>();
   useMobileInputFocus(root);
+  useMobileSurfacePhase(root,routeId+lang+(loc.postId||''));
   useMobileDisclosures(root);
   useMobileMotion(root,routeId+lang+(loc.postId||''));
+  useMobileStoryScroll(root,routeId+lang+(loc.postId||''));
   const contactId = ['home','spoluprace','praxe','pribeh'].includes(routeId) ? 'rezervace' : 'kontakt';
   const contactHref = ['spoluprace','praxe','pribeh'].includes(routeId) ? routePath('home',lang)+'#rezervace' : '#'+contactId;
   const toContact = useMobileContactScroll({root,dock,contactId,routeKey:routeId+lang+(loc.postId||'')});

@@ -8,6 +8,7 @@ import { verifyApprovedMobileContent } from './desktop-authorized-deltas.mjs';
 import { authorizedWorkingBytes, workingAuthorizedFiles } from './runtime-authorized-deltas-m10.mjs';
 import { pricingDelta, verifyAuthorizedPricingBytes } from './pricing-authorized-delta-2026-09-17.mjs';
 import { withoutAuthorizedPrivacyChanges } from './privacy-authorized-delta-2026-09-17.mjs';
+import { withoutAuthorizedOwnerCopy } from './owner-copy-authorized-delta-2026-09-17.mjs';
 import { matchPath, otherLangPath, CLIENT_APP_URL, WHATSAPP_URL } from '../src/site.js';
 const site=fileURLToPath(new URL('../',import.meta.url));
 const fixtures=join(site,'tests/fixtures/desktop-v922');
@@ -33,13 +34,13 @@ test('all 327 original shared files remain exact except precisely authorized cop
     const expected=workingAuthorizedFiles.includes(r.path)
       ?createHash('sha256').update(authorizedWorkingBytes(r.path,readFileSync(join(fixtures,'site',r.path)))).digest('hex')
       :r.sha256;
-    assert.equal(createHash('sha256').update(readFileSync(join(site,r.path))).digest('hex'),expected,r.path);
+    assert.equal(createHash('sha256').update(withoutAuthorizedOwnerCopy(r.path,readFileSync(join(site,r.path)))).digest('hex'),expected,r.path);
   }
 });
 
 test('App preserves locked desktop source plus exact copy/runtime and approved privacy deltas behind the mobile adapter',()=>{
   const original=authorizedWorkingBytes('src/App.tsx',readFileSync(join(fixtures,'site/src/App.tsx'))).toString('utf8').replaceAll('\r\n','\n');
-  const current=withoutAuthorizedPrivacyChanges(readFileSync(join(site,'src/App.tsx'))).toString('utf8').replaceAll('\r\n','\n');
+  const current=withoutAuthorizedPrivacyChanges(withoutAuthorizedOwnerCopy('src/App.tsx',readFileSync(join(site,'src/App.tsx')))).toString('utf8').replaceAll('\r\n','\n');
   const desktop=current
     .replace(/^import .* from "\.\/mobile\/.*";\n/gm,'')
     .replace('  const mobile = useMobileViewport();\n','')
@@ -48,7 +49,7 @@ test('App preserves locked desktop source plus exact copy/runtime and approved p
     .replace('      </>}\n','');
   assert.equal(desktop,original,'Only the isolated mobile adapter and explicitly recorded copy/runtime/privacy replacements may differ from locked App.');
 });
-test('approved bilingual mobile content differs from M8 only by the same two M9 meaning strings',()=>{
-  verifyApprovedMobileContent(readFileSync(join(site,'src/mobile/approved-content.ts')));
+test('approved bilingual mobile content preserves M8 and the two M9 strings after exact owner copy deltas',()=>{
+  verifyApprovedMobileContent(withoutAuthorizedOwnerCopy('src/mobile/approved-content.ts',readFileSync(join(site,'src/mobile/approved-content.ts'))));
 });
 test('unknown address resolves to no public route; built 404 exists',()=>{assert.equal(matchPath('/m00-unknown-page'),null);assert.ok(existsSync(join(site,'dist/404.html')))});

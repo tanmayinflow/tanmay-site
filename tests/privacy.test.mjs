@@ -2,9 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { withoutAuthorizedPrivacyChanges } from './privacy-authorized-delta-2026-09-17.mjs';
+import { withoutAuthorizedOwnerCopy } from './owner-copy-authorized-delta-2026-09-17.mjs';
 
 test('approved privacy guard rejects changed purposes, EU scope, complaint link and unrelated page edits', () => {
-  const current = readFileSync(new URL('../src/App.tsx', import.meta.url));
+  const current = withoutAuthorizedOwnerCopy('src/App.tsx', readFileSync(new URL('../src/App.tsx', import.meta.url)));
   withoutAuthorizedPrivacyChanges(current);
   for (const [before, after] of [
     ['Domluvu spolupráce zpracovávám pro kroky před uzavřením smlouvy na tvoji žádost.', 'Domluvu spolupráce zpracovávám na základě souhlasu.'],

@@ -15,7 +15,7 @@ const PHRASES = [
   'svůj plán, termíny a záznamy na jednom místě',
   'svou praxi držet sám', 'run the practice yourself',
   'co chceš zvládnout', 'what you want to be able to do',
-  's větší rezervou', 'with more reserve',
+  's větším klidem', 'with greater calm',
   'Začínáš, vracíš se po pauze', 'You are starting, returning after a break',
   'Každý má vlastní úroveň', 'Everyone has their own level',
   'pravidelnou zpětnou vazbu', 'regular feedback',

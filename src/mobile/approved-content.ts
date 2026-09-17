@@ -162,12 +162,12 @@ export const approved = {
       "Practice"
     ],
     [
-      "Praxe, ke které se dá vracet.",
-      "A practice you can return to."
+      "Praxe, co tě podrží.",
+      "A practice that supports you."
     ],
     [
-      "Nejde o dokonalou rutinu ani plán, který funguje jen v dobrých dnech. Praxe dává pohybu směr, ale umí měnit podobu podle toho, co je právě možné.",
-      "It is not a perfect routine or a plan that only works on good days. Practice gives movement direction while changing shape according to what is actually possible."
+      "Nejde o dokonalou rutinu ani plán, který funguje jen v dobrých dnech. Praxe dává pohybu směr, ale umí měnit podobu podle aktuální reality.",
+      "It is not a perfect routine or a plan that only works on good days. Practice gives movement direction while changing shape to reflect current reality."
     ],
     [
       "Forma se mění. Směr zůstává.",
@@ -186,8 +186,8 @@ export const approved = {
       "Training is specific work at a specific time. Practice is what connects individual sessions: intention, repetition, a record, and the ability to adjust the next step."
     ],
     [
-      "Nejde o to splnit všechno za každou cenu. Jde o to umět se k praxi vrátit, když se změní čas, energie nebo podmínky.",
-      "The aim is not to complete everything at any cost. It is to know how to return to practice when time, energy or conditions change."
+      "Nejde o to splnit všechno za každou cenu. Jde o to umět se k praxi vrátit, když se změní čas, energie nebo podmínky. Konzistence je klíčová.",
+      "The aim is not to complete everything at any cost. It is to know how to return to practice when time, energy or conditions change. Consistency is key."
     ],
     [
       "Trénink",
@@ -230,8 +230,8 @@ export const approved = {
       "What a session may include"
     ],
     [
-      "Většinu času se hýbeme. Ne všechno ale patří do každého setkání. Vybíráme jen to, co slouží tomu, na čem právě pracujeme.",
-      "Most of the time we move. Not everything belongs in every session. We choose only what serves the work in front of us."
+      "Většinu času se hýbeme. Ne všechno ale patří do každého setkání. Vybíráme jen to, co slouží aktuálnímu cíli.",
+      "Most of the time we move. Not everything belongs in every session. We choose only what serves the current goal."
     ],
     [
       "DOVEDNOST · SÍLA · ROZSAH · POZORNOST",
@@ -518,12 +518,12 @@ export const approved = {
       "What you can come with"
     ],
     [
-      "Nemusíš přesně vědět, co potřebuješ. Stačí vědět, co chceš zvládnout, co tě omezuje nebo kde ztrácíš směr.",
-      "You do not need to know exactly what you need. It is enough to know what you want to be able to do, what limits you, or where you are losing direction."
+      "Nemusíš přesně vědět, co potřebuješ. Stačí vědět, co chceš zvládnout, co tě omezuje nebo kde ztrácíš směr a jistotu.",
+      "You do not need to know exactly what you need. It is enough to know what you want to be able to do, what limits you, or where you are losing direction and confidence."
     ],
     [
-      "Zkušenost a vzdělání",
-      "Experience and education"
+      "Mé zkušenosti a vzdělání",
+      "My experience and education"
     ],
     [
       "Vycházím z deseti let vlastní pohybové praxe a zkušeností s 150+ klienty. Jsem držitelem profesní kvalifikace Osobní trenér ve fitness a instruktorem jógy.",
@@ -696,9 +696,9 @@ export const approvedLists = {
       ],
       [
         "02",
-        "Jóga a meditace",
+        "Jóga, meditace a buddhismus",
         "Naučily mě pracovat s rovnováhou, dechem a pozorností. Vnímat, kdy tělo potřebuje úsilí a kdy prostor.",
-        "Yoga and meditation",
+        "Yoga, meditation and Buddhism",
         "They taught me to work with balance, breath and attention, and to notice when the body needs effort and when it needs space."
       ],
       [
@@ -761,9 +761,9 @@ export const approvedLists = {
       [
         "01",
         "Síla a kondice",
-        "Chceš zesílit, zlepšit výdrž nebo zvládat fyzickou zátěž s větší rezervou.",
+        "Chceš zesílit, zlepšit výdrž nebo zvládat fyzickou zátěž s větším klidem.",
         "Strength and conditioning",
-        "You want to get stronger, improve endurance or handle physical demands with more reserve."
+        "You want to get stronger, improve endurance or handle physical demands with greater calm."
       ],
       [
         "02",
@@ -782,9 +782,9 @@ export const approvedLists = {
       [
         "04",
         "Pravidelnost a vlastní praxe",
-        "Začínáš, vracíš se po pauze nebo nechceš znovu ztratit směr. Hledáš způsob, který se dá skutečně držet.",
+        "Začínáš, vracíš se po pauze nebo ztrácíš balanc. Hledáš způsob, který se dá skutečně držet.",
         "Consistency and your own practice",
-        "You are starting, returning after a break, or do not want to lose direction again. You are looking for an approach you can genuinely sustain."
+        "You are starting, returning after a break, or losing your balance. You are looking for an approach you can genuinely sustain."
       ]
     ],
     "process": [

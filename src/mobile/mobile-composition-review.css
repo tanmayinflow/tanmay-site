@@ -1,0 +1,21 @@
+/* Owner's third mobile review; keep the existing compositions and original art. */
+@media (max-width:899px) {
+ .tm-mobile[data-mobile-version=M10] .m-work-captions {margin-left:8px;margin-right:-8px}
+ .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--collaboration .m-hero-benefits {border:0;padding-left:0}
+ .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--collaboration .m10-bars-crop {bottom:36px}
+ .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--about .m-hero-identity {grid-template-columns:max-content minmax(0,1fr);gap:10px}
+ .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--about .m-hero-service {font-size:clamp(.8125rem,3.2vw,.9375rem)}
+ .tm-mobile[data-mobile-version=M10] .m10-hero-vajra {left:calc(var(--m-gutter) + 14px);top:28px;width:clamp(64px,20vw,90px)}
+ .tm-mobile[data-mobile-version=M10][data-page=praxe] .m7-practice-definition {padding-bottom:58px}
+ /* Text can extend into the empty space beside the original rings, without
+    shrinking its readable size or forcing the middle wave onto two lines. */
+ .tm-mobile[data-mobile-version=M10] .m7-session-topic>.m-story-trigger {width:max-content;max-width:none;padding-right:0}
+ .tm-mobile[data-mobile-version=M10] .m7-session-topic .m-story-title {white-space:nowrap;font-size:clamp(1rem,4.45vw,1.125rem)}
+ .tm-mobile[data-mobile-version=M10]:has(.m-hero[data-large-text=true]) .m7-session-topic>.m-story-trigger {width:100%;max-width:100%}
+ .tm-mobile[data-mobile-version=M10]:has(.m-hero[data-large-text=true]) .m7-session-topic .m-story-title {white-space:normal}
+ .tm-mobile[data-mobile-version=M10]:has(.m-hero[data-large-text=true]) .m-hero.m-hero--about .m-hero-identity {grid-template-columns:minmax(0,1fr)}
+ @media (orientation:landscape) and (min-width:480px) {
+  .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--collaboration .m10-bars-crop {bottom:16px}
+  .tm-mobile[data-mobile-version=M10] .m10-hero-vajra {top:12px;left:calc(var(--m-gutter) + 10px);width:60px}
+ }
+}

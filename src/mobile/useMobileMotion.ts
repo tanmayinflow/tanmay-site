@@ -12,6 +12,7 @@ export function useMobileMotion(root:RefObject<HTMLDivElement>,pageKey:string) {
     const cycleControls=cycle?.closest('.m-interactive-cycle');
     const orbit=isM10?host.querySelector<HTMLElement>('.m-audience-orbit'):null;
     const salto=orbit?.querySelector<HTMLElement>('.m-salto');
+    const anchors=isM10?host.querySelector<HTMLElement>('.m7-anchors-stage'):null;
     let disposed=false,frame=0,lastFrame=0,lastY=window.scrollY;
     let cycleAngle=0,cycleTarget=0,saltoProgress=1,saltoDistance=0;
     const viewport=()=>{
@@ -24,25 +25,34 @@ export function useMobileMotion(root:RefObject<HTMLDivElement>,pageKey:string) {
       saltoProgress=1;
       if(!orbit)return;
       orbit.style.setProperty('--m-salto-x','0px');orbit.style.setProperty('--m-salto-angle','0deg');
+      orbit.style.setProperty('--m-salto-opacity','1');orbit.style.setProperty('--m-salto-copy-opacity','1');
       orbit.dataset.m10Salto='settled';
     };
     const paintSalto=()=>{
-      if(!orbit||!salto||saltoProgress>=1)return;
+      if(!orbit||!salto)return;
       if(preference.matches||!salto.isConnected){finishSalto();return;}
       const view=viewport(),box=orbit.getBoundingClientRect();
       const next=Math.max(0,Math.min(1,(view.top+view.height*.88-box.top)/(view.height*.48)));
-      // Scrolling up never rewinds the entrance; the final pose is untouched.
-      saltoProgress=Math.max(saltoProgress,next);
+      // The pose follows the page in both directions, not a one-shot entrance.
+      saltoProgress=next;
       if(saltoProgress>=.999){finishSalto();return;}
+      orbit.dataset.m10Salto='entering';
       const travel=(1-saltoProgress)**2;
       orbit.style.setProperty('--m-salto-x',`${saltoDistance*travel}px`);
       // A positive starting angle settles counter-clockwise into the sideflip pose.
       orbit.style.setProperty('--m-salto-angle',`${95*travel}deg`);
+      orbit.style.setProperty('--m-salto-opacity',String(saltoProgress));
+      orbit.style.setProperty('--m-salto-copy-opacity',String(Math.max(0,(saltoProgress-.65)/.35)));
     };
     const paint=(time:number)=>{
       frame=0;
       if(disposed)return;
       paintSalto();
+      if(anchors){
+        const view=viewport(),box=anchors.getBoundingClientRect();
+        const progress=Math.max(0,Math.min(1,(view.top+view.height-box.top)/(view.height+box.height)));
+        anchors.style.setProperty('--m-anchors-scroll-angle',`${preference.matches?0:progress*360}deg`);
+      }
       if(preference.matches)return;
       if(cycle){
         const elapsed=Math.min(64,Math.max(1,time-lastFrame)),remaining=cycleTarget-cycleAngle;
@@ -69,7 +79,7 @@ export function useMobileMotion(root:RefObject<HTMLDivElement>,pageKey:string) {
     };
     const measure=()=>{
       lastY=window.scrollY;
-      if(orbit&&salto&&saltoProgress<1){
+      if(orbit&&salto){
         // offsetLeft measures the untouched grid position, not the rotated image.
         saltoDistance=Math.max(0,viewport().right-orbit.getBoundingClientRect().left-salto.offsetLeft+24);
       }
@@ -85,9 +95,9 @@ export function useMobileMotion(root:RefObject<HTMLDivElement>,pageKey:string) {
         frame=0;cycleTarget=cycleAngle;finishSalto();
       }
       lastY=window.scrollY;
+      queue();
     };
-    // Only stage an entrance beginning below the viewport. Restored scroll and
-    // direct section links receive readable, already-settled content.
+    // Restored scroll and direct section links derive the same pose from position.
     if(orbit&&salto){
       const view=viewport();
       if(!preference.matches&&orbit.getBoundingClientRect().top>=view.top+view.height){
@@ -96,7 +106,10 @@ export function useMobileMotion(root:RefObject<HTMLDivElement>,pageKey:string) {
         paintSalto();
       }else finishSalto();
       orbit.addEventListener('focusin',onFocus);
+      orbit.addEventListener('focusout',queue);
     }
+    if(anchors)anchors.dataset.m10Rotation='ready';
+    measure();
     if(cycle)cycle.dataset.m10Scroll='ready';
     cycleControls?.addEventListener('click',onCycleClick);
     const observer=new IntersectionObserver(entries=>{
@@ -107,7 +120,7 @@ export function useMobileMotion(root:RefObject<HTMLDivElement>,pageKey:string) {
         motions.add(animation);animation.onfinish=()=>motions.delete(animation);
       }
     },{threshold:.12});
-    const entries=isM10?'.m-prague,.m-forest,.m-anchors-stage,.m-practice-session .m-rings':'.m-prague,.m-forest,.m-salto,.m-anchors-stage,.m-practice-session .m-rings';
+    const entries=isM10?'.m-prague,.m-forest,.m-practice-session .m-rings':'.m-prague,.m-forest,.m-salto,.m-anchors-stage,.m-practice-session .m-rings';
     host.querySelectorAll(entries).forEach(el=>observer.observe(el));
     const resize=new ResizeObserver(measure);resize.observe(host);if(orbit)resize.observe(orbit);
     window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',measure);
@@ -118,9 +131,11 @@ export function useMobileMotion(root:RefObject<HTMLDivElement>,pageKey:string) {
       window.removeEventListener('scroll',onScroll);window.removeEventListener('resize',measure);
       window.visualViewport?.removeEventListener('resize',measure);
       preference.removeEventListener('change',onPreference);orbit?.removeEventListener('focusin',onFocus);
+      orbit?.removeEventListener('focusout',queue);
       cycleControls?.removeEventListener('click',onCycleClick);
-      if(orbit){delete orbit.dataset.m10Salto;orbit.style.removeProperty('--m-salto-x');orbit.style.removeProperty('--m-salto-angle');}
+      if(orbit){delete orbit.dataset.m10Salto;orbit.style.removeProperty('--m-salto-x');orbit.style.removeProperty('--m-salto-angle');orbit.style.removeProperty('--m-salto-opacity');orbit.style.removeProperty('--m-salto-copy-opacity');}
       if(cycle){delete cycle.dataset.m10Scroll;cycle.style.removeProperty('--m-cycle-scroll-angle');}
+      if(anchors){delete anchors.dataset.m10Rotation;anchors.style.removeProperty('--m-anchors-scroll-angle');}
     };
   },[root,pageKey]);
 }

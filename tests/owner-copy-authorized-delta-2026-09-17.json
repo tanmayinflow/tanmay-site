@@ -1,0 +1,197 @@
+{
+  "approvedOn": "2026-09-17",
+  "authorization": "Owner requested these exact Czech edits and coherent English equivalents in the latest 25 browser annotations, with publication. Desktop changes are limited to the explicitly requested strength/regularity, Practice copy and roots title; mobile has separately requested needs and experience headings. Emphasis follows the changed strength phrase. Existing professional boundaries, prices, privacy and reviews are unchanged.",
+  "files": [
+    {
+      "path": "src/App.tsx",
+      "beforeSha256": "3653e82bd62e2d8c27badb02c6580c48e01d363fc0a5400f9afd87720c9f7d14",
+      "authorizedSha256": "20cc75112442f17387c598fbc2de754af1b9d460e8282f62d39d3fece05ee640",
+      "replacements": [
+        {
+          "id": "practice-title-cs",
+          "before": "Praxe, ke které se dá vracet.",
+          "after": "Praxe, co tě podrží."
+        },
+        {
+          "id": "practice-title-en",
+          "before": "A practice you can return to.",
+          "after": "A practice that supports you."
+        },
+        {
+          "id": "practice-intro-cs",
+          "before": "Praxe dává pohybu směr, ale umí měnit podobu podle toho, co je právě možné.",
+          "after": "Praxe dává pohybu směr, ale umí měnit podobu podle aktuální reality."
+        },
+        {
+          "id": "practice-intro-en",
+          "before": "Practice gives movement direction while changing shape according to what is actually possible.",
+          "after": "Practice gives movement direction while changing shape to reflect current reality."
+        },
+        {
+          "id": "practice-consistency-cs",
+          "before": "Nejde o to splnit všechno za každou cenu. Jde o to umět se k praxi vrátit, když se změní čas, energie nebo podmínky.",
+          "after": "Nejde o to splnit všechno za každou cenu. Jde o to umět se k praxi vrátit, když se změní čas, energie nebo podmínky. Konzistence je klíčová."
+        },
+        {
+          "id": "practice-consistency-en",
+          "before": "The aim is not to complete everything at any cost. It is to know how to return to practice when time, energy or conditions change.",
+          "after": "The aim is not to complete everything at any cost. It is to know how to return to practice when time, energy or conditions change. Consistency is key."
+        },
+        {
+          "id": "practice-session-cs",
+          "before": "Vybíráme jen to, co slouží tomu, na čem právě pracujeme.",
+          "after": "Vybíráme jen to, co slouží aktuálnímu cíli."
+        },
+        {
+          "id": "practice-session-en",
+          "before": "We choose only what serves the work in front of us.",
+          "after": "We choose only what serves the current goal."
+        },
+        {
+          "id": "roots-title-cs",
+          "before": "Jóga a meditace",
+          "after": "Jóga, meditace a buddhismus"
+        },
+        {
+          "id": "roots-title-en",
+          "before": "Yoga and meditation",
+          "after": "Yoga, meditation and Buddhism"
+        },
+        {
+          "id": "strength-cs",
+          "before": "Chceš zesílit, zlepšit výdrž nebo zvládat fyzickou zátěž s větší rezervou.",
+          "after": "Chceš zesílit, zlepšit výdrž nebo zvládat fyzickou zátěž s větším klidem."
+        },
+        {
+          "id": "strength-en",
+          "before": "You want to get stronger, improve endurance or handle physical demands with more reserve.",
+          "after": "You want to get stronger, improve endurance or handle physical demands with greater calm."
+        },
+        {
+          "id": "regularity-cs",
+          "before": "Začínáš, vracíš se po pauze nebo nechceš znovu ztratit směr.",
+          "after": "Začínáš, vracíš se po pauze nebo ztrácíš balanc."
+        },
+        {
+          "id": "regularity-en",
+          "before": "You are starting, returning after a break, or do not want to lose direction again.",
+          "after": "You are starting, returning after a break, or losing your balance."
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/approved-content.ts",
+      "beforeSha256": "2dfd4de5e1edf51906f7441807557f8a071d2390be1902c7c8395363660ba621",
+      "authorizedSha256": "7f42fd9deaa7b2244b018f30170ed265962b0aa40bcac67ee415e291b008f146",
+      "replacements": [
+        {
+          "id": "practice-title-cs",
+          "before": "Praxe, ke které se dá vracet.",
+          "after": "Praxe, co tě podrží."
+        },
+        {
+          "id": "practice-title-en",
+          "before": "A practice you can return to.",
+          "after": "A practice that supports you."
+        },
+        {
+          "id": "practice-intro-cs",
+          "before": "Praxe dává pohybu směr, ale umí měnit podobu podle toho, co je právě možné.",
+          "after": "Praxe dává pohybu směr, ale umí měnit podobu podle aktuální reality."
+        },
+        {
+          "id": "practice-intro-en",
+          "before": "Practice gives movement direction while changing shape according to what is actually possible.",
+          "after": "Practice gives movement direction while changing shape to reflect current reality."
+        },
+        {
+          "id": "practice-consistency-cs",
+          "before": "Nejde o to splnit všechno za každou cenu. Jde o to umět se k praxi vrátit, když se změní čas, energie nebo podmínky.",
+          "after": "Nejde o to splnit všechno za každou cenu. Jde o to umět se k praxi vrátit, když se změní čas, energie nebo podmínky. Konzistence je klíčová."
+        },
+        {
+          "id": "practice-consistency-en",
+          "before": "The aim is not to complete everything at any cost. It is to know how to return to practice when time, energy or conditions change.",
+          "after": "The aim is not to complete everything at any cost. It is to know how to return to practice when time, energy or conditions change. Consistency is key."
+        },
+        {
+          "id": "practice-session-cs",
+          "before": "Vybíráme jen to, co slouží tomu, na čem právě pracujeme.",
+          "after": "Vybíráme jen to, co slouží aktuálnímu cíli."
+        },
+        {
+          "id": "practice-session-en",
+          "before": "We choose only what serves the work in front of us.",
+          "after": "We choose only what serves the current goal."
+        },
+        {
+          "id": "roots-title-cs",
+          "before": "Jóga a meditace",
+          "after": "Jóga, meditace a buddhismus"
+        },
+        {
+          "id": "roots-title-en",
+          "before": "Yoga and meditation",
+          "after": "Yoga, meditation and Buddhism"
+        },
+        {
+          "id": "strength-cs",
+          "before": "Chceš zesílit, zlepšit výdrž nebo zvládat fyzickou zátěž s větší rezervou.",
+          "after": "Chceš zesílit, zlepšit výdrž nebo zvládat fyzickou zátěž s větším klidem."
+        },
+        {
+          "id": "strength-en",
+          "before": "You want to get stronger, improve endurance or handle physical demands with more reserve.",
+          "after": "You want to get stronger, improve endurance or handle physical demands with greater calm."
+        },
+        {
+          "id": "regularity-cs",
+          "before": "Začínáš, vracíš se po pauze nebo nechceš znovu ztratit směr.",
+          "after": "Začínáš, vracíš se po pauze nebo ztrácíš balanc."
+        },
+        {
+          "id": "regularity-en",
+          "before": "You are starting, returning after a break, or do not want to lose direction again.",
+          "after": "You are starting, returning after a break, or losing your balance."
+        },
+        {
+          "id": "needs-intro-cs",
+          "before": "co tě omezuje nebo kde ztrácíš směr.",
+          "after": "co tě omezuje nebo kde ztrácíš směr a jistotu."
+        },
+        {
+          "id": "needs-intro-en",
+          "before": "what limits you, or where you are losing direction.",
+          "after": "what limits you, or where you are losing direction and confidence."
+        },
+        {
+          "id": "experience-title-cs",
+          "before": "Zkušenost a vzdělání",
+          "after": "Mé zkušenosti a vzdělání"
+        },
+        {
+          "id": "experience-title-en",
+          "before": "\"Experience and education\"",
+          "after": "\"My experience and education\""
+        }
+      ]
+    },
+    {
+      "path": "src/components/content-emphasis.tsx",
+      "beforeSha256": "a0e097026318d0a1772043a528d76fbc054cc75b499fbd36d24d2701c7a8e71a",
+      "authorizedSha256": "79f809a61b2368d082304ba26f2646a2484b652945aa636578924f3f774d4564",
+      "replacements": [
+        {
+          "id": "strength-emphasis-cs",
+          "before": "'s větší rezervou'",
+          "after": "'s větším klidem'"
+        },
+        {
+          "id": "strength-emphasis-en",
+          "before": "'with more reserve'",
+          "after": "'with greater calm'"
+        }
+      ]
+    }
+  ]
+}

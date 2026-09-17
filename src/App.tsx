@@ -2880,8 +2880,8 @@ function PagePraxe({ lang }: any) {
       <div className="practice-rock-layout">
         <div className="practice-rock-copy">
           <p className="label">{E("Praxe","Practice")}</p>
-          <h1 className="h-display h1">{L("Praxe, ke které se dá vracet.","A practice you can return to.")}</h1>
-          <p className="lead">{E("Nejde o dokonalou rutinu ani plán, který funguje jen v dobrých dnech. Praxe dává pohybu směr, ale umí měnit podobu podle toho, co je právě možné.","It is not a perfect routine or a plan that only works on good days. Practice gives movement direction while changing shape according to what is actually possible.")}</p>
+          <h1 className="h-display h1">{L("Praxe, co tě podrží.","A practice that supports you.")}</h1>
+          <p className="lead">{E("Nejde o dokonalou rutinu ani plán, který funguje jen v dobrých dnech. Praxe dává pohybu směr, ale umí měnit podobu podle aktuální reality.","It is not a perfect routine or a plan that only works on good days. Practice gives movement direction while changing shape to reflect current reality.")}</p>
           <p className="hero-dominant">{E("Forma se mění. Směr zůstává.","The form changes. The direction remains.")}</p>
         </div>
         <PracticeRockPhoto alt={L("Sedím bosý na skalním výběžku v přírodě.","Sitting barefoot on a rocky outcrop outdoors.")} />
@@ -2893,7 +2893,7 @@ function PagePraxe({ lang }: any) {
       <div className="wrap">
         <div className="section-head section-head--split">
           <h2 className="h-display h2 rv">{L("Co tady znamená praxe","What practice means here")}</h2>
-          <div className="page-intro rv d1"><p>{E("Trénink je konkrétní práce v konkrétním čase. Praxe je to, co jednotlivé tréninky propojuje: záměr, opakování, záznam a schopnost upravit další krok.","Training is specific work at a specific time. Practice is what connects individual sessions: intention, repetition, a record, and the ability to adjust the next step.")}</p><p style={{marginTop:"1em"}}>{E("Nejde o to splnit všechno za každou cenu. Jde o to umět se k praxi vrátit, když se změní čas, energie nebo podmínky.","The aim is not to complete everything at any cost. It is to know how to return to practice when time, energy or conditions change.")}</p></div>
+          <div className="page-intro rv d1"><p>{E("Trénink je konkrétní práce v konkrétním čase. Praxe je to, co jednotlivé tréninky propojuje: záměr, opakování, záznam a schopnost upravit další krok.","Training is specific work at a specific time. Practice is what connects individual sessions: intention, repetition, a record, and the ability to adjust the next step.")}</p><p style={{marginTop:"1em"}}>{E("Nejde o to splnit všechno za každou cenu. Jde o to umět se k praxi vrátit, když se změní čas, energie nebo podmínky. Konzistence je klíčová.","The aim is not to complete everything at any cost. It is to know how to return to practice when time, energy or conditions change. Consistency is key.")}</p></div>
         </div>
         <div className="definition-pair rv d1">
           <article><strong>{L("Trénink","Training")}</strong><p>{E("konkrétní práce v konkrétním čase","specific work at a specific time")}</p></article>
@@ -2919,7 +2919,7 @@ function PagePraxe({ lang }: any) {
     <section className="site-linen page-section practice-work-v8"><SecondaryHomeInkEdge side="bottom" />
       <div className="wrap practice-work-layout">
         <div>
-          <div className="section-head"><div><p className="label rv">{E("Společná práce","Working together")}</p><h2 className="h-display h2 rv d1" style={{marginTop:12}}>{L("Co může setkání obsahovat","What a session may include")}</h2></div><p className="page-intro rv d1">{E("Většinu času se hýbeme. Ne všechno ale patří do každého setkání. Vybíráme jen to, co slouží tomu, na čem právě pracujeme.","Most of the time we move. Not everything belongs in every session. We choose only what serves the work in front of us.")}</p></div>
+          <div className="section-head"><div><p className="label rv">{E("Společná práce","Working together")}</p><h2 className="h-display h2 rv d1" style={{marginTop:12}}>{L("Co může setkání obsahovat","What a session may include")}</h2></div><p className="page-intro rv d1">{E("Většinu času se hýbeme. Ne všechno ale patří do každého setkání. Vybíráme jen to, co slouží aktuálnímu cíli.","Most of the time we move. Not everything belongs in every session. We choose only what serves the current goal.")}</p></div>
           <p className="scan-line rv">{E("DOVEDNOST · SÍLA · ROZSAH · POZORNOST","SKILL · STRENGTH · RANGE · ATTENTION")}</p>
           <div className="editorial-list" style={{marginTop:22}}>{session.map((x:any)=><article className="editorial-row rv" key={x[0]}><span className="num">{x[0]}</span><h3>{L(x[1],x[3])}</h3><p>{E(x[2],x[4])}</p></article>)}</div>
         </div>
@@ -2999,7 +2999,7 @@ function AboutNaturePhoto() {
 function PagePribeh({ lang }: any) {
   const roots=[
     ["01","Parkour a kalistenika","Parkour mě naučil hledat cestu. Kalistenika trpělivě stavět sílu a dovednost od základů.","Parkour and calisthenics","Parkour taught me to find a way through. Calisthenics taught me to build strength and skill patiently from the foundations."],
-    ["02","Jóga a meditace","Naučily mě pracovat s rovnováhou, dechem a pozorností. Vnímat, kdy tělo potřebuje úsilí a kdy prostor.","Yoga and meditation","They taught me to work with balance, breath and attention, and to notice when the body needs effort and when it needs space."],
+    ["02","Jóga, meditace a buddhismus","Naučily mě pracovat s rovnováhou, dechem a pozorností. Vnímat, kdy tělo potřebuje úsilí a kdy prostor.","Yoga, meditation and Buddhism","They taught me to work with balance, breath and attention, and to notice when the body needs effort and when it needs space."],
     ["03","Divoká příroda","Vrací mě k tomu, co se nedá urychlit ani plně kontrolovat. Tělo i praxe mají svůj rytmus a reagují na skutečné podmínky.","Wild nature","It returns me to what cannot be hurried or fully controlled. The body and practice have their own rhythm and respond to real conditions."],
   ];
   const approach=[
@@ -3059,10 +3059,10 @@ function PageSpoluprace({ lang }: any) {
     ["03","Online vedení a coaching","Máš jasný plán, pravidelnou zpětnou vazbu a úpravy podle skutečného průběhu. Praxe probíhá tam, kde jsi.","Online guidance and coaching","You have a clear plan, regular feedback and adjustments based on what actually happens. The practice takes place where you are."],
   ];
   const needs=[
-    ["01","Síla a kondice","Chceš zesílit, zlepšit výdrž nebo zvládat fyzickou zátěž s větší rezervou.","Strength and conditioning","You want to get stronger, improve endurance or handle physical demands with more reserve."],
+    ["01","Síla a kondice","Chceš zesílit, zlepšit výdrž nebo zvládat fyzickou zátěž s větším klidem.","Strength and conditioning","You want to get stronger, improve endurance or handle physical demands with greater calm."],
     ["02","Sebevědomí a dovednost","Chceš zvládnout shyb, stojku, práci na kruzích nebo jiný pohyb, na kterém ti záleží.","Confidence and skill","You want to learn a pull-up, handstand, ring work or another movement that matters to you."],
     ["03","Větší volnost v pohybu","Některé pohyby bolí, některým se vyhýbáš nebo nevíš, co si v nich můžeš dovolit.","More freedom in movement","Some movements hurt, some you avoid, or you are unsure what you can safely ask of yourself in them."],
-    ["04","Pravidelnost a vlastní praxe","Začínáš, vracíš se po pauze nebo nechceš znovu ztratit směr. Hledáš způsob, který se dá skutečně držet.","Consistency and your own practice","You are starting, returning after a break, or do not want to lose direction again. You are looking for an approach you can genuinely sustain."],
+    ["04","Pravidelnost a vlastní praxe","Začínáš, vracíš se po pauze nebo ztrácíš balanc. Hledáš způsob, který se dá skutečně držet.","Consistency and your own practice","You are starting, returning after a break, or losing your balance. You are looking for an approach you can genuinely sustain."],
   ];
   const process=[
     ["01","Napiš mi","Stačí pár vět o tom, co chceš rozvíjet, kde chceš trénovat a jakou spolupráci hledáš. Odpovím osobně a domluvíme první setkání.","Write to me","A few lines about what you want to develop, where you want to train and the kind of work you are looking for are enough. I will reply personally and we will arrange the first session."],

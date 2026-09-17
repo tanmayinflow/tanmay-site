@@ -3,7 +3,8 @@ import MobilePracticeAnchors from './MobilePracticeAnchors';
 import ReflectionStatement from '../components/ReflectionStatement';
 import { routePath } from '../site.js';
 import { approvedLists } from './approved-content';
-import { copy, Chapter, Detail, Photo, TextLink } from './MobileElements';
+import { copy, Chapter, Detail, Photo } from './MobileElements';
+import { MobileEditorialLink } from './MobileEditorialLink';
 import { RichText } from './MobileRichText';
 import { StoryCard } from './MobileStoryCard';
 import { MobileHero } from './MobileShared';
@@ -31,6 +32,6 @@ export default function MobilePractice({lang}:{lang:string}) {
       <p><RichText>{c(29)}</RichText></p><Detail title={lang==='en'?'Read more':'Číst dál'} className="m7-meaning-more">{[30,31].map(i=><p key={i}><RichText>{c(i)}</RichText></p>)}</Detail>
       <p className="m-meaning-path"><RichText>{c(32)}</RichText></p><p className="m-meaning-closing"><RichText>{c(33)}</RichText></p>
     </Chapter>
-    <Chapter title={c(34)} className="m-earth-coda"><p><RichText>{c(35)}</RichText></p><TextLink href={routePath('spoluprace',lang)}>{lang==='en'?'Ways to work together':'Možnosti spolupráce'}</TextLink></Chapter>
+    <Chapter title={c(34)} className="m-offer"><p><RichText>{c(35)}</RichText></p><MobileEditorialLink href={routePath('spoluprace',lang)}>{lang==='en'?'Ways to work together':'Možnosti spolupráce'}</MobileEditorialLink></Chapter>
   </>;
 }
