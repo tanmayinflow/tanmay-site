@@ -1,0 +1,44 @@
+{
+  "approvedOn": "2026-09-17",
+  "path": "src/App.tsx",
+  "scope": "Only the owner-approved bilingual privacy clarification; all prior M10 source and fixtures remain protected.",
+  "beforeSha256": "62ab318c983f66117c2054a49e3b8c6d1e425a317c147ad6b416009d6528ce69",
+  "authorizedSha256": "3653e82bd62e2d8c27badb02c6580c48e01d363fc0a5400f9afd87720c9f7d14",
+  "replacements": [
+    {
+      "id": "technical-basis-cs",
+      "before": "Tyto údaje nepoužívám k reklamě ani k vytváření profilu návštěvníka.",
+      "after": "Tyto údaje nepoužívám k reklamě ani k vytváření profilu návštěvníka. Technické údaje slouží oprávněnému zájmu bezpečně provozovat a chránit web."
+    },
+    {
+      "id": "technical-basis-en",
+      "before": "I do not use this data for advertising or visitor profiling.",
+      "after": "I do not use this data for advertising or visitor profiling. Technical data serves the legitimate interest of safely operating and protecting the site."
+    },
+    {
+      "id": "analytics-eu-cs",
+      "before": "Poskytuje mi souhrnné údaje, například počet návštěv, navštívené stránky, zdroje návštěvnosti, typ zařízení a rychlost webu.",
+      "after": "Poskytuje mi souhrnné údaje, například počet návštěv, navštívené stránky, zdroje návštěvnosti, typ zařízení a rychlost webu. Cloudflare Web Analytics je nastavené tak, aby neměřilo návštěvy z Evropské unie."
+    },
+    {
+      "id": "analytics-eu-en",
+      "before": "It provides aggregate information such as visits, viewed pages, traffic sources, device type and site speed.",
+      "after": "It provides aggregate information such as visits, viewed pages, traffic sources, device type and site speed. Cloudflare Web Analytics is configured not to measure visits from the European Union."
+    },
+    {
+      "id": "correspondence-basis-cs",
+      "before": "Kontaktní údaje a zprávu, které mi pošleš, používám k odpovědi, domluvě prvního setkání a případné přípravě spolupráce.",
+      "after": "Kontaktní údaje a zprávu, které mi pošleš, používám k odpovědi, domluvě prvního setkání a případné přípravě spolupráce. Domluvu spolupráce zpracovávám pro kroky před uzavřením smlouvy na tvoji žádost. Na jiné běžné dotazy odpovídám na základě oprávněného zájmu vyřídit komunikaci."
+    },
+    {
+      "id": "correspondence-basis-en",
+      "before": "I use the contact details and message you send to reply, arrange a first session and, if relevant, prepare our work together.",
+      "after": "I use the contact details and message you send to reply, arrange a first session and, if relevant, prepare our work together. I process arrangements for our work together to take steps at your request before entering into a contract. I respond to other ordinary enquiries on the basis of my legitimate interest in handling the communication."
+    },
+    {
+      "id": "complaint-right-bilingual",
+      "before": "<a href={\"mailto:\"+MAIL}>{MAIL}</a>.</p>",
+      "after": "<a href={\"mailto:\"+MAIL}>{MAIL}</a>.</p><p>{L(\"Máš právo podat stížnost Úřadu pro ochranu osobních údajů (\",\"You have the right to lodge a complaint with the Czech Office for Personal Data Protection (\")}<a href=\"https://uoou.gov.cz/\">uoou.gov.cz</a>).</p>"
+    }
+  ]
+}

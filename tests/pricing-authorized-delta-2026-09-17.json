@@ -1,0 +1,20 @@
+{
+  "approvedOn": "2026-09-17",
+  "authorization": "The owner explicitly answered the open prepaid-period question: Měsíc od prvního tréninku (one month from the first session).",
+  "path": "src/components/CollaborationPricing.tsx",
+  "beforeSha256": "f2f9ccb516f4bed0de2961c569839f041f4348c0e29cba7c75517345de4f5190",
+  "authorizedSha256": "2005482945546211af9d33305a0717c26e8627c5a4676ee0a472c2293aa5b8e6",
+  "scope": "Two exact strings in the shared desktop/mobile component. All prices, other terms, markup, CSS, photographs, fonts and immutable fixtures remain unchanged.",
+  "replacements": [
+    {
+      "id": "prepaid-period-cs",
+      "before": " individuálních tréninků na měsíční období",
+      "after": " individuálních tréninků na měsíc od prvního tréninku"
+    },
+    {
+      "id": "prepaid-period-en",
+      "before": " one-to-one sessions for a monthly period",
+      "after": " one-to-one sessions for one month from the first session"
+    }
+  ]
+}

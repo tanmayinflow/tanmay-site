@@ -40,7 +40,7 @@ export default function CollaborationPricing({ lang = "cs" }: { lang?: string })
         <div className="pricing-afterword">
           <p className="pricing-terms" id="regular-training-terms">
             {text("Zvýhodněná cena platí při předplacení alespoň ", "The reduced rate applies when you prepay for at least ")}
-            <strong>{REGULAR_TRAINING.minPrepaidSessions}{text(" individuálních tréninků na měsíční období", " one-to-one sessions for a monthly period")}</strong>.
+            <strong>{REGULAR_TRAINING.minPrepaidSessions}{text(" individuálních tréninků na měsíc od prvního tréninku", " one-to-one sessions for one month from the first session")}</strong>.
             {text(" Čtyři tréninky vyjdou na ", " Four sessions cost ")}
             <strong>{formatTrainingPrice(REGULAR_TRAINING.priceForFourCzk, language)}</strong>.
             {text(" Termíny domlouváme předem.", " We agree the dates and times in advance.")}

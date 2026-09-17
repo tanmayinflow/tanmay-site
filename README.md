@@ -9,6 +9,7 @@ This repository now contains the GTP M10 pass5 source. The owner designated that
 - Desktop from 900 CSS px: locked V9.22 appearance and content, with the accepted M7 FAQ and M9 meaning-text changes.
 - Below 900 CSS px: the M10 responsive implementation, including phone, tablet and landscape layouts.
 - M10 also repairs shared navigation, unpublished routes, language of error pages, metadata and keyboard focus.
+- The owner approved two precise content clarifications on 2026-09-17: prepaid sessions cover one month from the first session, and the privacy page states processing bases, the complaint right and actual EU analytics exclusion. Dedicated reversible source guards preserve the rest of the locked implementation.
 
 Integration is prepared on `integration/gtp-m10-2026-09-17`. Migration does not mean publication. Current integration results and next actions belong in the workspace's `Work/website/STATUS.md`.
 
