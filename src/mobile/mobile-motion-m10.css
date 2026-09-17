@@ -1,0 +1,19 @@
+/* M10: visible defaults; only the motion hook can stage an entrance. */
+@media (max-width:899px) {
+ .tm-mobile[data-mobile-version=M10] .m-cycle-art[data-m10-scroll=ready] {transform:rotate(var(--m-cycle-scroll-angle,0deg));transition:none;transform-origin:50% 50%}
+ .tm-mobile[data-mobile-version=M10] .m-audience-orbit[data-m10-salto] .m-salto {transform:translate3d(var(--m-salto-x,0px),0,0) rotate(var(--m-salto-angle,0deg));transform-origin:50% 50%;transition:none}
+ .tm-mobile[data-mobile-version=M10] .m-audience-orbit[data-m10-salto=entering] :is(.m-audience-one,.m-audience-two) {opacity:0;transform:translateY(5px);pointer-events:none;transition:none}
+ .tm-mobile[data-mobile-version=M10] .m-audience-orbit[data-m10-salto=settled] :is(.m-audience-one,.m-audience-two) {opacity:1;transform:none;transition:opacity 220ms ease,transform 220ms ease}
+ .tm-mobile[data-mobile-version=M10] .m-audience-orbit:focus-within :is(.m-audience-one,.m-audience-two) {opacity:1;transform:none;pointer-events:auto}
+ .tm-mobile[data-mobile-version=M10] .m7-interactive-anchors {--m7-anchor-duration:500ms}
+ @media (prefers-reduced-motion:no-preference) {
+  .tm-mobile[data-mobile-version=M10] .m7-anchor-ring[data-active=true],
+  .tm-mobile[data-mobile-version=M10] .m7-anchors-stage .m-anchor-button[aria-expanded=true] strong,
+  .tm-mobile[data-mobile-version=M10] .m7-interactive-anchors[data-active="3"] .m-anchor-button strong,
+  .tm-mobile[data-mobile-version=M10] .m7-interactive-anchors:not([data-active=none]) .m7-anchor-stance {animation-duration:1100ms}
+ }
+ @media (prefers-reduced-motion:reduce) {
+  .tm-mobile[data-mobile-version=M10] .m-audience-orbit[data-m10-salto] .m-salto {transform:none}
+  .tm-mobile[data-mobile-version=M10] .m-audience-orbit[data-m10-salto] :is(.m-audience-one,.m-audience-two) {opacity:1;transform:none;pointer-events:auto;transition:none}
+ }
+}

@@ -1,0 +1,29 @@
+/* M8 / Practice annotations 14–17. Mobile-only; original copy and all four topics remain. */
+@media (max-width:899px) {
+ .tm-mobile[data-mobile-version] .m7-practice-definition .m-definition-pair {display:block;margin-top:23px;text-align:right}
+ .tm-mobile[data-mobile-version] .m7-practice-definition .m-definition-pair>div {display:block;grid-template-columns:none;gap:0;margin:0;padding:0;border:0;text-align:right;line-height:1.65}
+ .tm-mobile[data-mobile-version] .m7-practice-definition .m-definition-pair>div+div {margin-top:10px}
+ .tm-mobile[data-mobile-version] .m7-practice-definition .m-definition-pair :is(h3,p,span) {display:inline;padding:0;margin:0;border:0}
+ .tm-mobile[data-mobile-version] .m7-practice-definition .m-definition-pair h3 {font-family:var(--ff-meta);font-size:.9375rem;font-weight:500;letter-spacing:.055em;color:var(--accent-earth)}
+ .tm-mobile[data-mobile-version] .m7-practice-definition .m-definition-pair p {font-size:.8125rem;line-height:inherit;color:var(--m-body)}
+ .tm-mobile[data-mobile-version] .m7-practice-definition .m-definition-pair span {font-size:.8125rem;color:var(--accent-earth)}
+
+ .tm-mobile[data-mobile-version][data-page=praxe] .m-anchors {--m-accent:#de7967}
+ .tm-mobile[data-mobile-version] .m7-anchor-description .m8-anchor-vajra {width:calc(100% + 10px);max-width:none;height:56px;margin:1px 0 0 -5px;color:var(--m-accent)}
+ /* Brighten gently instead of fading text, so the new red-orange keeps its contrast. */
+ @media (prefers-reduced-motion:no-preference) {
+  .tm-mobile[data-mobile-version] .m7-anchor-ring[data-active=true],
+  .tm-mobile[data-mobile-version] .m7-anchors-stage .m-anchor-button[aria-expanded=true] strong,
+  .tm-mobile[data-mobile-version] .m7-interactive-anchors[data-active="3"] .m-anchor-button strong,
+  .tm-mobile[data-mobile-version] .m7-interactive-anchors:not([data-active=none]) .m7-anchor-stance {animation-name:m8-anchor-breathe}
+ }
+ @keyframes m8-anchor-breathe {0%,100%{filter:brightness(1)}50%{filter:brightness(1.08)}}
+
+ .tm-mobile[data-mobile-version] .m7-session-topics {--m8-topic-wave:clamp(10px,4vw,18px)}
+ .tm-mobile[data-mobile-version] .m7-session-topic:nth-child(2),
+ .tm-mobile[data-mobile-version] .m7-session-topic:nth-child(3) {margin-left:var(--m8-topic-wave)}
+ .tm-mobile[data-mobile-version] .m7-session-topic>.m-story-trigger .m-disclosure-mark {display:none}
+ .tm-mobile[data-mobile-version] .m7-session-topic>.m-story-trigger .m-story-ending::after {content:'';display:inline-block;width:3px;height:3px;margin-left:6px;margin-bottom:2px;border-radius:50%;background:var(--accent-earth);vertical-align:middle}
+ .tm-mobile[data-mobile-version][data-page=praxe] .m-practice-session {padding-bottom:0}
+ .tm-mobile[data-mobile-version][data-page=praxe] .m-reflection {padding-top:2px;padding-bottom:60px}
+}

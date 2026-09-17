@@ -1,155 +1,38 @@
-# PUBLIC LAUNCH CHECKLIST
+# Public launch checklist
 
-Last run: 2026-08-23 evening, after the Material Landscape wave, against the build of that day.
+Current integration: GTP M10 pass5, 2026-09-17. This replaces the V8 checklist. The integrated site has not been published. Record new verification results in the workspace project status; do not substitute old QA results for a new integration check.
 
-What can be proved from this repository is proved by `npm run check`.
-What can only be proved on the live domain is listed at the end and is
-marked as needing Cloudflare or a person.
+## Existing evidence
 
----
+The preserved GTP package records pass5 build/typecheck and 23 tests, a 96-case responsive matrix, 32 hero cases and 16 native captures. Desktop 16/16 combines an earlier full matrix with targeted repeat checks. Runtime 32/32 belongs to pass4; motion and image-fallback evidence belongs to pass3. The reports retain those distinctions.
 
-## Automated · `npm run check`
+The current visual evidence is `WORKING/mobile-refinement/M10/final/pass5/` inside the archived GTP reference package. Physical iPhone/Safari and production hosting were not verified by those runs.
 
-`npm run check` is `npm run build` followed by `npm test`. The build
-typechecks, bundles and pre-renders. The tests read the real build
-output in `dist/`, never the source's intentions.
+## Resolve before release
 
-| Suite | What it holds | Count |
-|---|---|---|
-| `tests/routes.test.mjs` | Every route is a real file. Per-route title, description, canonical, hreflang, Open Graph, Twitter card. Symmetric alternates. Structured data carries no Offer, Review, rating, address, hours, credential or Event. 404 is a real page and Cloudflare is configured to serve it. Sitemap equals the pages that exist. Robots allows crawling. Old paths redirect, targets exist, no loops. | 16 |
-| `tests/content-truth.test.mjs` | Public truth controls plus the approved Home implementation contract. Demo references are allowed only while the visible demo warning and badge remain; they are still a public-launch blocker until replaced with consented material. | implementation gate |
-| `tests/media.test.mjs` | The manifest matches real files. Nothing is upscaled past its master. The CSS aspect ratio matches the file, so media cannot shift the layout. No EXIF or GPS survives. No asset over 600 kB. Exactly two generated assets. Optional media collapses instead of leaving a frame. | 11 |
-| `tests/contrast.test.mjs` | Every text token against the surface it is used on, computed from the stylesheet itself. Copper is never a text colour. The six Brand V2 colours are unchanged. | 11 |
-| `tests/browser.test.mjs` | The site as Chromium renders it: one H1 per route, landmarks, skip link, client entry visible in the header at 390 and 1280, no link to the Main App, keyboard menu with Escape, old hash links, pushState navigation with history, language switch, one language per page, images that actually load, a modern format chosen, reduced motion, visible focus, no sideways scroll at 390/834/1440, tap targets, and the whole site with the media folder blocked. | 17 |
+- Confirm permission to publish the four client names and the sensitive personal/health references in their supplied reviews. These are real supplied reviews, not the old demo carousel. See the original `05-CONTENT-LOCK.md` section “Recenze”.
+- Clarify what “měsíční období” means for the four prepaid individual sessions. Preserve the approved prices; do not invent cancellation, expiry, transfer or refund conditions. This question is explicitly left open in `05-CONTENT-LOCK.md`.
+- Complete the professional/legal boundary review requested in that same content lock, including the approved rehabilitation-training wording. Do not replace accepted text with an unapproved claim.
+- Obtain the owner's final review of the responsive result. Desktop V9.22 and its recorded M7/M9 changes remain accepted.
 
-**Result 2026-08-23 (Material Landscape): 85 passed, 0 failed** with a browser; the browser suite (20 checks) skips cleanly without one. New since the launch wave: the material-set inventory with per-file budgets, the cutout-used-once negative control, aperture confinement to the three photographs, Burnt Earth token and contrast pairs, the copper-background guard, and the fallback render with the whole media folder blocked.
+## Verify the integrated release
 
-The browser suite needs a browser, which is an authoring tool and is not
-a dependency. `npm run browser:setup` installs `playwright-core` with
-`--no-save`. Without it that suite skips and the other 56 still run, so
-the Cloudflare build never needs a browser.
+- Run installation from the lockfile and `npm run check` on the integrated source. Keep the exact source-protection checks and their reference evidence working after relocation.
+- Review the final responsive pages and key interactions in both languages. Preserve the desktop reference from 900 CSS px; verify phone, tablet, landscape and enlarged-text layouts.
+- Check on a physical iPhone/Safari, or explicitly record that limitation when deciding whether to release. A headless browser is not this device check.
+- Ensure the final `dist` contains no unused demo reference videos/posters. Preserve their historical originals outside the published output.
 
----
+## Verify deployment access and configuration
 
-## Content completeness gate
+- Identify the connected GitHub repository and production branch, confirm write access, and inspect whether a push triggers deployment.
+- Verify the Cloudflare site/project and `tanmaypractice.com` domain binding; use the existing deployment rather than assuming a new project is needed.
+- Confirm build `npm run build`, output `dist`, and actual HTTP 404 handling. Local preview behavior alone does not prove Cloudflare behavior.
+- Check whether Cloudflare Web Analytics is enabled and functioning. The current privacy page says it is used; the source does not contain a beacon. Do not infer dashboard injection from that copy.
 
-Every visible block on every route, classified.
+## Verify after the approved deployment
 
-| Route | Blocks | Classification |
-|---|---|---|
-| Home | opening, audience, work, collaboration preview, demo references, short About, first contact, client strip, reduced closing | COPY APPROVED · IMPLEMENTED · references DEMO / NOT PRODUCTION-READY |
-| Praxe | what practice means, three anchors, what a session contains, direction to practice, what it is not | FINAL · APPROVED, anchors are canonical |
-| Příběh | present day, roots, what I can actually do, three beats, the accident line, notebook poem | FINAL · APPROVED · REAL AUTHORED |
-| Spolupráce | who it is for, personal work, where, how it runs, field practice, the application, experience, contract and boundary, FAQ, contact | FINAL · APPROVED |
-| Deník | index of three real notes, photograph, rhythm note | REAL AUTHORED · one OPTIONAL MEDIA |
-| Deník article ×3 | date, tag, title, body, two links onward | REAL AUTHORED |
-| Soukromí | five sections, all checkable in this repository | FINAL |
-| 404 | one line and four ways out | FINAL |
-
-Nothing on the site is marked TODO, coming soon, placeholder, or "in
-preparation". There is no fake quote, no fake journal entry, no fake app
-data, no unapproved offer, no unapproved price, no undefined link and no
-empty image frame. All of that is enforced by tests rather than by
-memory.
-
----
-
-## Media
-
-| File | Master | Public derivatives | Where |
-|---|---|---|---|
-| `portrait-tanmay` | 3024 × 3780, 4:5 | AVIF and WebP at 480 / 720 / 960 / 1280, JPEG fallback at 960 | Home opening, stone aperture, eager, high priority |
-| `practice-handstand-trunk` | 2160 × 3024, 5:7 | AVIF and WebP at 480 / 720 / 1080, JPEG fallback at 720 | Home work chapter and Praxe, stone aperture, lazy |
-| `practice-sitting-pine` | 720 × 900, 4:5 | AVIF and WebP at 360 / 480 / 720, JPEG fallback at 480 | Deník, stone aperture, lazy |
-| `surface-ink-cotton.webp` | generated | one seamless tile, 1024 × 1024 | The Ink Cotton bands |
-| `material/` | see MATERIAL-ASSET-MANIFEST.md | strata edge, aperture mask, earth slab, copper line, sandstone tile, the real b/w cutout — 272 kB total | The Material Landscape wave |
-
-Three real photographs, one real cutout, no video. The generated set is
-exactly the manifest's accepted list; two supplied candidates were
-rejected there with reasons, and the launch-wave torn-linen edge is
-retired.
-
-Masters live in the workspace at `Work/website/Assets/Masters/` and are
-not in Git. `npm run media` rebuilds every derivative from them.
-
----
-
-## Measured, not claimed
-
-Production preview served like Cloudflare static assets, headless
-Chromium, uncompressed transfer sizes. Cloudflare compresses text, so
-the JS and HTML numbers are roughly a third of this over the wire.
-
-| Route | View | HTML | JS | Fonts | Images | Total | FCP | LCP | CLS |
-|---|---|---|---|---|---|---|---|---|---|
-| `/` | 1440 | 7 kB | 236 kB | 138 kB | 379 kB | 761 kB | 136 ms | 244 ms | 0.001 |
-| `/` | 390 @2× | 7 kB | 236 kB | 138 kB | 408 kB | 790 kB | 112 ms | 928 ms | 0.002 |
-| `/praxe` | 1440 | 6 kB | 236 kB | 138 kB | 153 kB | 534 kB | 112 ms | 192 ms | 0.002 |
-| `/spoluprace` | 1440 | 7 kB | 236 kB | 138 kB | 59 kB | 441 kB | 112 ms | 872 ms | 0.002 |
-| `/denik` | 1440 | 6 kB | 236 kB | 138 kB | 112 kB | 493 kB | 116 ms | 848 ms | 0.002 |
-| `/denik/les-nehodnoti` | 390 @2× | 7 kB | 236 kB | 115 kB | 4 kB | 362 kB | 80 ms | 80 ms | 0.003 |
-
-JS is 94 kB of site plus 142 kB of React, split so that a content edit
-does not invalidate the library in anyone's cache. Gzipped that is
-29 kB + 45 kB.
-
-CLS is below 0.005 everywhere, because every image declares its
-intrinsic size and the CSS reserves the same ratio the file has.
-
-LCP on the text routes is the moment the display face swaps in. It is
-served first party and preloaded; the local single-threaded preview
-serialises requests, so the real figure behind Cloudflare's HTTP/2 will
-be lower. LCP on Home is the portrait.
-
-Lighthouse was **not** run. No Lighthouse score is claimed anywhere.
-
----
-
-## DEMO REFERENCES BLOCK PUBLIC LAUNCH
-
-The Home reference carousel is intentionally present for working review, but its names, quotes and videos are demo content. The site is not public-launch ready until those items are replaced with real material and publication consent.
-
-## Visual review
-
-48 full-page screenshots: eight page types × Czech and English ×
-390 / 834 / 1440, reviewed as a contact sheet and individually for Home,
-Praxe, Příběh, Spolupráce, Deník, one article, privacy and 404.
-
-Checked for AI look, template look, excessive symmetry, image crop, copy
-density, route differentiation, CTA clarity, client entry visibility,
-brand restraint, real human presence, mobile pacing, dark band
-repetition, copper excess, empty placeholders and broken media.
-
-Two things were changed because of what the screenshots showed rather
-than what the code said:
-
-1. The first cotton tile read as a visible plaid once it repeated across
-   a wide band. It was regenerated from smoothed wrapped noise with no
-   low frequency component, and the deviation was cut to ±3 RGB levels.
-2. The first torn linen edge read as drips. The fibre depth was cut from
-   30 % of the band to a few pixels, and the line irregularity to about
-   14 px across 2400.
-
-No console errors on any of the 48 renders, except the expected 404
-status on the not-found route. No horizontal overflow anywhere.
-
----
-
-## Still needs Cloudflare or a person
-
-These cannot be proved from this repository.
-
-1. **`www` → apex redirect.** A Cloudflare Redirect Rule, not source.
-   Verify `https://www.tanmaypractice.com/` returns 301 to the apex.
-2. **`not_found_handling`.** `wrangler.jsonc` now sets `404-page`.
-   Confirm after deploy that `https://tanmaypractice.com/xxx` answers
-   404 and shows the not-found page rather than the home page.
-3. **`_redirects`.** Confirm `https://tanmaypractice.com/udalosti`
-   answers 301 to `/spoluprace`.
-4. **Social preview.** Paste `https://tanmaypractice.com/spoluprace`
-   into a preview debugger and confirm the card, then one article URL.
-5. **Search Console.** Submit `https://tanmaypractice.com/sitemap.xml`.
-6. **Lighthouse.** Run it on the live apex if a score is wanted.
-7. **The client entry on a real device.** Open
-   `https://klient.tanmaypractice.com` from the header and confirm the
-   Access policy behaves as expected.
+- Open all ten Czech/English direct routes and language switches on the production domain. Check metadata, assets, mobile navigation and the client-entry link.
+- Verify unknown Czech and English addresses return HTTP 404 and show the correct language. Journal paths and journal hashes must not expose the retired journal.
+- Verify legacy redirects and the `www` to apex redirect, without assuming the dashboard rule exists.
+- Check canonical URLs, sitemap and representative social previews against the deployed build.
+- Check the external contact destinations without sending test messages or entering a client's account. Record deployment identity and any remaining limitation in `Work/website/STATUS.md`.

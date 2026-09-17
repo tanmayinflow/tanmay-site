@@ -1,0 +1,80 @@
+/* M5: measured V9.22 editorial exceptions. Layout sizes stay in the mobile composition. */
+@media (max-width:899px) {
+ .tm-mobile[data-mobile-version] :is(.m-collab-intro,.m-practice-intro,.m-about-intro) .m-page-lead,
+ .tm-mobile[data-mobile-version] .m-desktop-lead {
+  font-family:var(--ff-display);
+  color:var(--m-heading);
+  font-weight:400;
+ }
+ .tm-mobile[data-mobile-version] .m-proof p.m-proof-qualification {
+  font-family:var(--ff-body);
+  font-weight:500;
+  color:#1C1C1A;
+ }
+ .tm-mobile[data-mobile-version] .m-proof p.m-proof-note,
+ .tm-mobile[data-mobile-version] .m-proof-numbers span {
+  font-family:var(--ff-body);
+  font-weight:400;
+  color:rgba(28,28,26,.74);
+ }
+ .tm-mobile[data-mobile-version] .m-proof .m-proof-numbers strong,
+ .tm-mobile[data-mobile-version] .m-proof p.m-eyebrow {
+  font-family:var(--ff-meta);
+  font-weight:500;
+  letter-spacing:.08em;
+  color:var(--accent-earth);
+ }
+ .tm-mobile[data-mobile-version] .m-needs-list article h3,
+ .tm-mobile[data-mobile-version] .m-about-practice .m-editorial-stack h3 {
+  color:var(--m-heading);
+ }
+ .tm-mobile[data-mobile-version] .m-practice-intro .m-statement,
+ .tm-mobile[data-mobile-version] .m-reflection .m-statement,
+ .tm-mobile[data-mobile-version] .m-reflection .reflection-closing,
+ .tm-mobile[data-mobile-version] .m-process .m-process-standalone,
+ .tm-mobile[data-mobile-version] .m-return .m-return-note {
+  font-family:var(--ff-display);
+  color:var(--m-heading);
+  font-weight:400;
+ }
+ .tm-mobile[data-mobile-version] .m-boundaries .m-boundary-stance {
+  font-family:var(--ff-display);
+  font-size:1.1875rem;
+  font-weight:400;
+  color:var(--m-body);
+  line-height:1.35;
+ }
+ .tm-mobile[data-mobile-version] .m-education dt {
+  font-family:var(--ff-display);
+  font-weight:500;
+  color:var(--accent-earth);
+  letter-spacing:var(--track);
+ }
+ .tm-mobile[data-mobile-version] .m-education .m-education-credential {
+  font-family:var(--ff-display);
+  color:var(--m-heading);
+  font-weight:400;
+ }
+ .tm-mobile[data-mobile-version] .m-meaning .m-etymology {
+  font-family:var(--ff-meta);
+  font-weight:500;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  color:var(--linen);
+ }
+ .tm-mobile[data-mobile-version] .m-meaning .m-etymology .etymology-term {
+  font-family:inherit;
+  font-weight:500;
+  color:var(--accent-on-ink);
+ }
+ .tm-mobile[data-mobile-version] .m-meaning .m-meaning-path {
+  font-family:var(--ff-meta);
+  font-weight:400;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  color:var(--accent-on-ink);
+ }
+ .tm-mobile[data-mobile-version] p:is(.m-cycle-caption,.m-session-topics) {font-weight:400}
+ .tm-mobile[data-mobile-version] :is(.m-earth-coda,.m-offer) p {color:var(--linen)}
+ .tm-mobile[data-mobile-version] .collaboration-pricing .pricing-terms {color:rgba(28,28,26,.74)}
+}

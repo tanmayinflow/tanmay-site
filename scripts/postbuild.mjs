@@ -19,6 +19,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { ORIGIN, ROUTES, POSTS, LANGS, allPages, IG_URL } from "../src/site.js";
+import { jsonLd } from "../src/page-metadata.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DIST = join(ROOT, "dist");
@@ -90,64 +91,6 @@ function head(page) {
  * No Offer, no price, no Review, no AggregateRating, no LocalBusiness
  * address, no openingHours, no credential, no Event.
  */
-function jsonLd(page) {
-  const { lang, path, routeId } = page;
-  const url = ORIGIN + path;
-  const person = {
-    "@type": "Person",
-    name: "Tanmay",
-    url: ORIGIN + (lang === "cs" ? "/" : "/en/"),
-    sameAs: [IG_URL],
-  };
-  if (routeId === "home") {
-    return {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebSite",
-          name: "tanmay",
-          url: ORIGIN + "/",
-          inLanguage: lang === "cs" ? "cs-CZ" : "en",
-        },
-        { ...person, image: ORIGIN + "/media/portrait-tanmay.jpg" },
-      ],
-    };
-  }
-  if (routeId === "pribeh") {
-    return { "@context": "https://schema.org", ...person, mainEntityOfPage: url };
-  }
-  if (routeId === "post") {
-    const post = POSTS.find((p) => p.id === page.postId);
-    const denik = ROUTES.find((r) => r.id === "denik");
-    return {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Article",
-          headline: post.title[lang],
-          description: post.excerpt[lang],
-          datePublished: post.date,
-          inLanguage: lang === "cs" ? "cs-CZ" : "en",
-          author: person,
-          mainEntityOfPage: url,
-        },
-        {
-          "@type": "BreadcrumbList",
-          itemListElement: [
-            {
-              "@type": "ListItem", position: 1,
-              name: lang === "cs" ? "Deník praxe" : "Practice log",
-              item: ORIGIN + denik.path[lang],
-            },
-            { "@type": "ListItem", position: 2, name: post.title[lang], item: url },
-          ],
-        },
-      ],
-    };
-  }
-  return null;
-}
-
 /* ---------------------------------------------------------------- write */
 function render(page) {
   let html = shell;
@@ -175,7 +118,8 @@ function render(page) {
   return html;
 }
 
-const pages = allPages();
+// M00: restore only the approved public scope; do not activate the legacy journal.
+const pages = allPages().filter(p => ["home", "praxe", "pribeh", "spoluprace", "soukromi"].includes(p.routeId));
 let written = 0;
 for (const page of pages) {
   const rel = page.path === "/" ? "index.html" : page.path.replace(/^\//, "").replace(/\/$/, "") + "/index.html";

@@ -1,0 +1,83 @@
+[
+  {
+    "path": "public/fonts/barlow-condensed-400-normal.woff2",
+    "name": "barlow-condensed-400-normal.woff2",
+    "bytes": 21472,
+    "sha256": "2472e421602fa039f8f1a31eeae8e921ce7b904c5d171a9636c541bb0f93d90c",
+    "source_archive": "tanmay-site(1).zip",
+    "entry": "tanmay-site/public/fonts/barlow-condensed-400-normal.woff2",
+    "delivery": "NOT INCLUDED; restore from owner local source only"
+  },
+  {
+    "path": "public/fonts/barlow-condensed-500-normal.woff2",
+    "name": "barlow-condensed-500-normal.woff2",
+    "bytes": 21888,
+    "sha256": "f4a515f11148eff818434daffede71ddf10dfbc6823d0118d9cc61535c1d6938",
+    "source_archive": "tanmay-site(1).zip",
+    "entry": "tanmay-site/public/fonts/barlow-condensed-500-normal.woff2",
+    "delivery": "NOT INCLUDED; restore from owner local source only"
+  },
+  {
+    "path": "public/fonts/cormorant-garamond-300-normal.woff2",
+    "name": "cormorant-garamond-300-normal.woff2",
+    "bytes": 20180,
+    "sha256": "633b55d74bfd25d1f0e1fcce9334d84a391ab49cfb581e02a0c0c9c234072b94",
+    "source_archive": "tanmay-site(1).zip",
+    "entry": "tanmay-site/public/fonts/cormorant-garamond-300-normal.woff2",
+    "delivery": "NOT INCLUDED; restore from owner local source only"
+  },
+  {
+    "path": "public/fonts/cormorant-garamond-400-italic.woff2",
+    "name": "cormorant-garamond-400-italic.woff2",
+    "bytes": 22476,
+    "sha256": "de1fdb4111c4a7c6befe7c0bd349b6d21ae4b5f7f077b59342abce97d64ff116",
+    "source_archive": "tanmay-site(1).zip",
+    "entry": "tanmay-site/public/fonts/cormorant-garamond-400-italic.woff2",
+    "delivery": "NOT INCLUDED; restore from owner local source only"
+  },
+  {
+    "path": "public/fonts/cormorant-garamond-400-normal.woff2",
+    "name": "cormorant-garamond-400-normal.woff2",
+    "bytes": 21348,
+    "sha256": "87281f8f9c0da6d30cb405df29dcf17cd198f37f693791b6767387bf9291f5bd",
+    "source_archive": "tanmay-site(1).zip",
+    "entry": "tanmay-site/public/fonts/cormorant-garamond-400-normal.woff2",
+    "delivery": "NOT INCLUDED; restore from owner local source only"
+  },
+  {
+    "path": "public/fonts/dm-sans-400-normal.woff2",
+    "name": "dm-sans-400-normal.woff2",
+    "bytes": 15408,
+    "sha256": "80e5caafb8cabaf9676af99f798811a2d92c1fb1bce0eab1c32e8e7d7ca54a67",
+    "source_archive": "tanmay-site(1).zip",
+    "entry": "tanmay-site/public/fonts/dm-sans-400-normal.woff2",
+    "delivery": "NOT INCLUDED; restore from owner local source only"
+  },
+  {
+    "path": "public/fonts/dm-sans-500-normal.woff2",
+    "name": "dm-sans-500-normal.woff2",
+    "bytes": 15540,
+    "sha256": "37a96e46fa4447fc62a6ae88da27efed50de6fc12860a7624a383a5f53876cd4",
+    "source_archive": "tanmay-site(1).zip",
+    "entry": "tanmay-site/public/fonts/dm-sans-500-normal.woff2",
+    "delivery": "NOT INCLUDED; restore from owner local source only"
+  },
+  {
+    "path": "public/fonts/eb-garamond-400-italic.woff2",
+    "name": "eb-garamond-400-italic.woff2",
+    "bytes": 23752,
+    "sha256": "c20d72af7485809c6c2e8b334d9fae1d6fa3082643ce343535a0565474dfa027",
+    "source_archive": "tanmay-site(1).zip",
+    "entry": "tanmay-site/public/fonts/eb-garamond-400-italic.woff2",
+    "delivery": "NOT INCLUDED; restore from owner local source only"
+  },
+  {
+    "path": "public/fonts/eb-garamond-400-normal.woff2",
+    "name": "eb-garamond-400-normal.woff2",
+    "bytes": 23268,
+    "sha256": "4a0878a5d4dacb1aca8f6bc7b32afa28271d2c1ce5252fe24d3d5232134586e9",
+    "source_archive": "tanmay-site(1).zip",
+    "entry": "tanmay-site/public/fonts/eb-garamond-400-normal.woff2",
+    "delivery": "NOT INCLUDED; restore from owner local source only"
+  }
+]

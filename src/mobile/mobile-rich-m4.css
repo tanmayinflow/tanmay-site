@@ -1,0 +1,78 @@
+/* Exact V9.22 font families and pigment hierarchy, scoped to the mobile tree.
+   Font sizes and composition belong to the current mobile composition. */
+@media (max-width:899px) {
+ .tm-mobile[data-mobile-version] {
+  --m-heading:#1C1C1A;
+  --m-body:rgba(28,28,26,.74);
+  --m-muted:rgba(28,28,26,.66);
+  --m-accent:var(--accent-earth);
+  --m-accent-line:var(--accent-earth);
+  --accent-text:var(--accent-earth);
+  --accent-line:var(--accent-earth);
+  --text:#1C1C1A;
+  --text-2:rgba(28,28,26,.74);
+  --text-3:rgba(28,28,26,.66);
+  font-family:var(--ff-body);
+ }
+ .tm-mobile[data-mobile-version] .m-dark,
+ .tm-mobile[data-mobile-version] .m-hero--home .m-hero-caption {
+  --m-heading:var(--linen);
+  --m-body:rgba(244,240,235,.80);
+  --m-muted:rgba(244,240,235,.62);
+  --m-accent:var(--accent-on-ink);
+  --m-accent-line:var(--accent-copper-on-ink);
+  --accent-text:var(--accent-on-ink);
+  --accent-line:var(--accent-copper-on-ink);
+  --text:var(--linen);
+  --text-2:rgba(244,240,235,.80);
+  --text-3:rgba(244,240,235,.62);
+ }
+ .tm-mobile[data-mobile-version] :is(.m-earth-coda,.m-offer) {
+  --m-heading:var(--linen);
+  --m-body:rgba(244,240,235,.86);
+  --m-muted:rgba(244,240,235,.80);
+  --m-accent:var(--linen);
+  --m-accent-line:var(--linen);
+  --accent-text:var(--linen);
+  --accent-line:var(--linen);
+ }
+ .tm-mobile[data-mobile-version] :is(.m-chapter,.m-proof,.m-detail-body,.m-figure-panel,.m-rail-slide) p {
+  color:var(--m-body);
+ }
+ .tm-mobile[data-mobile-version] :is(h1,h2,h3,.m-detail-title,.m-about-claim) {
+  font-family:var(--ff-display);
+  color:var(--m-heading);
+  font-weight:400;
+  font-synthesis:none;
+ }
+ .tm-mobile[data-mobile-version] :is(.m-eyebrow,.m-hero-service,.m-proof-numbers strong,.m-education dt,.m-session-topics) {
+  font-family:var(--ff-meta);
+  font-weight:500;
+  text-transform:uppercase;
+  letter-spacing:var(--track);
+  color:var(--m-accent);
+ }
+ .tm-mobile[data-mobile-version] .copy-emphasis {
+  font-family:inherit;
+  font-weight:600;
+  color:var(--m-heading);
+  font-synthesis:none;
+ }
+ .tm-mobile[data-mobile-version] p>.copy-emphasis:first-of-type {
+  color:var(--m-accent);
+ }
+ /* Desktop V9.20 deliberately makes qualifications bold Linen, not copper. */
+ .tm-mobile[data-mobile-version] .m-home-about .m-about-bio .copy-emphasis,
+ .tm-mobile[data-mobile-version] .m-home-about .m-about-bio>.copy-emphasis:first-of-type {
+  color:var(--linen);
+  font-weight:700;
+ }
+ .tm-mobile[data-mobile-version] .m-editorial-rail {
+  border-left:2px solid var(--m-accent-line);
+  padding-left:16px;
+ }
+ .tm-mobile[data-mobile-version] .m-editorial-rail>p+p {margin-top:1em}
+ .tm-mobile[data-mobile-version] :is(.m-figure-panel-inner p,.m-professional-boundary,.m-return-note) {
+  border-left-color:var(--m-accent-line);
+ }
+}

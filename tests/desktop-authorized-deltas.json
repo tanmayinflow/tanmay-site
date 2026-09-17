@@ -1,0 +1,57 @@
+{
+  "stage": "M9",
+  "authorization": "M7: two owner-authorized FAQ copy changes (Czech plural question and benefit-focused standalone-session answer in CS/EN). M9 annotation 10: replace only the final sentence of the extended Practice meaning paragraph with becoming part of the path, in CS/EN and matching mobile copy.",
+  "unchanged": "No price data, duration, conditions, markup, CSS, remaining desktop content, photographs, or locked/baseline files may change. App desktop source differs only by the two precise M9 string replacements; the mobile adapter is checked separately.",
+  "mobileReuse": "M7 FAQ is shared directly. M9 Practice meaning uses the same two exact replacements in src/mobile/approved-content.ts; all its other fields remain byte-identical to M8.",
+  "files": [
+    {
+      "path": "src/components/CollaborationFaq.tsx",
+      "originalSha256": "dffdfc98e590a547a985f591c47dbed39ed6a624828b5292374c30fab752d649",
+      "authorizedSha256": "628e66e0abd2e729807ca7a9277f91a0dbfa425582f988c6d1c51fa360453c8c",
+      "replacements": [
+        {
+          "id": "experience-question-cs",
+          "before": "Potřebuji zkušenost?",
+          "after": "Potřebuji zkušenosti?"
+        },
+        {
+          "id": "single-answer-cs",
+          "before": "Ano. Jednorázový individuální trénink trvá ${single.minutes} minut a stojí ${formatTrainingPrice(single.priceCzk,language)}. Jedno setkání může stát samo o sobě.",
+          "after": "Ano. Jedno setkání může stát samo o sobě. Podíváme se na tvůj pohyb a podle potřeby zařadíme vstupní pohybovou diagnostiku. Odneseš si jasnější obraz o tom, co už funguje, jasné priority a konkrétní další krok. Trénink trvá ${single.minutes} minut a stojí ${formatTrainingPrice(single.priceCzk,language)}."
+        },
+        {
+          "id": "single-answer-en",
+          "before": "Yes. A single one-to-one session lasts ${single.minutes} minutes and costs ${formatTrainingPrice(single.priceCzk,language)}. One session can stand on its own.",
+          "after": "Yes. One session can stand on its own. We look at how you move and, as needed, include an initial movement assessment. You leave with a clearer picture of what already works, clear priorities and a concrete next step. The session lasts ${single.minutes} minutes and costs ${formatTrainingPrice(single.priceCzk,language)}."
+        }
+      ]
+    },
+    {
+      "path": "src/App.tsx",
+      "originalSha256": "8f350c59016d977aa630c99b38d61ca446e0461ed8779f57cfbb0015e0501be4",
+      "authorizedSha256": "5ede1d5e428e9c72f9ca2a11bdabbb1bdf4e3243f22bc228560d9daf0e67a371",
+      "replacements": [
+        {
+          "id": "practice-meaning-part-cs",
+          "before": "Může se stát jejím materiálem.",
+          "after": "Může se stát její součástí."
+        },
+        {
+          "id": "practice-meaning-part-en",
+          "before": "It can become its material.",
+          "after": "It can become part of the path."
+        }
+      ]
+    }
+  ],
+  "mobileApprovedContent": {
+    "path": "src/mobile/approved-content.ts",
+    "beforeStage": "M8",
+    "beforeSha256": "bfc824286e8287e334c35aa592777882eda2b558b4dad3c33d07c17e575f9034",
+    "authorizedSha256": "2dfd4de5e1edf51906f7441807557f8a071d2390be1902c7c8395363660ba621",
+    "replacementIds": [
+      "practice-meaning-part-cs",
+      "practice-meaning-part-en"
+    ]
+  }
+}

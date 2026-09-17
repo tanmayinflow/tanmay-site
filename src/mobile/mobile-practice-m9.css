@@ -1,0 +1,20 @@
+/* M9 / Practice annotations 7–9: spacing, engraved symbols and quicker pigment. */
+@media (max-width:899px) {
+ .tm-mobile[data-mobile-version][data-page=praxe] .m7-practice-definition {padding-bottom:52px}
+ .tm-mobile[data-mobile-version] .m7-practice-definition .m-definition-pair>div+div {margin-top:3px}
+
+ .tm-mobile[data-mobile-version][data-page=praxe] .m-anchors {--m-accent:#cf9674}
+ .tm-mobile[data-mobile-version] .m7-interactive-anchors {--m7-anchor-duration:900ms}
+ .tm-mobile[data-mobile-version] .m9-anchor-engraving {overflow:visible}
+ .tm-mobile[data-mobile-version] .m7-anchor-ring[data-active=true],
+ .tm-mobile[data-mobile-version] .m7-anchors-stage .m-anchor-button[aria-expanded=true] strong,
+ .tm-mobile[data-mobile-version] .m7-interactive-anchors[data-active="3"] .m-anchor-button strong,
+ .tm-mobile[data-mobile-version] .m7-interactive-anchors:not([data-active=none]) .m7-anchor-stance {
+  animation:m9-anchor-breathe 1400ms ease-in-out var(--m7-anchor-duration) 2;
+ }
+ @keyframes m9-anchor-breathe {0%,100%{filter:brightness(1)}50%{filter:brightness(1.06)}}
+ @media (prefers-reduced-motion:reduce) {
+  .tm-mobile[data-mobile-version] .m7-interactive-anchors[data-active] :is(.m7-anchor-ring,.m7-anchor-ring path,.m7-anchor-stance,.m-anchor-button,.m-anchor-button strong) {transition:none;animation:none}
+ }
+}
+

@@ -1,0 +1,8 @@
+# Staré veřejné adresy. Web je živý a sdílené odkazy se nesmí rozbít.
+# Hash adresy (#/praxe …) přepisuje aplikace, tohle jsou holé cesty.
+/udalosti   /spoluprace   301
+/kontakt    /spoluprace   301
+/zapisky    /denik        301
+/poezie     /pribeh       301
+/en/events  /en/work-with-me  301
+/en/contact /en/work-with-me  301

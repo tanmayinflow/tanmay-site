@@ -1,0 +1,49 @@
+{
+  "purpose": "Minimal immutable V9.22 fixtures for existing M10 source guards",
+  "sourcePackage": "References/GTP-2026-09-17/Work/tanmay-work-mobil-desktop-v922/TANMAY-WORK-PREDANI-2026-09-15",
+  "copiedUtc": "2026-09-17T12:46:12.7503578Z",
+  "files": [
+    {
+      "file": "local-font-restore-index.json",
+      "source": "AUDIT/local-font-restore-index.json",
+      "bytes": 3627,
+      "sha256": "e1f9f60a8ade369e5d372ed7401ca76d03ece5be2cd58e829b66d219586d2e21"
+    },
+    {
+      "file": "original-site-manifest.json",
+      "source": "WORKING/audit/original-site-manifest.json",
+      "bytes": 57707,
+      "sha256": "160aaf58809262a89748d325215c31eb55b0460825999a54c40739c8e31070ae"
+    },
+    {
+      "file": "site/src/App.tsx",
+      "source": "DESKTOP-LOCKED-V9.22/site/src/App.tsx",
+      "bytes": 210176,
+      "sha256": "8f350c59016d977aa630c99b38d61ca446e0461ed8779f57cfbb0015e0501be4"
+    },
+    {
+      "file": "site/src/components/CollaborationFaq.tsx",
+      "source": "DESKTOP-LOCKED-V9.22/site/src/components/CollaborationFaq.tsx",
+      "bytes": 2978,
+      "sha256": "dffdfc98e590a547a985f591c47dbed39ed6a624828b5292374c30fab752d649"
+    },
+    {
+      "file": "site/src/site.js",
+      "source": "DESKTOP-LOCKED-V9.22/site/src/site.js",
+      "bytes": 10206,
+      "sha256": "9cbc4172602c2b40c8b1b343ecc0a5f1be9b087cac28be9b755780f2c8f7b393"
+    },
+    {
+      "file": "site/public/_redirects",
+      "source": "DESKTOP-LOCKED-V9.22/site/public/_redirects",
+      "bytes": 340,
+      "sha256": "ed2b0720d3b1096b1516142902a30aa004a952db2c6001f3de77dd8ea5ee265d"
+    },
+    {
+      "file": "baseline/scripts/postbuild.mjs",
+      "source": "WORKING/baseline/site/scripts/postbuild.mjs",
+      "bytes": 9441,
+      "sha256": "58dbae7c5ebad5986a06ba9d780b03382a23b4000e03fe7a50b47ae9deccd475"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+/* M9 About: a diagonal original vajra and independently flowing credentials. */
+@media (max-width:899px) {
+ .tm-mobile[data-mobile-version] .m-about-vajra-frame {display:grid;place-items:center;grid-column:1;grid-row:2;align-self:start;width:100%;aspect-ratio:1;min-width:0}
+ .tm-mobile[data-mobile-version] .m-about-vajra-frame .m-about-vajra {grid-area:1/1;align-self:center;justify-self:center;width:86%;height:auto;max-height:none;margin:0;transform:rotate(-32deg);transform-origin:center;color:var(--m-heading)}
+ .tm-mobile[data-mobile-version] .m-education-columns {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:20px;row-gap:22px;align-items:start;margin-top:26px}
+ .tm-mobile[data-mobile-version] .m-education-columns>dl {display:grid;grid-template-columns:minmax(0,1fr);align-content:start;gap:22px;margin:0;min-width:0}
+ @container m-chapter (max-width:14em) {
+  .tm-mobile[data-mobile-version] .m-about-vajra-frame {grid-column:1/-1;grid-row:3;justify-self:center;width:140px}
+  .tm-mobile[data-mobile-version] .m-about-vajra-frame .m-about-vajra {grid-area:1/1;width:86%}
+  .tm-mobile[data-mobile-version] .m-education-columns {grid-template-columns:minmax(0,1fr)}
+ }
+}
+

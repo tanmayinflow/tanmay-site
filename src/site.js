@@ -114,8 +114,8 @@ export const ROUTES = [
     label: { cs: "O mně", en: "The story" },
     title: { cs: "O mně | Kryštof Švec · tanmay practice", en: "About me | Kryštof Švec · tanmay practice" },
     description: {
-      cs: "Kryštof Švec, osobní trenér v Praze. Deset let vlastní pohybové praxe, zkušenost s více než 200 klienty a odborné zázemí v tréninku, józe a psychologii.",
-      en: "Kryštof Švec, personal trainer in Prague. Ten years of personal movement practice, experience with more than 200 clients, and professional grounding in training, yoga and psychology.",
+      cs: "Kryštof Švec, osobní trenér v Praze. Deset let vlastní pohybové praxe, zkušenost s 150+ klienty a odborné zázemí v tréninku, józe a psychologii.",
+      en: "Kryštof Švec, personal trainer in Prague. Ten years of personal movement practice, experience with 150+ clients, and professional grounding in training, yoga and psychology.",
     },
   },
   {
@@ -135,6 +135,7 @@ export const ROUTES = [
   },
   {
     id: "denik",
+    public: false,
     nav: false,
     num: "04",
     path: { cs: "/denik", en: "/en/journal" },
@@ -164,7 +165,7 @@ export const ROUTES = [
 const DENIK = ROUTES.find((r) => r.id === "denik");
 
 /** One entry per article, in both editions. */
-export const POST_ROUTES = POSTS.flatMap((p) =>
+export const POST_ROUTES = DENIK.public === false ? [] : POSTS.flatMap((p) =>
   LANGS.map((lang) => ({
     id: "post:" + p.id,
     postId: p.id,
@@ -222,10 +223,8 @@ export const HASH_ALIASES = {
   praxe: "praxe",
   pribeh: "pribeh",
   spoluprace: "spoluprace",
-  denik: "denik",
   udalosti: "spoluprace",
   kontakt: "spoluprace",
-  zapisky: "denik",
   poezie: "pribeh",
 };
 
@@ -235,6 +234,7 @@ export function matchPath(pathname) {
   if (p === "") p = "/";
   if (p === "/en") p = "/en/";
   for (const r of ROUTES) {
+    if (r.public === false) continue;
     for (const lang of LANGS) {
       if (r.path[lang].replace(/\/+$/, "") === p.replace(/\/+$/, "")) {
         return { routeId: r.id, lang, postId: null };

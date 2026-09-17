@@ -1,211 +1,52 @@
-# tanmay-site · tanmaypractice.com
+# tanmay-site
 
-The public website. React and Vite, no libraries beyond React.
+The public Czech and English website for [tanmaypractice.com](https://tanmaypractice.com), built with React, TypeScript and Vite.
 
-Brand authority is `Context/Brand/Canonical/` in the Tanmay-Cowork
-workspace. Read it before touching copy or visual direction, and read
-`tanmay_brand_glosar_V2_CZ_master.md` before writing any Czech.
+## Current source
 
-What may be published is `PUBLIC-FACTS-LEDGER.md` in this repository.
-Read it before adding any factual claim to the site.
+This repository now contains the GTP M10 pass5 source. The owner designated that work as the current website on 2026-09-17. It supersedes the older Claude/V8 implementation.
 
----
+- Desktop from 900 CSS px: locked V9.22 appearance and content, with the accepted M7 FAQ and M9 meaning-text changes.
+- Below 900 CSS px: the M10 responsive implementation, including phone, tablet and landscape layouts.
+- M10 also repairs shared navigation, unpublished routes, language of error pages, metadata and keyboard focus.
 
-## Structure
+Integration is prepared on `integration/gtp-m10-2026-09-17`. Migration does not mean publication. Current integration results and next actions belong in the workspace's `Work/website/STATUS.md`.
 
-| Path | What it is |
+The full original GTP package and its QA history are preserved under `Work/website/References/GTP-2026-09-17/Work/tanmay-work-mobil-desktop-v922/TANMAY-WORK-PREDANI-2026-09-15/`. The preceding source and controls are preserved under `Work/website/Archive/2026-09-17-before-gtp/`. These are workspace paths, not files expected on the public host.
+
+## Structure and scope
+
+| Path | Purpose |
 |---|---|
-| `src/site.js` | The public surface contract: routes, per-route metadata, journal entries, aliases. Plain JavaScript because the build reads it too. **There is no second copy of the route map.** |
-| `src/App.tsx` | The whole site: stylesheet, content, components. |
-| `scripts/postbuild.mjs` | Turns the one built shell into a real pre-rendered file per route, plus `404.html`, `sitemap.xml` and `robots.txt`. Runs inside `npm run build`. |
-| `scripts/build-media.py` | Photographic derivatives and the ink cotton tile. Authoring tool, run by hand. |
-| `scripts/build-material.py` | The Material Landscape set from Tanmay's selected sources; see `MATERIAL-ASSET-MANIFEST.md`. Authoring tool. |
-| `scripts/build-fonts.py` | The four Brand V2 typefaces, subset, as first party woff2. Authoring tool. |
-| `scripts/build-og.py` | The 18 social preview cards. Authoring tool. |
-| `tests/` | The launch gate. See `PUBLIC-LAUNCH-CHECKLIST.md`. |
-| `MATERIAL-ASSET-MANIFEST.md` | One table of truth for every generated and cutout asset: accepted, rejected, budgets, fallbacks. |
-| `public/_redirects` | Old public paths, kept alive. |
-| `wrangler.jsonc` | Cloudflare: assets from `./dist`, unknown paths get `404.html`. |
+| `src/site.js` | Public routes, language pairs, metadata and shared contact destinations |
+| `src/App.tsx`, `src/components/` | Accepted desktop implementation and shared components/data |
+| `src/mobile/` | Responsive interface below 900 CSS px |
+| `src/components/collaboration-pricing.data.ts` | Owner-supplied price data |
+| `src/components/home-reviews.data.js` | Owner-supplied client reviews and labelled English translations |
+| `src/runtime-navigation.js`, `src/page-metadata.js` | Shared navigation and metadata behavior |
+| `scripts/postbuild.mjs` | Per-route HTML metadata, 404 document, sitemap and robots |
+| `public/` | First-party fonts, media and redirect rules |
+| `tests/` | Route, preview, metadata and precise source-protection checks |
 
-Authoring tools are never dependencies. They fetch what they need with
-`npm install --no-save`, so the Cloudflare build installs React and Vite
-and nothing else.
+There are ten published route variants: Home, Praxe / Practice, Příběh / Story, Spolupráce / Work with me, and Soukromí / Privacy, each in Czech and English. Czech uses the root; English uses `/en/`. The journal and its articles remain unpublished. Do not restore them from old documentation or old redirects.
 
----
+Each public route gets its own HTML metadata. Page content is rendered by React; this is not full server-rendered page content. Without JavaScript, the document provides a contact fallback.
 
-## Routes
+## Local work
 
-Czech lives at the root. English lives under `/en/`. The path decides
-the language, so a shared link always opens in the language it was
-shared in.
-
-| Czech | English |
-|---|---|
-| `/` | `/en/` |
-| `/praxe` | `/en/practice` |
-| `/pribeh` | `/en/story` |
-| `/spoluprace` | `/en/work-with-me` |
-| `/denik` | `/en/journal` |
-| `/denik/<slug>` | `/en/journal/<slug>` |
-| `/soukromi` | `/en/privacy` |
-
-Every one of those is a real pre-rendered HTML file with its own title,
-description, canonical, hreflang pair, Open Graph card and structured
-data. A crawler that never runs JavaScript still reads all of it.
-
-**Old links keep working.** The hash routes the site used to serve
-(`#/praxe`, `#/pribeh`, `#/spoluprace`, `#/denik`, and the aliases
-`#/udalosti`, `#/kontakt`, `#/zapisky`, `#/poezie`) are rewritten to the
-clean path on load, without a reload. The old bare paths redirect 301
-through `public/_redirects`. Do not remove either: the site is live.
-
----
-
-## Language
-
-One complete language per page, never two. The switch in the header is a
-link to the counterpart URL, which is also the `hreflang` alternate.
-`localStorage` is not involved; there is nothing to go stale and nothing
-to disagree with the address bar.
-
-Czech display type is EB Garamond, English is Cormorant Garamond, set by
-`html[lang]`. The wordmark stays Cormorant in both. Czech metadata uses
-reduced tracking because the words carry diacritics. A non-breaking
-space is inserted automatically after single-letter Czech prepositions
-and conjunctions.
-
-CZ and EN are separate editorial versions. Do not translate line by
-line.
-
----
-
-## Fonts
-
-Served from this domain, subset to Latin-1 plus Latin Extended-A plus
-the punctuation the brand sets. Nine faces, 181 kB on disk, about 138 kB
-on a Czech page. All four families are SIL OFL 1.1; `public/fonts/OFL.txt`
-carries the licence.
-
-Google Fonts is not used. The footer says there are no third parties and
-that has to be true.
-
-Regenerate: `npm run fonts`. It rewrites `public/fonts/` and
-`public/fonts/tanmay-fonts.css`, which `postbuild.mjs` inlines into every
-page.
-
----
-
-## Media
-
-`public/media/` holds committed derivatives. The masters are in the
-workspace, not here. Names, crops, treatment and contracts are in
-`VISUAL-ASSET-PLAN.md`; edit direction and the generation prompts are in
-`IMAGE-GENERATION-BRIEF.md`.
-
-Every photograph is optional at runtime. A figure removes itself if its
-file is missing, so an absent file leaves no frame and no broken icon.
-The site is complete and intentional without any of them.
-
-Rebuild: `npm run media -- --masters ../Assets/Masters`.
-
----
-
-## What to edit in `src/App.tsx`
-
-Everything editable is in the `DATA` section near the top, or in
-`src/site.js`.
-
-| Where | What |
-|---|---|
-| `src/site.js` · `ROUTES` | Paths, navigation labels, per-route title and description |
-| `src/site.js` · `POSTS` | Journal entries: slug, date, title, tag, excerpt |
-| `src/App.tsx` · `BODIES` | The text of each journal entry |
-| `src/App.tsx` · `MEDIA` | Photograph base names and built widths |
-| `src/App.tsx` · `ANCHORS` | The three anchors. Canonical text. Change only when the Brand Book changes. |
-| `src/App.tsx` · `OFFERS` | **Empty on purpose.** See below. |
-| `src/App.tsx` · `EVENTS` | Real, announced events only |
-
-Adding a journal entry means: one entry in `POSTS`, one in `BODIES`,
-then `npm run og`. The routes, the sitemap, the metadata and the card
-follow by themselves.
-
----
-
-## The offer
-
-`OFFERS` is an empty array and `OfferSlot()` renders a complete, true
-description of what the personal work is and how it starts, with no
-price and no placeholder.
-
-The commercial frame exists and Tanmay approved it on 2026-08-16, but
-`Work/offers/` still gates its publication on five decisions and eight
-items of external verification. Until Offers releases it, no price, no
-package name and no session count goes on this site. See
-`PUBLIC-FACTS-LEDGER.md` §5.
-
-When it is released: fill `OFFERS`, the section renders without any
-layout change, then relax the price negative control in
-`tests/content-truth.test.mjs` and record the change in the ledger.
-
----
-
-## Commands
-
-```
-npm install
-npm run dev              # local development
-
-npm run typecheck        # tsc --noEmit
-npm run build            # typecheck, bundle, pre-render every route
-npm test                 # the launch gate
-npm run check            # build then test, this is the one that matters
-
-npm run browser:setup    # installs playwright-core --no-save, for the browser suite
-npm run fonts            # regenerate public/fonts/
-npm run media            # regenerate public/media/
-npm run material         # regenerate public/media/material/
-npm run og               # regenerate public/og/
+```sh
+npm ci
+npm run dev
+npm run check
+npm run preview
 ```
 
-`npm test` without a browser runs 56 checks and skips the browser suite
-cleanly. With `npm run browser:setup` it runs 73.
+`check` runs the production build, including TypeScript, then the tests. `preview` serves generated route documents and actual local 404 responses. Historical M10 QA is evidence about the original work; it is not a new test of this integration. See [PUBLIC-LAUNCH-CHECKLIST.md](PUBLIC-LAUNCH-CHECKLIST.md).
 
----
+Preserve the locked desktop reference, original photographs, fonts and exact approved source changes. Do not regenerate photographs or revive retired asset-generation tools as part of ordinary development. Workspace instructions and Brand Canonical remain the shared context for future changes; [PUBLIC-FACTS-LEDGER.md](PUBLIC-FACTS-LEDGER.md) records the current content boundaries.
 
-## Deployment
+## Publication
 
-GitHub repo → Cloudflare Workers & Pages → custom domain
-`tanmaypractice.com`. Build command `npm run build`, output `dist`.
-Every commit deploys in about a minute.
+The existing deployment path is GitHub to Cloudflare for `tanmaypractice.com`. The build command is `npm run build`, with `dist` as the output. The intended asset configuration serves unknown paths through `404.html` with an HTTP 404 response.
 
-**A correct commit proves nothing.** Before believing a wave shipped:
-
-```
-git archive HEAD | tar x -C <empty dir>
-cd <empty dir> && npm ci && npm run build
-```
-
-If `npm ci` fails, the Cloudflare build is dead and the last bundle that
-built is still being served, with no error anywhere a visitor can see.
-Never hand-edit dependencies in `package.json`; use npm so the lockfile
-moves with it.
-
-Two things live in the Cloudflare dashboard rather than here and have to
-be verified there: the `www` → apex 301 redirect rule, and that the
-deploy picked up `not_found_handling`.
-
----
-
-## Client access
-
-"Vstup pro klienty" / "Client login" points at
-`https://klient.tanmaypractice.com`, from the desktop header, the mobile
-header, the Home strip, the Spolupráce block and the footer. It is a
-utility action, visually distinct from the public call to action, and
-never the primary one.
-
-The public site never links to `app.tanmaypractice.com` and never
-exposes invitation mechanics. Both are enforced by tests.
-
-Clients are granted access by adding their e-mail to the Cloudflare Zero
-Trust Access policy on that app.
+Verify the actual connected repository, production branch, Cloudflare project, domain and analytics configuration before pushing a release. A push to a connected branch may deploy automatically. Local build success does not verify the production host. The launch checklist records the remaining content decisions and hosting checks.

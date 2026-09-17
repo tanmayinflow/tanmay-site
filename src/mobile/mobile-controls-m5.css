@@ -1,0 +1,22 @@
+/* Compact mobile carousel controls; the desktop remains outside this tree. */
+@media (max-width:899px) {
+ .tm-mobile[data-mobile-version] .m-rail-footer {justify-content:space-between;flex-wrap:wrap;gap:6px 12px;margin-top:10px}
+ .tm-mobile[data-mobile-version] .m-rail-footer-link {flex:1 1 130px;min-width:0}
+ .tm-mobile[data-mobile-version] .m-rail-footer-link .m-text-link {margin:0;min-height:44px}
+ .tm-mobile[data-mobile-version] .m-rail-controls {margin-left:auto;gap:0}
+ .tm-mobile[data-mobile-version] .m-review-controls {display:flex;align-items:center;justify-content:center;gap:0;margin-top:8px}
+ .tm-mobile[data-mobile-version] .m-carousel-arrow {position:relative;display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;min-width:44px;min-height:44px;padding:0;border:0;border-radius:50%;background:none;color:var(--m-heading);cursor:pointer;touch-action:manipulation}
+ .tm-mobile[data-mobile-version] .m-carousel-arrow::before {content:'';position:absolute;inset:6px;border:1px solid currentColor;border-radius:50%;opacity:.32}
+ .tm-mobile[data-mobile-version] .m-carousel-arrow .m-arrow {width:15px;height:15px;flex-basis:15px}
+ .tm-mobile[data-mobile-version] .m-carousel-arrow--previous .m-arrow {transform:rotate(180deg)}
+ .tm-mobile[data-mobile-version] .m-carousel-arrow[aria-disabled=true] {opacity:.3;cursor:default}
+ .tm-mobile[data-mobile-version] .m-carousel-arrow:focus-visible {outline:1px solid var(--m-accent);outline-offset:0}
+ .tm-mobile[data-mobile-version] .m-carousel-status {position:absolute;display:block;width:1px;height:1px;min-width:0;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;pointer-events:none}
+ .tm-mobile[data-mobile-version] .m-review-card>.m-story-trigger {display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start}
+ .tm-mobile[data-mobile-version] .m-review-card .m-review-quote {display:block;width:25px;height:19px;max-width:none;margin:0 0 11px -2px;color:var(--m-accent);transform:skewX(-9deg)}
+ @media (prefers-reduced-motion:no-preference) {
+  .tm-mobile[data-mobile-version] .m-carousel-arrow {transition:color 160ms ease,opacity 160ms ease,transform 140ms ease}
+  .tm-mobile[data-mobile-version] .m-carousel-arrow:not([aria-disabled=true]):active {transform:scale(.93)}
+  .tm-mobile[data-mobile-version] .m-carousel-arrow:not([aria-disabled=true]):hover {color:var(--m-accent)}
+ }
+}

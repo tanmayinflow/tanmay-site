@@ -1,0 +1,6 @@
+@media(max-width:899px) {
+ .tm-mobile[data-mobile-version=M6] .m-circular-viewport {scroll-behavior:auto}
+ .tm-mobile[data-mobile-version=M6] .m-rail-viewport>[data-carousel-clone] {pointer-events:none}
+ .tm-mobile[data-mobile-version=M6] .m-review-card[data-carousel-clone] {cursor:pointer}
+ .tm-mobile[data-mobile-version=M6] .m-review-card .m-review-quote {font-family:var(--ff-display);font-weight:500;font-size:2.25rem;line-height:.4;display:block;width:25px;height:20px;margin:0 0 10px;color:var(--m-accent);transform:none;font-synthesis:none}
+}

@@ -1,0 +1,3 @@
+# Exact source and immutable fixture bytes are verified by the desktop guards.
+# Keep checkout bytes identical across Windows and Linux release environments.
+* -text

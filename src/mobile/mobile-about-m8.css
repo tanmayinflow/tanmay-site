@@ -1,0 +1,59 @@
+/* M8 About: original words and photographs, with native scrolling and a linear large-text fallback. */
+@media (max-width:899px) {
+ .tm-mobile[data-mobile-version] .m-about-intro-copy {padding:8px 0 26px}
+ .tm-mobile[data-mobile-version] .m-about-intro-copy p {font-size:.8125rem;line-height:1.75;color:var(--m-body);margin:0}
+ .tm-mobile[data-mobile-version] .m-story-timeline {--story-progress:0;--story-reader-height:clamp(240px,43svh,320px);margin-top:26px}
+ .tm-mobile[data-mobile-version] .m-story-phase-controls {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;align-items:start}
+ .tm-mobile[data-mobile-version] .m-story-phase-controls button {display:flex;align-items:center;justify-content:flex-start;gap:7px;background:none;border:0;border-radius:4px;min-height:44px;padding:8px 0;text-align:left;font-family:var(--ff-display);font-size:1.0625rem;line-height:1.1;color:var(--m-body);cursor:pointer;touch-action:manipulation}
+ .tm-mobile[data-mobile-version] .m-story-phase-controls button>span {font-family:var(--ff-meta);font-size:.625rem;letter-spacing:.06em;color:var(--m-muted)}
+ .tm-mobile[data-mobile-version] .m-story-phase-controls button[aria-pressed=true],.tm-mobile[data-mobile-version] .m-story-phase-controls button[aria-pressed=true]>span {color:var(--m-accent)}
+ .tm-mobile[data-mobile-version] .m-story-phase-controls button:focus-visible {outline:1px solid var(--m-accent);outline-offset:3px}
+ .tm-mobile[data-mobile-version] .m-story-scroll-hint {font-family:var(--ff-meta);font-size:.625rem;line-height:1.4;letter-spacing:.045em;color:var(--m-muted);margin:2px 0 12px}
+ .tm-mobile[data-mobile-version] .m-story-reader-frame {position:relative;border:1px solid rgba(244,240,235,.1);border-radius:10px;background:rgba(244,240,235,.025)}
+ .tm-mobile[data-mobile-version] .m-story-progress {position:absolute;z-index:1;left:15px;top:25px;bottom:25px;width:1px;background:rgba(244,240,235,.17);pointer-events:none}
+ .tm-mobile[data-mobile-version] .m-story-progress-fill {position:absolute;inset:0;background:var(--m-accent);transform:scaleY(var(--story-progress));transform-origin:top}
+ .tm-mobile[data-mobile-version] .m-story-progress i {position:absolute;left:-2px;display:block;width:5px;height:5px;border-radius:50%;transform:translateY(-50%);background:#65625c}
+ .tm-mobile[data-mobile-version] .m-story-progress i.is-reached {background:var(--m-accent)}
+ .tm-mobile[data-mobile-version] .m-story-scroll {position:relative;height:var(--story-reader-height);overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:auto;scrollbar-width:thin;scrollbar-color:rgba(200,120,80,.4) transparent;border-radius:10px;scroll-padding:0;touch-action:pan-y pinch-zoom}
+ .tm-mobile[data-mobile-version] .m-story-scroll:focus-visible {outline:1px solid var(--m-accent);outline-offset:4px}
+ .tm-mobile[data-mobile-version] .m-story-stages {list-style:none;padding:0;margin:0}
+ .tm-mobile[data-mobile-version] .m-story-stages>li {min-height:var(--story-reader-height);padding:22px 20px 24px 34px;scroll-margin:0;box-sizing:border-box}
+ .tm-mobile[data-mobile-version] .m-story-stages h3 {display:flex;align-items:baseline;gap:10px;font-size:1.3125rem;line-height:1.2;margin:0 0 13px}
+ .tm-mobile[data-mobile-version] .m-story-stages h3>span {font-family:var(--ff-meta);font-size:.6875rem;letter-spacing:.06em;color:var(--m-accent)}
+ .tm-mobile[data-mobile-version] .m-story-stages p {font-size:.8125rem;line-height:1.75;margin:0}
+ .tm-mobile[data-mobile-version] .m-story-media {position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;margin:20px 0 0;border-radius:10px;background:rgba(244,240,235,.025)}
+ .tm-mobile[data-mobile-version] .m-story-photo {position:absolute;inset:0;opacity:0;pointer-events:none}
+ .tm-mobile[data-mobile-version] .m-story-photo.is-visible {opacity:1}
+ .tm-mobile[data-mobile-version] .m-story-photo img {display:block;width:100%;height:100%;object-fit:contain;object-position:center}
+ .tm-mobile[data-mobile-version] .m-story-photo-caption {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+ .tm-mobile[data-mobile-version] .m-story-inline-photo {display:none;margin:22px 0 0}
+ .tm-mobile[data-mobile-version] .m-story-inline-photo img {display:block;width:100%;height:auto;max-height:none;border-radius:10px}
+ .tm-mobile[data-mobile-version] .m-about-practice>.m-inner {align-items:start;row-gap:15px}
+ .tm-mobile[data-mobile-version] .m-about-practice h2 {align-self:start;grid-row:1}
+ .tm-mobile[data-mobile-version] .m-about-practice .m-forest {grid-row:1/3;align-self:start}
+ .tm-mobile[data-mobile-version] .m-about-vajra {display:block;grid-column:1;grid-row:2;align-self:start;width:100%;height:auto;max-height:54px;color:var(--m-heading);margin:0}
+ .tm-mobile[data-mobile-version] .m-about-practice .m-editorial-stack {grid-row:3;margin-top:12px}
+ .tm-mobile[data-mobile-version] .m-about-practice .m-editorial-stack h3 {display:flex;align-items:baseline;gap:10px}
+ .tm-mobile[data-mobile-version] .m-approach-number {flex:none;font-family:var(--ff-meta);font-size:.625rem;color:var(--accent-earth);letter-spacing:.08em}
+ .tm-mobile[data-mobile-version] .m-education dl {grid-template-columns:repeat(2,minmax(0,1fr));column-gap:20px;row-gap:25px}
+ .tm-mobile[data-mobile-version] .m-education dt {font-size:.6875rem;line-height:1.5}
+ .tm-mobile[data-mobile-version] .m-education dd {font-size:.75rem;line-height:1.65}
+ .tm-mobile[data-mobile-version] .m-credential-list li {padding-left:11px;overflow-wrap:anywhere}
+ @container m-chapter (max-width:14em) {
+  .tm-mobile[data-mobile-version] .m-story-phase-controls {grid-template-columns:minmax(0,1fr);gap:2px}
+  .tm-mobile[data-mobile-version] .m-story-scroll-hint,.tm-mobile[data-mobile-version] .m-story-progress,.tm-mobile[data-mobile-version] .m-story-media {display:none}
+  .tm-mobile[data-mobile-version] .m-story-reader-frame {border:0;background:none}
+  .tm-mobile[data-mobile-version] .m-story-scroll {height:auto;overflow:visible;border-radius:0}
+  .tm-mobile[data-mobile-version] .m-story-stages>li {min-height:0;padding:26px 0;scroll-margin-top:20px}
+  .tm-mobile[data-mobile-version] .m-story-inline-photo {display:block}
+  .tm-mobile[data-mobile-version] .m-about-practice .m-forest {grid-column:1/-1;grid-row:2}
+  .tm-mobile[data-mobile-version] .m-about-vajra {grid-column:1/-1;grid-row:3;width:140px;justify-self:center}
+  .tm-mobile[data-mobile-version] .m-about-practice .m-editorial-stack {grid-row:4}
+  .tm-mobile[data-mobile-version] .m-education dl {grid-template-columns:minmax(0,1fr)}
+ }
+ @media (prefers-reduced-motion:no-preference) {
+  .tm-mobile[data-mobile-version] .m-story-photo {transition:opacity 420ms ease}
+  .tm-mobile[data-mobile-version] .m-story-progress-fill {transition:transform 90ms linear}
+  .tm-mobile[data-mobile-version] .m-story-phase-controls button,.tm-mobile[data-mobile-version] .m-story-progress i {transition:color 180ms ease,background-color 180ms ease}
+ }
+}

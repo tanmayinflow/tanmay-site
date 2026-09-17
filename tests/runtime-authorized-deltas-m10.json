@@ -1,0 +1,114 @@
+{
+  "stage": "M10",
+  "scope": "Only authorized prepublication runtime repairs: enforce existing publication scope, derive unknown-route locale from URL, synchronize route metadata, focus new content after navigation. No approved page copy or visual definitions change.",
+  "parentDesktopDelta": "desktop-authorized-deltas.json",
+  "reference": "M9/desktop-expected at 5176 remains unchanged for visual comparison",
+  "appNormalization": "App baseline applies M7/M9 copy first, then LF line normalization already used by the mobile-adapter guard. Other files retain exact original bytes.",
+  "files": [
+    {
+      "path": "src/App.tsx",
+      "beforeSha256": "5ede1d5e428e9c72f9ca2a11bdabbb1bdf4e3243f22bc228560d9daf0e67a371",
+      "authorizedSha256": "efc901874da8616caf79c77cada4ec202f6474c46b9aa452a7ce9258b1b7be68",
+      "replacements": [
+        {
+          "id": "runtime-import",
+          "before": "import HomeReferences from \"./components/HomeReferences\";",
+          "after": "import HomeReferences from \"./components/HomeReferences\";\nimport { resolveLocation, syncRouteMetadata, scheduleRouteFocus } from \"./runtime-navigation.js\";"
+        },
+        {
+          "id": "location-public-scope-and-locale",
+          "before": "function readLocation(): Loc {\n  try {\n    /* Pre-rendered pages carry their own route, so the first paint is\n       correct even before the router looks at the address. */\n    const meta = document.querySelector('meta[name=\"tm-route\"]');\n    const hash = (window.location.hash || \"\").match(/^#\\/([a-z]*)/);\n    if (hash) {\n      const target = HASH_ALIASES[hash[1]];\n      if (target) {\n        const lang = window.location.pathname.indexOf(\"/en/\") === 0 ? \"en\" : \"cs\";\n        return { routeId: target, lang, postId: null };\n      }\n    }\n    const byPath = matchPath(window.location.pathname);\n    if (byPath) return byPath;\n    if (meta) {\n      const v = (meta.getAttribute(\"content\") || \"\").split(\":\");\n      if (v[0] === \"notfound\") return { routeId: \"notfound\", lang: v[1] || \"cs\", postId: null };\n    }\n    return { routeId: \"notfound\", lang: window.location.pathname.indexOf(\"/en/\") === 0 ? \"en\" : \"cs\", postId: null };\n  } catch (e) {\n    return HOME;\n  }\n}\n",
+          "after": "function readLocation(): Loc {\n  return resolveLocation(window.location.pathname, window.location.hash);\n}\n"
+        },
+        {
+          "id": "complete-metadata-and-navigation-focus",
+          "before": "  useEffect(() => {\n    if (firstPaint.current) { firstPaint.current = false; return; }\n    const route = ROUTES.find((r: any) => r.id === loc.routeId);\n    let title: string;\n    let desc: string;\n    if (loc.routeId === \"post\") {\n      const p = POSTS.find((x) => x.id === loc.postId);\n      const room = loc.lang === \"cs\" ? \"Deník praxe\" : \"Practice log\";\n      title = p.title[loc.lang] + \" · \" + room + \" · tanmay\";\n      desc = p.excerpt[loc.lang];\n    } else if (route) {\n      title = route.title[loc.lang];\n      desc = route.description[loc.lang];\n    } else {\n      title = loc.lang === \"cs\" ? \"Stránka nenalezena · tanmay\" : \"Page not found · tanmay\";\n      desc = loc.lang === \"cs\"\n        ? \"Tahle stránka na tanmaypractice.com není.\"\n        : \"This page does not exist on tanmaypractice.com.\";\n    }\n    document.documentElement.lang = loc.lang;\n    document.title = title;\n    const set = (sel: string, attr: string, value: string) => {\n      const el = document.querySelector(sel);\n      if (el) el.setAttribute(attr, value);\n    };\n    set('meta[name=\"description\"]', \"content\", desc);\n    set('meta[property=\"og:title\"]', \"content\", title);\n    set('meta[property=\"og:description\"]', \"content\", desc);\n    set('meta[property=\"og:url\"]', \"content\", \"https://tanmaypractice.com\" + window.location.pathname);\n    set('link[rel=\"canonical\"]', \"href\", \"https://tanmaypractice.com\" + window.location.pathname);\n  }, [loc]);",
+          "after": "  useEffect(() => {\n    syncRouteMetadata(document, loc, window.location.pathname);\n    if (firstPaint.current) { firstPaint.current = false; return; }\n    return scheduleRouteFocus(document, window);\n  }, [loc]);"
+        },
+        {
+          "id": "public-legacy-rewrite-only",
+          "before": "  useEffect(() => {\n    if (!window.location.hash) return;\n    const m = (window.location.hash || \"\").match(/^#\\/([a-z]*)/);\n    if (!m) return;\n    const target = HASH_ALIASES[m[1]];\n    if (!target) return;\n    const path = routePath(target, loc.lang);\n    window.history.replaceState({}, \"\", path);\n    setLoc({ routeId: target, lang: loc.lang, postId: null });\n    // eslint-disable-next-line react-hooks/exhaustive-deps\n  }, []);",
+          "after": "  useEffect(() => {\n    if (!/^#\\//.test(window.location.hash || \"\")) return;\n    const next = resolveLocation(window.location.pathname, window.location.hash);\n    if (next.routeId === \"notfound\") return;\n    const path = hrefFor(next);\n    window.history.replaceState({}, \"\", path);\n    setLoc(next);\n    // eslint-disable-next-line react-hooks/exhaustive-deps\n  }, []);"
+        },
+        {
+          "id": "recover-home-from-legacy-error",
+          "before": "if (href === window.location.pathname) {",
+          "after": "if (href === window.location.pathname && !/^#\\//.test(window.location.hash || \"\")) {"
+        }
+      ]
+    },
+    {
+      "path": "src/site.js",
+      "beforeSha256": "9cbc4172602c2b40c8b1b343ecc0a5f1be9b087cac28be9b755780f2c8f7b393",
+      "authorizedSha256": "8cf4f99090da23ccee184e132ee7fcffc2daeb0fab50dfb666a837a87ce033b6",
+      "replacements": [
+        {
+          "id": "journal-not-public",
+          "before": "    id: \"denik\",\n    nav: false,",
+          "after": "    id: \"denik\",\n    public: false,\n    nav: false,"
+        },
+        {
+          "id": "unpublished-post-routes",
+          "before": "export const POST_ROUTES = POSTS.flatMap((p) =>",
+          "after": "export const POST_ROUTES = DENIK.public === false ? [] : POSTS.flatMap((p) =>"
+        },
+        {
+          "id": "no-journal-hash-alias",
+          "before": "  denik: \"denik\",\n",
+          "after": ""
+        },
+        {
+          "id": "no-journal-notes-hash-alias",
+          "before": "  zapisky: \"denik\",\n",
+          "after": ""
+        },
+        {
+          "id": "resolve-public-routes-only",
+          "before": "  for (const r of ROUTES) {\n    for (const lang of LANGS) {",
+          "after": "  for (const r of ROUTES) {\n    if (r.public === false) continue;\n    for (const lang of LANGS) {"
+        }
+      ]
+    },
+    {
+      "path": "scripts/postbuild.mjs",
+      "beforeSha256": "58dbae7c5ebad5986a06ba9d780b03382a23b4000e03fe7a50b47ae9deccd475",
+      "authorizedSha256": "bb40bc643d1fb87664b73d0be7c57a2e401f08c79ac560f96c67a9012cf7334e",
+      "replacements": [
+        {
+          "id": "shared-structured-metadata-import",
+          "before": "import { ORIGIN, ROUTES, POSTS, LANGS, allPages, IG_URL } from \"../src/site.js\";",
+          "after": "import { ORIGIN, ROUTES, POSTS, LANGS, allPages, IG_URL } from \"../src/site.js\";\r\nimport { jsonLd } from \"../src/page-metadata.js\";"
+        },
+        {
+          "id": "single-structured-metadata-definition",
+          "before": "function jsonLd(page) {\r\n  const { lang, path, routeId } = page;\r\n  const url = ORIGIN + path;\r\n  const person = {\r\n    \"@type\": \"Person\",\r\n    name: \"Kryštof Švec\",\r\n    url: ORIGIN + (lang === \"cs\" ? \"/\" : \"/en/\"),\r\n    sameAs: [IG_URL],\r\n  };\r\n  if (routeId === \"home\") {\r\n    return {\r\n      \"@context\": \"https://schema.org\",\r\n      \"@graph\": [\r\n        {\r\n          \"@type\": \"WebSite\",\r\n          name: \"tanmay practice\",\r\n          url: ORIGIN + \"/\",\r\n          inLanguage: lang === \"cs\" ? \"cs-CZ\" : \"en\",\r\n        },\r\n        { ...person, image: ORIGIN + \"/media/home-v9-1/portrait-home-1153.webp\" },\r\n      ],\r\n    };\r\n  }\r\n  if (routeId === \"pribeh\") {\r\n    return { \"@context\": \"https://schema.org\", ...person, mainEntityOfPage: url };\r\n  }\r\n  if (routeId === \"post\") {\r\n    const post = POSTS.find((p) => p.id === page.postId);\r\n    const denik = ROUTES.find((r) => r.id === \"denik\");\r\n    return {\r\n      \"@context\": \"https://schema.org\",\r\n      \"@graph\": [\r\n        {\r\n          \"@type\": \"Article\",\r\n          headline: post.title[lang],\r\n          description: post.excerpt[lang],\r\n          datePublished: post.date,\r\n          inLanguage: lang === \"cs\" ? \"cs-CZ\" : \"en\",\r\n          author: person,\r\n          mainEntityOfPage: url,\r\n        },\r\n        {\r\n          \"@type\": \"BreadcrumbList\",\r\n          itemListElement: [\r\n            {\r\n              \"@type\": \"ListItem\", position: 1,\r\n              name: lang === \"cs\" ? \"Deník praxe\" : \"Practice log\",\r\n              item: ORIGIN + denik.path[lang],\r\n            },\r\n            { \"@type\": \"ListItem\", position: 2, name: post.title[lang], item: url },\r\n          ],\r\n        },\r\n      ],\r\n    };\r\n  }\r\n  return null;\r\n}\r\n\r\n",
+          "after": ""
+        }
+      ]
+    },
+    {
+      "path": "public/_redirects",
+      "beforeSha256": "ed2b0720d3b1096b1516142902a30aa004a952db2c6001f3de77dd8ea5ee265d",
+      "authorizedSha256": "fb8dc8da69af8b1cb1ae3966e22d83aa1406489fddccbdbd2a873dfdd0d20eb4",
+      "replacements": [
+        {
+          "id": "remove-unpublished-journal-target",
+          "before": "/zapisky    /denik        301\n",
+          "after": ""
+        }
+      ]
+    }
+  ],
+  "newFiles": [
+    {
+      "path": "src/page-metadata.js",
+      "bytes": 2450,
+      "sha256": "989dfad95e206c3d625d4efb49ede7dfd9898d4b4fe0e2214636c9331fb63f25"
+    },
+    {
+      "path": "src/runtime-navigation.js",
+      "bytes": 4495,
+      "sha256": "32889c371892ba1dad68cd5e42a54a1f3d6b1477c1638c153cdc5dc84d2bc4c0"
+    }
+  ]
+}

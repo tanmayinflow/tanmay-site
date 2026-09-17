@@ -1,0 +1,31 @@
+/* M9 shared refinements. Desktop starts at 900px and is outside these rules. */
+@media(max-width:899px) {
+ .tm-mobile[data-mobile-version] .m-menu-lines {filter:none;opacity:.72}
+ .tm-mobile[data-mobile-version] .m-hero--collaboration .m-hero-photo {transform:translateY(clamp(-42px,-9vw,-28px));overflow:visible}
+ .tm-mobile[data-mobile-version] .m-hero--collaboration .m-hero-benefits {font-size:1.125rem;line-height:1.45;max-width:78%;margin-top:17px}
+ .tm-mobile[data-mobile-version] .m-hero-benefits span {display:block}
+ .tm-mobile[data-mobile-version] .m-needs-opening p {text-align:left;hyphens:none}
+ .tm-mobile[data-mobile-version] .m-experience .m-text-link {display:flex;width:max-content;max-width:100%;margin-left:auto;margin-top:16px;text-align:right}
+ .tm-mobile[data-mobile-version] .collaboration-faq .faq-symbol::before {inset:auto;left:50%;top:50%;width:4px;height:4px;clip-path:none;border-radius:50%;transform:translate(-50%,-50%)}
+ /* Same supplied paper contour as the other transitions; kept below the toes. */
+ .tm-mobile[data-mobile-version] .m-hero--practice .m-hero-scene>.m-material-edge {height:9cqw;bottom:-5.8cqw}
+ .tm-mobile[data-mobile-version]:not([data-page=home]) .m-footer {padding:8px var(--m-gutter) 10px;row-gap:0}
+ .tm-mobile[data-mobile-version]:not([data-page=home]) .m-footer .m-logo {width:82px}
+ .tm-mobile[data-mobile-version]:not([data-page=home]) .m-footer p {font-size:.6875rem;line-height:1.6;margin:0}
+ .tm-mobile[data-mobile-version]:not([data-page=home]) .m-footer>a:last-child {font-size:.6875rem;min-height:44px}
+ .tm-mobile[data-mobile-version] .m-hero.m-hero--about .m-hero-identity {display:grid;grid-template-columns:max-content minmax(0,1fr);gap:16px;align-items:center}
+ .tm-mobile[data-mobile-version] .m-hero.m-hero--about .m-hero-identity h1 {font-size:clamp(2.5rem,11.8vw,2.875rem);line-height:1.06;white-space:nowrap}
+ .tm-mobile[data-mobile-version] .m-hero--about .m-hero-service {margin:0;padding-right:12px;font-size:.6875rem;line-height:1.5;text-wrap:pretty;letter-spacing:.09em}
+ @media(min-width:600px) {
+  .tm-mobile[data-mobile-version] .m-hero.m-hero--about .m-hero-identity {grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:12px}
+  .tm-mobile[data-mobile-version] .m-hero.m-hero--about .m-hero-identity h1 {font-size:2.875rem;white-space:normal}
+  .tm-mobile[data-mobile-version] .m-hero--about .m-hero-service {padding-right:0}
+  .tm-mobile[data-mobile-version] .m-hero--collaboration .m-hero-benefits {max-width:none}
+ }
+ @container m-hero (max-width:16em) {
+  .tm-mobile[data-mobile-version] .m-hero.m-hero--about .m-hero-identity {grid-template-columns:minmax(0,1fr);gap:12px}
+  .tm-mobile[data-mobile-version] .m-hero.m-hero--about .m-hero-identity h1 {white-space:normal}
+  .tm-mobile[data-mobile-version] .m-hero--collaboration .m-hero-benefits {max-width:none}
+ }
+}
+
