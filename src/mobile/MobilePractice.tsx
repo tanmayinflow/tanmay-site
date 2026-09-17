@@ -19,7 +19,7 @@ export default function MobilePractice({lang}:{lang:string}) {
     <Chapter title={c(13)} eyebrow={c(12)} className="m-anchors m-dark">
       <p className="m-page-lead"><RichText>{c(14)}</RichText></p><MobilePracticeAnchors lang={lang} stance={c(15)}/>
     </Chapter>
-    <Chapter title={c(17)} eyebrow={c(16)} className="m-practice-session">
+    <Chapter title={c(17)} className="m-practice-session">
       <p><RichText>{c(18)}</RichText></p><p className="m-eyebrow m-session-topics">{c(19)}</p>
       <div className="m-session-composition m7-session-composition"><div className="m7-session-topics">{approvedLists.PagePraxe.session.map(r=><StoryCard key={r[0]} title={r[lang==='en'?3:1]} lang={lang} className="m7-session-topic"><p><RichText>{r[lang==='en'?4:2]}</RichText></p></StoryCard>)}</div><Photo asset="rings" alt={c(20)} className="m-rings"/></div>
     </Chapter>

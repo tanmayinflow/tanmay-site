@@ -1,0 +1,97 @@
+/* Owner's physical-phone review, 17 September. Existing artwork and desktop stay locked. */
+@media (max-width:899px) {
+ .tm-mobile[data-mobile-version=M10] {font-size:.9375rem}
+ .tm-mobile[data-mobile-version=M10] .m-hero[class]>.m-hero-identity {padding-top:14px;padding-bottom:14px}
+ .tm-mobile[data-mobile-version=M10] .m-hero[class] .m-hero-identity h1 {font-size:clamp(2.75rem,12.6vw,3.5rem);line-height:1.06;white-space:normal}
+ .tm-mobile[data-mobile-version=M10] .m-hero[class] .m-hero-service {font-size:clamp(.8125rem,3.4vw,.9375rem);line-height:1.45;letter-spacing:.07em;margin-top:10px;max-width:100%}
+ .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--home .m-hero-service {max-width:82%}
+ .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--about .m-hero-identity {grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:14px}
+ .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--about .m-hero-service {margin:0;padding:0;letter-spacing:.045em}
+ .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--practice .m-hero-intro {font-size:1.0625rem;line-height:1.5;margin-top:14px}
+ .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--home .m-hero-photo img {--m-portrait-lift:clamp(68px,20vw,100px);top:calc(-1 * var(--m-portrait-lift));height:calc(100% + var(--m-portrait-lift))}
+ .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--about .m-hero-photo img {top:0;height:100%}
+ /* Move the two original crops independently: bars above the left toes, with
+    their complete original silhouette inside the page. Shared scale is retained. */
+ .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--collaboration {--m-collab-lift:clamp(52px,18vw,82px)}
+ .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--collaboration .m-hero-benefits {font-size:1.125rem;line-height:1.4;max-width:76%;margin-top:12px}
+ .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--collaboration .m10-person-crop {bottom:var(--m-collab-lift)}
+ .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--collaboration .m10-bars-crop {left:8px;bottom:calc(var(--m-collab-lift) + 130px * var(--m-collab-scale,.4))}
+
+ /* A readable contact pill, with the same understated shape and safe-area handling. */
+ .tm-mobile[data-mobile-version=M10] .m-dock {gap:8px}
+ .tm-mobile[data-mobile-version=M10] .m-dock .m-dock-primary {flex-basis:248px;min-height:54px;font-family:var(--ff-body);font-size:.9375rem;font-weight:600;line-height:1.3;letter-spacing:0;padding:10px 18px}
+ .tm-mobile[data-mobile-version=M10] .m-dock .m-dock-message {height:54px;min-height:54px;flex-basis:54px}
+ .tm-mobile[data-mobile-version=M10] .m-dock .m-dock-message svg {width:29px;height:29px}
+
+ .tm-mobile[data-mobile-version=M10] .m-home-current {color:#e3a07b;filter:drop-shadow(0 1px 0 #d58a60) drop-shadow(0 -1px 0 #d58a60)}
+ .tm-mobile[data-mobile-version=M10] .m-home-current .terrain-home__pigment {background-color:#e3a07b}
+ .tm-mobile[data-mobile-version=M10] .m-work-text h2 {font-size:1.625rem;line-height:1.17;margin:0 8px 0 -10px}
+ .tm-mobile[data-mobile-version=M10] .m-work-captions {padding-top:clamp(106px,32vw,160px);gap:22px}
+ .tm-mobile[data-mobile-version=M10] .m-work-caption:nth-child(1) {margin-left:-10px;margin-right:6px}
+ .tm-mobile[data-mobile-version=M10] .m-work-caption:nth-child(2) {margin-left:12px}
+ .tm-mobile[data-mobile-version=M10] .m-work-caption:nth-child(3) {margin-left:-14px;margin-right:8px}
+ .tm-mobile[data-mobile-version=M10] .m-work-caption .m-story-title {font-size:1.0625rem;line-height:1.3}
+
+ /* Increase small reading text, without flattening the existing display hierarchy. */
+ .tm-mobile[data-mobile-version=M10] .m-chapter p:not([class]),
+ .tm-mobile[data-mobile-version=M10] .m-detail-body,
+ .tm-mobile[data-mobile-version=M10] .m-about-intro-copy p,
+ .tm-mobile[data-mobile-version=M10] .m-home-about .m-about-bio,
+ .tm-mobile[data-mobile-version=M10] .m-needs-opening p,
+ .tm-mobile[data-mobile-version=M10] .m-needs-list .m-rail-slide p,
+ .tm-mobile[data-mobile-version=M10] .m-process-steps p,
+ .tm-mobile[data-mobile-version=M10] .m7-definition-copy p,
+ .tm-mobile[data-mobile-version=M10] .m7-anchor-description p,
+ .tm-mobile[data-mobile-version=M10] .m-between .m-figure-panel-inner p {font-size:.9375rem;line-height:1.65}
+ .tm-mobile[data-mobile-version=M10] :is(.m-roots,.m-return,.m-education,.m-about-practice,.m-process,.m-between,.m-boundaries,.m-meaning,.m-earth-coda,.m-offer) {padding-block:28px}
+ .tm-mobile[data-mobile-version=M10] .m-needs {padding-top:24px;padding-bottom:8px}
+ .tm-mobile[data-mobile-version=M10] .m-experience {padding-top:8px;padding-bottom:24px}
+ .tm-mobile[data-mobile-version=M10] .m-about-intro-copy {padding:18px 0 8px}
+ .tm-mobile[data-mobile-version=M10] .m-about-intro-copy .m-editorial-link {border:0;padding-bottom:0;margin-top:8px}
+ .tm-mobile[data-mobile-version=M10] .m-roots {padding-top:18px}
+ .tm-mobile[data-mobile-version=M10][data-page=praxe] .m7-practice-definition {padding-bottom:28px}
+ .tm-mobile[data-mobile-version=M10][data-page=praxe] .m-practice-session {padding-top:18px;padding-bottom:0}
+ .tm-mobile[data-mobile-version=M10][data-page=praxe] .m-reflection {padding-bottom:32px}
+ .tm-mobile[data-mobile-version=M10] .m-practice-session .m7-session-composition {align-items:start}
+ .tm-mobile[data-mobile-version=M10] .m7-session-topics {padding-top:clamp(76px,23vw,110px);gap:14px;--m8-topic-wave:clamp(24px,8vw,38px)}
+ .tm-mobile[data-mobile-version=M10] .m7-session-topic .m-story-title {font-size:1.125rem;line-height:1.3}
+ .tm-mobile[data-mobile-version=M10] .m-closing {padding:12px 0 8px}
+ .tm-mobile[data-mobile-version=M10] .m-closing .brand-wordmark {width:118px}
+ .tm-mobile[data-mobile-version=M10] .m-closing-meaning {margin-top:6px}
+ .tm-mobile[data-mobile-version=M10] .m-closing .m-closing-stance {margin-top:6px}
+
+ /* Safari native button chrome and the inherited rectangular focus outline must
+    not surround the close glyph. Keyboard focus remains visible as a round ring. */
+ .tm-mobile[data-mobile-version=M10] :is([data-story-close],[data-menu-close]) {appearance:none;-webkit-appearance:none;border:0;border-radius:50%;background:transparent;box-shadow:none;outline:none;-webkit-tap-highlight-color:transparent;width:44px;min-width:44px;height:44px;min-height:44px;padding:0;display:grid;place-items:center;color:var(--m-heading);line-height:1;cursor:pointer}
+ .tm-mobile[data-mobile-version=M10] :is([data-story-close],[data-menu-close]):focus-visible {outline:none;box-shadow:0 0 0 2px var(--m-accent)}
+ .tm-mobile[data-mobile-version=M10] :is([data-story-close],[data-menu-close]):focus:not(:focus-visible) {box-shadow:none}
+
+ @media (orientation:landscape) and (min-width:480px) {
+  .tm-mobile[data-mobile-version=M10] .m-hero[class]>.m-hero-identity {padding-top:10px;padding-bottom:8px}
+  .tm-mobile[data-mobile-version=M10] .m-hero[class] .m-hero-identity h1 {font-size:2.75rem}
+  .tm-mobile[data-mobile-version=M10] .m-hero[class] .m-hero-service {font-size:.8125rem;margin-top:8px}
+  .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--about .m-hero-identity {grid-template-columns:minmax(0,1fr);gap:8px}
+  .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--about .m-hero-service {margin:0}
+  .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--about .m-hero-photo img {top:0;height:100%}
+  .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--home .m-hero-photo img {--m-portrait-lift:28px}
+  .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--collaboration {--m-collab-lift:8px}
+  .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--collaboration .m10-person-crop {bottom:calc(-16px * var(--m-collab-scale,.4))}
+  .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--collaboration .m-hero-benefits {max-width:none}
+  .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--collaboration .m10-bars-crop {left:calc(-85.1852% + 8px);bottom:18px}
+  .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--practice .m-hero-identity {padding-top:60px}
+  .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--practice .m-hero-intro {font-size:1rem;margin-top:10px}
+ }
+ /* Preserve the established stacked fallback for very narrow or enlarged text. */
+ @container m-chapter (max-width:18em) {
+  .tm-mobile[data-mobile-version=M10] .m7-session-topics {padding-top:0;gap:10px;--m8-topic-wave:18px}
+ }
+ @container m-chapter (max-width:12em) {
+  .tm-mobile[data-mobile-version=M10] .m-work-text h2 {margin:12px 0 0}
+  .tm-mobile[data-mobile-version=M10] .m-work-captions {padding-top:20px;gap:12px}
+  .tm-mobile[data-mobile-version=M10] .m-work-caption:nth-child(n) {margin-inline:0}
+ }
+ .tm-mobile[data-mobile-version=M10] .m-hero[class][data-large-text=true] .m-hero-identity {grid-template-columns:minmax(0,1fr)}
+ .tm-mobile[data-mobile-version=M10] .m-hero[class][data-large-text=true] .m-hero-photo img {top:0;height:100%}
+ .tm-mobile[data-mobile-version=M10] .m-hero[class][data-large-text=true] {--m-collab-lift:0px}
+ .tm-mobile[data-mobile-version=M10] .m-hero[class][data-large-text=true] .m10-bars-crop {left:8px;bottom:calc(130px * var(--m-collab-scale,.4))}
+}

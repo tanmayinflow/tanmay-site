@@ -26,6 +26,7 @@ import './mobile-m9.css';
 import './mobile-content-m10.css';
 import './mobile-motion-m10.css';
 import './mobile-hero-m10.css';
+import './mobile-review-m10.css';
 import { MobileLanguageSwitch, MobileMenuLines } from './MobileHeaderDetails';
 import { useMobileContactScroll } from './mobile-contact-scroll';
 import { useMobileMotion } from './useMobileMotion';

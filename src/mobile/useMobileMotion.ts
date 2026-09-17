@@ -9,6 +9,7 @@ export function useMobileMotion(root:RefObject<HTMLDivElement>,pageKey:string) {
     const motions=new Set<Animation>();
     const isM10=host.dataset.mobileVersion==='M10';
     const cycle=isM10?host.querySelector<HTMLElement>('.m-cycle-art'):null;
+    const cycleControls=cycle?.closest('.m-interactive-cycle');
     const orbit=isM10?host.querySelector<HTMLElement>('.m-audience-orbit'):null;
     const salto=orbit?.querySelector<HTMLElement>('.m-salto');
     let disposed=false,frame=0,lastFrame=0,lastY=window.scrollY;
@@ -35,7 +36,8 @@ export function useMobileMotion(root:RefObject<HTMLDivElement>,pageKey:string) {
       if(saltoProgress>=.999){finishSalto();return;}
       const travel=(1-saltoProgress)**2;
       orbit.style.setProperty('--m-salto-x',`${saltoDistance*travel}px`);
-      orbit.style.setProperty('--m-salto-angle',`${-95*travel}deg`);
+      // A positive starting angle settles counter-clockwise into the sideflip pose.
+      orbit.style.setProperty('--m-salto-angle',`${95*travel}deg`);
     };
     const paint=(time:number)=>{
       frame=0;
@@ -51,6 +53,11 @@ export function useMobileMotion(root:RefObject<HTMLDivElement>,pageKey:string) {
       lastFrame=time;
     };
     const queue=()=>{if(!frame&&!disposed){lastFrame=performance.now();frame=requestAnimationFrame(paint);}};
+    const onCycleClick=(event:Event)=>{
+      if(preference.matches||!(event.target instanceof Element)||!event.target.closest('.m-cycle-controls button,.m-cycle-next'))return;
+      // Each activation turns one step, even when closing the selected description.
+      cycleTarget+=120;queue();
+    };
     const onScroll=()=>{
       const y=window.scrollY,down=Math.max(0,y-lastY);lastY=y;
       if(cycle&&down&&!preference.matches){
@@ -91,6 +98,7 @@ export function useMobileMotion(root:RefObject<HTMLDivElement>,pageKey:string) {
       orbit.addEventListener('focusin',onFocus);
     }
     if(cycle)cycle.dataset.m10Scroll='ready';
+    cycleControls?.addEventListener('click',onCycleClick);
     const observer=new IntersectionObserver(entries=>{
       for(const entry of entries)if(entry.isIntersecting){
         observer.unobserve(entry.target);
@@ -110,6 +118,7 @@ export function useMobileMotion(root:RefObject<HTMLDivElement>,pageKey:string) {
       window.removeEventListener('scroll',onScroll);window.removeEventListener('resize',measure);
       window.visualViewport?.removeEventListener('resize',measure);
       preference.removeEventListener('change',onPreference);orbit?.removeEventListener('focusin',onFocus);
+      cycleControls?.removeEventListener('click',onCycleClick);
       if(orbit){delete orbit.dataset.m10Salto;orbit.style.removeProperty('--m-salto-x');orbit.style.removeProperty('--m-salto-angle');}
       if(cycle){delete cycle.dataset.m10Scroll;cycle.style.removeProperty('--m-cycle-scroll-angle');}
     };
