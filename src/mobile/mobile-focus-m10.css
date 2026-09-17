@@ -1,0 +1,10 @@
+/* Keep programmatic dialog/route focus, without touch-triggered focus decoration. */
+@media (max-width:899px) {
+ .tm-mobile[data-mobile-version=M10]:not([data-input-modality=keyboard]) :is([data-story-close],[data-menu-close],.m-menu-trigger,.m-story-trigger):focus,
+ .tm-mobile[data-mobile-version=M10]:not([data-input-modality=keyboard]) #main h1:focus,
+ .tm-mobile[data-mobile-version=M10]:not([data-input-modality=keyboard]) #main:focus {outline:none;box-shadow:none;-webkit-tap-highlight-color:transparent}
+ /* An explicit keyboard mode also works when Safari does not set :focus-visible. */
+ .tm-mobile[data-mobile-version=M10][data-input-modality=keyboard] :is([data-story-close],[data-menu-close]):focus {outline:none;border-radius:50%;box-shadow:0 0 0 2px var(--m-accent)}
+ .tm-mobile[data-mobile-version=M10][data-input-modality=keyboard] #main h1:focus,
+ .tm-mobile[data-mobile-version=M10][data-input-modality=keyboard] #main:focus {outline:2px solid currentColor;outline-offset:4px}
+}

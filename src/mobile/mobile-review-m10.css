@@ -23,14 +23,20 @@
  .tm-mobile[data-mobile-version=M10] .m-dock .m-dock-message {height:54px;min-height:54px;flex-basis:54px}
  .tm-mobile[data-mobile-version=M10] .m-dock .m-dock-message svg {width:29px;height:29px}
 
- .tm-mobile[data-mobile-version=M10] .m-home-current {color:#e3a07b;filter:drop-shadow(0 1px 0 #d58a60) drop-shadow(0 -1px 0 #d58a60)}
- .tm-mobile[data-mobile-version=M10] .m-home-current .terrain-home__pigment {background-color:#e3a07b}
+ /* Keep the supplied line artwork at its own aspect ratio. Only its transparent
+    margins are cropped; no shadow copies or flattened raster soften the strokes. */
+ .tm-mobile[data-mobile-version=M10] .m-home-current {color:#e3a07b;filter:none;height:clamp(94px,21vw,180px);overflow:hidden}
+ .tm-mobile[data-mobile-version=M10] .m-home-current .terrain-home__pigment {background-color:#e3a07b;mask-size:100% auto;-webkit-mask-size:100% auto;mask-position:center;-webkit-mask-position:center}
+ .tm-mobile[data-mobile-version=M10] .m-home-current .terrain-home__fallback {height:100%;object-fit:cover;object-position:center}
+ .tm-mobile[data-mobile-version=M10] .m-work-layout {isolation:isolate}
+ .tm-mobile[data-mobile-version=M10] .m-handstand-composition {z-index:0;pointer-events:none}
+ .tm-mobile[data-mobile-version=M10] .m-work-text {position:relative;z-index:1}
  .tm-mobile[data-mobile-version=M10] .m-work-text h2 {font-size:1.625rem;line-height:1.17;margin:0 8px 0 -10px}
- .tm-mobile[data-mobile-version=M10] .m-work-captions {padding-top:clamp(106px,32vw,160px);gap:22px}
+ .tm-mobile[data-mobile-version=M10] .m-work-captions {padding-top:clamp(64px,20vw,100px);gap:20px}
  .tm-mobile[data-mobile-version=M10] .m-work-caption:nth-child(1) {margin-left:-10px;margin-right:6px}
  .tm-mobile[data-mobile-version=M10] .m-work-caption:nth-child(2) {margin-left:12px}
  .tm-mobile[data-mobile-version=M10] .m-work-caption:nth-child(3) {margin-left:-14px;margin-right:8px}
- .tm-mobile[data-mobile-version=M10] .m-work-caption .m-story-title {font-size:1.0625rem;line-height:1.3}
+ .tm-mobile[data-mobile-version=M10] .m-work-caption .m-story-title {font-size:1.125rem;line-height:1.3}
 
  /* Increase small reading text, without flattening the existing display hierarchy. */
  .tm-mobile[data-mobile-version=M10] .m-chapter p:not([class]),

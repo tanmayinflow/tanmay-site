@@ -5,7 +5,7 @@
     viewport immediately, so that toolbar movement never zooms the photograph. */
  .tm-mobile[data-mobile-version=M10] {--m-screen:100vh}
  @supports(height:100lvh) {.tm-mobile[data-mobile-version=M10] {--m-screen:100lvh}}
- .tm-mobile[data-mobile-version=M10] .m-hero[class] {display:flex;flex-direction:column;align-items:stretch;height:calc(var(--m-screen) - var(--m-header-height));min-height:0;padding:0;background:transparent;overflow:hidden;grid-template-rows:none}
+ .tm-mobile[data-mobile-version=M10] .m-hero[class] {display:flex;flex-direction:column;align-items:stretch;height:calc(var(--m-screen) - var(--m-hero-header-height,var(--m-header-height)));min-height:0;padding:0;background:transparent;overflow:hidden;grid-template-rows:none}
  .tm-mobile[data-mobile-version=M10] .m-hero[class]>.m-hero-identity {flex:none;grid-area:auto;align-self:stretch;padding:16px var(--m-gutter) 12px;text-align:left}
  .tm-mobile[data-mobile-version=M10] .m-hero[class]>.m-hero-scene {flex:1 1 0%;grid-area:auto;width:100%;height:auto;min-height:0;max-height:none;margin:0;aspect-ratio:auto;overflow:visible}
  .tm-mobile[data-mobile-version=M10] .m-hero[class] .m-hero-photo {position:absolute;inset:0;width:100%;height:100%;padding:0;transform:none;overflow:hidden}
@@ -75,7 +75,7 @@
   .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--practice .m-hero-photo img {object-fit:contain;object-position:center bottom}
  }
  /* A fixed slide must never cut off enlarged text or collide with its photo. */
- .tm-mobile[data-mobile-version=M10] .m-hero[class][data-large-text=true] {display:flex;height:auto;min-height:calc(var(--m-screen) - var(--m-header-height));overflow:hidden}
+ .tm-mobile[data-mobile-version=M10] .m-hero[class][data-large-text=true] {display:flex;height:auto;min-height:calc(var(--m-screen) - var(--m-hero-header-height,var(--m-header-height)));overflow:hidden}
  .tm-mobile[data-mobile-version=M10] .m-hero[class][data-large-text=true]>.m-hero-identity {padding:16px var(--m-gutter) 24px;grid-template-columns:minmax(0,1fr);gap:12px}
  .tm-mobile[data-mobile-version=M10] .m-hero[class][data-large-text=true]>.m-hero-scene {flex:none;width:100%;height:max(360px,90vw)}
  .tm-mobile[data-mobile-version=M10] .m-hero[class][data-large-text=true] .m-hero-identity h1 {white-space:normal}

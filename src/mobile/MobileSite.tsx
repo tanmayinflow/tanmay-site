@@ -27,11 +27,13 @@ import './mobile-content-m10.css';
 import './mobile-motion-m10.css';
 import './mobile-hero-m10.css';
 import './mobile-review-m10.css';
+import './mobile-focus-m10.css';
 import { MobileLanguageSwitch, MobileMenuLines } from './MobileHeaderDetails';
 import { useMobileContactScroll } from './mobile-contact-scroll';
 import { useMobileMotion } from './useMobileMotion';
 import { MobileContact } from './MobileShared';
 import { useMobileDisclosures } from './useMobileDisclosures';
+import { useMobileInputFocus } from './mobile-input-focus';
 
 export function useMobileViewport() {
   const [mobile, setMobile] = useState(() => typeof window !== 'undefined' && window.matchMedia('(max-width: 899px)').matches);
@@ -51,6 +53,7 @@ export default function MobileSite({ loc, children }: { loc: Location; children:
   const header = useRef<HTMLElement>(null);
   const root = useRef<HTMLDivElement>(null);
   const closeTimer = useRef<number>();
+  useMobileInputFocus(root);
   useMobileDisclosures(root);
   useMobileMotion(root,routeId+lang+(loc.postId||''));
   const contactId = ['home','spoluprace','praxe','pribeh'].includes(routeId) ? 'rezervace' : 'kontakt';

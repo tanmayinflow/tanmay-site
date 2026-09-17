@@ -6,9 +6,11 @@ import { RichText } from './MobileRichText';
 import { mobileText as t } from './mobile-copy';
 import { MobileVajra } from './MobileVajra';
 import { MobileCollaborationPortrait } from './MobileCollaborationPortrait';
+import { useStableHeroViewport } from './mobile-hero-viewport';
 
 export function MobileHero({ page, lang }: {page:'home'|'collaboration'|'practice'|'about';lang:string}) {
   const hero=useRef<HTMLElement>(null);
+  useStableHeroViewport(hero);
   useLayoutEffect(()=>{
     const el=hero.current;if(!el)return;
     const identity=el.querySelector<HTMLElement>('.m-hero-identity');
