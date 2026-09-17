@@ -57,7 +57,7 @@ export function Photo({ asset, alt, className='', eager=false, sizes='(min-width
   return <figure className={'m-photo '+className}><img key={stage} src={stage===0 ? a.src : a.fallback} srcSet={stage===0 && a.widths ? a.widths.map(w=>`${a.prefix}${w}.webp ${w}w`).join(', ') : undefined} sizes={sizes} width={a.width} height={a.height} alt={alt} loading={eager?'eager':'lazy'} decoding="async" fetchPriority={eager?'high':'auto'} onError={()=>setStage(s=>s+1)} /></figure>;
 }
 export function Mineral({ kind }: {kind:'home'|'collaboration'|'about'}) {
-  const mask = '/media/mobile-m6/hero-mask.png';
+  const mask = '/media/mobile-m6/hero-mask-alpha.png';
   const [ready,setReady] = useState(false);
   useEffect(()=>{let live=true;const img=new Image();img.onload=()=>img.decode().then(()=>{if(live)setReady(true)},()=>{});img.src=mask;return()=>{live=false;img.onload=null};},[mask]);
   return ready ? <div className={'m-mineral m-mineral--'+kind} aria-hidden="true" /> : null;

@@ -1,8 +1,10 @@
-/* M10: one available screen for the opening, natural document flow afterwards.
+/* M10: one stable full screen for the opening, natural document flow afterwards.
    Enlarged text is allowed to grow. Every photograph remains an original file. */
 @media(max-width:899px) {
- .tm-mobile[data-mobile-version=M10] {--m-screen:100svh}
- @supports(height:100dvh) {.tm-mobile[data-mobile-version=M10] {--m-screen:100dvh}}
+ /* Browser toolbars can hide while scrolling. Size the portrait for the large
+    viewport immediately, so that toolbar movement never zooms the photograph. */
+ .tm-mobile[data-mobile-version=M10] {--m-screen:100vh}
+ @supports(height:100lvh) {.tm-mobile[data-mobile-version=M10] {--m-screen:100lvh}}
  .tm-mobile[data-mobile-version=M10] .m-hero[class] {display:flex;flex-direction:column;align-items:stretch;height:calc(var(--m-screen) - var(--m-header-height));min-height:0;padding:0;background:transparent;overflow:hidden;grid-template-rows:none}
  .tm-mobile[data-mobile-version=M10] .m-hero[class]>.m-hero-identity {flex:none;grid-area:auto;align-self:stretch;padding:16px var(--m-gutter) 12px;text-align:left}
  .tm-mobile[data-mobile-version=M10] .m-hero[class]>.m-hero-scene {flex:1 1 0%;grid-area:auto;width:100%;height:auto;min-height:0;max-height:none;margin:0;aspect-ratio:auto;overflow:visible}
@@ -34,7 +36,9 @@
  .tm-mobile[data-mobile-version=M10] .m10-home-caption h2 {max-width:none;margin:0;font-size:1.75rem;line-height:1.2}
  /* The supplied contour keeps its exact size and top position. Only its fully
     filled lower material continues when a tall display needs more background. */
- .tm-mobile[data-mobile-version=M10] .m-hero[class] .m-hero-scene .m-mineral {--m-contour-height:244cqw;--m-contour-offset:53.7cqw;left:-2%;width:104%;top:calc(-1 * var(--m-identity-height) - var(--m-contour-offset));height:max(var(--m-contour-height),calc(100% + var(--m-identity-height) + var(--m-contour-offset)));transform:none;mask-image:url('/media/mobile-m6/hero-mask.png'),linear-gradient(#fff,#fff);-webkit-mask-image:url('/media/mobile-m6/hero-mask.png'),linear-gradient(#fff,#fff);mask-size:100% var(--m-contour-height),100% max(1px,calc(100% - var(--m-contour-height) + 1px));-webkit-mask-size:100% var(--m-contour-height),100% max(1px,calc(100% - var(--m-contour-height) + 1px));mask-position:top,bottom;-webkit-mask-position:top,bottom;mask-repeat:no-repeat;-webkit-mask-repeat:no-repeat}
+ /* True alpha preserves the supplied contour without Safari's large-image
+    luminance-mask failure. The original RGB mask remains untouched in media. */
+ .tm-mobile[data-mobile-version=M10] .m-hero[class] .m-hero-scene .m-mineral {--m-contour-height:244cqw;--m-contour-offset:53.7cqw;left:-2%;width:104%;top:calc(-1 * var(--m-identity-height) - var(--m-contour-offset));height:max(var(--m-contour-height),calc(100% + var(--m-identity-height) + var(--m-contour-offset)));transform:none;mask-image:url('/media/mobile-m6/hero-mask-alpha.png'),linear-gradient(#fff,#fff);-webkit-mask-image:url('/media/mobile-m6/hero-mask-alpha.png'),linear-gradient(#fff,#fff);mask-mode:alpha;mask-size:100% var(--m-contour-height),100% max(1px,calc(100% - var(--m-contour-height) + 1px));-webkit-mask-size:100% var(--m-contour-height),100% max(1px,calc(100% - var(--m-contour-height) + 1px));mask-position:top,bottom;-webkit-mask-position:top,bottom;mask-repeat:no-repeat;-webkit-mask-repeat:no-repeat}
  .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--home .m-hero-scene .m-mineral {--m-contour-height:184cqw;--m-contour-offset:40.5cqw}
  @media(max-width:350px) {
   .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--home .m-hero-identity {padding-top:7px}
