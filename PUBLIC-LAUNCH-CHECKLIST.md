@@ -10,7 +10,7 @@ The current visual evidence is `WORKING/mobile-refinement/M10/final/pass5/` insi
 
 ## Resolve before release
 
-- Confirm permission to publish the four client names and the sensitive personal/health references in their supplied reviews. These are real supplied reviews, not the old demo carousel. See the original `05-CONTENT-LOCK.md` section “Recenze”.
+- Client-review consent is confirmed: on 2026-09-17 the owner approved the four current reviews, names and personal/health mentions, including publication in the public GitHub repository. Keep the exact approved material; this gate is closed.
 - Clarify what “měsíční období” means for the four prepaid individual sessions. Preserve the approved prices; do not invent cancellation, expiry, transfer or refund conditions. This question is explicitly left open in `05-CONTENT-LOCK.md`.
 - Complete the professional/legal boundary review requested in that same content lock, including the approved rehabilitation-training wording. Do not replace accepted text with an unapproved claim.
 - Obtain the owner's final review of the responsive result. Desktop V9.22 and its recorded M7/M9 changes remain accepted.
@@ -23,6 +23,8 @@ The current visual evidence is `WORKING/mobile-refinement/M10/final/pass5/` insi
 - Ensure the final `dist` contains no unused demo reference videos/posters. Preserve their historical originals outside the published output.
 
 ## Verify deployment access and configuration
+
+Verified on 2026-09-17: GitHub read and write dry-run access; public repository tanmayinflow/tanmay-site; existing Cloudflare static-assets Worker tanmay-site; main production branch; npm run build and npx wrangler deploy; apex and www custom domains. Non-production branch builds were enabled with npx wrangler deploy too, so resolve that setting before pushing an integration branch. Web Analytics automatically injects outside the EU; EU visitor data is excluded. No production deployment was performed by this verification.
 
 - Identify the connected GitHub repository and production branch, confirm write access, and inspect whether a push triggers deployment.
 - Verify the Cloudflare site/project and `tanmaypractice.com` domain binding; use the existing deployment rather than assuming a new project is needed.

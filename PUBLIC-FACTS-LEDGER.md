@@ -29,7 +29,7 @@ The reduced individual rate requires at least four prepaid sessions for a “mě
 
 `src/components/home-reviews.data.js` contains the owner-supplied reviews from Mariana Stojkovová, Zuzana Hofman, Gledis Kmonickova and Lucie Kánská. Czech wording is preserved; English translations are labelled and the originals remain available.
 
-The source is no longer the V8 demo carousel. Permission to publish names and sensitive mentions still needs the owner's confirmation before deployment, as explicitly recorded in `05-CONTENT-LOCK.md`. Do not invent ratings, dates, verification badges, avatars or video testimonials. No client videos were supplied. Legacy demo media is historical material and must not be included in the published output.
+The source is no longer the V8 demo carousel. On 2026-09-17 the owner explicitly confirmed possession of consent and approved publication of the four existing reviews, names and personal/health mentions, including in the public `tanmayinflow/tanmay-site` repository. This closes the consent question in the original content lock for the exact existing material. Do not invent ratings, dates, verification badges, avatars or video testimonials. No client videos were supplied. Legacy demo media is historical material and must not be included in the published output.
 
 ## Contacts and application
 
@@ -44,7 +44,7 @@ The internal main application must not be linked publicly. Verifying these strin
 
 ## Privacy and publication scope
 
-The current privacy page identifies the data controller and describes hosting/security processing, correspondence, external services, client application separation, rights and Cloudflare Web Analytics. This integration does not establish legal review or the actual analytics configuration. The source contains no analytics beacon; dashboard or production verification is still needed. The old blanket assertion “no analytics or third-party requests” is no longer an accurate description of the approved privacy copy.
+The current privacy page identifies the data controller and describes hosting/security processing, correspondence, external services, client application separation, rights and Cloudflare Web Analytics. The Cloudflare dashboard was verified on 2026-09-17: Web Analytics uses automatic injection with the selected option “Enable, excluding visitor data in the EU”, and recent measurements exist. The source contains no beacon; do not add a second one. This establishes the actual configuration, not legal review or post-release production verification. The old blanket assertion “no analytics or third-party requests” is no longer an accurate description of the approved privacy copy.
 
 Only Home, Praxe, Příběh, Spolupráce and Soukromí, each in Czech and English, are public routes. Journal text remaining in source is historical and unpublished. Do not treat its presence as permission to publish it.
 
