@@ -1,0 +1,48 @@
+@media (min-width:900px) {
+ /* Keep .enso-anchors on the direct layout child: the original desktop's
+    missing-art fallback must not collapse this interactive version to one column. */
+ .d-practice-diagram {--d-practice-angle:0deg;position:relative;width:min(100%,450px);margin:0 auto;align-self:center;justify-self:center}
+ .d-practice-art>.enso-anchors {width:100%;margin:0}
+ .d-practice-art .enso-anchors__label {display:none}
+ /* The original brush can reach 4.63% below its square while rotating around
+    50% 56%. Keep the unchanged legend in flow below that full envelope. */
+ .d-practice-art .enso-anchors__legend {margin-top:calc(5cqw + 12px)}
+ .d-practice-art :is(.enso-anchors__strokes,.enso-anchors__fallback),
+ .d-practice-anchor-rotor {transform:rotate(var(--d-practice-angle));transform-origin:50% 56%;transition:none}
+ .d-practice-anchor-rotor {position:absolute;left:0;top:0;width:100%;aspect-ratio:1;pointer-events:none}
+ .d-practice-pigment {position:absolute;inset:0;width:100%;height:100%;color:var(--accent-on-ink);pointer-events:none}
+ .d-practice-ring {opacity:0}
+ .d-practice-ring[data-active=true] {opacity:1}
+ .d-practice-anchor-button {position:absolute;width:32%;min-height:74px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:8px 4px;border:0;border-radius:50%;background:none;color:var(--on-dark);text-align:center;pointer-events:auto;cursor:pointer;transform:translate(-50%,-50%) rotate(calc(-1 * var(--d-practice-angle)));transform-origin:center}
+ .d-practice-anchor-button--body {left:50%;top:31.5%}
+ .d-practice-anchor-button--practice {left:29%;top:69%}
+ .d-practice-anchor-button--nature {left:70%;top:69%}
+ .d-practice-anchor-button strong {display:block;font-family:var(--ff-display);font-size:clamp(21px,2.15vw,28px);font-weight:400;line-height:1.08}
+ .d-practice-anchor-button small {display:block;font-family:var(--ff-meta);font-size:11px;letter-spacing:.13em;line-height:1.4;text-transform:uppercase;margin-top:9px;color:var(--on-dark-2)}
+ .d-practice-anchor-button[aria-pressed=true],.d-practice-anchor-button[aria-pressed=true] small {color:var(--accent-on-ink)}
+ .d-practice-anchor-button:focus-visible {outline:1px solid var(--accent-on-ink);outline-offset:3px}
+
+ .d-practice-copy-row {position:relative;display:grid;grid-template-columns:44px minmax(0,1fr);column-gap:14px;align-items:start}
+ .d-practice-copy-icon {display:block;width:44px;margin-top:clamp(22px,3vw,30px);color:var(--accent-copper-on-ink)}
+ .d-practice-copy-icon>svg {display:block;width:100%;height:auto;max-height:50px;transform:none}
+ .d-practice-copy-icon>.m8-anchor-vajra {margin-top:4px}
+ .d-practice-copy-row>.anchor-light {min-width:0;width:100%}
+ .d-practice-copy-row+.d-practice-copy-row>.anchor-light {border-top:1px solid var(--rule-dark)}
+ .d-practice-copy-row[data-active=true]>.anchor-light h3,
+ .d-practice-copy-row[data-active=true]>.d-practice-copy-icon {color:var(--accent-on-ink)}
+ .d-practice-copy .d-practice-copy-row[data-active=true][data-anchor]>.anchor-light p {color:var(--on-dark)}
+
+ .d-practice-hero-art {position:absolute;top:clamp(24px,4vh,48px);right:clamp(8px,2vw,28px);width:clamp(78px,7.4vw,108px);pointer-events:none;color:#743627}
+ .d-practice-hero-art>svg {display:block;width:100%;height:auto;transform:none;color:inherit}
+
+ @media (prefers-reduced-motion:no-preference) {
+  .d-practice-ring {transition:opacity 180ms ease}
+  .d-practice-anchor-button,.d-practice-anchor-button small,
+  .d-practice-copy-icon,.d-practice-copy-row>.anchor-light :is(h3,p) {transition:color 160ms ease}
+ }
+ @media (prefers-reduced-motion:reduce) {
+  .d-practice-diagram {--d-practice-angle:0deg!important}
+  .d-practice-art :is(.enso-anchors__strokes,.enso-anchors__fallback),.d-practice-anchor-rotor {transform:none}
+  .d-practice-anchor-button {transform:translate(-50%,-50%)}
+ }
+}

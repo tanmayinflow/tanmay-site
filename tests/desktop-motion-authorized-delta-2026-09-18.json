@@ -1,0 +1,60 @@
+{
+  "approvedOn": "2026-09-18",
+  "baselineCommit": "dd31d1a42e457e24fe0fd7a859ca5543828c0bf0",
+  "path": "src/App.tsx",
+  "scope": [
+    "desktop-salto-scroll-motion",
+    "desktop-practice-illustrations-and-diagram",
+    "desktop-story-original-photographs-and-motion",
+    "desktop-plan-record-adjust-cycle"
+  ],
+  "beforeSha256": "20cc75112442f17387c598fbc2de754af1b9d460e8282f62d39d3fece05ee640",
+  "authorizedSha256": "cf65313e67b92d96bafa7f9596103ae1f8b04df032f94d883a3dd2dbb3b1fac9",
+  "replacements": [
+    {
+      "id": "desktop-module-imports",
+      "before": "import { emphasizeCopy } from \"./components/content-emphasis\";",
+      "after": "import { emphasizeCopy } from \"./components/content-emphasis\";\nimport DesktopStory from \"./desktop/DesktopStory\";\nimport { DesktopPracticeDiagram, DesktopPracticeCopy, DesktopPracticeHeroArt } from \"./desktop/DesktopPractice\";\nimport DesktopCycle from \"./desktop/DesktopCycle\";\nimport { useDesktopMotion } from \"./desktop/useDesktopMotion\";"
+    },
+    {
+      "id": "desktop-motion-lifecycle",
+      "before": "  useReveal(loc.routeId + loc.lang + (loc.postId || \"\") + (mobile ? \"mobile\" : \"desktop\"));",
+      "after": "  useReveal(loc.routeId + loc.lang + (loc.postId || \"\") + (mobile ? \"mobile\" : \"desktop\"));\n  useDesktopMotion(loc.routeId + loc.lang + (loc.postId || \"\"), !mobile);"
+    },
+    {
+      "id": "practice-hero-decoration",
+      "before": "        <div className=\"practice-rock-copy\">",
+      "after": "        <div className=\"practice-rock-copy\">\n          <DesktopPracticeHeroArt />"
+    },
+    {
+      "id": "practice-copy-open",
+      "before": "<div className=\"practice-anchors-layout\"><div>",
+      "after": "<div className=\"practice-anchors-layout\"><DesktopPracticeCopy lang={lang}>"
+    },
+    {
+      "id": "practice-copy-close-and-diagram",
+      "before": "        </div>\n        <AnchorDiagram /></div>",
+      "after": "        </DesktopPracticeCopy>\n        <DesktopPracticeDiagram lang={lang} /></div>"
+    },
+    {
+      "id": "story-wrapper-open",
+      "before": "<div className=\"story-beats\">",
+      "after": "<DesktopStory lang={lang}>"
+    },
+    {
+      "id": "story-wrapper-close",
+      "before": "</article></div><p className=\"stance-line rv\" style={{marginTop:\"clamp(30px,4vw,48px)\"}}>",
+      "after": "</article></DesktopStory><p className=\"stance-line rv\" style={{marginTop:\"clamp(30px,4vw,48px)\"}}>"
+    },
+    {
+      "id": "cycle-wrapper-open",
+      "before": "<div className=\"wrap between-grid\">",
+      "after": "<DesktopCycle lang={lang}>"
+    },
+    {
+      "id": "cycle-wrapper-close",
+      "before": "</div></div></div><div className=\"wrap collaboration-practice-link-v920\">",
+      "after": "</div></div></DesktopCycle><div className=\"wrap collaboration-practice-link-v920\">"
+    }
+  ]
+}

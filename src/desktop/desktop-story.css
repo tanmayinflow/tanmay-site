@@ -1,0 +1,47 @@
+/* One desktop story sequence. Its original articles and photographs stay readable. */
+@media (min-width:900px) {
+ /* Clip the material edge without creating a scroll container above the sticky gallery. */
+ .story-return:has(> .wrap > .d-story) {overflow:visible;overflow:clip}
+ .d-story {--d-story-top:calc(var(--topbar-h,66px) + 24px);display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(40px,6vw,88px);align-items:start;margin-top:clamp(28px,4vw,52px)}
+ .d-story .d-story-copy {min-width:0}
+ .d-story .d-story-chapter {min-width:0;min-height:clamp(22rem,45svh,29rem);padding:0 0 48px;scroll-margin-top:calc(var(--topbar-h,66px) + 32px)}
+ .d-story .d-story-chapter:last-child {min-height:max(clamp(22rem,45svh,29rem),var(--d-story-gallery-height,0px))}
+ .d-story .d-story-copy .d-story-chapter>.story-beat {padding:0;border:0;opacity:1;transform:none;transition:none}
+ .d-story .d-story-copy .d-story-chapter>.story-beat::before {content:none}
+ .d-story .d-story-copy .d-story-chapter>.story-beat>.story-point {display:none}
+ .d-story .d-story-copy .d-story-chapter>.story-beat h3 {margin-top:8px;font-size:clamp(1.5rem,2.2vw,1.9rem);line-height:1.25;text-wrap:balance}
+ .d-story .d-story-copy .d-story-chapter>.story-beat p {font-size:.9875rem;line-height:1.82;max-width:65ch}
+ .d-story .d-story-gallery {position:sticky;top:var(--d-story-top);min-width:0}
+ .d-story .d-story-controls {position:relative;display:flex;width:180px;max-width:100%;margin:0 0 18px;isolation:isolate}
+ .d-story .d-story-controls button {position:relative;flex:1;min-width:44px;min-height:44px;padding:8px 12px;font-family:var(--ff-meta);font-size:.8125rem;line-height:1.4;font-variant-numeric:tabular-nums;letter-spacing:.08em;color:var(--on-dark-2);touch-action:manipulation}
+ .d-story .d-story-controls button[aria-current=step] {color:var(--accent-earth-light,#e3a07b)}
+ .d-story .d-story-controls button:hover {color:var(--on-dark)}
+ .d-story .d-story-controls button:focus-visible {outline:2px solid var(--accent-earth-light,#e3a07b);outline-offset:2px}
+ .d-story .d-story-progress {position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--rule-dark);pointer-events:none}
+ .d-story .d-story-progress>span {display:block;width:33.333333%;height:100%;background:var(--accent-earth-light,#e3a07b);transition:transform 260ms cubic-bezier(.16,1,.3,1)}
+ .d-story .d-story-media {margin:0}
+ .d-story .d-story-photographs {position:relative;height:min(58svh,32rem)}
+ .d-story .d-story-photo {position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity 260ms cubic-bezier(.16,1,.3,1)}
+ .d-story .d-story-photo[data-active=true] {opacity:1}
+ .d-story .d-story-image {display:flex;align-items:center;justify-content:center;width:100%;height:100%;min-width:0}
+ .d-story .d-story-image img {display:block;width:100%;height:100%;object-fit:contain;object-position:center;max-width:100%}
+ .d-story .d-story-media figcaption {margin-top:12px;color:var(--on-dark-2);font-family:var(--ff-display);font-size:1rem;line-height:1.4;text-align:center}
+ .d-story .d-story-photo-error {margin:0;max-width:28ch;color:var(--on-dark-2);font-size:.875rem;line-height:1.6;text-align:center}
+ .d-story .d-story-inline-photo {display:none;margin:0}
+
+ /* Every photograph sits beside its own unchanged chapter when a sticky stage
+    would compete with reading, enlarged text or the reduced-motion preference. */
+ .d-story[data-layout=flow] {display:block}
+ .d-story[data-layout=flow] .d-story-gallery {display:none}
+ .d-story[data-layout=flow] .d-story-chapter {display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(32px,5vw,72px);min-height:0;padding-bottom:48px;align-items:start}
+ .d-story[data-layout=flow] .d-story-chapter:last-child {min-height:0;padding-bottom:0}
+ .d-story[data-layout=flow] .d-story-inline-photo {display:block;height:min(60svh,26rem)}
+ @media (max-height:620px),(prefers-reduced-motion:reduce) {
+  .d-story {display:block}
+  .d-story .d-story-gallery {display:none}
+  .d-story .d-story-chapter {display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(32px,5vw,72px);min-height:0;padding-bottom:48px;align-items:start}
+  .d-story .d-story-chapter:last-child {min-height:0;padding-bottom:0}
+  .d-story .d-story-inline-photo {display:block;height:min(60svh,26rem)}
+  .d-story .d-story-photo,.d-story .d-story-progress>span {transition:none}
+ }
+}

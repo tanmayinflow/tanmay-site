@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { withoutAuthorizedDesktopMotion } from './desktop-motion-authorized-delta-2026-09-18.mjs';
 import { readFileSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
@@ -38,16 +39,16 @@ test('all 327 original shared files remain exact except precisely authorized cop
   }
 });
 
-test('App preserves locked desktop source plus exact copy/runtime and approved privacy deltas behind the mobile adapter',()=>{
+test('App preserves locked desktop source after exact approved desktop motion, copy/runtime and privacy deltas',()=>{
   const original=authorizedWorkingBytes('src/App.tsx',readFileSync(join(fixtures,'site/src/App.tsx'))).toString('utf8').replaceAll('\r\n','\n');
-  const current=withoutAuthorizedPrivacyChanges(withoutAuthorizedOwnerCopy('src/App.tsx',readFileSync(join(site,'src/App.tsx')))).toString('utf8').replaceAll('\r\n','\n');
+  const current=withoutAuthorizedPrivacyChanges(withoutAuthorizedOwnerCopy('src/App.tsx',withoutAuthorizedDesktopMotion('src/App.tsx',readFileSync(join(site,'src/App.tsx'))))).toString('utf8').replaceAll('\r\n','\n');
   const desktop=current
     .replace(/^import .* from "\.\/mobile\/.*";\n/gm,'')
     .replace('  const mobile = useMobileViewport();\n','')
     .replace(' + (mobile ? "mobile" : "desktop")','')
     .replace(/      \{mobile \? <MobileSite loc=\{loc\}>[\s\S]*?      <\/MobileSite> : <>\n/,'')
     .replace('      </>}\n','');
-  assert.equal(desktop,original,'Only the isolated mobile adapter and explicitly recorded copy/runtime/privacy replacements may differ from locked App.');
+  assert.equal(desktop,original,'Only the isolated mobile adapter and explicitly recorded desktop motion/copy/runtime/privacy replacements may differ from locked App.');
 });
 test('approved bilingual mobile content preserves M8 and the two M9 strings after exact owner copy deltas',()=>{
   verifyApprovedMobileContent(withoutAuthorizedOwnerCopy('src/mobile/approved-content.ts',readFileSync(join(site,'src/mobile/approved-content.ts'))));
