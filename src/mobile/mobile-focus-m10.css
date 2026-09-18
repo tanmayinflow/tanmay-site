@@ -1,5 +1,7 @@
 /* Keep programmatic dialog/route focus, without touch-triggered focus decoration. */
 @media (max-width:899px) {
+ /* A modal in the top layer must not inherit a moving card's disabled hit area. */
+ .tm-mobile[data-mobile-version=M10] .m-story-dialog[open] {pointer-events:auto}
  .tm-mobile[data-mobile-version=M10]:not([data-input-modality=keyboard]) :is([data-story-close],[data-menu-close],.m-menu-trigger,.m-story-trigger):focus,
  .tm-mobile[data-mobile-version=M10]:not([data-input-modality=keyboard]) #main h1:focus,
  .tm-mobile[data-mobile-version=M10]:not([data-input-modality=keyboard]) #main:focus {outline:none;box-shadow:none;-webkit-tap-highlight-color:transparent}

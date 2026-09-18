@@ -4,7 +4,7 @@ import { WHATSAPP_URL, MAIL, CLIENT_APP_URL } from '../site.js';
 import { copy, Photo, Mineral, MessageIcon, MailIcon, MaterialEdge } from './MobileElements';
 import { RichText } from './MobileRichText';
 import { mobileText as t } from './mobile-copy';
-import { MobileVajra } from './MobileVajra';
+import { MobileVajraBell } from './MobileVajraBell';
 import { MobileCollaborationPortrait } from './MobileCollaborationPortrait';
 import { useStableHeroViewport } from './mobile-hero-viewport';
 
@@ -34,7 +34,7 @@ export function MobileHero({ page, lang }: {page:'home'|'collaboration'|'practic
   const benefits=lang==='en'?['Confidence in your body','Joy in your heart','Movement in your life']:['Jistota v těle','Radost v srdci','Pohyb v životě'];
   const alt=page==='home'?copy('Opening',4,lang):page==='collaboration'?copy('PageSpoluprace',8,lang):page==='practice'?copy('PagePraxe',4,lang):(lang==='en'?'Kryštof Švec, a portrait in a plain black T-shirt.':'Kryštof Švec, portrét v černém tričku bez potisku.');
   return <><header className={'m-hero m-hero--'+page} ref={hero}>
-    <div className="m-hero-identity">{page==='practice'&&<MobileVajra className="m10-hero-vajra"/>}<h1>{page==='home'?'Kryštof Švec':page==='about'?'Kryštof':topic}</h1><p className="m-hero-service">{page==='about'?<><span>{lang==='en'?'A trainer':'Trenér,'}</span><span>{lang==='en'?'who spent a year in a wheelchair':'co strávil rok na vozíku'}</span></>:subtitle}</p>{page==='collaboration'&&<p className="m-hero-intro m-hero-benefits">{benefits.map(benefit=><span key={benefit}>{benefit}</span>)}</p>}{intro&&<p className="m-hero-intro"><RichText>{intro}</RichText></p>}</div>
+    <div className="m-hero-identity">{page==='practice'&&<MobileVajraBell/>}<h1>{page==='home'?'Kryštof Švec':page==='about'?'Kryštof':topic}</h1><p className="m-hero-service">{page==='about'?<><span>{lang==='en'?'A trainer':'Trenér,'}</span><span>{lang==='en'?'who spent a year in a wheelchair':'co strávil rok na vozíku'}</span></>:subtitle}</p>{page==='collaboration'&&<p className="m-hero-intro m-hero-benefits">{benefits.map(benefit=><span key={benefit}>{benefit}</span>)}</p>}{intro&&<p className="m-hero-intro"><RichText>{intro}</RichText></p>}</div>
     <div className="m-hero-scene">{page!=='practice'&&<Mineral kind={page}/>} {page==='collaboration'?<MobileCollaborationPortrait alt={alt}/>:<Photo asset={page} alt={alt} eager className="m-hero-photo"/>}<MaterialEdge tone={page==='home'?'dark':'linen'}/></div>
   </header>{page==='home'&&<div className="m-hero-caption m10-home-caption m-dark"><h2 id="m-home-statement">{copy('Opening',1,lang)}</h2></div>}</>;
 }

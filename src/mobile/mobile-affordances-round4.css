@@ -1,24 +1,32 @@
 /* Owner's fourth mobile review: small cues belong to existing interactive targets only. */
 @media (max-width:899px) {
- .tm-mobile[data-mobile-version=M10] :is(.m-intro-words>.m-story-trigger .m-story-preview,.m-work-caption>.m-story-trigger .m-story-ending,.m-cycle-controls>button,.m7-anchors-stage .m-anchor-button>strong,.m7-session-topic>.m-story-trigger .m-story-ending)::after {
-  content:'';display:inline-block;box-sizing:border-box;width:.38em;height:.38em;margin:0 .08em .08em .45em;border:solid currentColor;border-width:1.5px 1.5px 0 0;border-radius:0;background:none;vertical-align:middle;transform:rotate(45deg);color:var(--m-accent)
+ .tm-mobile[data-mobile-version=M10] :is(.m-intro-words>.m-story-trigger .m-story-preview,.m-work-caption>.m-story-trigger .m-story-ending,.m-audience-one>.m-story-trigger .m-story-ending,.m-audience-two>.m-story-trigger .m-story-ending,.m-cycle-controls>button,.m7-anchors-stage .m-anchor-button>strong,.m7-session-topic>.m-story-trigger .m-story-ending)::after {
+  content:'';display:inline-block;box-sizing:border-box;width:.38em;height:.38em;margin:0 .08em .08em .45em;border:solid currentColor;border-width:1.5px 1.5px 0 0;border-radius:0;background:none;vertical-align:middle;transform:rotate(var(--m-disclosure-turn,45deg));color:var(--m-accent)
  }
+ /* The existing accessible open state also controls the visual cue. Navigation
+    arrows are intentionally outside these selectors. */
+ .tm-mobile[data-mobile-version=M10] :is(.m-intro-words,.m-work-caption,.m-audience-one,.m-audience-two,.m7-session-topic)>.m-story-trigger[aria-expanded=true],
+ .tm-mobile[data-mobile-version=M10] :is(.m-cycle-controls>button[aria-expanded=true],.m7-anchors-stage .m-anchor-button[aria-expanded=true]),
+ .tm-mobile[data-mobile-version=M10] .m7-interactive-anchors[data-active="3"] .m-anchor-button {--m-disclosure-turn:135deg}
  .tm-mobile[data-mobile-version=M10] .m-intro-words>.m-story-trigger .m-story-preview::after {font-size:1em}
- .tm-mobile[data-mobile-version=M10] :is(.m-work-caption,.m7-session-topic)>.m-story-trigger .m-story-ending {white-space:nowrap}
+ .tm-mobile[data-mobile-version=M10] :is(.m-work-caption,.m-audience-one,.m-audience-two,.m7-session-topic)>.m-story-trigger .m-story-ending {white-space:nowrap}
  .tm-mobile[data-mobile-version=M10] .m7-session-topic>.m-story-trigger .m-story-ending::after {color:var(--accent-earth)}
  .tm-mobile[data-mobile-version=M10] :is(.m-work-caption,.m7-session-topic)>.m-story-trigger .m-disclosure-mark,
  .tm-mobile[data-mobile-version=M10] .m7-anchors-stage .m-anchor-button>strong>.m-disclosure-mark {display:none}
 
- .tm-mobile[data-mobile-version=M10] .m-home-work>.m-inner>.m-text-link {flex-direction:column;align-items:center;gap:2px;font-size:1rem;line-height:1.35;min-height:60px;text-align:center}
+ .tm-mobile[data-mobile-version=M10] .m-home-work>.m-inner>.m-text-link {flex-direction:row;align-items:center;gap:12px}
  .tm-mobile[data-mobile-version=M10] .m-experience .m-text-link {flex-direction:column;align-items:center;gap:2px}
- .tm-mobile[data-mobile-version=M10] :is(.m-home-work,.m-experience)>.m-inner>.m-text-link>.m-arrow {width:26px;height:26px;flex-basis:26px}
- .tm-mobile[data-mobile-version=M10] :is(.m-home-formats,.m-home-about) .m-text-link>.m-arrow {width:20px;height:20px;flex:0 0 20px}
+ .tm-mobile[data-mobile-version=M10] .m-experience>.m-inner>.m-text-link>.m-arrow {width:26px;height:26px;flex-basis:26px}
+ .tm-mobile[data-mobile-version=M10] :is(.m-home-work,.m-home-formats,.m-home-about) .m-text-link>.m-arrow {width:20px;height:20px;flex:0 0 20px}
  .tm-mobile[data-mobile-version=M10] .m-home-formats .m-rail-footer-link .m-text-link {gap:8px}
 
  .tm-mobile[data-mobile-version=M10] .m-practice-session .m-session-topics {font-size:clamp(.875rem,3.6vw,1rem);font-weight:500;letter-spacing:.08em;line-height:1.5;color:var(--accent-earth)}
  .tm-mobile[data-mobile-version=M10] .m7-meaning-more .m-detail-title {display:inline-flex;align-items:center;gap:8px}
  .tm-mobile[data-mobile-version=M10] .m7-meaning-more .m-arrow {width:19px;height:19px;flex:0 0 19px;transform:rotate(0deg);transition:transform 220ms ease}
  .tm-mobile[data-mobile-version=M10] .m7-meaning-more[open]:not([data-expanded=false]) .m-arrow {transform:rotate(90deg)}
+ @media (prefers-reduced-motion:no-preference) {
+  .tm-mobile[data-mobile-version=M10] :is(.m-intro-words>.m-story-trigger .m-story-preview,.m-work-caption>.m-story-trigger .m-story-ending,.m-audience-one>.m-story-trigger .m-story-ending,.m-audience-two>.m-story-trigger .m-story-ending,.m-cycle-controls>button,.m7-anchors-stage .m-anchor-button>strong,.m7-session-topic>.m-story-trigger .m-story-ending)::after {transition:transform 220ms ease}
+ }
  @media (prefers-reduced-motion:reduce) {
   .tm-mobile[data-mobile-version=M10] .m7-meaning-more .m-arrow {transition:none}
  }
