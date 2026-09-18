@@ -20,7 +20,7 @@ export default function MobileCollaboration({lang}:{lang:string}) {
     </Chapter>
     <Chapter title={c(18)} className="m-experience">
       <div className="m-proof-start m-experience-proof"><MobileProof lang={lang}/></div>
-      <TextLink href={routePath('pribeh',lang)}><span className="m-experience-about-label">{lang==='en'?'More about me':'Více o mně'}</span></TextLink>
+      <TextLink href={routePath('pribeh',lang)} arrow><span className="m-experience-about-label">{lang==='en'?'More about me':'Více o mně'}</span></TextLink>
     </Chapter>
     <Chapter title={c(22)} className="m-formats"><Rail title={c(22)} lang={lang} items={approvedLists.PageSpoluprace.formats}/></Chapter>
     <CollaborationPricing lang={lang}/>

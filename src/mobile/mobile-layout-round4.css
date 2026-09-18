@@ -1,0 +1,36 @@
+/* Fourth mobile review: adjust the existing composition through its layout spacing. */
+@media (max-width:899px) {
+ /* Remove roughly three caption lines of empty space, retaining the authored wave. */
+ .tm-mobile[data-mobile-version=M10] .m-work-captions {padding-top:clamp(8px,calc(20vw - 70px),30px)}
+
+ /* The photograph determines the row height; the new decorative illustration uses what
+    remains beneath the heading and can shrink without extending below the photo. */
+ .tm-mobile[data-mobile-version=M10] .m-home-about .m-about-composition {align-items:stretch}
+ .tm-mobile[data-mobile-version=M10] .m-home-about .m-about-heading {contain:size;display:flex;flex-direction:column;align-items:flex-start;min-width:0;min-height:0}
+ .tm-mobile[data-mobile-version=M10] .m-home-about .m-about-heading>:is(.m-eyebrow,h2) {flex:none}
+ .tm-mobile[data-mobile-version=M10] .m-home-about .m-about-symbol {display:block;align-self:center;flex:0 1 80px;width:clamp(64px,24vw,105px);height:80px;min-height:0;max-width:100%;max-height:80px;margin:8px 0 0;object-fit:contain;color:var(--m-heading)}
+
+ /* Keep the entire CTA above the incoming linen contour, including its underline. */
+ .tm-mobile[data-mobile-version=M10] .m-offer {padding-top:18px;padding-bottom:calc(var(--m-edge-depth,40px) + 12px)}
+ .tm-mobile[data-mobile-version=M10] .m-offer .m-editorial-link {margin-top:16px;align-items:flex-end;padding-bottom:4px}
+
+ .tm-mobile[data-mobile-version=M10] .m-education dt {font-size:.75rem}
+ .tm-mobile[data-mobile-version=M10] .m-education dd {font-size:.8125rem}
+ .tm-mobile[data-mobile-version=M10] .m-education-columns>dl {gap:14px}
+
+ @media (max-width:359px) {
+  /* A taller frame leaves room for the full-size heading and its illustration. */
+  .tm-mobile[data-mobile-version=M10] .m-home-about .m-prague {aspect-ratio:3/5;height:auto}
+  .tm-mobile[data-mobile-version=M10] .m-home-about .m-prague img {height:100%;object-fit:cover;object-position:center}
+ }
+ @container m-chapter (max-width:12em) {
+  .tm-mobile[data-mobile-version=M10] .m-work-captions {padding-top:20px}
+ }
+ @container m-home-about (max-width:12em) {
+  /* In the existing single-column fallback, let the heading grow naturally. */
+  .tm-mobile[data-mobile-version=M10] .m-home-about .m-about-heading {contain:none}
+  .tm-mobile[data-mobile-version=M10] .m-home-about .m-about-symbol {flex:none}
+  .tm-mobile[data-mobile-version=M10] .m-home-about .m-prague {aspect-ratio:auto}
+  .tm-mobile[data-mobile-version=M10] .m-home-about .m-prague img {height:auto;object-fit:contain}
+ }
+}

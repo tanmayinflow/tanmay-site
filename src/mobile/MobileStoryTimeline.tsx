@@ -9,7 +9,7 @@ const PHOTOGRAPHS = [
 ] as const;
 type PhotoState={status:'pending'|'loaded'|'error';fallback:boolean;attempt:number};
 
-/** Native scrolling stays native: wheel/touch can continue into the page at either edge. */
+/** One sequence control, original photographs and a native reader fallback. */
 export default function MobileStoryTimeline({lang}:{lang:string}) {
   const id=useId();
   const host=useRef<HTMLDivElement>(null), reader=useRef<HTMLDivElement>(null);
@@ -63,15 +63,11 @@ export default function MobileStoryTimeline({lang}:{lang:string}) {
     return <img key={(inline?'inline-':'gallery-')+index+'-'+state.attempt+'-'+state.fallback} src={state.fallback&&photo.fallback?photo.fallback:photo.src} width={photo.width} height={photo.height} alt={photo[lang==='en'?'en':'cs']} loading="lazy" decoding="async" onLoad={()=>update('loaded')} onError={()=>update('error')}/>;
   };
 
-  return <div className="m-story-timeline" ref={host} data-active-phase={active} data-photo-state={photoState[active].status}>
-    <div className="m-story-phase-controls" role="group" aria-label={lang==='en'?'Stages of the story':'Etapy příběhu'}>{titles.map((title,index)=><button key={title} type="button" aria-controls={id+'-reader'} aria-pressed={active===index} onClick={()=>choose(index)}><span aria-hidden="true">{'0'+(index+1)}</span>{title}</button>)}</div>
-    <p className="m-story-scroll-hint" id={id+'-hint'}>{lang==='en'?'Scroll through the story or choose a stage.':'Posouvej příběh nebo vyber jeho etapu.'}</p>
-    <div className="m-story-reader-frame">
-      <div className="m-story-progress" aria-hidden="true"><span className="m-story-progress-fill"/>{titles.map((_,index)=><i key={index} className={index<=active?'is-reached':undefined} style={{top:index*50+'%'}}/>)}</div>
-      <div className="m-story-scroll" id={id+'-reader'} ref={reader} onScroll={schedule} tabIndex={0} role="region" aria-label={lang==='en'?'My story, scrollable text':'Můj příběh, posuvný text'} aria-describedby={id+'-hint'}>
+  return <div className="m-story-runway"><div className="m-story-timeline" ref={host} data-active-phase={active} data-photo-state={photoState[active].status}>
+    <div className="m-story-phase-controls" role="group" aria-label={lang==='en'?'Stages of the story':'Etapy příběhu'}><span className="m-story-phase-line" aria-hidden="true"><span/></span>{titles.map((title,index)=><button key={title} type="button" aria-controls={id+'-reader'} aria-pressed={active===index} onClick={()=>choose(index)}><span aria-hidden="true">{'0'+(index+1)}</span>{title}</button>)}</div>
+      <div className="m-story-scroll" id={id+'-reader'} ref={reader} onScroll={schedule} tabIndex={0} role="region" aria-label={lang==='en'?'My story, scrollable text':'Můj příběh, posuvný text'}>
         <ol className="m-story-stages">{[14,16,18].map((index,phase)=><li key={index} ref={node=>{stages.current[phase]=node;}} data-story-phase={phase} aria-labelledby={id+'-phase-'+phase}><h3 id={id+'-phase-'+phase}><span aria-hidden="true">{'0'+(phase+1)}</span>{c(index)}</h3><p><RichText>{c(index+1)}</RichText></p><figure className="m-story-inline-photo" tabIndex={-1}>{photograph(phase,true)}</figure></li>)}</ol>
       </div>
-    </div>
     <figure className="m-story-media" tabIndex={-1} aria-label={lang==='en'?'Photographs accompanying the story':'Fotografie k příběhu'}>{PHOTOGRAPHS.map((_,index)=><div key={index} className={'m-story-photo'+(active===index&&photoState[index].status!=='pending'?' is-visible':'')} aria-hidden={active!==index}>{photograph(index)}</div>)}<figcaption className="m-story-photo-caption" aria-live="polite">{titles[active]}</figcaption></figure>
-  </div>;
+  </div></div>;
 }

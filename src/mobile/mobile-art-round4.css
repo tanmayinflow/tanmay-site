@@ -1,0 +1,3 @@
+@media (max-width:899px) {
+ .tm-mobile[data-mobile-version=M10] .m-home-about-lines {display:block;width:calc(100% + 2 * var(--m-gutter));max-width:none;height:auto;margin:26px calc(-1 * var(--m-gutter)) 0;color:#e3a07b;pointer-events:none}
+}

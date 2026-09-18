@@ -27,8 +27,8 @@ export function Chapter({ title, eyebrow, children, className = '', id }: {title
   const uid = useId();
   return <section className={'m-chapter ' + className} id={id} aria-labelledby={uid}><div className="m-inner">{eyebrow && <p className="m-eyebrow">{eyebrow}</p>}<h2 id={uid}>{title}</h2>{children}</div></section>;
 }
-export function Detail({ title, children, number, className = '' }: {title: string; children: ReactNode; number?: string; className?: string}) {
-  return <details className={'m-detail ' + className} data-step={number}><summary><span className="m-detail-title">{title}<svg className="m-disclosure-mark" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1.5 7 5 3 8.5Z" fill="currentColor" /></svg></span></summary><div className="m-detail-body">{children}</div></details>;
+export function Detail({ title, children, number, className = '', arrow = false }: {title: string; children: ReactNode; number?: string; className?: string; arrow?: boolean}) {
+  return <details className={'m-detail ' + className} data-step={number}><summary><span className="m-detail-title">{title}{arrow?<Arrow/>:<svg className="m-disclosure-mark" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1.5 7 5 3 8.5Z" fill="currentColor" /></svg>}</span></summary><div className="m-detail-body">{children}</div></details>;
 }
 export function TextLink({ href, children, down = false, arrow = false }: { href: string; children: ReactNode; down?: boolean; arrow?: boolean }) {
   return <a className="m-text-link" href={href}>{children}{arrow&&<Arrow down={down} />}</a>;

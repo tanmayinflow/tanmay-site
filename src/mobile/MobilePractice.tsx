@@ -29,7 +29,7 @@ export default function MobilePractice({lang}:{lang:string}) {
     </Chapter>
     <Chapter title={c(28)} eyebrow={c(27)} className="m-meaning m-dark">
       <div className="m-meaning-origin"><TanmayCalligraphy/><div className="m-etymology"><strong className="etymology-term">tad</strong> · {c(25)}<br/><strong className="etymology-term">-maya</strong> · {lang==='en'?'formed from it':'z toho utvořený'}<br/>→ <strong className="etymology-term">tanmaya</strong></div></div>
-      <p><RichText>{c(29)}</RichText></p><Detail title={lang==='en'?'Read more':'Číst dál'} className="m7-meaning-more">{[30,31].map(i=><p key={i}><RichText>{c(i)}</RichText></p>)}</Detail>
+      <p><RichText>{c(29)}</RichText></p><Detail title={lang==='en'?'Read more':'Číst dál'} className="m7-meaning-more" arrow>{[30,31].map(i=><p key={i}><RichText>{c(i)}</RichText></p>)}</Detail>
       <p className="m-meaning-path"><RichText>{c(32)}</RichText></p><p className="m-meaning-closing"><RichText>{c(33)}</RichText></p>
     </Chapter>
     <Chapter title={c(34)} className="m-offer"><p><RichText>{c(35)}</RichText></p><MobileEditorialLink href={routePath('spoluprace',lang)}>{lang==='en'?'Ways to work together':'Možnosti spolupráce'}</MobileEditorialLink></Chapter>
