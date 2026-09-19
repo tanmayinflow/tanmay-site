@@ -1,0 +1,4 @@
+/* One compositor-owned pin for the complete Story page. The owned body sibling
+   supplies its native travel; JS never moves main/footer to chase the scroll. */
+body:has(> #root[data-story-page-root]) {overflow-x:clip;overflow-anchor:none}
+#root[data-story-page-root] {position:sticky;top:var(--story-page-pin,0px);overflow-anchor:none;display:flow-root}

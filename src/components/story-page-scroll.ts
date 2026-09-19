@@ -1,31 +1,31 @@
+import './story-page-scroll.css';
+
 type Options = { mobile:boolean; onRead?:(index:number)=>void; onLayout?:(flow:boolean)=>void };
 
-/** Native page travel advances the reader while the complete page composition
- * stays in place. No wheel/touch interception or document scroll lock is needed. */
+/** The browser pins the complete page natively. Scroll frames update only the
+ * reader and active photograph, never compensate the page's position in JS. */
 export function attachStoryPageScroll(host:HTMLElement, reader:HTMLElement, runway:HTMLElement, options:Options) {
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const stages=Array.from(reader.querySelectorAll<HTMLElement>('[data-story-phase]'));
-  const page=host.closest<HTMLElement>('main');
-  const sibling=page?.nextElementSibling;
-  const footer=sibling instanceof HTMLElement&&sibling.matches('footer')?sibling:null;
+  const candidate=host.closest<HTMLElement>('#root');
+  const page=candidate?.parentElement===document.body?candidate:null;
   const spacer=document.createElement('div');
   spacer.dataset.storyPageSpacer='true';spacer.setAttribute('aria-hidden','true');
   spacer.style.cssText='height:0;min-height:0;margin:0;padding:0;border:0;pointer-events:none;overflow-anchor:none';
-  // Keep React-owned nodes in their original parents. Only this empty spacer is
-  // inserted, and the previous inline styles are restored on every exit.
-  const pageStyles=page?['position','top','overflow-anchor','--story-page-offset'].map(name=>({name,value:page.style.getPropertyValue(name),priority:page.style.getPropertyPriority(name)})):[];
-  const footerStyles=footer?['position','top'].map(name=>({name,value:footer.style.getPropertyValue(name),priority:footer.style.getPropertyPriority(name)})):[];
-  let live=true,frame=0,hashFrame=0,flow:boolean|undefined,escaped=false,travel=0,active=0,capacityFailure='',pageOffset=0,start=0;
-  const shiftPage=(offset:number)=>{pageOffset=offset;page?.style.setProperty('--story-page-offset',offset+'px');footer?.style.setProperty('top',(offset-travel)+'px');};
+  // An owned sibling extends the body's content box by exactly the reader travel.
+  // React-owned children stay in place; header, main and footer share one native pin.
+  const savedPin=page?.style.getPropertyValue('--story-page-pin')||'';
+  const savedPriority=page?.style.getPropertyPriority('--story-page-pin')||'';
+  const savedRootMarker=page?.getAttribute('data-story-page-root');
+  let live=true,frame=0,hashFrame=0,flow:boolean|undefined,escaped=false,travel=0,active=0,capacityFailure='',start=0;
   const attachPage=()=>{
     if(!page)return;
-    page.after(spacer);page.style.setProperty('position','relative');page.style.setProperty('top','var(--story-page-offset,0px)');page.style.setProperty('overflow-anchor','none');
-    footer?.style.setProperty('position','relative');runway.dataset.storyPage='true';shiftPage(0);
+    page.after(spacer);page.dataset.storyPageRoot='true';runway.dataset.storyPage='true';
   };
   const restorePage=()=>{
-    spacer.remove();pageOffset=0;delete runway.dataset.storyPage;
-    pageStyles.forEach(({name,value,priority})=>{if(value)page?.style.setProperty(name,value,priority);else page?.style.removeProperty(name);});
-    footerStyles.forEach(({name,value,priority})=>{if(value)footer?.style.setProperty(name,value,priority);else footer?.style.removeProperty(name);});
+    spacer.remove();delete runway.dataset.storyPage;
+    if(savedPin)page?.style.setProperty('--story-page-pin',savedPin,savedPriority);else page?.style.removeProperty('--story-page-pin');
+    if(savedRootMarker!=null)page?.setAttribute('data-story-page-root',savedRootMarker);else page?.removeAttribute('data-story-page-root');
   };
   const viewport=()=>({top:visualViewport?.offsetTop||0,height:options.mobile?(visualViewport?.height||innerHeight):innerHeight});
   const pinTop=()=>{
@@ -61,7 +61,6 @@ export function attachStoryPageScroll(host:HTMLElement, reader:HTMLElement, runw
     frame=0;if(!live||!host.isConnected)return;
     if(flow){read();return;}
     const distance=scrollY-start;
-    shiftPage(Math.max(0,Math.min(travel,distance)));
     host.dataset.pageScroll=distance<0?'before':distance>travel?'after':'active';
     reader.scrollTop=Math.max(0,Math.min(travel,distance));read();
   };
@@ -76,11 +75,12 @@ export function attachStoryPageScroll(host:HTMLElement, reader:HTMLElement, runw
     if(nextFlow!==flow)setLayout(nextFlow);
     if(nextFlow){queue();return;}
     runway.style.setProperty('--story-pin-top',pinTop()+'px');
-    // The main's visual offset must never become part of the native scroll origin.
-    start=scrollY+runway.getBoundingClientRect().top-pageOffset-pinTop();
+    // Relative geometry is independent of both scrolling and the native sticky offset.
+    start=runway.getBoundingClientRect().top-page!.getBoundingClientRect().top-pinTop();
     travel=Math.max(0,reader.scrollHeight-reader.clientHeight);
     if(travel<2||host.getBoundingClientRect().height+pinTop()>lowerEdge()+1){capacityFailure=dimensions;setLayout(true);queue();return;}
     spacer.style.height=travel+'px';
+    page!.style.setProperty('--story-page-pin',-start+'px');
     runway.style.setProperty('--story-height',host.getBoundingClientRect().height+'px');
     runway.style.setProperty('--story-travel',travel+'px');runway.dataset.storySticky='true';
     if(previous===true&&host.getBoundingClientRect().top<lowerEdge()&&host.getBoundingClientRect().bottom>pinTop()){
@@ -107,7 +107,7 @@ export function attachStoryPageScroll(host:HTMLElement, reader:HTMLElement, runw
     if(!target||!page.contains(target)&&target!==page)return;
     const phase=target.closest<HTMLElement>('[data-story-phase]');
     if(phase&&reader.contains(phase)){choose(new CustomEvent('tanmay:story-phase',{detail:stages.indexOf(phase)}));return;}
-    const natural=scrollY+target.getBoundingClientRect().top-pageOffset;
+    const natural=target.getBoundingClientRect().top-page.getBoundingClientRect().top;
     const after=natural>=start+pinTop()+host.getBoundingClientRect().height;
     scrollTo({top:Math.max(0,natural+(after?travel:0)-(parseFloat(getComputedStyle(target).scrollMarginTop)||0)),behavior:'instant'});queue();
   };

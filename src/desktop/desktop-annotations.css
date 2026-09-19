@@ -66,3 +66,17 @@
  .site-page[data-secondary-v8] .practice-rock-copy {--d-rock-copy-left:max(57%,calc((var(--hero-scene-v913) + var(--hero-paper-height) - 30px) * 810 / 902 * .88));margin-left:var(--d-rock-copy-left);width:calc(100% - var(--d-rock-copy-left) - var(--gutter));justify-content:flex-start;padding-top:48px;padding-bottom:28px}
  .site-page[data-secondary-v8] .practice-rock-copy .h1 {font-size:clamp(38px,4.2vw,52px)}
 }
+/* Round eight: fit the complete About portrait below navigation on wide,
+   short screens. Preserve its existing width cap and lower material anchor;
+   the original 1366/1814 element ratio caps the already-approved large view. */
+@media (min-width:900px) {
+ .site-page[data-secondary-v8] .about-hero-v912b .about-portrait-v912b {
+  top:auto;bottom:0;
+  height:calc(100% - 24px);
+  max-height:calc(min(49vw,660px) * 1814 / 1366);
+  min-height:0;
+ }
+ .site-page[data-secondary-v8] .about-hero-v912b .about-portrait-v912b img {
+  width:100%;height:100%;object-fit:contain;object-position:right bottom;
+ }
+}
