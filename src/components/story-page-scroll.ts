@@ -1,6 +1,6 @@
 import './story-page-scroll.css';
 
-type Options = { mobile:boolean; onRead?:(index:number)=>void; onLayout?:(flow:boolean)=>void };
+type Options = { mobile:boolean; viewport?:()=>{top:number;height:number;bottom:number}|undefined; onRead?:(index:number)=>void; onLayout?:(flow:boolean)=>void };
 
 /** The browser pins the complete page natively. Scroll frames update only the
  * reader and active photograph, never compensate the page's position in JS. */
@@ -27,13 +27,14 @@ export function attachStoryPageScroll(host:HTMLElement, reader:HTMLElement, runw
     if(savedPin)page?.style.setProperty('--story-page-pin',savedPin,savedPriority);else page?.style.removeProperty('--story-page-pin');
     if(savedRootMarker!=null)page?.setAttribute('data-story-page-root',savedRootMarker);else page?.removeAttribute('data-story-page-root');
   };
-  const viewport=()=>({top:visualViewport?.offsetTop||0,height:options.mobile?(visualViewport?.height||innerHeight):innerHeight});
+  const viewport=()=>options.viewport?.()||{top:visualViewport?.offsetTop||0,height:options.mobile?(visualViewport?.height||innerHeight):innerHeight};
   const pinTop=()=>{
     const header=document.querySelector<HTMLElement>(options.mobile?'.m-header':'.topbar');
     const rect=header?.getBoundingClientRect(),fixed=header&&['fixed','sticky'].includes(getComputedStyle(header).position);
     return Math.max(viewport().top+16,fixed&&rect&&rect.bottom>0?rect.bottom+(options.mobile?12:24):0);
   };
   const lowerEdge=()=>{
+    const stable=options.viewport?.();if(stable)return stable.bottom;
     const v=viewport(),dock=options.mobile?document.querySelector<HTMLElement>('.m-dock')?.getBoundingClientRect():null;
     return dock&&dock.height>0?Math.min(v.top+v.height-12,dock.top-12):v.top+v.height-16;
   };

@@ -1,7 +1,7 @@
 /* One compact story stage. The page itself supplies the first reading pass. */
 @media (max-width:899px) {
  .tm-mobile[data-mobile-version=M10] .m-story-runway {margin-top:22px;overflow-anchor:none}
- .tm-mobile[data-mobile-version=M10] .m-story-timeline {--story-reader-height:clamp(180px,34svh,270px);margin:0}
+ .tm-mobile[data-mobile-version=M10] .m-story-timeline {--story-reader-height:clamp(180px,calc(var(--story-viewport-height,100svh) * .34),270px);margin:0}
  .tm-mobile[data-mobile-version=M10] .m-story-runway[data-story-sticky=true] {min-height:calc(var(--story-height) + var(--story-travel))}
  .tm-mobile[data-mobile-version=M10] .m-story-runway[data-story-sticky=true] .m-story-timeline {position:sticky;top:var(--story-pin-top,16px)}
  .tm-mobile[data-mobile-version=M10] .m-story-phase-controls {position:relative;gap:8px;margin-bottom:10px;padding-top:9px}
@@ -17,7 +17,7 @@
  .tm-mobile[data-mobile-version=M10] .m-story-stages>li {padding:0 0 18px}
  .tm-mobile[data-mobile-version=M10] .m-story-stages h3 {font-size:1.375rem;margin:0 0 10px}
  .tm-mobile[data-mobile-version=M10] .m-story-stages p {font-size:.875rem;line-height:1.65}
- .tm-mobile[data-mobile-version=M10] .m-story-media {height:clamp(130px,26svh,220px);aspect-ratio:auto;margin:12px 0 0;border-radius:0;background:none}
+ .tm-mobile[data-mobile-version=M10] .m-story-media {height:clamp(130px,calc(var(--story-viewport-height,100svh) * .26),220px);aspect-ratio:auto;margin:12px 0 0;border-radius:0;background:none}
  .tm-mobile[data-mobile-version=M10] .m-story-photo img {object-fit:contain}
  @container m-chapter (max-width:14em) {
   .tm-mobile[data-mobile-version=M10] .m-story-phase-controls {grid-template-columns:minmax(0,1fr);padding-top:0}
