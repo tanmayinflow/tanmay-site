@@ -32,8 +32,6 @@
  .d-practice-copy-row[data-active=true]>.d-practice-copy-icon {color:var(--accent-on-ink)}
  .d-practice-copy .d-practice-copy-row[data-active=true][data-anchor]>.anchor-light p {color:var(--on-dark)}
 
- .d-practice-hero-art {position:absolute;top:clamp(24px,4vh,48px);right:clamp(8px,2vw,28px);width:clamp(78px,7.4vw,108px);pointer-events:none;color:#743627}
- .d-practice-hero-art>svg {display:block;width:100%;height:auto;transform:none;color:inherit}
 
  @media (prefers-reduced-motion:no-preference) {
   .d-practice-ring {transition:opacity 180ms ease}

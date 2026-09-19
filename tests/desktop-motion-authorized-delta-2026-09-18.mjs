@@ -1,3 +1,4 @@
+import { withoutAuthorizedAnnotations } from './desktop-annotations-authorized-delta-2026-09-19.mjs';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
@@ -22,6 +23,7 @@ const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 /** Reverse only the approved desktop adapters, then run every earlier content guard. */
 export function withoutAuthorizedDesktopMotion(relativePath, current) {
   if (relativePath !== desktopMotionDelta.path) return current;
+  current = withoutAuthorizedAnnotations(relativePath, current);
   assert.equal(sha(current), desktopMotionDelta.authorizedSha256, 'Desktop work permits only its exact recorded App bridge.');
   let previous = current.toString('utf8');
   for (const change of [...desktopMotionDelta.replacements].reverse()) {

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { copy } from './MobileElements';
 import { RichText } from './MobileRichText';
+import './mobile-story-round6.css';
 
 const PHOTOGRAPHS = [
   {src:'/media/mobile-m8/story-before.jpg',fallback:null,width:752,height:564,cs:'Pohybová praxe před nehodou.',en:'Movement practice before the accident.'},
@@ -46,6 +47,7 @@ export default function MobileStoryTimeline({lang}:{lang:string}) {
   },[schedule]);
   const choose=(index:number)=>{
     const el=reader.current,stage=stages.current[index];if(!el||!stage)return;
+    if(host.current?.dataset.storyLayout){host.current.dispatchEvent(new CustomEvent('tanmay:story-phase',{detail:index}));return;}
     const behavior=matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth';
     if(el.scrollHeight-el.clientHeight>2)el.scrollTo({top:stage.offsetTop,behavior});
     else stage.scrollIntoView({block:'start',behavior});

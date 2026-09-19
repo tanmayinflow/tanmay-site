@@ -1,3 +1,4 @@
+@import './desktop-annotations.css';
 @media(min-width:900px){
   .who:has(.salto-field[data-desktop-salto]){overflow-x:clip}
   .who .salto-field[data-desktop-salto] img{

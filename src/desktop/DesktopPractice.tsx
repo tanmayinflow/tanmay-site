@@ -1,7 +1,6 @@
 import { Children, useEffect, useId, useRef, useState, type ReactNode } from 'react';
 import { ThreeAnchorsArtwork } from '../components/FinalArtwork';
 import { MobileAnchorIcon } from '../mobile/MobileAnchorIcons';
-import { MobileVajraBell } from '../mobile/MobileVajraBell';
 import './desktop-practice.css';
 
 const selectionEvent = 'tanmay:desktop-practice-anchor';
@@ -109,7 +108,7 @@ export function DesktopPracticeCopy({ children, lang }: { children: ReactNode; l
   </div>)}</div>;
 }
 
-/** The approved mobile outline, with the same precise dark-earth pigment. */
+/** The owner removed this decorative symbol from the desktop hero on 2026-09-19. */
 export function DesktopPracticeHeroArt() {
-  return <div className="d-practice-hero-art" aria-hidden="true"><MobileVajraBell/></div>;
+  return null;
 }

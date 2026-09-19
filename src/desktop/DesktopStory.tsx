@@ -1,5 +1,6 @@
 import { Children, useEffect, useId, useRef, useState, type ReactNode } from 'react';
 import './desktop-story.css';
+import { attachStoryPageScroll } from '../components/story-page-scroll';
 
 // The same untouched photographs and descriptions already used in the mobile story.
 const PHOTOGRAPHS = [
@@ -23,55 +24,23 @@ function StoryPhoto({ index, lang }: { index:number; lang:string }) {
   </div>;
 }
 
-/** Original chapters remain in normal page flow; only the accompanying photograph stays. */
+/** The whole stage stays in place; native page travel moves only the story column. */
 export default function DesktopStory({ children, lang }: { children:ReactNode; lang:string }) {
-  const id=useId(),host=useRef<HTMLDivElement>(null),chapters=useRef<(HTMLDivElement|null)[]>([]);
+  const id=useId(),host=useRef<HTMLDivElement>(null),reader=useRef<HTMLDivElement>(null),runway=useRef<HTMLDivElement>(null);
   const entries=Children.toArray(children),valid=entries.length===PHOTOGRAPHS.length;
   const [active,setActive]=useState(0);
   const [flow,setFlow]=useState(()=>typeof window!=='undefined'&&(window.matchMedia('(prefers-reduced-motion: reduce), (max-height: 620px)').matches||parseFloat(getComputedStyle(document.documentElement).fontSize)>20));
 
   useEffect(()=>{
-    const element=host.current;if(!element||!valid)return;
-    const gallery=element.querySelector<HTMLElement>('.d-story-gallery');
-    const preference=matchMedia('(prefers-reduced-motion: reduce)'),short=matchMedia('(max-height: 620px)');
-    let frame=0,visible=true,live=true;
-    const measure=()=>{
-      frame=0;if(!live)return;
-      setFlow(preference.matches||short.matches||parseFloat(getComputedStyle(document.documentElement).fontSize)>20);
-      // The final chapter needs exactly enough runway to keep the whole gallery visible.
-      const galleryHeight=`${gallery?.getBoundingClientRect().height||0}px`;
-      if(element.style.getPropertyValue('--d-story-gallery-height')!==galleryHeight)element.style.setProperty('--d-story-gallery-height',galleryHeight);
-      const header=document.querySelector('.topbar')?.getBoundingClientRect().height||66;
-      const readingLine=header+Math.max(64,(window.innerHeight-header)*.34);
-      let next=0;
-      chapters.current.forEach((chapter,index)=>{if(chapter&&chapter.getBoundingClientRect().top<=readingLine)next=index;});
-      setActive(next);
-    };
-    const schedule=()=>{if(live&&!frame)frame=requestAnimationFrame(measure);};
-    const onScroll=()=>{if(visible)schedule();};
-    const resize=new ResizeObserver(schedule);
-    resize.observe(element);
-    if(gallery)resize.observe(gallery);
-    chapters.current.forEach(chapter=>{
-      if(chapter)resize.observe(chapter);
-      const article=chapter?.querySelector('.story-beat');if(article)resize.observe(article);
-    });
-    const intersection=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;if(visible)schedule();},{rootMargin:'15% 0px'});
-    intersection.observe(element);
-    window.addEventListener('scroll',onScroll,{passive:true});
-    window.addEventListener('resize',schedule);
-    preference.addEventListener('change',schedule);short.addEventListener('change',schedule);
-    document.fonts.ready.then(schedule);measure();
-    return()=>{live=false;cancelAnimationFrame(frame);resize.disconnect();intersection.disconnect();window.removeEventListener('scroll',onScroll);window.removeEventListener('resize',schedule);preference.removeEventListener('change',schedule);short.removeEventListener('change',schedule);};
-  },[valid]);
+    if(!valid||!host.current||!reader.current||!runway.current)return;
+    return attachStoryPageScroll(host.current,reader.current,runway.current,{mobile:false,onRead:setActive,onLayout:setFlow});
+  },[valid,lang]);
 
-  const choose=(index:number)=>{
-    chapters.current[index]?.scrollIntoView({block:'start',behavior:flow||matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
-  };
+  const choose=(index:number)=>host.current?.dispatchEvent(new CustomEvent('tanmay:story-phase',{detail:index}));
   // Preserve all supplied content if a future caller passes a different chapter structure.
   if(!valid)return <div className="story-beats">{children}</div>;
-  return <div className="d-story" ref={host} data-active-phase={active} data-layout={flow?'flow':'sticky'}>
-    <div className="d-story-copy">{entries.map((chapter,index)=><div className="d-story-chapter" id={id+'-chapter-'+index} key={index} ref={node=>{chapters.current[index]=node;}} data-story-phase={index}>
+  return <div className="d-story-runway" ref={runway}><div className="d-story" ref={host} data-active-phase={active} data-layout={flow?'flow':'reader'}>
+    <div className="d-story-copy" ref={reader} tabIndex={0} role="region" aria-label={lang==='en'?'My story, scrollable text':'Můj příběh, posuvný text'}>{entries.map((chapter,index)=><div className="d-story-chapter" id={id+'-chapter-'+index} key={index} data-story-phase={index}>
       {chapter}
       <figure className="d-story-inline-photo"><StoryPhoto index={index} lang={lang}/></figure>
     </div>)}</div>
@@ -85,5 +54,5 @@ export default function DesktopStory({ children, lang }: { children:ReactNode; l
         <figcaption>{PHOTOGRAPHS[active][lang==='en'?'titleEn':'titleCs']}</figcaption>
       </figure>
     </div>
-  </div>;
+  </div></div>;
 }

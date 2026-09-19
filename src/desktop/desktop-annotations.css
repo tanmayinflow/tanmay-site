@@ -1,0 +1,79 @@
+/* Owner annotations, 2026-09-19. Desktop composition only; original assets and copy stay intact. */
+@media (min-width:900px) {
+ /* The authored desktop header is a 66px row plus its 1px border, including at the 900px boundary. */
+ html .opening.has-portrait {--topbar-h:67px;--hero-scene-v913:max(554px,calc(100svh - var(--topbar-h)));height:calc(var(--hero-scene-v913) + var(--topbar-h))}
+
+ /* Native FAQ disclosure remains unchanged; a restrained dot replaces the plus. */
+ .site-page .collaboration-faq .faq-symbol {flex-basis:22px;width:22px;height:22px}
+ .site-page .collaboration-faq .faq-symbol::before {left:9px;right:auto;top:9px;width:4px;height:4px;border-radius:50%;transform:none;transition:none}
+ .site-page .collaboration-faq .faq-symbol::after {content:none}
+
+ /* Enlarge from the lower anchor; reserve enough room for the complete transformed canvas. */
+ .site-page[data-secondary-v8] .collaboration-hero-v8 .collaboration-hero-cutout {max-height:calc((var(--hero-scene-v913) - 54px) / 1.12)}
+ .site-page[data-secondary-v8] .collaboration-hero-v8 .collaboration-hero-cutout img {transform:scale(1.12);transform-origin:50% 100%}
+
+ /* The cutout's bottom belongs to the existing natural foreground, at every desktop width. */
+ .site-page[data-secondary-v8] .about-hero-v912b .about-portrait-v912b {top:auto;bottom:0}
+
+ /* This photograph accompanies the preceding text already from the desktop breakpoint. */
+ .site-page[data-secondary-v8] .about-approach-v912d:has(>.about-nature-photo-v912c) {grid-template-columns:minmax(0,1.1fr) minmax(0,.95fr);grid-template-areas:"title title" "text image";column-gap:clamp(40px,5vw,70px);align-items:stretch}
+ .site-page[data-secondary-v8] .about-approach-v912d>.about-nature-photo-v912c {position:relative;align-self:stretch;justify-self:stretch;width:100%;max-width:none;min-height:0;height:100%}
+ .site-page[data-secondary-v8] .about-approach-v912d>.about-nature-photo-v912c img {position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;object-fit:cover;object-position:65% 50%}
+
+ /* Fit the scene to the complete original photograph at narrower desktop widths.
+    The unchanged 30px lower clearance protects the toes without an empty upper strip. */
+ .site-page[data-secondary-v8] .practice-rock-v963 {--d-rock-scene:min(var(--hero-scene-v913),calc(56vw * 902 / 810 + 30px));height:var(--d-rock-scene)}
+ .site-page[data-secondary-v8] .practice-rock-photo {top:0;bottom:30px;width:calc((var(--d-rock-scene) - 30px) * 810 / 902);height:calc(100% - 30px);aspect-ratio:810/902}
+ .site-page[data-secondary-v8] .practice-rock-photo picture {width:100%;height:100%}
+ .site-page[data-secondary-v8] .practice-rock-photo img {width:100%;height:100%;object-fit:contain;object-position:left bottom}
+
+ /* The original incoming Linen has its actual contour at source rows 111-197.
+    Show that contour instead of squeezing the entire 693px canvas into a thin band.
+    Its fully opaque row 208 starts 31px above the scene bottom, covering the rock's
+    straight canvas edge while keeping the original toes clear. No image pixels change. */
+ .site-page[data-secondary-v8] .hero-end-v913,
+ .site-page[data-secondary-v8] .about-hero-foreground-v912b,
+ .site-page[data-collaboration-v99] .collaboration-proof-v919 .collaboration-linen-lip {
+  --d-hero-mask-art:clamp(150px,16vw,200px);
+  height:64px;
+  -webkit-mask-size:100% var(--d-hero-mask-art);mask-size:100% var(--d-hero-mask-art);
+  -webkit-mask-position:center calc(32px - var(--d-hero-mask-art) * .3001443001);mask-position:center calc(32px - var(--d-hero-mask-art) * .3001443001);
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;mask-mode:alpha;
+ }
+
+ /* The supplied 1600x693 strata files have a 99px contour around 23%/77% of
+    their canvas. Crop that real contour into the existing band instead of
+    compressing the entire transparent/solid canvas into a nearly straight line.
+    The section heights and original texture coordinates are unchanged. */
+ .site-page[data-secondary-home-edges] .secondary-home-edge[data-side=top] {--d-edge-band:var(--hero-edge-h);--d-edge-centre:.23}
+ .site-page[data-secondary-home-edges] .secondary-home-edge[data-side=bottom] {--d-edge-band:clamp(46px,6.2vw,88px);--d-edge-centre:.77}
+ .site-page[data-secondary-v6] .material-edge {--d-edge-band:clamp(48px,6vw,84px);--d-edge-centre:.77}
+ .home-dark-field .who .strata--hero {--d-edge-band:var(--hero-edge-h);--d-edge-centre:.77}
+ .closing>.strata {--d-edge-band:clamp(36px,3.3vw,48px);--d-edge-centre:.77}
+ .site-page[data-secondary-home-edges] .secondary-home-edge>span,
+ .site-page[data-secondary-v6] .material-edge,
+ .home-dark-field .who .strata--hero,
+ html .closing>.strata {
+  -webkit-mask-size:100% calc(var(--d-edge-band) * 6);mask-size:100% calc(var(--d-edge-band) * 6);
+  -webkit-mask-position:center calc(var(--d-edge-band) * .5 - var(--d-edge-band) * 6 * var(--d-edge-centre));mask-position:center calc(var(--d-edge-band) * .5 - var(--d-edge-band) * 6 * var(--d-edge-centre));
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;mask-mode:alpha;
+ }
+
+ /* Tighten only the two annotated entrances; the material boundaries keep their own space. */
+ .site-page[data-secondary-v8] .practice-rock-v963 + .page-section--tight {padding-top:32px}
+ .site-page[data-secondary-v8] .practice-work-v8 {padding-bottom:24px}
+ .site-page[data-secondary-v8] .reflection-v918 {padding-top:24px}
+
+ /* Eyebrow is its own row so the introduction begins beside the actual heading. */
+ .site-page[data-secondary-v8] .practice-anchors .section-head--split {row-gap:0}
+ .site-page[data-secondary-v8] .practice-anchors .section-head--split>div {display:contents}
+ .site-page[data-secondary-v8] .practice-anchors .section-head--split .label {grid-column:1;grid-row:1;margin:0}
+ .site-page[data-secondary-v8] .practice-anchors .section-head--split h2 {grid-column:1;grid-row:2;align-self:start}
+ .site-page[data-secondary-v8] .practice-anchors .section-head--split>.page-intro {grid-column:2;grid-row:2;margin-top:12px;align-self:start}
+}
+@media (min-width:900px) and (max-width:1099px) {
+ /* Keep the existing complete photograph at narrower desktop widths instead of stretching it to a tall text column. */
+ .site-page[data-secondary-v8] .about-approach-v912d:has(>.about-nature-photo-v912c) {column-gap:32px}
+ .site-page[data-secondary-v8] .about-approach-v912d>.about-nature-photo-v912c {align-self:start;height:auto}
+ .site-page[data-secondary-v8] .about-approach-v912d>.about-nature-photo-v912c img {position:static;height:auto;aspect-ratio:1080/1070;object-fit:contain}
+}

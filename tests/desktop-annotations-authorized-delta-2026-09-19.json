@@ -1,0 +1,19 @@
+{
+  "approvedOn": "2026-09-19",
+  "baselineCommit": "7ca88dd0baa311539689daec4cd6e57a19141863",
+  "path": "src/App.tsx",
+  "beforeSha256": "cf65313e67b92d96bafa7f9596103ae1f8b04df032f94d883a3dd2dbb3b1fac9",
+  "authorizedSha256": "46aff47cbbb3e279116bc7a8188f2bdba9fe98f242852772e992f502d3139576",
+  "replacements": [
+    {
+      "id": "meaning-import",
+      "before": "import DesktopStory from \"./desktop/DesktopStory\";",
+      "after": "import DesktopStory from \"./desktop/DesktopStory\";\nimport DesktopMeaningMore from \"./desktop/DesktopMeaningMore\";"
+    },
+    {
+      "id": "meaning-two-paragraph-disclosure",
+      "before": "<p className=\"body-txt rv d2\">{E(\"V tradici, ze které osobně čerpám, se cesta nehledá mimo tělo ani mimo podmínky života. Tělo není jen nástroj praxe. Je součástí cesty samotné. To, co se objeví, nemusí stát mimo ni. Může se stát její součástí.\",\"In the tradition I personally draw from, the path is not sought outside the body or outside the conditions of life. The body is not only a tool of practice. It is part of the path itself. What appears does not have to stand outside it. It can become part of the path.\")}</p><p className=\"body-txt rv d2\">{E(\"Je mi blízký obraz šípu, který po zásahu nezůstává vedle cíle, ale splyne s ním. To, čemu dáváš tělo, pozornost a čas, začne postupně utvářet, jak se hýbeš, vnímáš a žiješ. Proto tanmay practice není jen soubor tréninků, ale cesta od poznání k vlastní zkušenosti a od společného setkání k praxi, kterou dokážeš držet sám.\",\"I am drawn to the image of an arrow that, once it strikes, does not remain beside the target but becomes one with it. What you give your body, attention and time to gradually shapes how you move, perceive and live. That is why tanmay practice is not just a collection of training sessions, but a path from understanding to lived experience and from shared sessions to a practice you can hold yourself.\")}</p>",
+      "after": "<DesktopMeaningMore lang={lang}><p className=\"body-txt rv d2\">{E(\"V tradici, ze které osobně čerpám, se cesta nehledá mimo tělo ani mimo podmínky života. Tělo není jen nástroj praxe. Je součástí cesty samotné. To, co se objeví, nemusí stát mimo ni. Může se stát její součástí.\",\"In the tradition I personally draw from, the path is not sought outside the body or outside the conditions of life. The body is not only a tool of practice. It is part of the path itself. What appears does not have to stand outside it. It can become part of the path.\")}</p><p className=\"body-txt rv d2\">{E(\"Je mi blízký obraz šípu, který po zásahu nezůstává vedle cíle, ale splyne s ním. To, čemu dáváš tělo, pozornost a čas, začne postupně utvářet, jak se hýbeš, vnímáš a žiješ. Proto tanmay practice není jen soubor tréninků, ale cesta od poznání k vlastní zkušenosti a od společného setkání k praxi, kterou dokážeš držet sám.\",\"I am drawn to the image of an arrow that, once it strikes, does not remain beside the target but becomes one with it. What you give your body, attention and time to gradually shapes how you move, perceive and live. That is why tanmay practice is not just a collection of training sessions, but a path from understanding to lived experience and from shared sessions to a practice you can hold yourself.\")}</p></DesktopMeaningMore>"
+    }
+  ]
+}
