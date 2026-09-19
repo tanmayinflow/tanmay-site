@@ -1,5 +1,7 @@
 /* Reversible story: the entire compact stage stays while only its reader moves. */
 @media (max-width:899px) {
+ .tm-mobile[data-mobile-version=M10] .m-story-runway[data-story-page=true][data-story-sticky=true] {min-height:0}
+ .tm-mobile[data-mobile-version=M10] .m-story-runway[data-story-page=true][data-story-sticky=true] .m-story-timeline {position:relative;top:auto}
  .tm-mobile[data-mobile-version=M10] .m-story-timeline[data-story-layout=scroll] .m-story-scroll {overflow-y:hidden}
  .tm-mobile[data-mobile-version=M10] .m-story-photo {display:flex;align-items:center;justify-content:center}
  .tm-mobile[data-mobile-version=M10] .m-story-photo img {width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;border-radius:var(--m-radius,12px)}

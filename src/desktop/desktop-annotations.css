@@ -1,7 +1,12 @@
 /* Owner annotations, 2026-09-19. Desktop composition only; original assets and copy stay intact. */
 @media (min-width:900px) {
- /* The authored desktop header is a 66px row plus its 1px border, including at the 900px boundary. */
- html .opening.has-portrait {--topbar-h:67px;--hero-scene-v913:max(554px,calc(100svh - var(--topbar-h)));height:calc(var(--hero-scene-v913) + var(--topbar-h))}
+ /* The first screen contains only the opening. Its outgoing material band
+    has its own space after the viewport instead of overlapping that first screen. */
+ html:root, .site-page[data-secondary-v8] {--topbar-h:67px;--hero-scene-v913:max(554px,calc(100svh - 67px))}
+ html .opening.has-portrait {--topbar-h:67px;--hero-scene-v913:max(554px,calc(100svh - 67px));height:calc(var(--hero-scene-v913) + var(--topbar-h) + var(--hero-edge-h))}
+ .site-page[data-secondary-v8] .collaboration-hero-v8,
+ .site-page[data-secondary-v8] .practice-rock-v963,
+ .site-page[data-secondary-v8] .about-hero-v912b .about-hero-scene {height:calc(var(--hero-scene-v913) + var(--hero-paper-height))}
 
  /* Native FAQ disclosure remains unchanged; a restrained dot replaces the plus. */
  .site-page .collaboration-faq .faq-symbol {flex-basis:22px;width:22px;height:22px}
@@ -20,44 +25,21 @@
  .site-page[data-secondary-v8] .about-approach-v912d>.about-nature-photo-v912c {position:relative;align-self:stretch;justify-self:stretch;width:100%;max-width:none;min-height:0;height:100%}
  .site-page[data-secondary-v8] .about-approach-v912d>.about-nature-photo-v912c img {position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;object-fit:cover;object-position:65% 50%}
 
- /* Fit the scene to the complete original photograph at narrower desktop widths.
-    The unchanged 30px lower clearance protects the toes without an empty upper strip. */
- .site-page[data-secondary-v8] .practice-rock-v963 {--d-rock-scene:min(var(--hero-scene-v913),calc(56vw * 902 / 810 + 30px));height:var(--d-rock-scene)}
- .site-page[data-secondary-v8] .practice-rock-photo {top:0;bottom:30px;width:calc((var(--d-rock-scene) - 30px) * 810 / 902);height:calc(100% - 30px);aspect-ratio:810/902}
+ /* Preserve the complete original cliff, anchored directly at navigation.
+    Its sloping transparent silhouette keeps the original editorial composition. */
+ .site-page[data-secondary-v8] .practice-rock-photo {top:0;bottom:30px;width:calc((var(--hero-scene-v913) + var(--hero-paper-height) - 30px) * 810 / 902);height:calc(100% - 30px);aspect-ratio:810/902}
  .site-page[data-secondary-v8] .practice-rock-photo picture {width:100%;height:100%}
  .site-page[data-secondary-v8] .practice-rock-photo img {width:100%;height:100%;object-fit:contain;object-position:left bottom}
 
- /* The original incoming Linen has its actual contour at source rows 111-197.
-    Show that contour instead of squeezing the entire 693px canvas into a thin band.
-    Its fully opaque row 208 starts 31px above the scene bottom, covering the rock's
-    straight canvas edge while keeping the original toes clear. No image pixels change. */
+ /* Restore the supplied original strata at the established subtle scale.
+    Home and its Copper clipping window now share the same alpha silhouette. */
  .site-page[data-secondary-v8] .hero-end-v913,
  .site-page[data-secondary-v8] .about-hero-foreground-v912b,
- .site-page[data-collaboration-v99] .collaboration-proof-v919 .collaboration-linen-lip {
-  --d-hero-mask-art:clamp(150px,16vw,200px);
-  height:64px;
-  -webkit-mask-size:100% var(--d-hero-mask-art);mask-size:100% var(--d-hero-mask-art);
-  -webkit-mask-position:center calc(32px - var(--d-hero-mask-art) * .3001443001);mask-position:center calc(32px - var(--d-hero-mask-art) * .3001443001);
-  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;mask-mode:alpha;
- }
-
- /* The supplied 1600x693 strata files have a 99px contour around 23%/77% of
-    their canvas. Crop that real contour into the existing band instead of
-    compressing the entire transparent/solid canvas into a nearly straight line.
-    The section heights and original texture coordinates are unchanged. */
- .site-page[data-secondary-home-edges] .secondary-home-edge[data-side=top] {--d-edge-band:var(--hero-edge-h);--d-edge-centre:.23}
- .site-page[data-secondary-home-edges] .secondary-home-edge[data-side=bottom] {--d-edge-band:clamp(46px,6.2vw,88px);--d-edge-centre:.77}
- .site-page[data-secondary-v6] .material-edge {--d-edge-band:clamp(48px,6vw,84px);--d-edge-centre:.77}
- .home-dark-field .who .strata--hero {--d-edge-band:var(--hero-edge-h);--d-edge-centre:.77}
- .closing>.strata {--d-edge-band:clamp(36px,3.3vw,48px);--d-edge-centre:.77}
+ .site-page[data-collaboration-v99] .collaboration-proof-v919 .collaboration-linen-lip {height:var(--hero-paper-height);-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-position:center;mask-position:center;mask-mode:alpha}
  .site-page[data-secondary-home-edges] .secondary-home-edge>span,
  .site-page[data-secondary-v6] .material-edge,
  .home-dark-field .who .strata--hero,
- html .closing>.strata {
-  -webkit-mask-size:100% calc(var(--d-edge-band) * 6);mask-size:100% calc(var(--d-edge-band) * 6);
-  -webkit-mask-position:center calc(var(--d-edge-band) * .5 - var(--d-edge-band) * 6 * var(--d-edge-centre));mask-position:center calc(var(--d-edge-band) * .5 - var(--d-edge-band) * 6 * var(--d-edge-centre));
-  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;mask-mode:alpha;
- }
+ html .closing>.strata {-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-position:center;mask-position:center;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;mask-mode:alpha}
 
  /* Tighten only the two annotated entrances; the material boundaries keep their own space. */
  .site-page[data-secondary-v8] .practice-rock-v963 + .page-section--tight {padding-top:32px}
@@ -76,4 +58,11 @@
  .site-page[data-secondary-v8] .about-approach-v912d:has(>.about-nature-photo-v912c) {column-gap:32px}
  .site-page[data-secondary-v8] .about-approach-v912d>.about-nature-photo-v912c {align-self:start;height:auto}
  .site-page[data-secondary-v8] .about-approach-v912d>.about-nature-photo-v912c img {position:static;height:auto;aspect-ratio:1080/1070;object-fit:contain}
+}
+
+/* A tall desktop viewport keeps the original cliff complete. Move its copy into
+   the clear upper-right paper, respecting the photographed sloping silhouette. */
+@media (min-width:900px) and (max-aspect-ratio:13/10) {
+ .site-page[data-secondary-v8] .practice-rock-copy {--d-rock-copy-left:max(57%,calc((var(--hero-scene-v913) + var(--hero-paper-height) - 30px) * 810 / 902 * .88));margin-left:var(--d-rock-copy-left);width:calc(100% - var(--d-rock-copy-left) - var(--gutter));justify-content:flex-start;padding-top:48px;padding-bottom:28px}
+ .site-page[data-secondary-v8] .practice-rock-copy .h1 {font-size:clamp(38px,4.2vw,52px)}
 }

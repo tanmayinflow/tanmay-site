@@ -51,7 +51,7 @@ export function useMobileMotion(root:RefObject<HTMLDivElement>,pageKey:string) {
       if(anchors){
         const view=viewport(),box=anchors.getBoundingClientRect();
         const progress=Math.max(0,Math.min(1,(view.top+view.height-box.top)/(view.height+box.height)));
-        anchors.style.setProperty('--m-anchors-scroll-angle',`${preference.matches?0:progress*360}deg`);
+        anchors.style.setProperty('--m-anchors-scroll-angle',`${preference.matches?0:progress*180}deg`);
       }
       if(preference.matches)return;
       if(cycle){

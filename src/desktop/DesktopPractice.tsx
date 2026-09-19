@@ -41,7 +41,7 @@ export function DesktopPracticeDiagram({ lang }: { lang: string }) {
       const moving = desktop.matches && !reduced.matches;
       const bounds = element.getBoundingClientRect();
       const progress = Math.max(0, Math.min(1, (innerHeight - bounds.top) / (innerHeight + bounds.height)));
-      element.style.setProperty('--d-practice-angle', `${moving ? progress * 360 : 0}deg`);
+      element.style.setProperty('--d-practice-angle', `${moving ? progress * 180 : 0}deg`);
       element.dataset.motion = moving ? 'scroll' : 'static';
     };
     const queue = () => {

@@ -1,8 +1,12 @@
 @media (max-width:899px) {
  .tm-mobile[data-mobile-version=M10] .m-home-about-lines {display:block;width:calc(100% + 2 * var(--m-gutter));max-width:none;height:auto;margin:26px calc(-1 * var(--m-gutter)) 0;color:#e3a07b;pointer-events:none}
- .tm-mobile[data-mobile-version=M10] .m-home-about .m-about-symbol {color:var(--m-body);margin-top:auto;margin-bottom:4px;transform:rotate(-28deg);transform-origin:center}
- .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--practice .m-hero-vajra-bell {left:calc(var(--m-gutter) - 12px);top:4px;width:clamp(88px,28vw,124px);transform:none;color:#743627}
+ .tm-mobile[data-mobile-version=M10] .m-home-about .m-about-symbol {color:var(--m-body);margin-top:14px;margin-bottom:0;transform:rotate(-28deg);transform-origin:center}
+ .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--practice .m-hero-vajra-bell {left:calc(var(--m-gutter) - 4px);top:10px;width:clamp(88px,26vw,120px);transform:none;color:#743627}
  .tm-mobile[data-mobile-version=M10] .m-about-intro-copy .m-editorial-link {color:var(--accent-earth)}
+ /* A full-width English subtitle needs the upper slot on the narrowest phones. */
+ @media (max-width:385px) {
+  .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--practice .m-hero-vajra-bell {top:3px}
+ }
  @media (orientation:landscape) and (min-width:480px) {
   .tm-mobile[data-mobile-version=M10] .m-hero.m-hero--practice .m-hero-vajra-bell {top:10px;width:88px}
  }

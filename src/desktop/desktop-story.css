@@ -3,6 +3,9 @@
  .d-story-runway {margin-top:clamp(28px,4vw,52px);overflow-anchor:none}
  .d-story-runway[data-story-sticky=true] {min-height:calc(var(--story-height) + var(--story-travel))}
  .d-story-runway[data-story-sticky=true]>.d-story {position:sticky;top:var(--story-pin-top,90px)}
+ /* Page compensation now holds the closing statement and following sections too. */
+ .d-story-runway[data-story-page=true][data-story-sticky=true] {min-height:0}
+ .d-story-runway[data-story-page=true][data-story-sticky=true]>.d-story {position:relative;top:auto}
  .d-story .d-story-copy:focus-visible {outline:1px solid var(--accent-earth-light,#e3a07b);outline-offset:6px}
  /* Clip the material edge without creating a scroll container above the sticky gallery. */
  .story-return:has(> .wrap > .d-story-runway) {overflow:visible;overflow:clip}
