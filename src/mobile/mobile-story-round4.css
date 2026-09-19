@@ -17,7 +17,7 @@
  .tm-mobile[data-mobile-version=M10] .m-story-stages>li {padding:0 0 18px}
  .tm-mobile[data-mobile-version=M10] .m-story-stages h3 {font-size:1.375rem;margin:0 0 10px}
  .tm-mobile[data-mobile-version=M10] .m-story-stages p {font-size:.875rem;line-height:1.65}
- .tm-mobile[data-mobile-version=M10] .m-story-media {height:clamp(130px,calc(var(--story-viewport-height,100svh) * .26),220px);aspect-ratio:auto;margin:12px 0 0;border-radius:0;background:none}
+ .tm-mobile[data-mobile-version=M10] .m-story-media {height:clamp(170px,calc(var(--story-viewport-height,100svh) * .34),280px);aspect-ratio:auto;margin:12px 0 0;border-radius:0;background:none}
  .tm-mobile[data-mobile-version=M10] .m-story-photo img {object-fit:contain}
  @container m-chapter (max-width:14em) {
   .tm-mobile[data-mobile-version=M10] .m-story-phase-controls {grid-template-columns:minmax(0,1fr);padding-top:0}
