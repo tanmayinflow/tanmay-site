@@ -34,6 +34,7 @@ import './mobile-affordances-round4.css';
 import './mobile-layout-round4.css';
 import './mobile-art-round4.css';
 import './mobile-story-round4.css';
+import '../text-and-edges-review.css';
 import { MobileLanguageSwitch, MobileMenuLines } from './MobileHeaderDetails';
 import { useMobileContactScroll } from './mobile-contact-scroll';
 import { useMobileMotion } from './useMobileMotion';
