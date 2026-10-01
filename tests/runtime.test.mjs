@@ -35,7 +35,15 @@ test('all 327 original shared files remain exact except precisely authorized cop
     const expected=workingAuthorizedFiles.includes(r.path)
       ?createHash('sha256').update(authorizedWorkingBytes(r.path,readFileSync(join(fixtures,'site',r.path)))).digest('hex')
       :r.sha256;
-    assert.equal(createHash('sha256').update(withoutAuthorizedOwnerCopy(r.path,readFileSync(join(site,r.path)))).digest('hex'),expected,r.path);
+    let current = readFileSync(join(site,r.path));
+    // Owner requested the current Home share image on 2026-10-01. Reverse only
+    // its versioned image slug; the original guard still checks every other byte.
+    if (r.path === 'src/site.js') {
+      const approved = 'ogSlug: r.id === "home" ? "home-20261001" : r.id,';
+      assert.equal(current.toString('utf8').split(approved).length - 1, 1);
+      current = Buffer.from(current.toString('utf8').replace(approved, 'ogSlug: r.id,'));
+    }
+    assert.equal(createHash('sha256').update(withoutAuthorizedOwnerCopy(r.path,current)).digest('hex'),expected,r.path);
   }
 });
 

@@ -190,7 +190,7 @@ export function allPages() {
         title: r.title[lang],
         description: r.description[lang],
         alternates: Object.fromEntries(LANGS.map((l) => [l, r.path[l]])),
-        ogSlug: r.id,
+        ogSlug: r.id === "home" ? "home-20261001" : r.id,
       });
     }
   }
