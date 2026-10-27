@@ -1,7 +1,7 @@
 // New mobile summaries and controls. Approved long-form copy lives separately.
 export const mobileCopy = {
   service: ['Osobní trénink a pohybová praxe · Praha', 'Personal training and movement practice · Prague'],
-  book: ['Domluvit lekci', 'Book a session'],
+  book: ['20 minut zdarma', 'Free 20 minutes'],
   clients: ['Vstup pro klienty', 'Client login'],
   menu: ['Otevřít menu', 'Open menu'],
   close: ['Zavřít menu', 'Close menu'],
@@ -9,7 +9,7 @@ export const mobileCopy = {
   homeLead: ['Síla. Jistota v pohybu. Vlastní praxe.', 'Strength. Confidence in movement. Your own practice.'],
   audienceOne: ['Trénink, ke kterému se rád vracíš.', 'Training you enjoy returning to.'],
   audienceTwo: ['Směr místo nahodilých lekcí.', 'Direction for every session.'],
-  clearPriorities: ['Jasné hodnoty', 'Clear values'],
+  clearPriorities: ['Pokaždé trochu jinak', 'A little different every time'],
   collabLead: ['Osobně v Praze. Nebo odkudkoli.', 'In person in Prague. Or wherever you are.'],
   formatDetail: ['Jak může spolupráce vypadat', 'What working together can look like'],
   aboutDetail: ['Zkušenosti a vzdělání', 'Experience and education'],
@@ -34,7 +34,7 @@ export const mobileCopy = {
   privacy: ['Soukromí', 'Privacy'],
   skip: ['Přejít na obsah', 'Skip to content'],
   email: ['Napsat e-mail', 'Send an email'],
-  wa: ['Napsat na WhatsApp', 'Message on WhatsApp'],
+  wa: ['Domluvit přes WhatsApp', 'Book on WhatsApp'],
   prices: ['Ceník', 'Prices'],
   explore: ['Prohlédnout nabídku', 'Explore the options'],
   continue: ['Pokračovat', 'Continue'],

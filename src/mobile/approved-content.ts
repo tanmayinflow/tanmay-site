@@ -24,8 +24,8 @@ export const approved = {
       "I teach only what I live."
     ],
     [
-      "Pomáhám lidem budovat sílu, pohybovou jistotu a praxi, která drží i v běžném životě. Osobní trénink propojuju s plánem a průběžnou úpravou podle toho, co se skutečně děje.",
-      "I help people rebuild a reliable relationship with the body and build a practice that holds in ordinary life. Through movement, meditation and direct contact with wild nature."
+      "Pomůžu ti zesílit a hýbat se líp. Trénujeme naplno, ale bezpečně. Bez nudy a výčitek, i když týden nejde podle plánu.",
+      "I’ll help you get stronger and move better. We train hard, but safely. No boredom or guilt, even when your week doesn’t go to plan."
     ],
     [
       "tělo · praxe · divoká příroda",
@@ -56,28 +56,28 @@ export const approved = {
       "What actually happens in the work"
     ],
     [
-      "Síla, kterou umíš použít",
-      "What we train"
+      "Naplno, ale nikdy přes hranu",
+      "All in, never over the edge"
     ],
     [
-      "Trénujeme sílu, kontrolu, mobilitu a pohybovou jistotu. Základ tvoří vlastní váha a kalistenika. Kruhy, činky a další pomůcky zapojujeme jen tam, kde pomáhají konkrétnímu cíli.",
-      "The spine of the work is bodyweight training and calisthenics. Movement skill, strength through full range, control, progression from a simpler variant to a harder one. Rings, weights and apparatus where they move a specific goal. Parkour and yoga are the background it draws on."
+      "Dáš do toho všechno a já hlídám, kde je tvoje hranice. Když tě něco bolí, nemusíš končit. Najdeme verzi pohybu, která je bezpečná.",
+      "You give it everything, and I keep an eye on where your limit is. If something hurts, you don’t have to stop. We find a version of the movement that’s safe."
     ],
     [
-      "Co má teď smysl",
-      "How it is held"
+      "Pokaždé trochu jinak",
+      "A little different every time"
     ],
     [
-      "Každé setkání má pokračování. Společně určíme, co má teď prioritu, kolik práce unese tvůj týden a čeho se držet, když podmínky nejsou ideální.",
-      "A session is mostly movement. What shows up in it becomes the plan for the period that follows: what to train, how much your week can carry, and what to hold on to in a worse week. The practice between sessions is the actual product, not homework."
+      "Žádný trénink pořád dokola. Střídáme sílu, dovednosti i hru s pohybem, takže tě to baví a posiluješ celé tělo. Většinou s vlastní vahou, kruhy a činky přidáme, když dávají smysl.",
+      "No same-old routine. We mix strength, skills and play, so it stays fun and your whole body gets stronger. Mostly bodyweight; rings and weights come in when they make sense."
     ],
     [
-      "Plán podle reality",
-      "What changes between sessions"
+      "Když týden nevyjde, nevadí",
+      "When the week falls apart, that’s okay"
     ],
     [
-      "V klientské aplikaci máš svůj plán, termíny a záznamy na jednom místě. Podle toho, co jsi skutečně udělal a jak na to tělo reagovalo, upravujeme objem, náročnost i další krok. Plán se přizpůsobuje realitě, ne naopak.",
-      "You record what actually happened, not what was supposed to. The plan is adjusted from that. Reflection and logging are not a ritual. They are the tools that decide what happens next time."
+      "Práce, rodina, únava. Život se mění a plán se mění s ním. Žádné výčitky, prostě navážeme dalším krokem. Plán, termíny a záznamy máš v klientské aplikaci na jednom místě.",
+      "Work, family, tiredness. Life changes and the plan changes with it. No guilt, we just pick up with the next step. Your plan, sessions and records live in one place in the client app."
     ]
   ],
   "HomeCollab": [
@@ -114,32 +114,32 @@ export const approved = {
   ],
   "HomeBooking": [
     [
-      "Ahoj Kryštofe, mám zájem o spolupráci.\n\nCo chci rozvíjet:\n\nJakou spolupráci hledám:\n\nKdy mám obvykle čas:",
-      "Hi Tanmay, I would like to ask about coaching. I am working on: … I want to train: … I am usually available: …"
+      "Ahoj Kryštofe, chci si domluvit 20 minut zdarma.\n\nCo chci zvládnout:\n\nKde chci trénovat (Praha / online):\n\nKdy se mi to hodí:",
+      "Hi Kryštof, I’d like to book the free 20 minutes.\n\nWhat I want to achieve:\n\nWhere I want to train (Prague / online):\n\nWhen suits me:"
     ],
     [
-      "Zájem o spolupráci",
-      "Coaching enquiry"
+      "20 minut zdarma",
+      "Free 20 minutes"
     ],
     [
-      "Ahoj Kryštofe,\n\nmám zájem o spolupráci.\n\nCo chci rozvíjet:\n\nJakou spolupráci hledám:\n\nKdy mám obvykle čas:",
-      "Hi Tanmay,\n\nI would like to ask about coaching.\n\nWhat I am working on:\nWhere I want to train:\nWhen I am usually available:\n\n"
+      "Ahoj Kryštofe, chci si domluvit 20 minut zdarma.\n\nCo chci zvládnout:\n\nKde chci trénovat (Praha / online):\n\nKdy se mi to hodí:",
+      "Hi Kryštof, I’d like to book the free 20 minutes.\n\nWhat I want to achieve:\n\nWhere I want to train (Prague / online):\n\nWhen suits me:"
     ],
     [
       "První krok",
-      "Booking"
+      "First step"
     ],
     [
-      "Napiš mi.",
-      "Let’s begin simply."
+      "20 minut zdarma.",
+      "20 minutes, free."
     ],
     [
-      "Stačí mi pár vět o tom, co chceš rozvíjet, jakou spolupráci hledáš a kdy máš obvykle čas. Ozvu se a domluvíme první krok.",
-      "Write me a few lines about what you are working through, where you would like to work and what you expect from coaching. I will reply and we will see whether it makes sense."
+      "Krátce si zavoláme, telefonem nebo přes video. Řekneš mi, co chceš zvládnout a co ti zatím brání. Já ti řeknu, jak bych začal. Nic nemusíš kupovat a do ničeho tě nebudu tlačit.",
+      "We’ll have a short call, by phone or video. You tell me what you want to achieve and what’s been getting in the way. I’ll tell you how I’d start. You don’t have to buy anything, and I won’t push you into anything."
     ],
     [
-      "Napsat na WhatsApp",
-      "Message on WhatsApp"
+      "Domluvit přes WhatsApp",
+      "Book on WhatsApp"
     ],
     [
       "Napsat e-mail",
@@ -223,7 +223,7 @@ export const approved = {
     ],
     [
       "Společná práce",
-      "Working together"
+      "Free 20 minutes"
     ],
     [
       "Co může setkání obsahovat",
@@ -450,16 +450,16 @@ export const approved = {
   ],
   "PageSpoluprace": [
     [
-      "Ahoj Kryštofe, mám zájem o spolupráci.\n\nCo chci rozvíjet:\n\nKde chci trénovat:\n\nJakou spolupráci hledám:\n\nKdy mám obvykle čas:",
-      "Hi Kryštof, I am interested in working together.\n\nWhat I want to develop:\n\nWhere I want to train:\n\nWhat kind of collaboration I am looking for:\n\nWhen I am usually available:"
+      "Ahoj Kryštofe, chci si domluvit 20 minut zdarma.\n\nCo chci zvládnout:\n\nKde chci trénovat (Praha / online):\n\nKdy se mi to hodí:",
+      "Hi Kryštof, I’d like to book the free 20 minutes.\n\nWhat I want to achieve:\n\nWhere I want to train (Prague / online):\n\nWhen suits me:"
     ],
     [
-      "Zájem o spolupráci",
-      "Working together"
+      "20 minut zdarma",
+      "Free 20 minutes"
     ],
     [
-      "Ahoj Kryštofe,\n\nmám zájem o spolupráci.\n\nCo chci rozvíjet:\n\nKde chci trénovat:\n\nJakou spolupráci hledám:\n\nKdy mám obvykle čas:",
-      "Hi Kryštof,\n\nI am interested in working together.\n\nWhat I want to develop:\n\nWhere I want to train:\n\nWhat kind of collaboration I am looking for:\n\nWhen I am usually available:"
+      "Ahoj Kryštofe, chci si domluvit 20 minut zdarma.\n\nCo chci zvládnout:\n\nKde chci trénovat (Praha / online):\n\nKdy se mi to hodí:",
+      "Hi Kryštof, I’d like to book the free 20 minutes.\n\nWhat I want to achieve:\n\nWhere I want to train (Prague / online):\n\nWhen suits me:"
     ],
     [
       "Spolupráce",
@@ -602,12 +602,12 @@ export const approved = {
       "Acute injury, unexplained pain or pain that is getting worse belongs first with a doctor or physiotherapist. Once it is clear what range of movement is safe for you, we can work from there."
     ],
     [
-      "Napiš mi.",
-      "Write to me."
+      "20 minut zdarma.",
+      "20 minutes, free."
     ],
     [
-      "Napsat na WhatsApp",
-      "Message on WhatsApp"
+      "Domluvit přes WhatsApp",
+      "Book on WhatsApp"
     ],
     [
       "Napsat e-mail",
@@ -790,10 +790,10 @@ export const approvedLists = {
     "process": [
       [
         "01",
-        "Napiš mi",
-        "Stačí pár vět o tom, co chceš rozvíjet, kde chceš trénovat a jakou spolupráci hledáš. Odpovím osobně a domluvíme první setkání.",
-        "Write to me",
-        "A few lines about what you want to develop, where you want to train and the kind of work you are looking for are enough. I will reply personally and we will arrange the first session."
+        "20 minut zdarma",
+        "Krátce si zavoláme. Řekneš mi, co chceš zvládnout, kde chceš trénovat a co ti zatím brání. Když ti pomoct neumím, řeknu ti to na rovinu a doporučím, kam jít.",
+        "Free 20 minutes",
+        "We’ll have a short call. You tell me what you want to achieve, where you’d like to train and what’s been getting in the way. If I can’t help, I’ll tell you straight and suggest where to go."
       ],
       [
         "02",

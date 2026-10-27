@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { BrandWordmark } from '../components/FinalArtwork';
 import { CLIENT_APP_URL, WHATSAPP_URL, IG_URL, routePath, otherLangPath } from '../site.js';
 import { mobileText as t } from './mobile-copy';
-import { MessageIcon, InstagramIcon } from './MobileElements';
+import { MessageIcon, InstagramIcon, copy } from './MobileElements';
 import './mobile.css';
 import './mobile-m2.css';
 import './mobile-m3.css';
@@ -144,7 +144,7 @@ export default function MobileSite({ loc, children }: { loc: Location; children:
     </dialog>
     <main id="main" key={routeId+lang+(loc.postId||'')}>{children}{!['home','spoluprace','praxe','pribeh'].includes(routeId)&&<MobileContact lang={lang}/>}</main>
     <footer className="m-footer">{routeId!=='home'&&<a className="m-logo" href={routePath('home',lang)} aria-label={'tanmay · '+t('home',lang)}><BrandWordmark /></a>}<p>© {new Date().getFullYear()} Kryštof Švec<span className="m-footer-brand"> · Tanmay Practice · {t('prague',lang)}</span></p><a href={routePath('soukromi',lang)}>{t('privacy',lang)}</a></footer>
-    <div ref={dock} className="m-dock" hidden={blocked||keyboard} aria-label={lang==='en'?'Quick contact':'Rychlý kontakt'}><a className="m-dock-primary" href={contactHref} onClick={toContact}>{t('book',lang)}</a><a className="m-dock-message" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" aria-label={t('wa',lang)}><MessageIcon /></a></div>
+    <div ref={dock} className="m-dock" hidden={blocked||keyboard} aria-label={lang==='en'?'Quick contact':'Rychlý kontakt'}><a className="m-dock-primary" href={contactHref} onClick={toContact}>{t('book',lang)}</a><a className="m-dock-message" href={WHATSAPP_URL + (['home','spoluprace'].includes(routeId) ? '?text=' + encodeURIComponent(copy('HomeBooking',0,lang)) : '')} target="_blank" rel="noopener noreferrer" aria-label={t('wa',lang)}><MessageIcon /></a></div>
   </div>;
 }
 

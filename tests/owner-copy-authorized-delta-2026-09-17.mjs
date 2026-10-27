@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { withoutAuthorizedConsultationCopy } from './owner-copy-authorized-delta-2026-10-27.mjs';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 
@@ -16,6 +17,7 @@ const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 
 /** Reverse the owner's exact new copy only, then run the unchanged earlier guards. */
 export function withoutAuthorizedOwnerCopy(relativePath, current) {
+  if (['src/mobile/approved-content.ts', 'src/components/content-emphasis.tsx'].includes(relativePath)) current = withoutAuthorizedConsultationCopy(relativePath, current);
   const file = ownerCopyDelta.files.find(item => item.path === relativePath);
   if (!file) return current;
   assert.equal(sha(current), file.authorizedSha256, 'Only the approved bilingual review copy may change: ' + relativePath);

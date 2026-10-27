@@ -2438,8 +2438,8 @@ function Opening({ lang }: any) {
           </h1>
           <p className="body-txt rv d2">
             {L(
-              "Pomáhám lidem budovat sílu, pohybovou jistotu a praxi, která drží i v běžném životě. Osobní trénink propojuju s plánem a průběžnou úpravou podle toho, co se skutečně děje.",
-              "I help people rebuild a reliable relationship with the body and build a practice that holds in ordinary life. Through movement, meditation and direct contact with wild nature."
+              "Pomůžu ti zesílit a hýbat se líp. Trénujeme naplno, ale bezpečně. Bez nudy a výčitek, i když týden nejde podle plánu.",
+              "I’ll help you get stronger and move better. We train hard, but safely. No boredom or guilt, even when your week doesn’t go to plan."
             )}
           </p>
           <p className="act rv d3">
@@ -2564,26 +2564,26 @@ function HomeWork({ lang }: any) {
             <div className="chapter rv d1">
               <div className="row">
                 <span className="num">01</span>
-                <h3>{L("Síla, kterou umíš použít", "What we train")}</h3>
+                <h3>{L("Naplno, ale nikdy přes hranu", "All in, never over the edge")}</h3>
                 <p>{E(
-                  "Trénujeme sílu, kontrolu, mobilitu a pohybovou jistotu. Základ tvoří vlastní váha a kalistenika. Kruhy, činky a další pomůcky zapojujeme jen tam, kde pomáhají konkrétnímu cíli.",
-                  "The spine of the work is bodyweight training and calisthenics. Movement skill, strength through full range, control, progression from a simpler variant to a harder one. Rings, weights and apparatus where they move a specific goal. Parkour and yoga are the background it draws on."
+                  "Dáš do toho všechno a já hlídám, kde je tvoje hranice. Když tě něco bolí, nemusíš končit. Najdeme verzi pohybu, která je bezpečná.",
+                  "You give it everything, and I keep an eye on where your limit is. If something hurts, you don’t have to stop. We find a version of the movement that’s safe."
                 )}</p>
               </div>
               <div className="row">
                 <span className="num">02</span>
-                <h3>{L("Co má teď smysl", "How it is held")}</h3>
+                <h3>{L("Pokaždé trochu jinak", "A little different every time")}</h3>
                 <p>{E(
-                  "Každé setkání má pokračování. Společně určíme, co má teď prioritu, kolik práce unese tvůj týden a čeho se držet, když podmínky nejsou ideální.",
-                  "A session is mostly movement. What shows up in it becomes the plan for the period that follows: what to train, how much your week can carry, and what to hold on to in a worse week. The practice between sessions is the actual product, not homework."
+                  "Žádný trénink pořád dokola. Střídáme sílu, dovednosti i hru s pohybem, takže tě to baví a posiluješ celé tělo. Většinou s vlastní vahou, kruhy a činky přidáme, když dávají smysl.",
+                  "No same-old routine. We mix strength, skills and play, so it stays fun and your whole body gets stronger. Mostly bodyweight; rings and weights come in when they make sense."
                 )}</p>
               </div>
               <div className="row">
                 <span className="num">03</span>
-                <h3>{L("Plán podle reality", "What changes between sessions")}</h3>
+                <h3>{L("Když týden nevyjde, nevadí", "When the week falls apart, that’s okay")}</h3>
                 <p>{E(
-                  "V klientské aplikaci máš svůj plán, termíny a záznamy na jednom místě. Podle toho, co jsi skutečně udělal a jak na to tělo reagovalo, upravujeme objem, náročnost i další krok. Plán se přizpůsobuje realitě, ne naopak.",
-                  "You record what actually happened, not what was supposed to. The plan is adjusted from that. Reflection and logging are not a ritual. They are the tools that decide what happens next time."
+                  "Práce, rodina, únava. Život se mění a plán se mění s ním. Žádné výčitky, prostě navážeme dalším krokem. Plán, termíny a záznamy máš v klientské aplikaci na jednom místě.",
+                  "Work, family, tiredness. Life changes and the plan changes with it. No guilt, we just pick up with the next step. Your plan, sessions and records live in one place in the client app."
                 )}</p>
               </div>
             </div>
@@ -2698,31 +2698,31 @@ function HomeAbout({ lang }: any) {
 
 function HomeBooking() {
   const whatsappText = encodeURIComponent(L(
-    "Ahoj Kryštofe, mám zájem o spolupráci.\n\nCo chci rozvíjet:\n\nJakou spolupráci hledám:\n\nKdy mám obvykle čas:",
-    "Hi Tanmay, I would like to ask about coaching. I am working on: … I want to train: … I am usually available: …"
+    "Ahoj Kryštofe, chci si domluvit 20 minut zdarma.\n\nCo chci zvládnout:\n\nKde chci trénovat (Praha / online):\n\nKdy se mi to hodí:",
+    "Hi Kryštof, I’d like to book the free 20 minutes.\n\nWhat I want to achieve:\n\nWhere I want to train (Prague / online):\n\nWhen suits me:"
   ));
-  const mailSubject = encodeURIComponent(L("Zájem o spolupráci", "Coaching enquiry"));
+  const mailSubject = encodeURIComponent(L("20 minut zdarma", "Free 20 minutes"));
   const mailBody = encodeURIComponent(L(
-    "Ahoj Kryštofe,\n\nmám zájem o spolupráci.\n\nCo chci rozvíjet:\n\nJakou spolupráci hledám:\n\nKdy mám obvykle čas:",
-    "Hi Tanmay,\n\nI would like to ask about coaching.\n\nWhat I am working on:\nWhere I want to train:\nWhen I am usually available:\n\n"
+    "Ahoj Kryštofe, chci si domluvit 20 minut zdarma.\n\nCo chci zvládnout:\n\nKde chci trénovat (Praha / online):\n\nKdy se mi to hodí:",
+    "Hi Kryštof, I’d like to book the free 20 minutes.\n\nWhat I want to achieve:\n\nWhere I want to train (Prague / online):\n\nWhen suits me:"
   ));
   return (
     <section className="home-booking" id="rezervace" aria-labelledby="h-booking">
       <div className="wrap">
         <div className="booking-inner">
-          <p className="booking-kicker label rv">{E("První krok", "Booking")}</p>
+          <p className="booking-kicker label rv">{E("První krok", "First step")}</p>
           <h2 className="h-display h2 rv d1" id="h-booking">
-            {L("Napiš mi.", "Let’s begin simply.")}
+            {L("20 minut zdarma.", "20 minutes, free.")}
           </h2>
           <p className="booking-lead rv d2">
             {E(
-              "Stačí mi pár vět o tom, co chceš rozvíjet, jakou spolupráci hledáš a kdy máš obvykle čas. Ozvu se a domluvíme první krok.",
-              "Write me a few lines about what you are working through, where you would like to work and what you expect from coaching. I will reply and we will see whether it makes sense."
+              "Krátce si zavoláme, telefonem nebo přes video. Řekneš mi, co chceš zvládnout a co ti zatím brání. Já ti řeknu, jak bych začal. Nic nemusíš kupovat a do ničeho tě nebudu tlačit.",
+              "We’ll have a short call, by phone or video. You tell me what you want to achieve and what’s been getting in the way. I’ll tell you how I’d start. You don’t have to buy anything, and I won’t push you into anything."
             )}
           </p>
           <div className="booking-actions rv d3">
             <a className="contact-action contact-action--primary" href={WHATSAPP_URL + "?text=" + whatsappText} target="_blank" rel="noopener noreferrer">
-              <IconWhatsApp />{L("Napsat na WhatsApp", "Message on WhatsApp")}
+              <IconWhatsApp />{L("Domluvit přes WhatsApp", "Book on WhatsApp")}
             </a>
             <a className="contact-action" href={"mailto:" + MAIL + "?subject=" + mailSubject + "&body=" + mailBody}>
               <IconMail />{L("Napsat e-mail", "Send an email")}
@@ -2925,7 +2925,7 @@ function PagePraxe({ lang }: any) {
     <section className="site-linen page-section practice-work-v8"><SecondaryHomeInkEdge side="bottom" />
       <div className="wrap practice-work-layout">
         <div>
-          <div className="section-head"><div><p className="label rv">{E("Společná práce","Working together")}</p><h2 className="h-display h2 rv d1" style={{marginTop:12}}>{L("Co může setkání obsahovat","What a session may include")}</h2></div><p className="page-intro rv d1">{E("Většinu času se hýbeme. Ne všechno ale patří do každého setkání. Vybíráme jen to, co slouží aktuálnímu cíli.","Most of the time we move. Not everything belongs in every session. We choose only what serves the current goal.")}</p></div>
+          <div className="section-head"><div><p className="label rv">{E("Společná práce","Free 20 minutes")}</p><h2 className="h-display h2 rv d1" style={{marginTop:12}}>{L("Co může setkání obsahovat","What a session may include")}</h2></div><p className="page-intro rv d1">{E("Většinu času se hýbeme. Ne všechno ale patří do každého setkání. Vybíráme jen to, co slouží aktuálnímu cíli.","Most of the time we move. Not everything belongs in every session. We choose only what serves the current goal.")}</p></div>
           <p className="scan-line rv">{E("DOVEDNOST · SÍLA · ROZSAH · POZORNOST","SKILL · STRENGTH · RANGE · ATTENTION")}</p>
           <div className="editorial-list" style={{marginTop:22}}>{session.map((x:any)=><article className="editorial-row rv" key={x[0]}><span className="num">{x[0]}</span><h3>{L(x[1],x[3])}</h3><p>{E(x[2],x[4])}</p></article>)}</div>
         </div>
@@ -3071,13 +3071,13 @@ function PageSpoluprace({ lang }: any) {
     ["04","Pravidelnost a vlastní praxe","Začínáš, vracíš se po pauze nebo ztrácíš balanc. Hledáš způsob, který se dá skutečně držet.","Consistency and your own practice","You are starting, returning after a break, or losing your balance. You are looking for an approach you can genuinely sustain."],
   ];
   const process=[
-    ["01","Napiš mi","Stačí pár vět o tom, co chceš rozvíjet, kde chceš trénovat a jakou spolupráci hledáš. Odpovím osobně a domluvíme první setkání.","Write to me","A few lines about what you want to develop, where you want to train and the kind of work you are looking for are enough. I will reply personally and we will arrange the first session."],
+    ["01","20 minut zdarma","Krátce si zavoláme. Řekneš mi, co chceš zvládnout, kde chceš trénovat a co ti zatím brání. Když ti pomoct neumím, řeknu ti to na rovinu a doporučím, kam jít.","Free 20 minutes","We’ll have a short call. You tell me what you want to achieve, where you’d like to train and what’s been getting in the way. If I can’t help, I’ll tell you straight and suggest where to go."],
     ["02","První setkání","Krátce si ujasníme cíl a potom se většinu času hýbeme. Podíváme se na pohyby, které jsou pro tebe důležité, a podle potřeby zařadíme několik jednoduchých testů a vstupní pohybovou diagnostiku.","First session","We briefly clarify the goal and then spend most of the time moving. We look at the movements that matter to you and, as needed, include a few simple tests and an initial movement assessment."],
     ["03","Kde jsi a co dál","Jedno setkání může stát samo o sobě. Odneseš si jasnější obraz o tom, co už funguje, co má prioritu a jak pokračovat. Pokud navážeme, domluvíme rytmus, plán a průběžnou úpravu.","Where you are and what comes next","One session can stand on its own. You leave with a clearer picture of what already works, what has priority and how to continue. If we carry on, we agree the rhythm, plan and ongoing adjustments."],
   ];
-  const whatsappText=encodeURIComponent(L("Ahoj Kryštofe, mám zájem o spolupráci.\n\nCo chci rozvíjet:\n\nKde chci trénovat:\n\nJakou spolupráci hledám:\n\nKdy mám obvykle čas:","Hi Kryštof, I am interested in working together.\n\nWhat I want to develop:\n\nWhere I want to train:\n\nWhat kind of collaboration I am looking for:\n\nWhen I am usually available:"));
-  const mailSubject=encodeURIComponent(L("Zájem o spolupráci","Working together"));
-  const mailBody=encodeURIComponent(L("Ahoj Kryštofe,\n\nmám zájem o spolupráci.\n\nCo chci rozvíjet:\n\nKde chci trénovat:\n\nJakou spolupráci hledám:\n\nKdy mám obvykle čas:","Hi Kryštof,\n\nI am interested in working together.\n\nWhat I want to develop:\n\nWhere I want to train:\n\nWhat kind of collaboration I am looking for:\n\nWhen I am usually available:"));
+  const whatsappText=encodeURIComponent(L("Ahoj Kryštofe, chci si domluvit 20 minut zdarma.\n\nCo chci zvládnout:\n\nKde chci trénovat (Praha / online):\n\nKdy se mi to hodí:","Hi Kryštof, I’d like to book the free 20 minutes.\n\nWhat I want to achieve:\n\nWhere I want to train (Prague / online):\n\nWhen suits me:"));
+  const mailSubject=encodeURIComponent(L("20 minut zdarma","Free 20 minutes"));
+  const mailBody=encodeURIComponent(L("Ahoj Kryštofe, chci si domluvit 20 minut zdarma.\n\nCo chci zvládnout:\n\nKde chci trénovat (Praha / online):\n\nKdy se mi to hodí:","Hi Kryštof, I’d like to book the free 20 minutes.\n\nWhat I want to achieve:\n\nWhere I want to train (Prague / online):\n\nWhen suits me:"));
   return <div className="site-page" data-secondary-v6="" data-secondary-v8="" data-collaboration-v99="">
     <header className="site-linen page-hero collaboration-hero-v8 hero-unified">
       <div className="collaboration-earth-stage" aria-hidden="true"><SecondaryMaterialMask src="/media/refine-v9-14/collaboration-mask.png" className="v8-art--earth v8-art--desktop" /><SecondaryMaterialMask src="/media/refine-v9-14/collaboration-mask-mobile.png" className="v8-art--earth v8-art--mobile" /></div>
@@ -3090,7 +3090,7 @@ function PageSpoluprace({ lang }: any) {
             <h1 className="h-display h1 rv d1">{L("Spolupráce","Work with me")}</h1>
             <p className="hero-dominant rv d1">{E("Jedno setkání nebo delší vedení.","One session or longer-term guidance.")}</p>
             <p className="lead rv d2">{E("Individuálně, v menší skupině, osobně v Praze nebo online. Zvolíme formu podle toho, co chceš rozvíjet a co se dá skutečně držet.","One-to-one, in a small group, in person in Prague or online. We choose the format according to what you want to develop and what you can realistically sustain.")}</p>
-            <div className="act rv d3 collaboration-entry-actions"><Go href="#kontakt" cs="Napiš mi" en="Write to me" /><a className="collaboration-price-jump" href="#cenik">{L("Zobrazit ceník","View prices")}<span aria-hidden="true">↓</span></a></div>
+            <div className="act rv d3 collaboration-entry-actions"><Go href="#kontakt" cs="20 minut zdarma" en="Free 20 minutes" /><a className="collaboration-price-jump" href="#cenik">{L("Zobrazit ceník","View prices")}<span aria-hidden="true">↓</span></a></div>
           </div>
           <SecondaryHeroPhoto className="collaboration-hero-cutout" src="/media/collaboration-v9-8/collaboration-hero-1086.webp"
             srcSet="/media/collaboration-v9-8/collaboration-hero-540.webp 540w, /media/collaboration-v9-8/collaboration-hero-720.webp 720w, /media/collaboration-v9-8/collaboration-hero-1086.webp 1086w"
@@ -3141,7 +3141,7 @@ function PageSpoluprace({ lang }: any) {
 
     <CollaborationFaq lang={lang} />
 
-    <section className="site-linen contact-coda" id="kontakt"><div className="wrap"><h2 className="h-display h2 rv">{L("Napiš mi.","Write to me.")}</h2><div className="booking-actions rv d1"><a className="contact-action contact-action--primary" href={"https://wa.me/420774121475?text="+whatsappText} target="_blank" rel="noopener noreferrer">{L("Napsat na WhatsApp","Message on WhatsApp")}</a><a className="contact-action" href={"mailto:"+MAIL+"?subject="+mailSubject+"&body="+mailBody}>{L("Napsat e-mail","Send an email")}</a></div></div></section>
+    <section className="site-linen contact-coda" id="kontakt"><div className="wrap"><h2 className="h-display h2 rv">{L("20 minut zdarma.","20 minutes, free.")}</h2><div className="booking-actions rv d1"><a className="contact-action contact-action--primary" href={WHATSAPP_URL+"?text="+whatsappText} target="_blank" rel="noopener noreferrer">{L("Domluvit přes WhatsApp","Book on WhatsApp")}</a><a className="contact-action" href={"mailto:"+MAIL+"?subject="+mailSubject+"&body="+mailBody}>{L("Napsat e-mail","Send an email")}</a></div></div></section>
   </div>;
 }
 
@@ -3295,7 +3295,7 @@ function Footer({ lang, variant = "linen" }: any) {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={L("Napsat přes WhatsApp", "Message on WhatsApp")}
+              aria-label={L("Napsat přes WhatsApp", "Book on WhatsApp")}
             >
               <IconWhatsApp />
             </a>

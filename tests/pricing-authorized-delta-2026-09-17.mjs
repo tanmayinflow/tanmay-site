@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { withoutAuthorizedConsultationCopy } from './owner-copy-authorized-delta-2026-10-27.mjs';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 
@@ -10,6 +11,7 @@ const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 
 /** Reverse only the approved pair; all other bytes must match the immutable V9.22 manifest. */
 export function verifyAuthorizedPricingBytes(current, originalSha256) {
+  current = withoutAuthorizedConsultationCopy(pricingDelta.path, current);
   assert.equal(pricingDelta.beforeSha256, originalSha256, 'Pricing approval must start from the original locked manifest.');
   assert.equal(sha(current), pricingDelta.authorizedSha256, 'Current pricing must match the precise approved period clarification.');
   let original = current.toString('utf8');

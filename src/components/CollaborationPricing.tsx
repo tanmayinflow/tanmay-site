@@ -43,7 +43,7 @@ export default function CollaborationPricing({ lang = "cs" }: { lang?: string })
             <strong>{REGULAR_TRAINING.minPrepaidSessions}{text(" individuálních tréninků na měsíc od prvního tréninku", " one-to-one sessions for one month from the first session")}</strong>.
             {text(" Čtyři tréninky vyjdou na ", " Four sessions cost ")}
             <strong>{formatTrainingPrice(REGULAR_TRAINING.priceForFourCzk, language)}</strong>.
-            {text(" Termíny domlouváme předem.", " We agree the dates and times in advance.")}
+            {text(" Termíny domlouváme předem. Úvodní hovor (20 minut) je zdarma.", " We agree the dates and times in advance. The first call (20 minutes) is free.")}
           </p>
           <a className="pricing-contact go" href="#kontakt">{text("Domluvit trénink", "Arrange a session")}<span className="arw" aria-hidden="true">→</span></a>
         </div>

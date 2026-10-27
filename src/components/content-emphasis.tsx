@@ -37,6 +37,10 @@ const PHRASES = [
 const escape = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '[ \\u00a0]');
 const PATTERN = new RegExp(PHRASES.slice().sort((a,b)=>b.length-a.length).map(escape).join('|'), 'g');
 export function emphasizeCopy(text: string, options?: { maxMatches?: number; extraPhrases?: readonly string[] }) {
+  // Preserve the owner's client-app emphasis in the approved consultation copy only.
+  if (/^(Práce, rodina, únava\.|Work, family, tiredness\.)/.test(text.replace(/\u00a0/g, ' '))) {
+    options = { ...options, extraPhrases: [...(options?.extraPhrases || []), 'klientské aplikaci', 'client app'] };
+  }
   const pattern = options?.extraPhrases?.length
     ? new RegExp([...PHRASES, ...options.extraPhrases].sort((a,b)=>b.length-a.length).map(escape).join('|'), 'g')
     : new RegExp(PATTERN.source, 'g');
