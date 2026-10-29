@@ -51,7 +51,8 @@ export function useMobileViewport() {
 }
 type Location = { routeId: string; lang: string; postId: string | null };
 export default function MobileSite({ loc, children }: { loc: Location; children: ReactNode }) {
-  const {lang, routeId} = loc;
+  const {lang} = loc;
+  const routeId = loc.routeId.replace('-preview', '');
   const [open, setOpen] = useState(false);
   const [shown, setShown] = useState(false);
   const [blocked, setBlocked] = useState(false);
@@ -128,7 +129,7 @@ export default function MobileSite({ loc, children }: { loc: Location; children:
     addEventListener('scroll',update,{passive:true});addEventListener('resize',update);update();
     return()=>{layout.disconnect();removeEventListener('scroll',update);removeEventListener('resize',update);cancelAnimationFrame(frame);};
   },[routeId,lang]);
-  return <div className="tm-mobile" lang={lang} ref={root} data-mobile-version="M10" data-page={routeId}>
+  return <div className="tm-mobile" lang={lang} ref={root} data-preview={loc.routeId.endsWith("-preview") ? "v3" : undefined} data-mobile-version="M10" data-page={routeId}>
     <a className="m-skip" href="#main">{t('skip',lang)}</a>
     <header className="m-header" ref={header}>
       <a className="m-logo" href={routePath('home',lang)} aria-label={'tanmay · '+t('home',lang)}><BrandWordmark /></a>

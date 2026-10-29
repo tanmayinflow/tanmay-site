@@ -1,3 +1,4 @@
+import { withoutAuthorizedPreview } from './owner-preview-v3-authorized-2026-10-29.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -8,7 +9,7 @@ import { jsonLd, pageMetadata } from '../src/page-metadata.js';
 import { runtimeDelta, authorizedWorkingBytes, verifyNewRuntimeFiles } from './runtime-authorized-deltas-m10.mjs';
 
 test('unpublished journal cannot be reached by route, post, or legacy hash',()=>{
- assert.equal(allPages().length,10);assert.deepEqual(POST_ROUTES,[]);
+ assert.equal(allPages().filter(p=>!p.preview).length,10);assert.deepEqual(POST_ROUTES,[]);
  for(const path of ['/denik','/en/journal','/denik/les-nehodnoti','/en/journal/the-forest-does-not-judge'])assert.equal(matchPath(path),null);
  for(const hash of ['#/denik','#/zapisky','#/unknown','#/constructor','#/Praxe','#/praxe-extra'])assert.equal(resolveLocation('/',hash).routeId,'notfound');
  for(const id of Object.values(HASH_ALIASES))assert.ok(allPages().some(p=>p.routeId===id));
@@ -42,6 +43,6 @@ test('M10 runtime repairs and new helper modules match only their exact authoriz
  verifyNewRuntimeFiles(new URL('../',import.meta.url));
  const source=new URL('../scripts/postbuild.mjs',import.meta.url);
  const baseline=readFileSync(new URL('./fixtures/desktop-v922/baseline/scripts/postbuild.mjs',import.meta.url));
- assert.deepEqual(readFileSync(source),authorizedWorkingBytes('scripts/postbuild.mjs',baseline));
- for(const file of runtimeDelta.newFiles)assert.equal(createHash('sha256').update(readFileSync(new URL('../'+file.path,import.meta.url))).digest('hex'),file.sha256);
+ assert.deepEqual(withoutAuthorizedPreview("scripts/postbuild.mjs",readFileSync(source)),authorizedWorkingBytes('scripts/postbuild.mjs',baseline));
+ for(const file of runtimeDelta.newFiles)assert.equal(createHash('sha256').update(withoutAuthorizedPreview(file.path,readFileSync(new URL('../'+file.path,import.meta.url)))).digest('hex'),file.sha256);
 });

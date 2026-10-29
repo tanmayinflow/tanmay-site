@@ -1,3 +1,4 @@
+import { withoutAuthorizedPreview } from './owner-preview-v3-authorized-2026-10-29.mjs';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
@@ -36,7 +37,7 @@ export function authorizedWorkingBytes(relativePath, original) {
 
 export function verifyNewRuntimeFiles(site) {
   for(const file of runtimeDelta.newFiles){
-    const bytes=readFileSync(new URL(file.path,site));
+    const bytes=withoutAuthorizedPreview(file.path,readFileSync(new URL(file.path,site)));
     assert.equal(bytes.length,file.bytes,'Runtime module size: '+file.path);
     assert.equal(sha(bytes),file.sha256,'Runtime module exact bytes: '+file.path);
   }

@@ -56,6 +56,7 @@ function head(page) {
   const og = ORIGIN + ogFor(ogSlug, lang);
   const out = [];
   out.push(`<meta name="tm-route" content="${page.routeId}:${lang}${page.postId ? ":" + page.postId : ""}">`);
+  if (page.preview) out.push(`<meta name="robots" content="noindex, nofollow">`);
   out.push(`<title>${esc(title)}</title>`);
   out.push(`<meta name="description" content="${esc(description)}">`);
   out.push(`<link rel="canonical" href="${esc(url)}">`);
@@ -119,7 +120,7 @@ function render(page) {
 }
 
 // M00: restore only the approved public scope; do not activate the legacy journal.
-const pages = allPages().filter(p => ["home", "praxe", "pribeh", "spoluprace", "soukromi"].includes(p.routeId));
+const pages = allPages().filter(p => ["home", "praxe", "pribeh", "spoluprace", "soukromi"].includes(p.routeId) || p.preview);
 let written = 0;
 for (const page of pages) {
   const rel = page.path === "/" ? "index.html" : page.path.replace(/^\//, "").replace(/\/$/, "") + "/index.html";
@@ -150,7 +151,7 @@ const SITEMAP_NS =
 
 const sitemap =
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset ${SITEMAP_NS}>\n` +
-  pages
+  pages.filter(p => !p.preview)
     .map((p) => {
       const alts = LANGS.map(
         (l) =>

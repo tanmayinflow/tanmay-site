@@ -159,6 +159,12 @@ export const ROUTES = [
       en: "How tanmay practice handles data when you visit the site, make personal contact or move into the client application.",
     },
   },
+  ...[ ['home-preview','home','/nahled','/en/preview'], ['spoluprace-preview','spoluprace','/nahled/spoluprace','/en/preview/work-with-me'] ].map(([id,original,cs,en]) => ({
+    id, original, preview: true, nav: false, num: undefined, path: {cs,en},
+    label: {cs:'Náhled',en:'Preview'},
+    title: {cs:'Náhled · tanmay practice',en:'Preview · tanmay practice'},
+    description: {cs:'Náhled nové verze.',en:'Preview of the new version.'},
+  })),
 ];
 
 /** Journal index route, used to build the article paths. */
@@ -185,12 +191,13 @@ export function allPages() {
     for (const lang of LANGS) {
       out.push({
         routeId: r.id,
+        ...(r.preview ? {preview:true} : {}),
         lang,
         path: r.path[lang],
         title: r.title[lang],
         description: r.description[lang],
         alternates: Object.fromEntries(LANGS.map((l) => [l, r.path[l]])),
-        ogSlug: r.id === "home" ? "home-20261001" : r.id,
+        ogSlug: r.preview ? (r.original === "home" ? "home-20261001" : r.original) : r.id === "home" ? "home-20261001" : r.id,
       });
     }
   }

@@ -37,7 +37,8 @@ export function syncRouteMetadata(doc, loc, pathname) {
   const structured = jsonLd(page), old = doc.head.querySelector('script[type="application/ld+json"]');
   if (structured) put('script[type="application/ld+json"]', 'script', { type:'application/ld+json' }).textContent = JSON.stringify(structured);
   else old?.remove();
-  if (page.routeId === 'notfound') meta('name', 'robots', 'noindex,follow');
+  if (page.preview) meta('name', 'robots', 'noindex, nofollow');
+  else if (page.routeId === 'notfound') meta('name', 'robots', 'noindex,follow');
   else doc.head.querySelector('meta[name="robots"]')?.remove();
   const fonts = lang === 'cs' ? ['eb-garamond-400-normal.woff2', 'dm-sans-400-normal.woff2'] : ['cormorant-garamond-400-normal.woff2', 'dm-sans-400-normal.woff2'];
   const preloads = [...doc.head.querySelectorAll('link[rel="preload"][as="font"]')];

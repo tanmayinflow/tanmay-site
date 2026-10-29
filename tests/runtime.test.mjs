@@ -1,3 +1,4 @@
+import { withoutAuthorizedPreview } from './owner-preview-v3-authorized-2026-10-29.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { withoutAuthorizedDesktopMotion } from './desktop-motion-authorized-delta-2026-09-18.mjs';
@@ -35,7 +36,7 @@ test('all 327 original shared files remain exact except precisely authorized cop
     const expected=workingAuthorizedFiles.includes(r.path)
       ?createHash('sha256').update(authorizedWorkingBytes(r.path,readFileSync(join(fixtures,'site',r.path)))).digest('hex')
       :r.sha256;
-    let current = readFileSync(join(site,r.path));
+    let current = withoutAuthorizedPreview(r.path, readFileSync(join(site,r.path)));
     // Owner requested the current Home share image on 2026-10-01. Reverse only
     // its versioned image slug; the original guard still checks every other byte.
     if (r.path === 'src/site.js') {

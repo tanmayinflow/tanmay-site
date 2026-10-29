@@ -1,3 +1,4 @@
+import { withoutAuthorizedPreview } from './owner-preview-v3-authorized-2026-10-29.mjs';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
@@ -15,6 +16,7 @@ const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 // Reverse only the exact approved replacements before the immutable older guards.
 // Byte offsets distinguish repeated messages with different original wording.
 export function withoutAuthorizedConsultationCopy(path, current) {
+  current = withoutAuthorizedPreview(path, current);
   const file = consultationDelta.files.find(item => item.path === path);
   if (!file) return current;
   assert.equal(sha(current), file.authorizedSha256, 'Exact approved consultation copy: ' + path);
