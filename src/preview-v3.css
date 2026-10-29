@@ -28,6 +28,7 @@
 
 [data-preview="v3"] .preview-work-intro { padding-block:24px; }
 [data-preview="v3"] .preview-work-intro p + p { margin-top:16px; }
+[data-preview="v3"] .m-home-intro .m-inner > .m-text-link { margin-inline-end:18px; }
 @media (max-width:899px) {
  .tm-mobile[data-preview="v3"] .m-between::after,
  .tm-mobile[data-preview="v3"] .m-process.preview-dark-end::before,
