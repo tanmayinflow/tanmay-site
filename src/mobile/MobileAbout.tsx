@@ -1,3 +1,4 @@
+import { EducationDetail } from '../components/EducationDetails';
 import { routePath } from '../site.js';
 import { approvedLists } from './approved-content';
 import { mobileText as t } from './mobile-copy';
@@ -23,8 +24,8 @@ export default function MobileAbout({lang}:{lang:string}) {
     <Chapter title={c(21)} className="m-about-practice"><Photo asset="forest" alt={t('forestAlt',lang)} className="m-forest"/><div className="m-about-vajra-frame"><MobileVajra className="m-about-vajra"/></div><div className="m-editorial-stack">{approvedLists.PagePribeh.approach.map(r=><article key={r[0]}><h3><span className="m-approach-number">{r[0]}</span>{r[lang==='en'?3:1]}</h3><p><RichText>{r[lang==='en'?4:2]}</RichText></p></article>)}</div></Chapter>
     <Chapter title={c(23)} eyebrow={lang==='en'?'Professional education':'Odborné vzdělání'} className="m-education" id="vzdelani">
       <p><RichText>{c(24)}</RichText></p>
-      <div className="m-education-columns">{[[25,29],[27,31]].map(column=><dl key={column[0]}>{column.map(i=><div key={i}><dt>{c(i)}</dt><dd><ul className="m-credential-list">{(i===27?c(i+1).split(' · '):[c(i+1)]).map((credential,n)=><li key={credential}>{n>0&&<span className="m-credential-separator" aria-hidden="true">{' · '}</span>}<RichText>{credential}</RichText></li>)}</ul></dd></div>)}</dl>)}</div>
-      <p className="m-professional-boundary"><RichText>{c(33)}</RichText></p>
+      <div className="m-education-columns">{[[25,29],[27,31]].map(column=><dl key={column[0]}>{column.map(i=><div key={i}><dt>{c(i)}</dt><dd><EducationDetail index={{25:0,27:1,29:2,31:3}[i]!} lang={lang}/></dd></div>)}</dl>)}</div>
+        <p className="m-professional-boundary"><RichText>{c(33)}</RichText></p>
     </Chapter>
     <Chapter title={c(34)} className="m-offer"><p><RichText>{c(35)}</RichText></p><MobileEditorialLink href={routePath('spoluprace',lang)}>{lang==='en'?'Ways to work together':'Možnosti spolupráce'}</MobileEditorialLink></Chapter>
   </>;

@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {withoutAuthorizedFeedback} from './owner-preview-feedback-authorized-2026-10-29.mjs';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
@@ -9,7 +10,7 @@ const sha=b=>createHash('sha256').update(b).digest('hex');
 test('preview scope reverses exactly and rejects drift, including newly copied components',()=>{
  assert.equal(previewDelta.baselineCommit,'40d90992f6ea0c65f5345d7e1a28661595fabb40');
  for(const file of previewDelta.files){const current=read(file.path);assert.equal(sha(withoutAuthorizedPreview(file.path,current)),file.beforeSha256);assert.throws(()=>withoutAuthorizedPreview(file.path,Buffer.concat([current,Buffer.from(' ')])));}
- for(const file of previewDelta.newFiles)assert.equal(sha(read(file.path)),file.sha256,file.path);
+ for(const file of previewDelta.newFiles)assert.equal(sha(withoutAuthorizedFeedback(file.path,read(file.path))),file.sha256,file.path);
 });
 test('four independent previews are noindex, excluded from discovery, and language-paired',()=>{
  const previews=allPages().filter(p=>p.preview);assert.equal(previews.length,4);

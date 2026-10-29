@@ -1,5 +1,15 @@
 # Current public content boundaries
 
+## Owner education clarification · 2026-10-29
+
+The owner requested provider names and course hours/duration in Story education and preview Collaboration, confirmed two yoga programmes totalling 400 hours, and directed lookup on the providers' websites. Existing personal qualification/study claims remain owner statements. No certificate photograph with a name or completed attendance record was found; the Drive Master trainer credit sheet is blank and must not be presented as completion evidence.
+
+- Vital Institut fitness and conditioning/functional/rehabilitation course descriptions state an individual pace, typically 2–3 months. They do not publish an exact hourly total. Public copy explicitly labels this as typical course duration, not Kryštof's personal attendance or an additive total. Sources: https://vitalinstitut.cz/trenersky-kurz/instruktor-fitness/, https://vitalinstitut.cz/trenersky-kurz/funkcni-trener/, https://vitalinstitut.cz/trenersky-kurz/rehabilitacni-trener/, https://vitalinstitut.cz/trenersky-kurz/kondicni-trener/ (read 2026-10-29). No new Master Trainer credential is claimed.
+- Yoga: 400 hours across two programmes is directly owner-confirmed. Kabir Yoga publishes a 200-hour curriculum: https://kabiryoga.com/certifikovany-instruktorsky-kurz-jogy-yofyz-2020-osnova-a-podrobnosti/. Existing personal Kabir Yoga study notes establish the provider connection. The second programme's provider/date is not independently established and is not invented.
+- Psychology: existing approved Palacký University study period 2019–2024, described as five years of study, without a degree or psychologist licence.
+
+These provider descriptions establish course structure, not personal certification. Detailed provenance and remaining limits: Work/website/Reviews/preview-feedback-2026-10-29/README.md in the private workspace.
+
 Updated for the GTP M10 integration on 2026-09-17. The owner designated the GTP website as current; the preceding V8 ledger is archived. This file records existing decisions and open questions, not a new approval of facts or legal wording.
 
 The current content authority is the preserved GTP package's `05-CONTENT-LOCK.md`, the locked V9.22 source, and the explicit M7/M9/M10 changes recorded with that work. The exact source remains authoritative for approved wording. Earlier workspace offer drafts or V8 restrictions must not silently replace these newer decisions.

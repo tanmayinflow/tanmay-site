@@ -178,8 +178,8 @@ export const previewCopy = {
     ],
     [
       [
-        "Přístup k aplikaci a první cyklus tréninků.",
-        "App access and your first training cycle."
+        "Přístup k vlastní aplikaci a první cyklus tréninků.",
+        "Access to your own app and your first training cycle."
       ],
       [
         "4 tréninky za měsíc a plán mezi nimi v aplikaci. Zesílíš a uvidíš, že to drží.",
@@ -210,8 +210,8 @@ export const previewCopy = {
     ],
     [
       [
-        "Přístup k aplikaci a první cyklus tréninků.",
-        "App access and your first training cycle."
+        "Přístup k vlastní aplikaci a první cyklus tréninků.",
+        "Access to your own app and your first training cycle."
       ],
       [
         "4 tréninky za měsíc a plán mezi nimi v aplikaci. Po měsíci se podíváme na výsledky a domluvíme další krok.",
@@ -232,12 +232,12 @@ export const previewCopy = {
     "Who will lead you?"
   ],
   "bio": [
-    "Jsem Kryštof. Pohyb a disciplína byly dlouho tím, o co jsem se opíral. Pak přišla těžká nehoda: rok jsem strávil na vozíku a návrat trval dva roky. Až potom jsem se stal trenérem na plný úvazek. Rok jsem vedl studio jako hlavní trenér. Celkem jsem trénoval víc než 100 lidí. Nehoda není moje kvalifikace. Vysvětluje, proč tuhle práci beru vážně.",
-    "I’m Kryštof. For a long time, movement and discipline were what I leaned on. Then came a serious accident: I spent a year in a wheelchair, and coming back took two years. Only after that did I become a full-time trainer. I ran a studio for a year as head trainer. In total I have trained more than 100 people. The accident isn’t my qualification. It explains why I take this work seriously."
+    "Jsem Kryštof. Pohyb byl tím, o co jsem se vždy opíral. Pak přišla těžká nehoda. Rok jsem strávil na vozíku a návrat mi trval dva roky. Až potom jsem se stal trenérem na plný úvazek. Teď chápu, proč je zdraví a tohle tělo ta nejcennější věc a jasná priorita. Rok jsem vedl studio jako hlavní trenér. Celkem jsem trénoval víc než 100 lidí. Nehoda není moje kvalifikace, ale vysvětluje, proč tuhle práci beru vážně.",
+    "I’m Kryštof. Movement was what I always relied on. Then came a serious accident. I spent a year in a wheelchair, and my recovery took two years. Only after that did I become a full-time trainer. Now I understand why health and this body are the most precious things and a clear priority. I ran a studio for a year as head trainer. In total I have trained more than 100 people. The accident isn’t my qualification. It explains why I take this work seriously."
   ],
   "cheer": [
-    "Na tréninku jsem tvůj osobní roztleskávač: fandím ti, hecuju tě a raduju se z každého tvého pokroku.",
-    "In training I’m your personal cheerleader: I root for you, push you on and celebrate every bit of your progress."
+    "Na tréninku jsem tvůj osobní roztleskávač a rovnocenný přítel. Fandím ti, hecuju tě a raduju se z každého tvého pokroku.",
+    "In training I’m your personal cheerleader and a friend on equal terms. I root for you, push you on and celebrate every bit of your progress."
   ],
   "live": [
     "To, co učím, sám žiju.",
@@ -366,8 +366,8 @@ export const previewCopy = {
     "4-Week Start"
   ],
   "startTitle": [
-    "Přístup k aplikaci a první cyklus tréninků",
-    "App access and your first training cycle"
+    "Přístup k vlastní aplikaci a první cyklus tréninků",
+    "Access to your own app and your first training cycle"
   ],
   "startItems": [
     [
