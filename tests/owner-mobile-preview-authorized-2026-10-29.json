@@ -1,0 +1,87 @@
+{
+  "approvedOn": "2026-10-29",
+  "baselineCommit": "088ed5a975c4d78dd93952e531cbc3a2fa0a474c",
+  "scope": "Nine owner mobile annotations: remove duplicate wants heading; coloured bullets and benefits accents; dominant handstand with adjacent comparison; separated process links; photo-wrapped about paragraph; readable booking and adjacent secondary links; native-scroll barriers with solution arrows; Home-shaped collaboration hero with original red mineral and smiling portrait. Desktop and original pages remain unchanged.",
+  "files": [
+    {
+      "path": "src/components/PreviewReading.tsx",
+      "beforeSha256": "98db7fda7c710a2299811ece4a7569e9eaad1d5510233795a6a0985c2901261e",
+      "afterSha256": "79f54f67cc6b6e0ab07a5181c551c353c137d5e50d4f3ec64e4a2a46d09d11fb",
+      "replacements": [
+        {
+          "offset": 1871,
+          "before": "export function PreviewBenefits({lang}:{lang:string}) {\n",
+          "after": "export function PreviewBenefits({lang,kind='benefits'}:{lang:string;kind?:'benefits'|'barriers'}) {\n"
+        },
+        {
+          "offset": 3697,
+          "before": " },[lang]);\n return <section className=\"preview-benefits\" ref={root} aria-labelledby=\"preview-benefits-title\"><div className=\"preview-benefits-pin\" ref={pin}><h2 id=\"preview-benefits-title\">{c(p.benefitsTitle)}</h2><div className=\"preview-benefits-window\"><div className=\"preview-benefits-track\" ref={track}>{p.benefits.map((x,i)=><article key={x[0][0]}><span className=\"preview-benefit-number\" aria-hidden=\"true\">0{i+1}</span><h3>{c(x[0])}</h3><p>{c(x[1])}</p></article>)}</div></div><p className=\"preview-benefits-close\"><strong>{c(p.benefitsClose)}</strong></p></div></section>;\n",
+          "after": " },[lang,kind]);\n const barriers=kind==='barriers',titleId=barriers?'preview-barriers-title':'preview-benefits-title';\n return <section className={'preview-benefits'+(barriers?' preview-barriers':'')} ref={root} aria-labelledby={titleId}><div className=\"preview-benefits-pin\" ref={pin}><h2 id={titleId}>{c(barriers?p.barriersTitle:p.benefitsTitle)}</h2><div className=\"preview-benefits-window\"><div className=\"preview-benefits-track\" ref={track}>{(barriers?p.barriers:p.benefits).map((x,i)=><article key={x[0][0]}>{!barriers&&<span className=\"preview-benefit-number\" aria-hidden=\"true\">0{i+1}</span>}<h3>{c(x[0])}</h3><p>{barriers&&<span className=\"preview-solution-arrow\" aria-hidden=\"true\">→</span>}{c(x[1])}</p></article>)}</div></div>{!barriers&&<p className=\"preview-benefits-close\"><strong>{c(p.benefitsClose)}</strong></p>}</div></section>;\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileHomePreview.tsx",
+      "beforeSha256": "dbe807ec71607b7d171c7a5eb02727489775683ea870bdefbb85a6b22d7377c2",
+      "afterSha256": "fd29a60f0f6ace4294021bc6104d9cb39cac8264a79a915e7e02d9ba45cdbed3",
+      "replacements": [
+        {
+          "offset": 1468,
+          "before": "   <Chapter title={c(p.audienceTitle)} className=\"m-home-audience m-dark\"><div className=\"m-audience-orbit\"><Photo asset=\"salto\" alt={t('saltoAlt',lang)} className=\"m-salto\"/><div className=\"preview-audience-copy\"><h3>{lang==='en'?'What you want':'Co chceš'}</h3><PreviewWants lang={lang}/><div className=\"preview-missing\"><h3>{lang==='en'?\"What’s missing\":'Co ti chybí'}</h3><p>{c(p.audienceClose)}</p><TextLink href=\"#rezervace\">{lang==='en'?'I want a plan made for me':'Chci plán přesně pro mě'}</TextLink></div></div></div></Chapter>\r\n",
+          "after": "   <Chapter title={c(p.audienceTitle)} className=\"m-home-audience m-dark\"><div className=\"m-audience-orbit\"><Photo asset=\"salto\" alt={t('saltoAlt',lang)} className=\"m-salto\"/><div className=\"preview-audience-copy\"><PreviewWants lang={lang}/><div className=\"preview-missing\"><h3>{lang==='en'?\"What’s missing\":'Co ti chybí'}</h3><p>{c(p.audienceClose)}</p><TextLink href=\"#rezervace\">{lang==='en'?'I want a plan made for me':'Chci plán přesně pro mě'}</TextLink></div></div></div></Chapter>\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileCollaborationPreview.tsx",
+      "beforeSha256": "6b12df9abdf00eab7a5a1c9470056ccd631df588433a9b3e62e3203a513b35b5",
+      "afterSha256": "9228676eb3e8e167876a4ce50f5a9b963d5802185491457b13dbd1f4cec6992a",
+      "replacements": [
+        {
+          "offset": 0,
+          "before": "import { PreviewComparison } from '../components/PreviewReading';\r\n",
+          "after": "import { PreviewComparison, PreviewBenefits } from '../components/PreviewReading';\r\n"
+        },
+        {
+          "offset": 469,
+          "before": "import { Chapter, Photo, Rail, TextLink } from './MobileElements';\r\n",
+          "after": "import { Chapter, Photo, TextLink } from './MobileElements';\r\n"
+        },
+        {
+          "offset": 1280,
+          "before": "  <Chapter title={c(p.needsTitle)} id=\"mobilni-obsah\" className=\"m-needs\"><div className=\"m-needs-opening\"><div><p><strong>{lang==='en'?'Now:':'Teď:'}</strong> {c(p.now)}</p><p><strong>{lang==='en'?'Where you want to be:':'Kam chceš:'}</strong> {c(p.destination)}</p></div></div><h3>{c(p.barriersTitle)}</h3><div className=\"m-needs-list\"><Rail title={c(p.barriersTitle)} lang={lang} items={p.barriers.map((x,i)=>[String(i+1).padStart(2,'0'),x[0][0],x[1][0],x[0][1],x[1][1]])}/></div><p>{c(p.needsClose)}</p><TextLink href=\"#kontakt\">{c(p.cta)}</TextLink></Chapter>\r\n",
+          "after": "  <Chapter title={c(p.needsTitle)} id=\"mobilni-obsah\" className=\"m-needs\"><div className=\"m-needs-opening\"><div><p><strong>{lang==='en'?'Now:':'Teď:'}</strong> {c(p.now)}</p><p><strong>{lang==='en'?'Where you want to be:':'Kam chceš:'}</strong> {c(p.destination)}</p></div></div><PreviewBenefits lang={lang} kind=\"barriers\"/><p>{c(p.needsClose)}</p><TextLink href=\"#kontakt\">{c(p.cta)}</TextLink></Chapter>\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileShared.tsx",
+      "beforeSha256": "daff561e5987bea9d3eb91efe0ea29e7a8fc49937795f00e00398c6250d40099",
+      "afterSha256": "926ba88f3c0613b0eb57a8f837b9cf06fe9424565fe219307ead45ff852462c0",
+      "replacements": [
+        {
+          "offset": 2838,
+          "before": "  return <><header className={'m-hero m-hero--'+page} ref={hero}>\n    <div className=\"m-hero-identity\">{page==='practice'&&<MobileVajraBell/>}<h1>{page==='home'?'Kryštof Švec':page==='about'?'Kryštof':topic}</h1><p className=\"m-hero-service\">{page==='about'?<><span>{lang==='en'?'A trainer':'Trenér,'}</span><span>{lang==='en'?'who spent a year in a wheelchair':'co strávil rok na vozíku'}</span></>:subtitle}</p>{page==='collaboration'&&<p className=\"m-hero-intro m-hero-benefits\">{benefits.map(benefit=><span key={benefit}>{benefit}</span>)}</p>}{intro&&<p className=\"m-hero-intro\"><RichText>{intro}</RichText></p>}</div>\n    <div className=\"m-hero-scene\">{page!=='practice'&&!(preview&&page==='collaboration')&&<Mineral kind={page}/>} {page==='collaboration'?(preview?<figure className=\"m-photo m-hero-photo preview-smile\"><img src=\"/media/material/portrait-cutout.webp\" width={1153} height={1364} alt={lang==='en'?'Kryštof Švec, smiling, in a patterned waistcoat.':'Kryštof Švec s úsměvem ve vzorované vestě.'} fetchPriority=\"high\"/></figure>:<MobileCollaborationPortrait alt={alt}/>):<Photo asset={page} alt={alt} eager className=\"m-hero-photo\"/>}<MaterialEdge tone={page==='home'?'dark':'linen'}/></div>\r\n  </header>{page==='home'&&<div className=\"m-hero-caption m10-home-caption m-dark\"><h2 id=\"m-home-statement\">{preview?previewText(p.homeTitle,lang):copy('Opening',1,lang)}</h2></div>}</>;\r\n",
+          "after": "  return <><header className={'m-hero m-hero--'+(preview&&page==='collaboration'?'home preview-collaboration-hero':page)} ref={hero}>\r\n    <div className=\"m-hero-identity\">{page==='practice'&&<MobileVajraBell/>}<h1>{page==='home'?'Kryštof Švec':page==='about'?'Kryštof':topic}</h1><p className=\"m-hero-service\">{page==='about'?<><span>{lang==='en'?'A trainer':'Trenér,'}</span><span>{lang==='en'?'who spent a year in a wheelchair':'co strávil rok na vozíku'}</span></>:subtitle}</p>{page==='collaboration'&&!preview&&<p className=\"m-hero-intro m-hero-benefits\">{benefits.map(benefit=><span key={benefit}>{benefit}</span>)}</p>}{intro&&<p className=\"m-hero-intro\"><RichText>{intro}</RichText></p>}</div>\r\n    <div className=\"m-hero-scene\">{page!=='practice'&&<Mineral kind={page}/>} {page==='collaboration'?(preview?<figure className=\"m-photo m-hero-photo preview-smile\"><img src=\"/media/material/portrait-cutout.webp\" width={1153} height={1364} alt={lang==='en'?'Kryštof Švec, smiling, in a patterned waistcoat.':'Kryštof Švec s úsměvem ve vzorované vestě.'} fetchPriority=\"high\"/></figure>:<MobileCollaborationPortrait alt={alt}/>):<Photo asset={page} alt={alt} eager className=\"m-hero-photo\"/>}<MaterialEdge tone={page==='home'?'dark':'linen'}/></div>\r\n  </header>{preview&&page==='collaboration'&&<div className=\"preview-collab-caption m-inner\"><p>{benefits.map(benefit=><span key={benefit}>{benefit}</span>)}</p></div>}{page==='home'&&<div className=\"m-hero-caption m10-home-caption m-dark\"><h2 id=\"m-home-statement\">{preview?previewText(p.homeTitle,lang):copy('Opening',1,lang)}</h2></div>}</>;\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/preview-v3.css",
+      "beforeSha256": "318c214c7e85299278cf931909ece74534d8462142e944cb4594a2221fc07452",
+      "afterSha256": "a82614dee9de7a0396d4e553719103749eabf166717c07dd47a69c6e64df7a12",
+      "replacements": [
+        {
+          "offset": 7163,
+          "before": "",
+          "after": "\n"
+        },
+        {
+          "offset": 11482,
+          "before": "",
+          "after": "\n/* Owner's mobile review: photography leads, colour replaces numbering. */\n@media (max-width:899px) {\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-wants li { border:0; grid-template-columns:10px minmax(0,1fr); gap:18px; padding-block:13px; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-wants li > span { font-size:0; padding:0; width:8px; height:8px; border-radius:50%; background:var(--m-accent); opacity:1; margin-top:12px; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-wants li:nth-child(even) > span { background:var(--sandstone); }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefit-number { display:none; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits:not(.preview-barriers) article { border-color:color-mix(in srgb,var(--m-accent) 48%,transparent); background:color-mix(in srgb,var(--m-accent) 8%,transparent); border-top:3px solid var(--m-accent); }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits:not(.preview-barriers) article h3 { color:var(--m-accent); margin-top:0; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-work .m-work-layout { grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:18px; align-items:start; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-work .m-handstand-composition { position:sticky; top:28px; width:100%; height:auto; grid-column:1; grid-row:1/3; align-self:start; margin-top:8px; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-work .m-handstand { width:100%; margin:0; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-work-text h2 { font-size:clamp(1.5rem,5vw,2rem); line-height:1.2; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-work .preview-comparison { grid-column:2; grid-row:2; margin:0; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-work .preview-comparison-key { display:grid; gap:6px; margin-bottom:12px; font-size:.875rem; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-work .preview-comparison article { padding-block:18px; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-work .preview-comparison article :is(p,h3) { grid-template-columns:13px minmax(0,1fr); gap:7px; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-work .preview-comparison article p { font-size:.875rem; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-work .preview-comparison article h3 { font-size:1.125rem; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-comparison :is(h3,strong) > span,\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-comparison-key strong { color:var(--m-accent); }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] #jak-to-funguje > .m-inner > .m-text-link { display:flex; width:fit-content; margin-top:28px; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-about .m-about-composition { display:flow-root; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-about .m-prague { float:left; width:45%; height:auto; aspect-ratio:3/5; margin:0 20px 16px 0; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-about .m-prague img { height:100%; object-fit:cover; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-about .m-about-heading { display:block; contain:none; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-about .m-about-heading .m-eyebrow { margin:0 0 8px; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-about .m-about-heading h2 { font-size:1.35rem; margin:0; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-about .m-about-heading .m-about-symbol { width:76px; height:62px; margin:12px 0 10px; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-about-aside { margin:0; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-about-aside p { margin:12px 0 0; font-size:.9375rem; line-height:1.6; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-contact .m-contact-actions { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); align-items:stretch; gap:12px; width:100%; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-contact .m-contact-actions .m-contact-main { grid-column:1/-1; width:100%; padding:18px 12px; font-family:var(--ff-body); font-size:1.0625rem; letter-spacing:0; text-transform:none; font-weight:700; line-height:1.35; gap:10px; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-contact .preview-cta-note { font-size:.8125rem; margin-top:7px; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-contact .m-contact-actions .m-contact-mail { width:100%; min-width:0; padding:11px 7px; font-size:.75rem; letter-spacing:.02em; gap:6px; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-contact .m-contact-actions .m-contact-mail svg { width:14px; height:14px; flex-shrink:0; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-barriers { width:100%; margin:20px 0; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-barriers h2 { font-size:1.5rem; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-barriers article h3 { margin-top:0; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-barriers article p { display:grid; grid-template-columns:22px minmax(0,1fr); gap:10px; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-solution-arrow { font-size:1.5rem; line-height:1.1; color:var(--m-accent); }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-collab-caption { padding-block:28px 0; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-collab-caption p { font-family:var(--ff-display); font-size:1.4rem; line-height:1.4; margin:0; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-collab-caption span { display:block; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-hero.preview-collaboration-hero .m-hero-photo img { top:48px; height:calc(100% - 48px); object-fit:cover; object-position:center top; }\n}\n"
+        }
+      ]
+    }
+  ]
+}

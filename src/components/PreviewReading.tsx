@@ -27,7 +27,7 @@ export function PreviewWants({lang}:{lang:string}) {
 }
 
 /** Native document scroll owns the distance. No wheel/touch interception or focus trap. */
-export function PreviewBenefits({lang}:{lang:string}) {
+export function PreviewBenefits({lang,kind='benefits'}:{lang:string;kind?:'benefits'|'barriers'}) {
  const root=useRef<HTMLElement>(null), pin=useRef<HTMLDivElement>(null), track=useRef<HTMLDivElement>(null);
  const c=(v:readonly string[])=>previewText(v,lang);
  useEffect(()=>{
@@ -51,6 +51,7 @@ export function PreviewBenefits({lang}:{lang:string}) {
   preference.addEventListener('change',measure);window.addEventListener('resize',measure);window.addEventListener('scroll',queue,{passive:true});
   document.fonts.ready.then(()=>{if(!disposed)measure();});measure();
   return()=>{disposed=true;observer.disconnect();cancelAnimationFrame(frame);preference.removeEventListener('change',measure);window.removeEventListener('resize',measure);window.removeEventListener('scroll',queue);};
- },[lang]);
- return <section className="preview-benefits" ref={root} aria-labelledby="preview-benefits-title"><div className="preview-benefits-pin" ref={pin}><h2 id="preview-benefits-title">{c(p.benefitsTitle)}</h2><div className="preview-benefits-window"><div className="preview-benefits-track" ref={track}>{p.benefits.map((x,i)=><article key={x[0][0]}><span className="preview-benefit-number" aria-hidden="true">0{i+1}</span><h3>{c(x[0])}</h3><p>{c(x[1])}</p></article>)}</div></div><p className="preview-benefits-close"><strong>{c(p.benefitsClose)}</strong></p></div></section>;
+ },[lang,kind]);
+ const barriers=kind==='barriers',titleId=barriers?'preview-barriers-title':'preview-benefits-title';
+ return <section className={'preview-benefits'+(barriers?' preview-barriers':'')} ref={root} aria-labelledby={titleId}><div className="preview-benefits-pin" ref={pin}><h2 id={titleId}>{c(barriers?p.barriersTitle:p.benefitsTitle)}</h2><div className="preview-benefits-window"><div className="preview-benefits-track" ref={track}>{(barriers?p.barriers:p.benefits).map((x,i)=><article key={x[0][0]}>{!barriers&&<span className="preview-benefit-number" aria-hidden="true">0{i+1}</span>}<h3>{c(x[0])}</h3><p>{barriers&&<span className="preview-solution-arrow" aria-hidden="true">→</span>}{c(x[1])}</p></article>)}</div></div>{!barriers&&<p className="preview-benefits-close"><strong>{c(p.benefitsClose)}</strong></p>}</div></section>;
 }

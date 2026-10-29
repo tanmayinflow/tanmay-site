@@ -1,4 +1,4 @@
-import { PreviewComparison } from '../components/PreviewReading';
+import { PreviewComparison, PreviewBenefits } from '../components/PreviewReading';
 import CollaborationPricing from '../components/CollaborationPricing';
 import MobileCollaborationFaq from './MobileCollaborationFaq';
 import MobileCycle from './MobileCycle';
@@ -6,7 +6,7 @@ import MobileReviews from './MobileReviews';
 import { TerrainArtwork } from '../components/TerrainArtwork';
 import { routePath } from '../site.js';
 import { approved } from './preview-approved-content';
-import { Chapter, Photo, Rail, TextLink } from './MobileElements';
+import { Chapter, Photo, TextLink } from './MobileElements';
 import { MobileHero, MobileProof, MobileContact } from './MobileShared';
 import { previewCopy as p, previewText, previewWhatsApp } from '../preview-copy';
 
@@ -16,7 +16,7 @@ export default function MobileCollaborationPreview({lang}:{lang:string}) {
   <MobileHero page="collaboration" lang={lang} preview/>
   <div className="m-inner m-proof-start"><MobileProof lang={lang} preview/></div>
   <div className="m-inner preview-work-intro"><p className="m-eyebrow">{c(p.workKicker)}</p><p>{c(p.workLead)}</p><TextLink href="#kontakt">{c(p.cta)}</TextLink><p className="small">{c(p.micro)}</p><TextLink href="#co-dostanes" down arrow>{lang==='en'?'What you get':'Co dostaneš'}</TextLink></div>
-  <Chapter title={c(p.needsTitle)} id="mobilni-obsah" className="m-needs"><div className="m-needs-opening"><div><p><strong>{lang==='en'?'Now:':'Teď:'}</strong> {c(p.now)}</p><p><strong>{lang==='en'?'Where you want to be:':'Kam chceš:'}</strong> {c(p.destination)}</p></div></div><h3>{c(p.barriersTitle)}</h3><div className="m-needs-list"><Rail title={c(p.barriersTitle)} lang={lang} items={p.barriers.map((x,i)=>[String(i+1).padStart(2,'0'),x[0][0],x[1][0],x[0][1],x[1][1]])}/></div><p>{c(p.needsClose)}</p><TextLink href="#kontakt">{c(p.cta)}</TextLink></Chapter>
+  <Chapter title={c(p.needsTitle)} id="mobilni-obsah" className="m-needs"><div className="m-needs-opening"><div><p><strong>{lang==='en'?'Now:':'Teď:'}</strong> {c(p.now)}</p><p><strong>{lang==='en'?'Where you want to be:':'Kam chceš:'}</strong> {c(p.destination)}</p></div></div><PreviewBenefits lang={lang} kind="barriers"/><p>{c(p.needsClose)}</p><TextLink href="#kontakt">{c(p.cta)}</TextLink></Chapter>
   <Chapter title={c(p.forTitle)} className="m-boundaries"><ul>{p.forItems.map(x=><li key={x[0]}>{c(x)}</li>)}</ul><p><strong>{c(p.forClose)}</strong></p><p>{c(p.notFor)}</p></Chapter>
   <Chapter title={c(p.oldTitle)} className="m-formats"><PreviewComparison lang={lang}/><p>{c(p.oldClose)}</p><TextLink href="#kontakt">{c(p.cta)}</TextLink></Chapter>
   <Chapter title={c(p.startTitle)} eyebrow={c(p.startLabel)} id="co-dostanes" className="m-between m-process m-dark preview-cotton"><div className="m-editorial-stack">{p.startItems.map((x,i)=><article key={i}><h3>{c(x[0])}</h3><p>{c(x[1])}</p></article>)}</div><MobileCycle lang={lang}/><p><strong>{c(p.weekTitle)}</strong></p><p>{c(p.week)}</p><p><strong>{c(p.why)}</strong></p><p><strong>{c(p.price)}</strong></p><p className="small">{c(p.priceSmall)}</p><TextLink href="#kontakt">{c(p.cta)}</TextLink><a className="m-text-link" href={previewWhatsApp(lang,true)} target="_blank" rel="noopener noreferrer">{c(p.direct)}</a></Chapter>
