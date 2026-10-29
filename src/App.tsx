@@ -1,3 +1,5 @@
+import { previewCopy as p, previewText, previewWhatsApp, previewMail } from "./preview-copy";
+import "./preview-v3.css";
 /**
  * tanmaypractice.com · veřejný web
  * ----------------------------------------------------------------------
@@ -2332,7 +2334,7 @@ function ClientStrip({ lang }: any) {
 // ----------------------------------------------------------------------
 // CHROME
 // ----------------------------------------------------------------------
-function TopBar({ loc, menuOpen, onMenu }: any) {
+function TopBar({ loc, menuOpen, onMenu, preview=false }: any) {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const on = () => setScrolled(window.scrollY > 8);
@@ -2344,13 +2346,13 @@ function TopBar({ loc, menuOpen, onMenu }: any) {
   return (
     <div className="topbar" data-scrolled={scrolled ? "1" : "0"}>
       <div className="wrap row">
-        <a href={routePath("home", loc.lang)} className="logo" aria-label="tanmay"><Wordmark /></a>
+        <a href={routePath(preview?"home-preview":"home", loc.lang)} className="logo" aria-label="tanmay"><Wordmark /></a>
         <div className="navcluster">
           <nav className="topnav" aria-label={L("Hlavní navigace", "Main navigation")}>
             {PRIMARY_NAV.map((r: any) => (
               <a
                 key={r.id}
-                href={r.path[loc.lang]}
+                href={preview&&r.id==="spoluprace"?routePath("spoluprace-preview",loc.lang):r.path[loc.lang]}
                 aria-current={loc.routeId.replace('-preview', '') === r.id ? "page" : undefined}
               >
                 {L((r.navLabel || r.label).cs, (r.navLabel || r.label).en)}
@@ -2370,7 +2372,7 @@ function TopBar({ loc, menuOpen, onMenu }: any) {
             <a className="icon-link head-social" href={IG_URL} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <IconInstagram />
             </a>
-            <ClientEntry />
+            {preview&&<a className="centry" href={loc.routeId==="home-preview"?"#rezervace":"#kontakt"}>{L("15 minut zdarma","Free 15 minutes")}</a>}<ClientEntry />
             <button
               type="button"
               className="burger"
@@ -2388,7 +2390,7 @@ function TopBar({ loc, menuOpen, onMenu }: any) {
   );
 }
 
-function Menu({ open, onClose, loc }: any) {
+function Menu({ open, onClose, loc, preview=false }: any) {
   const other = otherLangPath(loc.routeId, loc.lang, loc.postId);
   return (
     <div className="mmenu" id="tm-menu" hidden={!open}>
@@ -2397,7 +2399,7 @@ function Menu({ open, onClose, loc }: any) {
           {PRIMARY_NAV.map((r: any) => (
             <li key={r.id}>
               <a
-                href={r.path[loc.lang]}
+                href={preview&&r.id==="spoluprace"?routePath("spoluprace-preview",loc.lang):r.path[loc.lang]}
                 onClick={onClose}
                 aria-current={loc.routeId.replace('-preview', '') === r.id ? "page" : undefined}
               >
@@ -2672,8 +2674,8 @@ function HomeAbout({ lang }: any) {
           </h2>
           <p className="body-txt rv d2 home-credentials-v920">
             {emphasizeCopy(L(
-              "Moje práce vyrostla z deseti let vlastní pohybové praxe a zkušeností s 150+ klienty. Rok jsem působil jako vedoucí studia a hlavní trenér. Jsem držitelem profesní kvalifikace Osobní trenér ve fitness a instruktorem jógy. Další odborné vzdělání mám v oblasti kondičního a funkčního tréninku, zdravotní tělesné výchovy a rehabilitačního tréninku. V letech 2019 až 2024 jsem studoval psychologii na Univerzitě Palackého.",
-              "My work grew from ten years of personal movement practice and experience with 150+ clients. I spent a year as a studio manager and head trainer. I hold the professional qualification Personal Trainer in Fitness and I am a yoga instructor. I also have further education in conditioning and functional training, health-oriented physical education and rehabilitation training. From 2019 to 2024, I studied psychology at Palacký University."
+              "Moje práce vyrostla z deseti let vlastní pohybové praxe a zkušeností s 100+ klienty. Rok jsem působil jako vedoucí studia a hlavní trenér. Jsem držitelem profesní kvalifikace Osobní trenér ve fitness a instruktorem jógy. Další odborné vzdělání mám v oblasti kondičního a funkčního tréninku, zdravotní tělesné výchovy a rehabilitačního tréninku. V letech 2019 až 2024 jsem studoval psychologii na Univerzitě Palackého.",
+              "My work grew from ten years of personal movement practice and experience with 100+ clients. I spent a year as a studio manager and head trainer. I hold the professional qualification Personal Trainer in Fitness and I am a yoga instructor. I also have further education in conditioning and functional training, health-oriented physical education and rehabilitation training. From 2019 to 2024, I studied psychology at Palacký University."
             ), { maxMatches: 12, extraPhrases: [
               "kondičního a funkčního tréninku", "zdravotní tělesné výchovy", "rehabilitačního tréninku",
               "studoval psychologii na Univerzitě Palackého",
@@ -3025,7 +3027,7 @@ function PagePribeh({ lang }: any) {
       </div><SecondaryMaterialMask src="/media/refine-v9-14/home-paper-top.png" className="about-hero-foreground-v912b" /></div><div className="about-hero-proof-v912b"><div className="wrap">
         <div className="proof-row about-proof-v918 rv">
           <div className="proof-item"><strong>{L("10 LET","10 YEARS")}</strong><span>{L("vlastní pohybové praxe","of personal movement practice")}</span></div>
-          <div className="proof-item"><strong>150+</strong><span>{L("klientů","clients")}</span></div>
+          <div className="proof-item"><strong>100+</strong><span>{L("klientů","clients")}</span></div>
           <div className="proof-item proof-item--education"><strong>{L("ODBORNÉ ZÁZEMÍ","PROFESSIONAL BACKGROUND")}</strong>
             <span className="proof-credentials">{L("Osobní trenér ve fitness · instruktor jógy","Personal Trainer in Fitness · yoga instructor")}</span>
             <span className="proof-study">{L("Kondiční, funkční a rehabilitační trénink · studium psychologie","Conditioning, functional and rehabilitation training · psychology studies")}</span>
@@ -3046,7 +3048,7 @@ function PagePribeh({ lang }: any) {
       <AboutNaturePhoto />
     </div></section>
 
-    <section className="site-linen page-section about-education-v919"><div className="wrap"><div className="section-head section-head--split about-section-head-v918" data-about-heading="education">
+    <section id="vzdelani" className="site-linen page-section about-education-v919"><div className="wrap"><div className="section-head section-head--split about-section-head-v918" data-about-heading="education">
           <p className="label rv">{L("Odborné zázemí","Professional background")}</p>
           <h2 className="h-display h2 rv d1">{L("Vlastní zkušenost je důležitá. Sama ale nestačí.","Personal experience matters. On its own, it is not enough.")}</h2>
           <p className="page-intro rv d1">{E("Proto svou práci opírám také o profesní kvalifikaci a další vzdělání v tréninku, józe a psychologii.","That is why I also ground my work in professional qualifications and further education in training, yoga and psychology.")}</p>
@@ -3106,7 +3108,7 @@ function PageSpoluprace({ lang }: any) {
       <div className="collaboration-linen-lip" aria-hidden="true" />
       <div className="wrap"><div className="proof-row about-proof-v918 rv">
         <div className="proof-item"><strong>{L("10 LET","10 YEARS")}</strong><span>{L("vlastní pohybové praxe","of personal movement practice")}</span></div>
-        <div className="proof-item"><strong>150+</strong><span>{L("klientů","clients")}</span></div>
+        <div className="proof-item"><strong>100+</strong><span>{L("klientů","clients")}</span></div>
         <div className="proof-item proof-item--education"><strong>{L("ODBORNÉ ZÁZEMÍ","PROFESSIONAL BACKGROUND")}</strong>
           <span className="proof-credentials">{L("Osobní trenér ve fitness · instruktor jógy","Personal Trainer in Fitness · yoga instructor")}</span>
           <span className="proof-study">{L("Kondiční, funkční a rehabilitační trénink · studium psychologie","Conditioning, functional and rehabilitation training · psychology studies")}</span>
@@ -3119,7 +3121,7 @@ function PageSpoluprace({ lang }: any) {
           sizes="(min-width:900px) 290px, 220px" className="secondary-illustration--collaboration-pine" decorative />
       </div></div></section>
 
-    <section className="site-linen page-section collaboration-experience" id="zkusenost"><div className="wrap"><div className="section-head section-head--split"><h2 className="h-display h2 rv">{L("Zkušenost a vzdělání","Experience and education")}</h2><p className="page-intro rv d1">{E("Vycházím z deseti let vlastní pohybové praxe a zkušeností s 150+ klienty. Jsem držitelem profesní kvalifikace Osobní trenér ve fitness a instruktorem jógy.","My work draws on ten years of personal movement practice and experience with 150+ clients. I hold the professional qualification Personal Trainer in Fitness and I am a yoga instructor.")}{L(" Další vzdělání mám v "," I also have further education in ")}<strong className="copy-emphasis">{L("kondičním a funkčním tréninku, zdravotní tělesné výchově a rehabilitačním tréninku","conditioning and functional training, health-oriented physical education and rehabilitation training")}</strong>.</p></div></div></section>
+    <section className="site-linen page-section collaboration-experience" id="zkusenost"><div className="wrap"><div className="section-head section-head--split"><h2 className="h-display h2 rv">{L("Zkušenost a vzdělání","Experience and education")}</h2><p className="page-intro rv d1">{E("Vycházím z deseti let vlastní pohybové praxe a zkušeností s 100+ klienty. Jsem držitelem profesní kvalifikace Osobní trenér ve fitness a instruktorem jógy.","My work draws on ten years of personal movement practice and experience with 100+ clients. I hold the professional qualification Personal Trainer in Fitness and I am a yoga instructor.")}{L(" Další vzdělání mám v "," I also have further education in ")}<strong className="copy-emphasis">{L("kondičním a funkčním tréninku, zdravotní tělesné výchově a rehabilitačním tréninku","conditioning and functional training, health-oriented physical education and rehabilitation training")}</strong>.</p></div></div></section>
 
     <section className="site-linen page-section collaboration-formats" id="moznosti"><div className="wrap"><h2 className="h-display h2 rv">{L("Možnosti spolupráce","Ways to work together")}</h2><div className="editorial-list" style={{marginTop:30}}>{formats.map((x:any)=><article className="editorial-row rv" key={x[0]}><span className="num">{x[0]}</span><h3>{L(x[1],x[3])}</h3><p>{E(x[2],x[4])}</p></article>)}</div></div></section>
 
@@ -3272,12 +3274,13 @@ function PageNotFound({ lang }: any) {
 
 // FOOTER
 // ----------------------------------------------------------------------
-function Footer({ lang, variant = "linen" }: any) {
+function Footer({ lang, variant = "linen", preview=false, original="home" }: any) {
   return (
-    <footer className={variant === "sand" ? "footer--sand footer-v920" : "footer--linen footer-v920"} data-secondary-v6={variant === "sand" ? undefined : ""}>
+    <footer data-preview={preview?"v3":undefined} className={variant === "sand" ? "footer--sand footer-v920" : "footer--linen footer-v920"} data-secondary-v6={variant === "sand" ? undefined : ""}>
+      {preview&&<p className="preview-original">{L("Náhled nové verze · ","Preview of the new version · ")}<a href={routePath(original,lang)}>{L("Původní stránka →","Original page →")}</a></p>}
       <div className="wrap">
         <div className="frow">
-          <div className="footer-start-v920"><a className="footer-brand-v920" href={routePath("home", lang)} aria-label="tanmay"><Wordmark /></a>
+          <div className="footer-start-v920"><a className="footer-brand-v920" href={routePath(preview?"home-preview":"home", lang)} aria-label="tanmay"><Wordmark /></a>
           <div className="flinks">
             <a href={CLIENT_APP_URL} target="_blank" rel="noopener noreferrer">
               {L("Vstup pro klienty", "Client login")}
@@ -3294,7 +3297,7 @@ function Footer({ lang, variant = "linen" }: any) {
             </a>
             <a
               className="icon-link"
-              href={WHATSAPP_URL}
+              href={preview?previewWhatsApp(lang):WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={L("Napsat přes WhatsApp", "Book on WhatsApp")}
@@ -3315,24 +3318,21 @@ function Footer({ lang, variant = "linen" }: any) {
 // APP
 // ----------------------------------------------------------------------
 function OpeningPreview({ lang }: any) {
+  const c=(pair:readonly string[])=>previewText(pair,lang);
   const [noPortrait, setNoPortrait] = useState(false);
   return (
     <header className={"opening surf--sand" + (noPortrait ? "" : " has-portrait")}>
       <div className="wrap grid">
         <div className="copy">
-          <p className="kicker label rv">{L("Osobní trénink a pohybová praxe · Praha", "Movement and practice coaching · Prague")}</p>
+          <p className="kicker label rv">{c(p.homeKicker)}</p>
           <h1 className="h-display h1 rv d1">
-            {L("To, co učím, sám žiju.", "I teach only what I live.")}
+            {c(p.homeTitle)}
           </h1>
-          <p className="body-txt rv d2">
-            {L(
-              "Pomůžu ti zesílit a hýbat se líp. Trénujeme naplno, ale bezpečně. Bez nudy a výčitek, i když týden nejde podle plánu.",
-              "I’ll help you get stronger and move better. We train hard, but safely. No boredom or guilt, even when your week doesn’t go to plan."
-            )}
-          </p>
+          <p className="body-txt rv d2">{c(p.homeLead)}</p>
           <p className="act rv d3">
-            <Go href={routePath("spoluprace", lang)} cs="Jak spolupracovat" en="How we can work together" />
+            <Go href="#rezervace" cs={p.cta[0]} en={p.cta[1]} /><a className="collaboration-price-jump" href="#jak-to-funguje">{L("Jak to funguje ↓","How it works ↓")}</a>
           </p>
+          <p className="small rv d3">{c(p.micro)}</p>
           <p className="stance rv d3">
             {L("tělo · praxe · divoká příroda", "body · practice · wild nature")}
           </p>
@@ -3364,203 +3364,49 @@ function OpeningPreview({ lang }: any) {
   );
 }
 
-function HomeAudiencePreview() {
-  return (
-    <section className="sec sec--edged who" aria-labelledby="h-audience">
-      <div className="strata strata--ink strata--hero" aria-hidden="true" />
-      <TerrainCurrent />
-      <div className="wrap grid">
-        <div className="prose">
-          <h2 className="h-display h2 rv" id="h-audience">
-            {L("Pro koho to je", "Who this is for")}
-          </h2>
-          <div className="rv d1" style={{ marginTop: 18 }}>
-            <p className="body-txt">
-              {E(
-                "Nechceš pokaždé začínat znovu. Hledáš trénink s jasným směrem, který počítá i s týdny, kdy nejde všechno podle plánu.",
-                "You know how to commit to what you decide. And still there is a distance between what you understand and how you actually live."
-              )}
-            </p>
-            <p className="body-txt" style={{ marginTop: "1.15em" }}>
-              {E(
-                "Nejde ti o univerzální plán ani nahodilé lekce. Chceš vědět, co má teď smysl, proč to děláš a jak podle reality upravit další krok.",
-                "You are not looking for another identity to perform. You are not looking for a guru. You want a practice that is more reliable, more physical and more your own."
-              )}
-            </p>
-          </div>
-        </div>
-        <SaltoField />
-      </div>
-    </section>
-  );
+function HomeAudiencePreview({ lang }: any) {
+  const c=(pair:readonly string[])=>previewText(pair,lang);
+  return <section className="sec sec--edged who" aria-labelledby="h-audience">
+ <div className="strata strata--ink strata--hero" aria-hidden="true"/><TerrainCurrent/>
+ <div className="wrap grid"><div className="prose"><h2 className="h-display h2 rv" id="h-audience">{c(p.audienceTitle)}</h2>
+ <div className="rv d1" style={{marginTop:18}}>{p.wants.map(x=><p className="body-txt" key={x[0]}>{c(x)}</p>)}<p className="body-txt"><strong>{c(p.audienceClose)}</strong></p>
+ <Go href="#rezervace" cs="Chci plán přesně pro mě" en="I want a plan made for me"/></div></div><SaltoField/></div></section>;
 }
 
 function HomeWorkPreview({ lang }: any) {
-  return (
-    <section className="sec home-work" aria-labelledby="h-work">
-      <div className="wrap">
-        <h2 className="h-display h2 rv" id="h-work">
-          {L("Jak spolu pracujeme", "What actually happens in the work")}
-        </h2>
-
-        <div className="work-grid">
-          <div>
-            <div className="chapter rv d1">
-              <div className="row">
-                <span className="num">01</span>
-                <h3>{L("Naplno, ale nikdy přes hranu", "All in, never over the edge")}</h3>
-                <p>{E(
-                  "Dáš do toho všechno a já hlídám, kde je tvoje hranice. Když tě něco bolí, nemusíš končit. Najdeme verzi pohybu, která je bezpečná.",
-                  "You give it everything, and I keep an eye on where your limit is. If something hurts, you don’t have to stop. We find a version of the movement that’s safe."
-                )}</p>
-              </div>
-              <div className="row">
-                <span className="num">02</span>
-                <h3>{L("Pokaždé trochu jinak", "A little different every time")}</h3>
-                <p>{E(
-                  "Žádný trénink pořád dokola. Střídáme sílu, dovednosti i hru s pohybem, takže tě to baví a posiluješ celé tělo. Většinou s vlastní vahou, kruhy a činky přidáme, když dávají smysl.",
-                  "No same-old routine. We mix strength, skills and play, so it stays fun and your whole body gets stronger. Mostly bodyweight; rings and weights come in when they make sense."
-                )}</p>
-              </div>
-              <div className="row">
-                <span className="num">03</span>
-                <h3>{L("Když týden nevyjde, nevadí", "When the week falls apart, that’s okay")}</h3>
-                <p>{E(
-                  "Práce, rodina, únava. Život se mění a plán se mění s ním. Žádné výčitky, prostě navážeme dalším krokem. Plán, termíny a záznamy máš v klientské aplikaci na jednom místě.",
-                  "Work, family, tiredness. Life changes and the plan changes with it. No guilt, we just pick up with the next step. Your plan, sessions and records live in one place in the client app."
-                )}</p>
-              </div>
-            </div>
-
-            <p className="work-action rv d2">
-              <Go href={routePath("praxe", lang)} cs="Více o praxi" en="The whole practice" />
-            </p>
-          </div>
-          <HomeWorkHandstand />
-        </div>
-      </div>
-    </section>
-  );
+  const c=(pair:readonly string[])=>previewText(pair,lang);
+  return <section className="sec home-work" aria-labelledby="h-work"><div className="wrap"><h2 className="h-display h2 rv" id="h-work">{c(p.oldTitle)}</h2>
+ <div className="work-grid"><div><div className="chapter rv d1">{p.oldWays.map((x,i)=><div className="row" key={i}><span className="num">0{i+1}</span><p className="preview-old-way">{c(x[0])}</p><h3>{c(x[1])}</h3></div>)}</div><p className="stance-line rv d2">{c(p.oldClose)}</p></div><HomeWorkHandstand/></div></div></section>;
 }
 
 function HomeCollabPreview({ lang }: any) {
-  return (
-    <section className="sec home-collab" aria-labelledby="h-collab">
-      <div className="wrap">
-        <h2 className="h-display h2 rv" id="h-collab">
-          {L("Od setkání k vlastní praxi", "How we can work together")}
-        </h2>
-        <div className="prose railed rv d1" style={{ marginTop: 22 }}>
-          <p className="body-txt">
-            {E(
-              "Pracuji individuálně i s menšími skupinami, jednorázově i dlouhodobě, osobně v Praze nebo online.",
-              "The personal work is one to one, in Prague. We meet regularly, between sessions you run your own practice, and we adjust it together according to what actually happened."
-            )}
-          </p>
-          <p className="body-txt">
-            {E(
-              "Pracujeme tak, abys rozuměl svému tréninku a dokázal svou praxi držet sám.",
-              "I work with few people, closely. Guidance, not dependence. The aim is that one day you run the practice yourself."
-            )}
-          </p>
-        </div>
-        <p className="rv d2" style={{ marginTop: "clamp(26px,3.4vw,34px)" }}>
-          <Go href={routePath("spoluprace", lang)} cs="Možnosti spolupráce" en="How it runs and how to start" />
-        </p>
-      </div>
-    </section>
-  );
+  const c=(pair:readonly string[])=>previewText(pair,lang);
+  return <section className="sec home-collab" aria-labelledby="h-collab"><div className="wrap"><h2 className="h-display h2 rv" id="h-collab">{c(p.benefitsTitle)}</h2><div className="prose railed rv d1" style={{marginTop:22}}>{p.benefits.map(x=><p className="body-txt" key={x[0][0]}><strong>{c(x[0])}</strong> {c(x[1])}</p>)}<p className="body-txt"><strong>{c(p.benefitsClose)}</strong></p></div><p className="act rv d2"><Go href="#rezervace" cs={p.cta[0]} en={p.cta[1]}/></p></div></section>;
 }
 
 function HomeAboutPreview({ lang }: any) {
-  return (
-    <section className="sec home-about" aria-labelledby="h-about-short">
-      <div className="wrap about-short-grid">
-        <div className="about-short-copy">
-          <p className="label rv">{E("Kryštof Švec", "About me, briefly")}</p>
-          <h2 className="h-display h2 rv d1" id="h-about-short" style={{ marginTop: 14 }}>
-            {L(
-              "Vlastní praxe. Zkušenost s lidmi. Odborné vzdělání.",
-              "I do not teach something separate from my own life."
-            )}
-          </h2>
-          <p className="body-txt rv d2 home-credentials-v920">
-            {emphasizeCopy(L(
-              "Moje práce vyrostla z deseti let vlastní pohybové praxe a zkušeností s 150+ klienty. Rok jsem působil jako vedoucí studia a hlavní trenér. Jsem držitelem profesní kvalifikace Osobní trenér ve fitness a instruktorem jógy. Další odborné vzdělání mám v oblasti kondičního a funkčního tréninku, zdravotní tělesné výchovy a rehabilitačního tréninku. V letech 2019 až 2024 jsem studoval psychologii na Univerzitě Palackého.",
-              "My work grew from ten years of personal movement practice and experience with 150+ clients. I spent a year as a studio manager and head trainer. I hold the professional qualification Personal Trainer in Fitness and I am a yoga instructor. I also have further education in conditioning and functional training, health-oriented physical education and rehabilitation training. From 2019 to 2024, I studied psychology at Palacký University."
-            ), { maxMatches: 12, extraPhrases: [
-              "kondičního a funkčního tréninku", "zdravotní tělesné výchovy", "rehabilitačního tréninku",
-              "studoval psychologii na Univerzitě Palackého",
-              "studio manager and head trainer", "conditioning and functional training", "health-oriented physical education",
-              "rehabilitation training", "studied psychology at Palacký University"
-            ] })}
-          </p>
-          <p className="act rv d3">
-            <Go href={routePath("pribeh", lang)} cs="Více o mně" en="My story" />
-          </p>
-        </div>
-        <HomeAboutPhoto
-          pic={MEDIA.homeAboutPrague}
-          alt={L(
-            "Portrét z profilu s Pražským hradem v pozadí.",
-            "Profile portrait with Prague Castle in the background."
-          )}
-          sizes="(min-width:521px) 410px, (min-width:366px) 330px, calc(100vw - 36px)"
-        />
-      </div>
-    </section>
-  );
+  const c=(pair:readonly string[])=>previewText(pair,lang);
+  return <section className="sec home-about" aria-labelledby="h-about-short"><div className="wrap about-short-grid"><div className="about-short-copy"><p className="label rv">Kryštof Švec</p><h2 className="h-display h2 rv d1" id="h-about-short">{c(p.aboutTitle)}</h2><p className="body-txt rv d2">{c(p.bio)}</p><p className="body-txt rv d2">{c(p.cheer)}</p><p className="body-txt"><strong>{c(p.live)}</strong></p><p className="body-txt"><a href={routePath("pribeh",lang)+"#vzdelani"}>{c(p.qualification)}</a></p><p className="act rv d3"><Go href={routePath("pribeh",lang)} cs="Můj příběh" en="My story"/></p></div><HomeAboutPhoto pic={MEDIA.homeAboutPrague} alt={L("Portrét z profilu s Pražským hradem v pozadí.","Profile portrait with Prague Castle in the background.")} sizes="(min-width:521px) 410px, (min-width:366px) 330px, calc(100vw - 36px)"/></div></section>;
 }
 
-function HomeBookingPreview() {
-  const whatsappText = encodeURIComponent(L(
-    "Ahoj Kryštofe, chci si domluvit 20 minut zdarma.\n\nCo chci zvládnout:\n\nKde chci trénovat (Praha / online):\n\nKdy se mi to hodí:",
-    "Hi Kryštof, I’d like to book the free 20 minutes.\n\nWhat I want to achieve:\n\nWhere I want to train (Prague / online):\n\nWhen suits me:"
-  ));
-  const mailSubject = encodeURIComponent(L("20 minut zdarma", "Free 20 minutes"));
-  const mailBody = encodeURIComponent(L(
-    "Ahoj Kryštofe, chci si domluvit 20 minut zdarma.\n\nCo chci zvládnout:\n\nKde chci trénovat (Praha / online):\n\nKdy se mi to hodí:",
-    "Hi Kryštof, I’d like to book the free 20 minutes.\n\nWhat I want to achieve:\n\nWhere I want to train (Prague / online):\n\nWhen suits me:"
-  ));
-  return (
-    <section className="home-booking" id="rezervace" aria-labelledby="h-booking">
-      <div className="wrap">
-        <div className="booking-inner">
-          <p className="booking-kicker label rv">{E("První krok", "First step")}</p>
-          <h2 className="h-display h2 rv d1" id="h-booking">
-            {L("20 minut zdarma.", "20 minutes, free.")}
-          </h2>
-          <p className="booking-lead rv d2">
-            {E(
-              "Krátce si zavoláme, telefonem nebo přes video. Řekneš mi, co chceš zvládnout a co ti zatím brání. Já ti řeknu, jak bych začal. Nic nemusíš kupovat a do ničeho tě nebudu tlačit.",
-              "We’ll have a short call, by phone or video. You tell me what you want to achieve and what’s been getting in the way. I’ll tell you how I’d start. You don’t have to buy anything, and I won’t push you into anything."
-            )}
-          </p>
-          <div className="booking-actions rv d3">
-            <a className="contact-action contact-action--primary" href={WHATSAPP_URL + "?text=" + whatsappText} target="_blank" rel="noopener noreferrer">
-              <IconWhatsApp />{L("Domluvit přes WhatsApp", "Book on WhatsApp")}
-            </a>
-            <a className="contact-action" href={"mailto:" + MAIL + "?subject=" + mailSubject + "&body=" + mailBody}>
-              <IconMail />{L("Napsat e-mail", "Send an email")}
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+function HomeBookingPreview({ lang, collaboration=false }: any) {
+  const c=(pair:readonly string[])=>previewText(pair,lang);
+  return <section className={collaboration?"site-linen contact-coda":"home-booking"} id={collaboration?"kontakt":"rezervace"} aria-labelledby="h-booking"><div className="wrap"><div className="booking-inner"><p className="booking-kicker label rv">{L("První krok","First step")}</p><h2 className="h-display h2 rv d1" id="h-booking">{c(p.closingTitle)}</h2><p className="booking-lead rv d2">{c(p.closingLead)}</p><div className="booking-actions rv d3"><div><a className="contact-action contact-action--primary" href={previewWhatsApp(lang,true)} target="_blank" rel="noopener noreferrer"><IconWhatsApp/>{c(p.firstCta)}</a><p className="small">{c(p.closingMicro)}</p></div><a className="contact-action" href={previewWhatsApp(lang)} target="_blank" rel="noopener noreferrer"><IconWhatsApp/>{c(p.cta)}</a><a className="contact-action" href={previewMail(lang)}><IconMail/>{L("Napsat e-mail","Send an email")}</a></div>{collaboration&&<a href={IG_URL} target="_blank" rel="noopener noreferrer">Instagram</a>}</div></div></section>;
 }
 
 function PageHomePreview({ lang }: any) {
+  const c=(pair:readonly string[])=>previewText(pair,lang);
   return (
     <>
       <OpeningPreview lang={lang} />
       <div className="home-dark-field">
-        <HomeAudiencePreview />
+        <HomeAudiencePreview lang={lang}/>
         <HomeWorkPreview lang={lang} />
         <HomeCollabPreview lang={lang} />
-        <HomeReferences lang={lang} />
+        <section className="sec" id="jak-to-funguje"><div className="wrap"><h2 className="h-display h2 rv">{c(p.howTitle)}</h2><div className="process-three">{p.steps.map((x,i)=><article className="rv" key={i}><span className="num">0{i+1}</span><h3>{c(x[0])}</h3><p>{c(x[1])}</p></article>)}</div><p className="act"><Go href="#rezervace" cs="Chci začít" en="I want to start"/></p><Go href={routePath("spoluprace-preview",lang)+"#co-dostanes"} cs="Co přesně dostaneš →" en="What exactly you get →"/></div></section>
+        <HomeReferences lang={lang} preview/>
         <HomeAboutPreview lang={lang} />
-        <HomeBookingPreview />
+        <HomeBookingPreview lang={lang}/>
         <ClientStrip lang={lang} />
       </div>
       <Closing />
@@ -3569,25 +3415,7 @@ function PageHomePreview({ lang }: any) {
 }
 
 function PageSpolupracePreview({ lang }: any) {
-  const formats=[
-    ["01","Osobní trénink","Pracujeme přesně s tím, co chceš rozvíjet. Podle cíle může jít o samostatný trénink nebo delší vedení.","Personal training","We work precisely with what you want to develop. Depending on the goal, it can be a single session or longer-term guidance."],
-    ["02","Trénink v menší skupině","Společný trénink pro lidi, kteří chtějí pracovat podobným směrem. Každý má vlastní úroveň, skupina společný rytmus.","Small-group training","Shared training for people who want to work in a similar direction. Everyone has their own level, while the group shares a rhythm."],
-    ["03","Online vedení a coaching","Máš jasný plán, pravidelnou zpětnou vazbu a úpravy podle skutečného průběhu. Praxe probíhá tam, kde jsi.","Online guidance and coaching","You have a clear plan, regular feedback and adjustments based on what actually happens. The practice takes place where you are."],
-  ];
-  const needs=[
-    ["01","Síla a kondice","Chceš zesílit, zlepšit výdrž nebo zvládat fyzickou zátěž s větším klidem.","Strength and conditioning","You want to get stronger, improve endurance or handle physical demands with greater calm."],
-    ["02","Sebevědomí a dovednost","Chceš zvládnout shyb, stojku, práci na kruzích nebo jiný pohyb, na kterém ti záleží.","Confidence and skill","You want to learn a pull-up, handstand, ring work or another movement that matters to you."],
-    ["03","Větší volnost v pohybu","Některé pohyby bolí, některým se vyhýbáš nebo nevíš, co si v nich můžeš dovolit.","More freedom in movement","Some movements hurt, some you avoid, or you are unsure what you can safely ask of yourself in them."],
-    ["04","Pravidelnost a vlastní praxe","Začínáš, vracíš se po pauze nebo ztrácíš balanc. Hledáš způsob, který se dá skutečně držet.","Consistency and your own practice","You are starting, returning after a break, or losing your balance. You are looking for an approach you can genuinely sustain."],
-  ];
-  const process=[
-    ["01","20 minut zdarma","Krátce si zavoláme. Řekneš mi, co chceš zvládnout, kde chceš trénovat a co ti zatím brání. Když ti pomoct neumím, řeknu ti to na rovinu a doporučím, kam jít.","Free 20 minutes","We’ll have a short call. You tell me what you want to achieve, where you’d like to train and what’s been getting in the way. If I can’t help, I’ll tell you straight and suggest where to go."],
-    ["02","První setkání","Krátce si ujasníme cíl a potom se většinu času hýbeme. Podíváme se na pohyby, které jsou pro tebe důležité, a podle potřeby zařadíme několik jednoduchých testů a vstupní pohybovou diagnostiku.","First session","We briefly clarify the goal and then spend most of the time moving. We look at the movements that matter to you and, as needed, include a few simple tests and an initial movement assessment."],
-    ["03","Kde jsi a co dál","Jedno setkání může stát samo o sobě. Odneseš si jasnější obraz o tom, co už funguje, co má prioritu a jak pokračovat. Pokud navážeme, domluvíme rytmus, plán a průběžnou úpravu.","Where you are and what comes next","One session can stand on its own. You leave with a clearer picture of what already works, what has priority and how to continue. If we carry on, we agree the rhythm, plan and ongoing adjustments."],
-  ];
-  const whatsappText=encodeURIComponent(L("Ahoj Kryštofe, chci si domluvit 20 minut zdarma.\n\nCo chci zvládnout:\n\nKde chci trénovat (Praha / online):\n\nKdy se mi to hodí:","Hi Kryštof, I’d like to book the free 20 minutes.\n\nWhat I want to achieve:\n\nWhere I want to train (Prague / online):\n\nWhen suits me:"));
-  const mailSubject=encodeURIComponent(L("20 minut zdarma","Free 20 minutes"));
-  const mailBody=encodeURIComponent(L("Ahoj Kryštofe, chci si domluvit 20 minut zdarma.\n\nCo chci zvládnout:\n\nKde chci trénovat (Praha / online):\n\nKdy se mi to hodí:","Hi Kryštof, I’d like to book the free 20 minutes.\n\nWhat I want to achieve:\n\nWhere I want to train (Prague / online):\n\nWhen suits me:"));
+  const c=(pair:readonly string[])=>previewText(pair,lang);
   return <div className="site-page" data-secondary-v6="" data-secondary-v8="" data-collaboration-v99="">
     <header className="site-linen page-hero collaboration-hero-v8 hero-unified">
       <div className="collaboration-earth-stage" aria-hidden="true"><SecondaryMaterialMask src="/media/refine-v9-14/collaboration-mask.png" className="v8-art--earth v8-art--desktop" /><SecondaryMaterialMask src="/media/refine-v9-14/collaboration-mask-mobile.png" className="v8-art--earth v8-art--mobile" /></div>
@@ -3596,11 +3424,11 @@ function PageSpolupracePreview({ lang }: any) {
           
           
           <div className="collaboration-hero-copy">
-            <p className="label rv">{E("Spolupráce","Work with me")}</p>
-            <h1 className="h-display h1 rv d1">{L("Spolupráce","Work with me")}</h1>
-            <p className="hero-dominant rv d1">{E("Jedno setkání nebo delší vedení.","One session or longer-term guidance.")}</p>
-            <p className="lead rv d2">{E("Individuálně, v menší skupině, osobně v Praze nebo online. Zvolíme formu podle toho, co chceš rozvíjet a co se dá skutečně držet.","One-to-one, in a small group, in person in Prague or online. We choose the format according to what you want to develop and what you can realistically sustain.")}</p>
-            <div className="act rv d3 collaboration-entry-actions"><Go href="#kontakt" cs="20 minut zdarma" en="Free 20 minutes" /><a className="collaboration-price-jump" href="#cenik">{L("Zobrazit ceník","View prices")}<span aria-hidden="true">↓</span></a></div>
+            <p className="label rv">{c(p.workKicker)}</p>
+            <h1 className="h-display h1 rv d1">{c(p.workTitle)}</h1>
+            <p className="hero-dominant rv d1">{c(p.workLead)}</p>
+            <p className="lead rv d2">{c(p.micro)}</p>
+            <div className="act rv d3 collaboration-entry-actions"><Go href="#kontakt" cs={p.cta[0]} en={p.cta[1]} /><a className="collaboration-price-jump" href="#co-dostanes">{L("Co dostaneš","What you get")}<span aria-hidden="true">↓</span></a></div>
           </div>
           <SecondaryHeroPhoto className="collaboration-hero-cutout" src="/media/collaboration-v9-8/collaboration-hero-1086.webp"
             srcSet="/media/collaboration-v9-8/collaboration-hero-540.webp 540w, /media/collaboration-v9-8/collaboration-hero-720.webp 720w, /media/collaboration-v9-8/collaboration-hero-1086.webp 1086w"
@@ -3614,45 +3442,28 @@ function PageSpolupracePreview({ lang }: any) {
       <div className="collaboration-linen-lip" aria-hidden="true" />
       <div className="wrap"><div className="proof-row about-proof-v918 rv">
         <div className="proof-item"><strong>{L("10 LET","10 YEARS")}</strong><span>{L("vlastní pohybové praxe","of personal movement practice")}</span></div>
-        <div className="proof-item"><strong>150+</strong><span>{L("klientů","clients")}</span></div>
+        <div className="proof-item"><strong>100+</strong><span>{L("klientů","clients")}</span></div>
         <div className="proof-item proof-item--education"><strong>{L("ODBORNÉ ZÁZEMÍ","PROFESSIONAL BACKGROUND")}</strong>
           <span className="proof-credentials">{L("Osobní trenér ve fitness · instruktor jógy","Personal Trainer in Fitness · yoga instructor")}</span>
-          <span className="proof-study">{L("Kondiční, funkční a rehabilitační trénink · studium psychologie","Conditioning, functional and rehabilitation training · psychology studies")}</span>
+          <a className="proof-study" href={routePath("pribeh",lang)+"#vzdelani"}>{L("celé vzdělání →","full education →")}</a>
         </div>
       </div></div>
     </div>
 
-    <section className="site-linen page-section collaboration-needs-v99" id="potreby"><div className="wrap"><div className="section-head section-head--split"><h2 className="h-display h2 rv">{L("S čím můžeš přijít","What you can come with")}</h2><p className="page-intro rv d1">{E("Nemusíš přesně vědět, co potřebuješ. Stačí vědět, co chceš zvládnout, co tě omezuje nebo kde ztrácíš směr.","You do not need to know exactly what you need. It is enough to know what you want to be able to do, what limits you, or where you are losing direction.")}</p></div><div className="secondary-illustrated secondary-illustrated--needs"><div className="editorial-grid">{needs.map((x:any)=><article className="rv" key={x[0]}><span className="num">{x[0]}</span><h3>{L(x[1],x[3])}</h3><p>{E(x[2],x[4])}</p></article>)}</div>
-        <SecondaryIllustration src="/media/illustration/illustration-pine.webp" width={640} height={960}
-          sizes="(min-width:900px) 290px, 220px" className="secondary-illustration--collaboration-pine" decorative />
-      </div></div></section>
-
-    <section className="site-linen page-section collaboration-experience" id="zkusenost"><div className="wrap"><div className="section-head section-head--split"><h2 className="h-display h2 rv">{L("Zkušenost a vzdělání","Experience and education")}</h2><p className="page-intro rv d1">{E("Vycházím z deseti let vlastní pohybové praxe a zkušeností s 150+ klienty. Jsem držitelem profesní kvalifikace Osobní trenér ve fitness a instruktorem jógy.","My work draws on ten years of personal movement practice and experience with 150+ clients. I hold the professional qualification Personal Trainer in Fitness and I am a yoga instructor.")}{L(" Další vzdělání mám v "," I also have further education in ")}<strong className="copy-emphasis">{L("kondičním a funkčním tréninku, zdravotní tělesné výchově a rehabilitačním tréninku","conditioning and functional training, health-oriented physical education and rehabilitation training")}</strong>.</p></div></div></section>
-
-    <section className="site-linen page-section collaboration-formats" id="moznosti"><div className="wrap"><h2 className="h-display h2 rv">{L("Možnosti spolupráce","Ways to work together")}</h2><div className="editorial-list" style={{marginTop:30}}>{formats.map((x:any)=><article className="editorial-row rv" key={x[0]}><span className="num">{x[0]}</span><h3>{L(x[1],x[3])}</h3><p>{E(x[2],x[4])}</p></article>)}</div></div></section>
-
-    <CollaborationPricing lang={lang} />
-
-    <section className="site-ink page-section process-v8"><div className="material-edge material-edge--linen" aria-hidden="true"/>
-      <div className="wrap process-v8-grid process-with-equipment"><div className="process-v913-heading"><h2 className="h-display h2 rv">{L("Jak to probíhá","How it works")}</h2>
-      <p className="stance-line rv">{E("Jedno setkání může stát samo o sobě.","One session can stand on its own.")}</p></div>
-      <div className="process-three">{process.map((x:any)=><article className="rv" key={x[0]}><span className="num">{x[0]}</span><h3>{L(x[1],x[3])}</h3><p>{E(x[2],x[4])}</p></article>)}</div>
+<section className="site-linen page-section collaboration-needs-v99" id="potreby"><div className="wrap"><div className="section-head section-head--split"><h2 className="h-display h2 rv">{c(p.needsTitle)}</h2><div className="page-intro rv d1"><p><strong>{L("Teď:","Now:")}</strong> {c(p.now)}</p><p><strong>{L("Kam chceš:","Where you want to be:")}</strong> {c(p.destination)}</p></div></div><h3 className="h3">{c(p.barriersTitle)}</h3><div className="secondary-illustrated secondary-illustrated--needs"><div className="editorial-grid">{p.barriers.map((x,i)=><article className="rv" key={i}><span className="num">0{i+1}</span><h3>{c(x[0])}</h3><p>{c(x[1])}</p></article>)}</div><SecondaryIllustration src="/media/illustration/illustration-pine.webp" width={640} height={960} sizes="(min-width:900px) 290px, 220px" className="secondary-illustration--collaboration-pine" decorative/></div><p className="stance-line">{c(p.needsClose)}</p><Go href="#kontakt" cs={p.cta[0]} en={p.cta[1]}/></div></section><section className="site-linen page-section collaboration-experience" id="zkusenost"><div className="wrap"><div className="section-head section-head--split"><h2 className="h-display h2 rv">{c(p.forTitle)}</h2><div className="page-intro rv d1"><ul>{p.forItems.map(x=><li key={x[0]}>{c(x)}</li>)}</ul><p><strong>{c(p.forClose)}</strong></p><p>{c(p.notFor)}</p></div></div></div></section><section className="site-linen page-section collaboration-formats" id="moznosti"><div className="wrap"><h2 className="h-display h2 rv">{c(p.oldTitle)}</h2><div className="editorial-list" style={{marginTop:30}}>{p.oldWays.map((x,i)=><article className="editorial-row rv" key={i}><span className="num">0{i+1}</span><div><p className="preview-old-way">{c(x[0])}</p><h3>{c(x[1])}</h3></div></article>)}</div><p className="stance-line">{c(p.oldClose)}</p><Go href="#kontakt" cs={p.cta[0]} en={p.cta[1]}/></div></section><section className="site-ink page-section--tight between-v8 between-v919" id="co-dostanes"><div className="material-edge material-edge--linen" aria-hidden="true"/><DesktopCycle lang={lang}><div className="between-copy-v919"><p className="label rv">{c(p.startLabel)}</p><h2 className="h-display h2 rv d1" style={{marginTop:12}}>{c(p.startTitle)}</h2><div className="between-visual-row-v919"><p className="scan-line rv d2">{L("PLÁN · ZÁZNAM · ÚPRAVA","PLAN · RECORD · ADJUST")}</p><CollaborationCycle/></div></div><div className="between-items">{p.startItems.map((x,i)=><div className="preview-start-item rv" key={i}><h3>{c(x[0])}</h3><p>{c(x[1])}</p></div>)}</div></DesktopCycle><div className="wrap preview-week"><p className="body-txt"><strong>{c(p.weekTitle)}</strong></p><p className="body-txt">{c(p.week)}</p><p className="body-txt"><strong>{c(p.why)}</strong></p><p className="body-txt"><strong>{c(p.price)}</strong></p><p className="small">{c(p.priceSmall)}</p><p className="act"><Go href="#kontakt" cs={p.cta[0]} en={p.cta[1]}/></p><a className="go" href={previewWhatsApp(lang,true)} target="_blank" rel="noopener noreferrer">{c(p.direct)}</a></div></section>
+<div className="site-ink"><HomeReferences lang={lang} preview/></div>    <section className="site-ink page-section process-v8">
+      <div className="wrap process-v8-grid process-with-equipment"><div className="process-v913-heading"><h2 className="h-display h2 rv">{L("Jak začneš?","How do you start?")}</h2>
+      </div>
+      <div className="process-three">{p.workSteps.map((x,i)=><article className="rv" key={i}><span className="num">0{i+1}</span><h3>{c(x[0])}</h3><p>{c(x[1])}</p></article>)}</div>
       <SecondaryIllustration className="process-equipment-v913"
         src="/media/refine-v9-17/equipment-linen-720.webp"
         srcSet="/media/refine-v9-17/equipment-linen-360.webp 360w, /media/refine-v9-17/equipment-linen-540.webp 540w, /media/refine-v9-17/equipment-linen-720.webp 720w, /media/refine-v9-17/equipment-linen-960.webp 960w, /media/refine-v9-17/equipment-linen-1405.webp 1405w"
         width={1405} height={903} sizes="(min-width:1200px) 430px, (min-width:900px) 35vw, (min-width:520px) 380px, calc(100vw - 64px)"
         alt={L("Dřevěné kruhy se sbalenými popruhy, kettlebell a dvě nízké stálky, jemná konturová kresba.","Wooden rings with packed straps, a kettlebell and two low parallettes, a fine contour illustration.")} />
       </div>
-      <SecondaryTerrain kind="l01" /></section>
+      <div className="wrap"><Go href="#kontakt" cs="Chci začít" en="I want to start"/></div><SecondaryTerrain kind="l01" /></section>
 
-    <section className="site-ink page-section--tight between-v8 between-v919"><DesktopCycle lang={lang}><div className="between-copy-v919"><p className="label rv">{E("Mezi setkáními","Between sessions")}</p><h2 className="h-display h2 rv d1" style={{marginTop:12}}>{L("Plán, záznam, úprava.","Plan, record, adjust.")}</h2><p className="body-txt rv d1" style={{marginTop:18}}>{lang === "en" ? <>In longer-term work, your plan, sessions, records and feedback live together in the <strong className="copy-emphasis">client app</strong>.</> : <>Při delší spolupráci máš v <strong className="copy-emphasis">klientské aplikaci</strong> svůj plán, termíny, záznamy a zpětnou vazbu na jednom místě.</>}</p><div className="between-visual-row-v919"><p className="scan-line rv d2">{L("PLÁN · ZÁZNAM · ÚPRAVA","PLAN · RECORD · ADJUST")}</p><CollaborationCycle /></div></div><div className="between-items"><div className="between-item rv"><h3>{L("Jasný plán","A clear plan")}</h3><p>{E("Víš, co má teď prioritu a čeho se držet.","You know what matters now and what to keep hold of.")}</p></div><div className="between-item rv d1"><h3>{L("Skutečný záznam","A real record")}</h3><p>{E("Zapisuješ, co jsi opravdu udělal a jak na to tělo reagovalo.","You record what you actually did and how your body responded.")}</p></div><div className="between-item rv d2"><h3>{L("Průběžná úprava","Ongoing adjustment")}</h3><p>{E("Další krok vychází ze skutečného průběhu, ne z toho, jak měl týden vypadat.","The next step comes from what actually happened, not from how the week was supposed to look.")}</p></div></div></DesktopCycle><div className="wrap collaboration-practice-link-v920"><Go href={routePath("praxe", lang)} cs="Více o praxi" en="Explore the practice" /></div></section>
-
-    <section className="site-linen page-section--tight"><div className="material-edge material-edge--ink" aria-hidden="true"/><div className="wrap"><div className="boundary rv"><h3 className="h3">{L("Kde jsou hranice","Where the boundaries are")}</h3><p className="stance-line">{E("Moje práce je trenérská.","My work is training.")}</p><p>{E("Akutní zranění, nevysvětlená nebo zhoršující se bolest patří nejdřív k lékaři nebo fyzioterapeutovi. Když je jasné, v jakém rozsahu se můžeš bezpečně hýbat, můžeme z toho vycházet.","Acute injury, unexplained pain or pain that is getting worse belongs first with a doctor or physiotherapist. Once it is clear what range of movement is safe for you, we can work from there.")}</p></div></div></section>
-
-    <CollaborationFaq lang={lang} />
-
-    <section className="site-linen contact-coda" id="kontakt"><div className="wrap"><h2 className="h-display h2 rv">{L("20 minut zdarma.","20 minutes, free.")}</h2><div className="booking-actions rv d1"><a className="contact-action contact-action--primary" href={WHATSAPP_URL+"?text="+whatsappText} target="_blank" rel="noopener noreferrer">{L("Domluvit přes WhatsApp","Book on WhatsApp")}</a><a className="contact-action" href={"mailto:"+MAIL+"?subject="+mailSubject+"&body="+mailBody}>{L("Napsat e-mail","Send an email")}</a></div></div></section>
-  </div>;
+<section className="site-linen page-section--tight"><div className="material-edge material-edge--ink" aria-hidden="true"/><div className="wrap"><div className="boundary rv"><p className="label rv">Kryštof Švec</p><h2 className="h-display h2 rv d1" id="h-about-short">{c(p.aboutTitle)}</h2><p className="body-txt rv d2">{c(p.bio)}</p><p className="body-txt rv d2">{c(p.cheer)}</p><p className="body-txt"><strong>{c(p.live)}</strong></p><p className="body-txt"><a href={routePath("pribeh",lang)+"#vzdelani"}>{c(p.qualification)}</a></p><p className="act rv d3"><Go href={routePath("pribeh",lang)} cs="Můj příběh" en="My story"/></p></div></div></section><CollaborationFaq lang={lang} preview/><CollaborationPricing lang={lang} preview/><HomeBookingPreview lang={lang} collaboration/></div>;
 }
 
 export default function App() {
@@ -3722,6 +3533,19 @@ export default function App() {
     return scheduleRouteFocus(document, window);
   }, [loc]);
 
+  // Preview cross-page anchors must scroll after React has mounted the destination.
+  // Existing original routes keep their navigation; education is the new approved anchor.
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (!hash || (hash !== "#vzdelani" && !loc.routeId.endsWith("-preview"))) return;
+    let active = true, frame = 0;
+    document.fonts.ready.then(() => {
+      if (!active) return;
+      frame = requestAnimationFrame(() => document.getElementById(hash.slice(1))?.scrollIntoView({behavior:"instant"}));
+    });
+    return () => { active = false; cancelAnimationFrame(frame); };
+  }, [loc]);
+
   /**
    * Volitelné povrchy a masky. Když soubor chybí, plocha zůstane plná
    * barva, hranice rovná a fotografie obdélníková. Stahuje se jen to,
@@ -3760,7 +3584,7 @@ export default function App() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: CSS + FINAL_VISUAL_CSS + REFINEMENT_CSS }} />
-      {mobile ? <MobileSite loc={loc}>
+      {mobile ? <MobileSite loc={loc} preview={loc.routeId.endsWith("-preview")}>
         {loc.routeId === "home-preview" && <MobileHomePreview lang={lang} />}
         {loc.routeId === "spoluprace-preview" && <MobileCollaborationPreview lang={lang} />}
         {loc.routeId === "home" && <MobileHome lang={lang} />}
@@ -3774,8 +3598,8 @@ export default function App() {
       </MobileSite> : <>
       <a className="skip" href="#main">{L("Přejít na obsah", "Skip to content")}</a>
 
-      <TopBar loc={loc} menuOpen={menuOpen} onMenu={() => setMenuOpen((o) => !o)} />
-      <Menu open={menuOpen} onClose={() => setMenuOpen(false)} loc={loc} />
+      <TopBar preview={loc.routeId.endsWith("-preview")} loc={loc} menuOpen={menuOpen} onMenu={() => setMenuOpen((o) => !o)} />
+      <Menu preview={loc.routeId.endsWith("-preview")} open={menuOpen} onClose={() => setMenuOpen(false)} loc={loc} />
 
       <main data-preview={loc.routeId.endsWith("-preview") ? "v3" : undefined} id="main" key={loc.routeId + lang + (loc.postId || "")}>
         {loc.routeId === "home-preview" && <PageHomePreview lang={lang} />}
@@ -3790,7 +3614,7 @@ export default function App() {
         {loc.routeId === "notfound" && <PageNotFound lang={lang} />}
       </main>
 
-      <Footer lang={lang} variant={r === "home" ? "sand" : "linen"} />
+      <Footer preview={loc.routeId.endsWith("-preview")} original={r} lang={lang} variant={r === "home" ? "sand" : "linen"} />
       </>}
     </>
   );

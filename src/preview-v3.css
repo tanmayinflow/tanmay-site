@@ -1,0 +1,43 @@
+/* Minimum adaptations for longer approved copy, scoped exclusively to previews. */
+[data-preview="v3"] .preview-old-way { opacity:.72; font-weight:400; }
+[data-preview="v3"] .preview-start-item { padding-block:18px; border-top:1px solid var(--rule-dark); }
+[data-preview="v3"] .preview-start-item h3 { font:inherit; font-weight:600; margin-bottom:12px; }
+[data-preview="v3"] .preview-week { padding-top:28px; }
+[data-preview="v3"] .preview-week p + p { margin-top:18px; }
+[data-preview="v3"] .opening .act { display:flex; flex-wrap:wrap; align-items:center; gap:20px; }
+[data-preview="v3"] .body-txt + .body-txt { margin-top:1em; }
+[data-preview="v3"] .home-work .row .preview-old-way { grid-column:2; margin:0 0 10px; }
+[data-preview="v3"] .home-work .row h3 { grid-column:2; }
+[data-preview="v3"] .collaboration-formats .editorial-row > div { grid-column:2 / -1; }
+[data-preview="v3"] .collaboration-formats .editorial-row h3 { margin-top:12px; }
+[data-preview="v3"] .preview-original { padding:24px; text-align:center; font-size:.875rem; }
+[data-preview="v3"] .preview-original a { text-decoration:underline; text-underline-offset:.2em; }
+[data-preview="v3"] .contact-coda .booking-lead { color:inherit; }
+[data-preview="v3"] .m-contact-actions > .small { margin:0; }
+[data-preview="v3"] .m-review-card .m-story-preview { white-space:normal; }
+[data-preview="v3"] .m-between { padding-top:48px; }
+[data-preview="v3"] .m-between .m-editorial-stack article + article { margin-top:24px; }
+[data-preview="v3"] .m-between p + p { margin-top:18px; }
+[data-preview="v3"] .m-boundaries li + li { margin-top:12px; }
+@media (min-width:900px) {
+ [data-preview="v3"] .collaboration-hero-copy .h1 { font-size:clamp(40px,4.1vw,60px); line-height:1.05; }
+ [data-preview="v3"] #jak-to-funguje .process-three { margin-top:28px; }
+ [data-preview="v3"] .between-v919 { padding-top:64px; }
+ [data-preview="v3"] .contact-coda .booking-inner { max-width:860px; margin-inline:auto; }
+}
+
+[data-preview="v3"] .preview-work-intro { padding-block:24px; }
+[data-preview="v3"] .preview-work-intro p + p { margin-top:16px; }
+@media (max-width:899px) {
+ .tm-mobile[data-preview="v3"] .m-between::after,
+ .tm-mobile[data-preview="v3"] .m-process.preview-dark-end::before,
+ .tm-mobile[data-preview="v3"] #jak-to-funguje::before { display:none; }
+ .tm-mobile[data-preview="v3"] .m-process.preview-dark-end::after {
+  content:'';position:absolute;left:0;right:0;bottom:-1px;height:var(--m-edge-depth);pointer-events:none;
+  background:var(--sandstone) var(--tex-sand);background-size:768px 768px;
+  mask-image:url('/media/material/edge-strata.png'),linear-gradient(#fff,#fff);
+  mask-size:160% var(--m-section-edge-art),100% 100%;mask-position:center calc(var(--m-edge-depth) * .5 - var(--m-section-edge-art) * .77),center;mask-repeat:no-repeat;mask-composite:exclude,add;
+ }
+ .tm-mobile[data-preview="v3"] .m-work-caption .m-story-trigger { display:flex;flex-direction:column; }
+ .tm-mobile[data-preview="v3"] .m-work-caption .m-story-preview { order:-1;margin:0 0 8px; }
+}

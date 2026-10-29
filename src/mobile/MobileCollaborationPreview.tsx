@@ -1,45 +1,27 @@
-const copy = (group: keyof typeof approved, index: number, lang: string): string => {
-  const text = approved[group][index][lang === 'en' ? 1 : 0];
-  return lang === 'en' ? text : text.replace(/(^|[\s\u00a0(„"])([ksvzouaiKSVZOUAI])[ \t]+/g, '$1$2\u00a0').replace(/(^|[\s\u00a0(„"])([ksvzouaiKSVZOUAI])[ \t]+/g, '$1$2\u00a0');
-};
-import { approved } from './preview-approved-content';
 import CollaborationPricing from '../components/CollaborationPricing';
 import MobileCollaborationFaq from './MobileCollaborationFaq';
 import MobileCycle from './MobileCycle';
+import MobileReviews from './MobileReviews';
 import { TerrainArtwork } from '../components/TerrainArtwork';
 import { routePath } from '../site.js';
-import { approvedLists } from './preview-approved-content';
-import { mobileText as t } from './mobile-copy';
+import { approved } from './preview-approved-content';
 import { Chapter, Photo, Rail, TextLink } from './MobileElements';
-import { RichText } from './MobileRichText';
-import { MobileHero, MobileProof } from './MobileShared';
+import { MobileHero, MobileProof, MobileContact } from './MobileShared';
+import { previewCopy as p, previewText, previewWhatsApp } from '../preview-copy';
 
 export default function MobileCollaborationPreview({lang}:{lang:string}) {
-  const c=(i:number)=>copy('PageSpoluprace',i,lang);
-  const row=(r:readonly string[],index:number)=>r[index+(lang==='en'?2:0)];
-  return <>
-    <MobileHero page="collaboration" lang={lang}/>
-    <Chapter title={c(16)} id="mobilni-obsah" className="m-needs">
-      <div className="m-needs-opening"><p><RichText>{c(17)}</RichText></p><Photo asset="pine" alt="" className="m-pine"/></div>
-      <div className="m-needs-list"><Rail title={c(16)} lang={lang} items={approvedLists.PageSpoluprace.needs}/></div>
-    </Chapter>
-    <Chapter title={c(18)} className="m-experience">
-      <div className="m-proof-start m-experience-proof"><MobileProof lang={lang}/></div>
-      <TextLink href={routePath('pribeh',lang)} arrow><span className="m-experience-about-label">{lang==='en'?'More about me':'Více o mně'}</span></TextLink>
-    </Chapter>
-    <Chapter title={c(22)} className="m-formats"><Rail title={c(22)} lang={lang} items={approvedLists.PageSpoluprace.formats}/></Chapter>
-    <CollaborationPricing lang={lang}/>
-    <Chapter title={c(23)} className="m-process m-dark">
-      <div className="m-process-opening"><p className="m-process-standalone"><RichText>{c(24)}</RichText></p><Photo asset="equipment" alt={c(25)} className="m-equipment"/></div>
-      <ol className="m-process-steps m-editorial-stack">{approvedLists.PageSpoluprace.process.map(r=><li key={r[0]}><span className="m-process-number" aria-hidden="true">{r[0]}</span><div><h3>{row(r,1)}</h3><p><RichText>{row(r,2)}</RichText></p></div></li>)}</ol>
-      <TerrainArtwork variant="home" className="m-process-current"/>
-    </Chapter>
-    <Chapter title={c(27)} eyebrow={c(26)} className="m-between m-dark">
-      <p className="m-accent-copy">{lang==='en'?<>In longer-term work, your plan, sessions, records and feedback live together in the <strong className="copy-emphasis">client app</strong>.</>:<>Při delší spolupráci máš v <strong className="copy-emphasis">klientské aplikaci</strong> svůj plán, termíny, záznamy a zpětnou vazbu na jednom místě.</>}</p>
-      <MobileCycle lang={lang}/>
-      <TextLink href={routePath('praxe',lang)}>{t('practice',lang)}</TextLink>
-    </Chapter>
-    <Chapter title={c(35)} className="m-boundaries"><p className="m-boundary-stance">{c(36)}</p><p className="m-accent-copy"><RichText>{c(37)}</RichText></p></Chapter>
-    <MobileCollaborationFaq lang={lang}/>
-  </>;
+ const c=(pair:readonly string[])=>previewText(pair,lang);
+ return <>
+  <MobileHero page="collaboration" lang={lang} preview/>
+  <div className="m-inner m-proof-start"><MobileProof lang={lang} preview/></div>
+  <div className="m-inner preview-work-intro"><p className="m-eyebrow">{c(p.workKicker)}</p><p>{c(p.workLead)}</p><TextLink href="#kontakt">{c(p.cta)}</TextLink><p className="small">{c(p.micro)}</p><TextLink href="#co-dostanes" down arrow>{lang==='en'?'What you get':'Co dostaneš'}</TextLink></div>
+  <Chapter title={c(p.needsTitle)} id="mobilni-obsah" className="m-needs"><div className="m-needs-opening"><div><p><strong>{lang==='en'?'Now:':'Teď:'}</strong> {c(p.now)}</p><p><strong>{lang==='en'?'Where you want to be:':'Kam chceš:'}</strong> {c(p.destination)}</p></div><Photo asset="pine" alt="" className="m-pine"/></div><h3>{c(p.barriersTitle)}</h3><div className="m-needs-list"><Rail title={c(p.barriersTitle)} lang={lang} items={p.barriers.map((x,i)=>[String(i+1).padStart(2,'0'),x[0][0],x[1][0],x[0][1],x[1][1]])}/></div><p>{c(p.needsClose)}</p><TextLink href="#kontakt">{c(p.cta)}</TextLink></Chapter>
+  <Chapter title={c(p.forTitle)} className="m-boundaries"><ul>{p.forItems.map(x=><li key={x[0]}>{c(x)}</li>)}</ul><p><strong>{c(p.forClose)}</strong></p><p>{c(p.notFor)}</p></Chapter>
+  <Chapter title={c(p.oldTitle)} className="m-formats"><div className="m-editorial-stack">{p.oldWays.map((x,i)=><article key={i}><p className="preview-old-way">{c(x[0])}</p><h3>{c(x[1])}</h3></article>)}</div><p>{c(p.oldClose)}</p><TextLink href="#kontakt">{c(p.cta)}</TextLink></Chapter>
+  <Chapter title={c(p.startTitle)} eyebrow={c(p.startLabel)} id="co-dostanes" className="m-between m-process m-dark"><div className="m-editorial-stack">{p.startItems.map((x,i)=><article key={i}><h3>{c(x[0])}</h3><p>{c(x[1])}</p></article>)}</div><MobileCycle lang={lang}/><p><strong>{c(p.weekTitle)}</strong></p><p>{c(p.week)}</p><p><strong>{c(p.why)}</strong></p><p><strong>{c(p.price)}</strong></p><p className="small">{c(p.priceSmall)}</p><TextLink href="#kontakt">{c(p.cta)}</TextLink><a className="m-text-link" href={previewWhatsApp(lang,true)} target="_blank" rel="noopener noreferrer">{c(p.direct)}</a></Chapter>
+  <div className="m-dark"><MobileReviews lang={lang} preview/></div>
+  <Chapter title={lang==='en'?'How do you start?':'Jak začneš?'} className="m-process m-dark preview-dark-end"><div className="m-process-opening"><Photo asset="equipment" alt={c(approved.PageSpoluprace[25])} className="m-equipment"/></div><ol className="m-process-steps m-editorial-stack">{p.workSteps.map((x,i)=><li key={i}><span className="m-process-number" aria-hidden="true">0{i+1}</span><div><h3>{c(x[0])}</h3><p>{c(x[1])}</p></div></li>)}</ol><TextLink href="#kontakt">{lang==='en'?'I want to start':'Chci začít'}</TextLink><TerrainArtwork variant="home" className="m-process-current"/></Chapter>
+  <Chapter title={c(p.aboutTitle)} eyebrow="Kryštof Švec" className="m-boundaries"><p className="m-accent-copy">{c(p.bio)}</p><p>{c(p.cheer)}</p><p><strong>{c(p.live)}</strong></p><TextLink href={routePath('pribeh',lang)+'#vzdelani'}>{c(p.qualification)}</TextLink><TextLink href={routePath('pribeh',lang)} arrow>{lang==='en'?'My story':'Můj příběh'}</TextLink></Chapter>
+  <MobileCollaborationFaq lang={lang} preview/><CollaborationPricing lang={lang} preview/><MobileContact lang={lang} collaboration preview/>
+ </>;
 }

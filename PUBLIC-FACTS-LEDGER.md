@@ -6,7 +6,7 @@ The current content authority is the preserved GTP package's `05-CONTENT-LOCK.md
 
 ## Identity and professional wording
 
-The current content names Kryštof Švec and the brand tanmay practice. Its approved professional background includes ten years of personal movement practice, 150+ clients, a year as studio lead and head trainer, personal fitness training, yoga instruction and the further education listed in the content lock.
+The current content names Kryštof Švec and the brand tanmay practice. Its approved professional background includes ten years of personal movement practice, 100+ clients, a year as studio lead and head trainer, personal fitness training, yoga instruction and the further education listed in the content lock.
 
 Psychology at Palacký University in 2019–2024 is described as study, not a completed degree or a psychologist's licence. Do not invent qualifications, certification, clinical services or outcomes.
 
@@ -48,6 +48,6 @@ On 2026-09-17 the owner approved and the site implemented the exact Czech privac
 
 The current privacy page identifies the data controller and describes hosting/security processing, correspondence, external services, client application separation, rights and Cloudflare Web Analytics. The Cloudflare dashboard was verified on 2026-09-17: Web Analytics uses automatic injection with the selected option “Enable, excluding visitor data in the EU”, and recent measurements exist. The source contains no beacon; do not add a second one. This establishes the actual configuration, not legal review or post-release production verification. The old blanket assertion “no analytics or third-party requests” is no longer an accurate description of the approved privacy copy.
 
-Only Home, Praxe, Příběh, Spolupráce and Soukromí, each in Czech and English, are public routes. Journal text remaining in source is historical and unpublished. Do not treat its presence as permission to publish it.
+The indexed routes remain Home, Praxe, Příběh, Spolupráce and Soukromí, each in Czech and English. The owner explicitly authorized phase 1 of brief 3.2 on 2026-10-29: independent Home/Collaboration previews at /nahled, /nahled/spoluprace, /en/preview and /en/preview/work-with-me, with noindex, nofollow and outside the sitemap. Those previews use the exact approved 15-minute introductory call, 4-Week Start and first-session copy from that brief. Original pages retain their approved 20-minute call. The owner corrected the client fact to 100+ site-wide; this replaces the previous 150+ figure. Preview reviews retain the exact source wording in the order Gledis, Lucie, Mariana, Zuzana. The price table and legal wording are unchanged. Replacing the original routes is phase 2 and remains unapproved. Journal text remaining in source is historical and unpublished. Do not treat its presence as permission to publish it.
 
 Any new public claim, legal text or commercial condition needs its actual source and the owner's decision. Do not re-open already accepted wording merely because an archived document disagrees with it.

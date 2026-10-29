@@ -1,10 +1,11 @@
+import { previewCopy as p, previewText, previewWhatsApp, previewMail } from "../preview-copy";
 import { TRAINING_PRICES, REGULAR_TRAINING, formatTrainingPrice, type PricingLanguage } from "./collaboration-pricing.data";
 import "./collaboration-pricing.css";
 
 /** A single price list on Spolupráce, adjacent to the approved formats.
  * No tier cards, hidden prices, subscriptions or unapproved contractual terms.
  */
-export default function CollaborationPricing({ lang = "cs" }: { lang?: string }) {
+export default function CollaborationPricing({ lang = "cs", preview = false }: { lang?: string; preview?: boolean }) {
   const language: PricingLanguage = lang === "en" ? "en" : "cs";
   const text = (cs: string, en: string) => language === "cs" ? cs : en;
   return (
@@ -39,13 +40,15 @@ export default function CollaborationPricing({ lang = "cs" }: { lang?: string })
         </table>
         <div className="pricing-afterword">
           <p className="pricing-terms" id="regular-training-terms">
+            {preview ? previewText(p.terms,lang) : <>
             {text("Zvýhodněná cena platí při předplacení alespoň ", "The reduced rate applies when you prepay for at least ")}
             <strong>{REGULAR_TRAINING.minPrepaidSessions}{text(" individuálních tréninků na měsíc od prvního tréninku", " one-to-one sessions for one month from the first session")}</strong>.
             {text(" Čtyři tréninky vyjdou na ", " Four sessions cost ")}
             <strong>{formatTrainingPrice(REGULAR_TRAINING.priceForFourCzk, language)}</strong>.
             {text(" Termíny domlouváme předem. Úvodní hovor (20 minut) je zdarma.", " We agree the dates and times in advance. The first call (20 minutes) is free.")}
+            </>}
           </p>
-          <a className="pricing-contact go" href="#kontakt">{text("Domluvit trénink", "Arrange a session")}<span className="arw" aria-hidden="true">→</span></a>
+          <a className="pricing-contact go" href="#kontakt">{preview ? previewText(p.cta,lang) : text("Domluvit trénink", "Arrange a session")}<span className="arw" aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>

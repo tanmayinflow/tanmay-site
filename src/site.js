@@ -114,8 +114,8 @@ export const ROUTES = [
     label: { cs: "O mně", en: "The story" },
     title: { cs: "O mně | Kryštof Švec · tanmay practice", en: "About me | Kryštof Švec · tanmay practice" },
     description: {
-      cs: "Kryštof Švec, osobní trenér v Praze. Deset let vlastní pohybové praxe, zkušenost s 150+ klienty a odborné zázemí v tréninku, józe a psychologii.",
-      en: "Kryštof Švec, personal trainer in Prague. Ten years of personal movement practice, experience with 150+ clients, and professional grounding in training, yoga and psychology.",
+      cs: "Kryštof Švec, osobní trenér v Praze. Deset let vlastní pohybové praxe, zkušenost s 100+ klienty a odborné zázemí v tréninku, józe a psychologii.",
+      en: "Kryštof Švec, personal trainer in Prague. Ten years of personal movement practice, experience with 100+ clients, and professional grounding in training, yoga and psychology.",
     },
   },
   {
@@ -162,8 +162,8 @@ export const ROUTES = [
   ...[ ['home-preview','home','/nahled','/en/preview'], ['spoluprace-preview','spoluprace','/nahled/spoluprace','/en/preview/work-with-me'] ].map(([id,original,cs,en]) => ({
     id, original, preview: true, nav: false, num: undefined, path: {cs,en},
     label: {cs:'Náhled',en:'Preview'},
-    title: {cs:'Náhled · tanmay practice',en:'Preview · tanmay practice'},
-    description: {cs:'Náhled nové verze.',en:'Preview of the new version.'},
+    title: original === 'home' ? {cs:'Osobní trenér Praha | Kryštof Švec · tanmay practice',en:'Personal trainer Prague | Kryštof Švec · tanmay practice'} : {cs:'Start 4 týdny · osobní trénink Praha | tanmay practice',en:'4-Week Start · personal training Prague | tanmay practice'},
+    description: original === 'home' ? {cs:'Zesílíš, zhubneš a tentokrát vydržíš. Síla s vlastní vahou a plán, který unese i těžký týden. Prvních 15 minut zdarma.',en:'You’ll get stronger, lose fat and this time it’ll last. Bodyweight strength and a plan that survives a hard week. First 15 minutes free.'} : {cs:'Za 4 týdny zesílíš, zpevníš se a přestaneš začínat od pondělí. Bez hodin v posilovně a bez drastických diet. 3 200 Kč. Začni 15 minutami zdarma.',en:'In 4 weeks you’ll be stronger, firmer and done with starting over on Monday. No hours in the gym, no crash diets. CZK 3,200. Start with a free 15 minutes.'},
   })),
 ];
 

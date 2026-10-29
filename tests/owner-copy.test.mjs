@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { withoutAuthorizedPreview } from './owner-preview-v3-authorized-2026-10-29.mjs';
 import assert from 'node:assert/strict';
 import { withoutAuthorizedDesktopMotion } from './desktop-motion-authorized-delta-2026-09-18.mjs';
 import { readFileSync } from 'node:fs';
@@ -17,7 +18,7 @@ test('owner review permits only the 34 recorded bilingual replacements before th
 
 test('owner copy approval cannot silently change professional boundaries or approved counts', () => {
   for (const relativePath of ['src/App.tsx', 'src/mobile/approved-content.ts']) {
-    const current = withoutAuthorizedDesktopMotion(relativePath, readFileSync(new URL('../' + relativePath, import.meta.url))).toString('utf8');
+    const current = withoutAuthorizedDesktopMotion(relativePath, withoutAuthorizedPreview(relativePath, readFileSync(new URL('../' + relativePath, import.meta.url)))).toString('utf8');
     for (const [before, after] of [['Moje práce je trenérská.', 'Moje práce je fyzioterapie.'], ['150+', '200+']]) {
       assert.ok(current.includes(before));
       assert.throws(() => withoutAuthorizedOwnerCopy(relativePath, Buffer.from(current.replace(before, after))));

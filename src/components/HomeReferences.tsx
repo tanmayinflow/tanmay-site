@@ -1,3 +1,4 @@
+import { previewCopy as p, previewText, previewWhatsApp, previewMail } from "../preview-copy";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { CLIENT_REVIEWS } from "./home-reviews.data.js";
@@ -12,7 +13,8 @@ const prefersReducedMotion = () =>
  * Native scroll-snap supports touch and trackpads, with buttons/keys as alternatives.
  * No autoplay, line-clamping, artificial quotes, invented videos or ratings.
  */
-export default function HomeReferences({ lang = "cs" }: { lang?: string }) {
+export default function HomeReferences({ lang = "cs", preview = false }: { lang?: string; preview?: boolean }) {
+  const reviews = preview ? ['gledis-kmonickova','lucie-kanska','mariana-stojkovova','zuzana-hofman'].map(id => CLIENT_REVIEWS.find(r => r.id === id)!) : CLIENT_REVIEWS;
   const language: Lang = lang === "en" ? "en" : "cs";
   const tr = (cs: string, en: string) => language === "cs" ? cs : en;
   const [active, setActive] = useState(0);
@@ -44,8 +46,8 @@ export default function HomeReferences({ lang = "cs" }: { lang?: string }) {
         activeRef.current = i;
         setActive(i);
         setAnnouncement(language === "cs"
-          ? `Recenze ${i + 1} ze ${COUNT}: ${CLIENT_REVIEWS[i].name}`
-          : `Review ${i + 1} of ${COUNT}: ${CLIENT_REVIEWS[i].name}`);
+          ? `Recenze ${i + 1} ze ${COUNT}: ${reviews[i].name}`
+          : `Review ${i + 1} of ${COUNT}: ${reviews[i].name}`);
       });
     };
     el.addEventListener("scroll", update, { passive: true });
@@ -93,7 +95,7 @@ export default function HomeReferences({ lang = "cs" }: { lang?: string }) {
         <header className="tmr-head">
           <div>
             <p className="label">{tr("Reference", "Experiences")}</p>
-            <h2 className="h-display h2" id="h-reviews">{tr("Co říkají klienti", "What people say about the work")}</h2>
+            <h2 className="h-display h2" id="h-reviews">{preview ? previewText(p.reviewTitle,lang) : tr("Co říkají klienti", "What people say about the work")}</h2>{preview && <p className="body-txt">{previewText(p.reviewLead,lang)}</p>}
           </div>
           <div className="tmr-controls" role="group" aria-label={tr("Posouvání recenzí", "Review navigation")}>
             <button className="tmr-arrow" type="button" aria-label={tr("Předchozí recenze", "Previous review")}
@@ -116,7 +118,7 @@ export default function HomeReferences({ lang = "cs" }: { lang?: string }) {
                 : e.key === "Home" ? 0 : e.key === "End" ? COUNT - 1 : null;
               if (dest !== null) { e.preventDefault(); goTo(dest); }
             }}>
-            {CLIENT_REVIEWS.map((review, i) => (
+            {reviews.map((review, i) => (
               <article key={review.id} className="tmr-slide" role="group" ref={node => { slides.current[i] = node; }}
                 aria-roledescription={tr("recenze", "slide")} aria-label={`${i + 1} / ${COUNT}: ${review.name}`}
                 aria-hidden={i !== active ? true : undefined} data-review-id={review.id}>
@@ -149,20 +151,20 @@ export default function HomeReferences({ lang = "cs" }: { lang?: string }) {
         </div>
       </div>
       {opened !== null && typeof document !== "undefined" && createPortal(
-        <ReviewReader index={opened} lang={language} initialOriginal={openOriginal} onClose={closeReader}
+        <ReviewReader reviews={reviews} index={opened} lang={language} initialOriginal={openOriginal} onClose={closeReader}
           onNavigate={i => { setOpened(i); goTo(i, false); }} />, document.body)}
     </section>
   );
 }
 
-function ReviewReader({ index, lang, initialOriginal, onClose, onNavigate }: {
-  index: number; lang: Lang; initialOriginal: boolean; onClose: () => void; onNavigate: (index: number) => void;
+function ReviewReader({ reviews = CLIENT_REVIEWS, index, lang, initialOriginal, onClose, onNavigate }: {
+  reviews?: typeof CLIENT_REVIEWS; index: number; lang: Lang; initialOriginal: boolean; onClose: () => void; onNavigate: (index: number) => void;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const title = useRef<HTMLHeadingElement>(null);
   const scroll = useRef<HTMLDivElement>(null);
   const [original, setOriginal] = useState(initialOriginal);
-  const review = CLIENT_REVIEWS[index];
+  const review = reviews[index];
   const tr = (cs: string, en: string) => lang === "cs" ? cs : en;
   const textLang: Lang = lang === "en" && !original ? "en" : "cs";
 

@@ -30,7 +30,7 @@ test('desktop visual authorization rejects changed qualifications, counts, artwo
   const text = current.toString('utf8');
   for (const [before, after] of [
     ['Moje práce je trenérská.', 'Moje práce je fyzioterapie.'],
-    ['150+', '200+'],
+    ['100+', '200+'],
     ['Osobní trenér ve fitness', 'Fyzioterapeut'],
     ['/media/home-v9-4/salto-bw-1385.webp', '/media/generated-replacement.webp'],
     ['useDesktopMotion(loc.routeId + loc.lang + (loc.postId || ""), !mobile)', 'useDesktopMotion(loc.routeId + loc.lang + (loc.postId || ""), true)'],

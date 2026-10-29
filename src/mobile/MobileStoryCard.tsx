@@ -2,7 +2,7 @@ import { useCallback, useEffect, useId, useRef, useState, type ReactNode } from 
 import { DisclosureMark } from './MobileFigureDisclosure';
 
 /** A compact mobile invitation opens the complete original text in the top layer. */
-export function StoryCard({title,preview,children,lang,className='',label}: {title:string;preview?:ReactNode;children:ReactNode;lang:string;className?:string;label?:string}) {
+export function StoryCard({title,preview,children,lang,className='',label,closeOnNavigate=false}: {title:string;preview?:ReactNode;children:ReactNode;lang:string;className?:string;label?:string;closeOnNavigate?:boolean}) {
   const [open,setOpen]=useState(false);
   const [visible,setVisible]=useState(false);
   const dialog=useRef<HTMLDialogElement>(null);
@@ -35,7 +35,7 @@ export function StoryCard({title,preview,children,lang,className='',label}: {tit
     <button ref={trigger} type="button" className="m-story-trigger" aria-haspopup="dialog" aria-controls={id} aria-expanded={open} aria-label={label} onClick={()=>setOpen(true)}>
       <span className="m-story-title">{lastSpace<0?null:title.slice(0,lastSpace+1)}<span className="m-story-ending">{title.slice(lastSpace+1)}<DisclosureMark/></span></span>{preview&&<span className="m-story-preview">{preview}</span>}
     </button>
-    <dialog ref={dialog} id={id} className="m-story-dialog" data-visible={visible} aria-labelledby={id+'-title'} onCancel={e=>{e.preventDefault();close();}} onClose={()=>{setOpen(false);setVisible(false);}} onClick={e=>{const sheet=e.currentTarget.querySelector('.m-story-sheet');if(sheet&&!sheet.contains(e.target as Node))close();}} onKeyDown={e=>{
+    <dialog ref={dialog} id={id} className="m-story-dialog" data-visible={visible} aria-labelledby={id+'-title'} onCancel={e=>{e.preventDefault();close();}} onClose={()=>{setOpen(false);setVisible(false);}} onClick={e=>{const link=(e.target as HTMLElement).closest('a[href]');if(closeOnNavigate&&link&&!e.metaKey&&!e.ctrlKey&&!e.shiftKey&&!e.altKey){finish();const href=link.getAttribute('href');if(href?.startsWith('#'))requestAnimationFrame(()=>document.getElementById(href.slice(1))?.scrollIntoView());}const sheet=e.currentTarget.querySelector('.m-story-sheet');if(sheet&&!sheet.contains(e.target as Node))close();}} onKeyDown={e=>{
       if(e.key!=='Tab')return;
       const stops=Array.from(e.currentTarget.querySelectorAll<HTMLElement>('button:not([disabled]),a[href],[tabindex]:not([tabindex="-1"])')).filter(el=>el.getClientRects().length&&!el.closest('[hidden]'));
       const first=stops[0],last=stops[stops.length-1];

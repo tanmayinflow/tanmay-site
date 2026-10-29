@@ -104,8 +104,8 @@ export const approved = {
       "I do not teach something separate from my own life."
     ],
     [
-      "Moje práce vyrostla z deseti let vlastní pohybové praxe a zkušeností s 150+ klienty. Rok jsem působil jako vedoucí studia a hlavní trenér. Jsem držitelem profesní kvalifikace Osobní trenér ve fitness a instruktorem jógy. Další odborné vzdělání mám v oblasti kondičního a funkčního tréninku, zdravotní tělesné výchovy a rehabilitačního tréninku. V letech 2019 až 2024 jsem studoval psychologii na Univerzitě Palackého.",
-      "My work grew from ten years of personal movement practice and experience with 150+ clients. I spent a year as a studio manager and head trainer. I hold the professional qualification Personal Trainer in Fitness and I am a yoga instructor. I also have further education in conditioning and functional training, health-oriented physical education and rehabilitation training. From 2019 to 2024, I studied psychology at Palacký University."
+      "Moje práce vyrostla z deseti let vlastní pohybové praxe a zkušeností s 100+ klienty. Rok jsem působil jako vedoucí studia a hlavní trenér. Jsem držitelem profesní kvalifikace Osobní trenér ve fitness a instruktorem jógy. Další odborné vzdělání mám v oblasti kondičního a funkčního tréninku, zdravotní tělesné výchovy a rehabilitačního tréninku. V letech 2019 až 2024 jsem studoval psychologii na Univerzitě Palackého.",
+      "My work grew from ten years of personal movement practice and experience with 100+ clients. I spent a year as a studio manager and head trainer. I hold the professional qualification Personal Trainer in Fitness and I am a yoga instructor. I also have further education in conditioning and functional training, health-oriented physical education and rehabilitation training. From 2019 to 2024, I studied psychology at Palacký University."
     ],
     [
       "Portrét z profilu s Pražským hradem v pozadí.",
@@ -526,8 +526,8 @@ export const approved = {
       "My experience and education"
     ],
     [
-      "Vycházím z deseti let vlastní pohybové praxe a zkušeností s 150+ klienty. Jsem držitelem profesní kvalifikace Osobní trenér ve fitness a instruktorem jógy.",
-      "My work draws on ten years of personal movement practice and experience with 150+ clients. I hold the professional qualification Personal Trainer in Fitness and I am a yoga instructor."
+      "Vycházím z deseti let vlastní pohybové praxe a zkušeností s 100+ klienty. Jsem držitelem profesní kvalifikace Osobní trenér ve fitness a instruktorem jógy.",
+      "My work draws on ten years of personal movement practice and experience with 100+ clients. I hold the professional qualification Personal Trainer in Fitness and I am a yoga instructor."
     ],
     [
       " Další vzdělání mám v ",

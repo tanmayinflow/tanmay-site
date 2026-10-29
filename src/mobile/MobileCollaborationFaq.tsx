@@ -1,10 +1,11 @@
+import { previewCopy as p, previewText, previewWhatsApp, previewMail } from "../preview-copy";
 import '../components/collaboration-faq.css';
 
 /** Mobile M10 keeps the approved FAQ wording, except the requested removal of
  * the final price/duration sentence. The locked desktop component is untouched. */
-export default function MobileCollaborationFaq({ lang }: { lang: string }) {
+export default function MobileCollaborationFaq({ lang, preview = false }: { lang: string; preview?: boolean }) {
   const t = (cs: string, en: string) => lang === 'en' ? en : cs;
-  const questions = [
+  const questions = preview ? p.faq.map(q=>[q.id,previewText(q.question,lang),previewText(q.answer,lang)]) : [
     ['experience', t('Potřebuji zkušenosti?', 'Do I need experience?'), t('Ne. První setkání slouží i k tomu, abychom zjistili, kde právě jsi a co má pro tebe smysl.', 'No. The first session also helps us see where you are now and what makes sense for you.')],
     ['place', t('Kde probíhají osobní tréninky?', 'Where do in-person sessions take place?'), t('V Praze, uvnitř nebo venku podle toho, na čem pracujeme. Konkrétní místo domluvíme před prvním setkáním.', 'In Prague, indoors or outdoors depending on what we are working on. We agree the exact place before the first session.')],
     ['frequency', t('Jak často se budeme vídat?', 'How often will we meet?'), t('Frekvence není předem daná. U delší spolupráce ji nastavíme podle cíle, tvého týdne a životního rytmu.', 'The frequency is not fixed in advance. In longer-term work we set it according to the goal, your week and the rhythm of your life.')],
@@ -12,10 +13,10 @@ export default function MobileCollaborationFaq({ lang }: { lang: string }) {
   ];
   return <section className="site-linen page-section collaboration-faq m-collaboration-faq" id="otazky" aria-labelledby="collaboration-faq-title">
     <div className="wrap">
-      <div className="faq-heading"><h2 className="h-display h2" id="collaboration-faq-title">{t('Časté otázky', 'Common questions')}</h2></div>
+      <div className="faq-heading"><h2 className="h-display h2" id="collaboration-faq-title">{preview ? previewText(p.faqTitle,lang) : t('Časté otázky', 'Common questions')}</h2></div>
       <div className="faq-list">{questions.map(([id, question, answer]) => <details className="faq-item" key={id} data-faq-id={id} name="collaboration-questions">
         <summary><span>{question}</span><span className="faq-symbol" aria-hidden="true" /></summary>
-        <div className="faq-answer"><p>{answer}</p>{id === 'single' && <a href="#cenik" className="faq-price-link"><span className="m-faq-price-label">{t('Celý ceník', 'Full price list')}</span><span aria-hidden="true">↗</span></a>}</div>
+        <div className="faq-answer"><p>{answer}</p>{preview && <a className="faq-price-link" href={p.faq.find(q=>q.id===id)?.target === "prices" ? "#cenik" : previewWhatsApp(lang,p.faq.find(q=>q.id===id)?.target === "first")} target={p.faq.find(q=>q.id===id)?.target === "prices" ? undefined : "_blank"} rel="noopener noreferrer">{previewText(p.faq.find(q=>q.id===id)!.label,lang)}</a>}{id === 'single' && <a href="#cenik" className="faq-price-link"><span className="m-faq-price-label">{t('Celý ceník', 'Full price list')}</span><span aria-hidden="true">↗</span></a>}</div>
       </details>)}</div>
     </div>
   </section>;

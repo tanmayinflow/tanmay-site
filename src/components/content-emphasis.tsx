@@ -4,7 +4,7 @@
  */
 const PHRASES = [
   'deseti let vlastní pohybové praxe', 'ten years of personal movement practice',
-  '150+ klienty', '150+ clients', 'vedoucí studia a hlavní trenér',
+  '100+ klienty', '100+ clients', 'vedoucí studia a hlavní trenér',
   'Osobní trenér ve fitness', 'Personal Trainer in Fitness',
   'instruktorem jógy', 'yoga instructor',
   'studoval psychologii', 'studied psychology',
@@ -47,7 +47,7 @@ export function emphasizeCopy(text: string, options?: { maxMatches?: number; ext
   const ranges = Array.from(text.matchAll(pattern));
   if (!ranges.length) return text;
   // Longer credential paragraphs may carry several distinct facts. All others remain quiet.
-  const limit = options?.maxMatches ?? (text.includes('150+') ? 5 : 2);
+  const limit = options?.maxMatches ?? (text.includes('100+') ? 5 : 2);
   const nodes = [];
   let cursor = 0;
   for (const item of ranges.slice(0, limit)) {
