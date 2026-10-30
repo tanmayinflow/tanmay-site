@@ -1,0 +1,80 @@
+{
+  "approvedOn": "2026-10-29",
+  "baselineCommit": "627c9793c89f5ac68be761f270082b989dbdf704",
+  "scope": "Four owner mobile refinements: exact Home portrait and mask for Collaboration with colour only changed; original-size handstand with heading/key above and no rules; uniform benefit outlines; compact transition into process. Local preview only.",
+  "files": [
+    {
+      "path": "src/components/PreviewReading.tsx",
+      "beforeSha256": "79f54f67cc6b6e0ab07a5181c551c353c137d5e50d4f3ec64e4a2a46d09d11fb",
+      "afterSha256": "6199a0a0fa5bb639ab5c6fac5619fc9ddcfae18ccb9378bdc92716c05cdd4822",
+      "replacements": [
+        {
+          "offset": 109,
+          "before": "export function PreviewComparison({lang}:{lang:string}) {\n",
+          "after": "export function PreviewComparisonKey({lang}:{lang:string}) {\n return <div className=\"preview-comparison-key\"><span>✕ {lang==='en'?'Old way':'Stará cesta'}</span><strong>✓ {lang==='en'?'New practice':'Nová praxe'}</strong></div>;\n}\nexport function PreviewComparison({lang,showKey=true}:{lang:string;showKey?:boolean}) {\n"
+        },
+        {
+          "offset": 487,
+          "before": " return <div className=\"preview-comparison\"><div className=\"preview-comparison-key\"><span>✕ {lang==='en'?'Old way':'Stará cesta'}</span><strong>✓ {lang==='en'?'New practice':'Nová praxe'}</strong></div>{p.oldWays.map((x,i)=><article key={i}><p className=\"preview-old-way\"><span aria-hidden=\"true\">✕</span>{c(x[0])}</p><h3><span aria-hidden=\"true\">✓</span>{c(x[1])}</h3></article>)}</div>;\n",
+          "after": " return <div className=\"preview-comparison\">{showKey&&<PreviewComparisonKey lang={lang}/ >}{p.oldWays.map((x,i)=><article key={i}><p className=\"preview-old-way\"><span aria-hidden=\"true\">✕</span>{c(x[0])}</p><h3><span aria-hidden=\"true\">✓</span>{c(x[1])}</h3></article>)}</div>;\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileHomePreview.tsx",
+      "beforeSha256": "fd29a60f0f6ace4294021bc6104d9cb39cac8264a79a915e7e02d9ba45cdbed3",
+      "afterSha256": "5132f07db74eefe57653f2e17a2a3dcca7713e37da2cca6d105acd0a26d8b323",
+      "replacements": [
+        {
+          "offset": 0,
+          "before": "import { PreviewComparison, PreviewWants, PreviewBenefits } from '../components/PreviewReading';\r\n",
+          "after": "import { PreviewComparison, PreviewComparisonKey, PreviewWants, PreviewBenefits } from '../components/PreviewReading';\r\n"
+        },
+        {
+          "offset": 1987,
+          "before": "   <section className=\"m-chapter m-home-work\" aria-labelledby=\"m-work-title\"><div className=\"m-inner\"><div className=\"m-work-layout\"><div className=\"m-handstand-composition\"><Photo asset=\"earthField\" alt=\"\" className=\"m-handstand-earth\"/><Photo asset=\"handstand\" alt={t('handstandAlt',lang)} className=\"m-handstand\"/></div><div className=\"m-work-text\"><h2 id=\"m-work-title\">{c(p.oldTitle)}</h2><PreviewComparison lang={lang}/></div></div><p>{c(p.oldClose)}</p></div></section>\r\n",
+          "after": "   <section className=\"m-chapter m-home-work\" aria-labelledby=\"m-work-title\"><div className=\"m-inner\"><header className=\"preview-work-heading\"><h2 id=\"m-work-title\">{c(p.oldTitle)}</h2><PreviewComparisonKey lang={lang}/></header><div className=\"m-work-layout\"><div className=\"m-handstand-composition\"><Photo asset=\"earthField\" alt=\"\" className=\"m-handstand-earth\"/><Photo asset=\"handstand\" alt={t('handstandAlt',lang)} className=\"m-handstand\"/></div><div className=\"m-work-text\"><PreviewComparison lang={lang} showKey={false}/></div></div><p>{c(p.oldClose)}</p></div></section>\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileShared.tsx",
+      "beforeSha256": "926ba88f3c0613b0eb57a8f837b9cf06fe9424565fe219307ead45ff852462c0",
+      "afterSha256": "08547f47ac1b56c2e8e30b06a3736b118b1c66477bba928f08817fd321823a22",
+      "replacements": [
+        {
+          "offset": 3548,
+          "before": "    <div className=\"m-hero-scene\">{page!=='practice'&&<Mineral kind={page}/>} {page==='collaboration'?(preview?<figure className=\"m-photo m-hero-photo preview-smile\"><img src=\"/media/material/portrait-cutout.webp\" width={1153} height={1364} alt={lang==='en'?'Kryštof Švec, smiling, in a patterned waistcoat.':'Kryštof Švec s úsměvem ve vzorované vestě.'} fetchPriority=\"high\"/></figure>:<MobileCollaborationPortrait alt={alt}/>):<Photo asset={page} alt={alt} eager className=\"m-hero-photo\"/>}<MaterialEdge tone={page==='home'?'dark':'linen'}/></div>\r\n",
+          "after": "    <div className=\"m-hero-scene\">{page!=='practice'&&<Mineral kind={preview&&page==='collaboration'?'home':page}/>} {page==='collaboration'?(preview?<Photo asset=\"home\" alt={copy('Opening',4,lang)} eager className=\"m-hero-photo\"/>:<MobileCollaborationPortrait alt={alt}/>):<Photo asset={page} alt={alt} eager className=\"m-hero-photo\"/>}<MaterialEdge tone={page==='home'?'dark':'linen'}/></div>\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/preview-v3.css",
+      "beforeSha256": "a82614dee9de7a0396d4e553719103749eabf166717c07dd47a69c6e64df7a12",
+      "afterSha256": "15c462f25c1dbb3b5663951b648bc9172731f90759dec815503c634841553a02",
+      "replacements": [
+        {
+          "offset": 12164,
+          "before": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits:not(.preview-barriers) article { border-color:color-mix(in srgb,var(--m-accent) 48%,transparent); background:color-mix(in srgb,var(--m-accent) 8%,transparent); border-top:3px solid var(--m-accent); }\n",
+          "after": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits:not(.preview-barriers) article { border-color:color-mix(in srgb,var(--m-accent) 48%,transparent); background:color-mix(in srgb,var(--m-accent) 8%,transparent); }\n"
+        },
+        {
+          "offset": 12541,
+          "before": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-work .m-work-layout { grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:18px; align-items:start; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-work .m-handstand-composition { position:sticky; top:28px; width:100%; height:auto; grid-column:1; grid-row:1/3; align-self:start; margin-top:8px; }\n",
+          "after": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-work .m-work-layout { grid-template-columns:55% minmax(0,1fr); gap:12px; padding-left:8px; max-width:490px; align-items:start; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-work .m-handstand-composition { position:sticky; top:28px; width:100%; height:auto; grid-column:1; grid-row:1; align-self:start; margin-top:0; }\n"
+        },
+        {
+          "offset": 13162,
+          "before": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-work .preview-comparison { grid-column:2; grid-row:2; margin:0; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-work .preview-comparison-key { display:grid; gap:6px; margin-bottom:12px; font-size:.875rem; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-work .preview-comparison article { padding-block:18px; }\n",
+          "after": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-work .preview-comparison { grid-column:2; grid-row:1; margin:0; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-work .preview-comparison-key { display:flex; flex-wrap:wrap; gap:12px 24px; margin:16px 0 0; font-size:.875rem; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-work .preview-comparison article { padding:0 0 24px; border:0; }\n"
+        },
+        {
+          "offset": 17319,
+          "before": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-hero.preview-collaboration-hero .m-hero-photo img { top:48px; height:calc(100% - 48px); object-fit:cover; object-position:center top; }\n",
+          "after": " /* The longer Collaboration subtitle overlays the same one-line Home slot.\n    The original portrait, crop, texture and alpha contour are shared verbatim. */\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-collaboration-hero .m-hero-service { height:1lh; overflow:visible; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-collaboration-hero .m-mineral--home { background-color:#754437; background-blend-mode:screen; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-work-heading { margin:0 0 28px; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-work-heading h2 { margin:0; max-width:none; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits:not(.preview-barriers) { margin-bottom:8px; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits + #jak-to-funguje { padding-top:12px; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-collaboration-hero[data-large-text=\"true\"] .m-hero-service { height:auto; }\n @container m-chapter (max-width:17em) {\n  .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-work .m-work-layout { padding-left:4px; }\n }\n"
+        }
+      ]
+    }
+  ]
+}

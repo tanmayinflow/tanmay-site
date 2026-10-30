@@ -1,3 +1,4 @@
+import {withoutAuthorizedMobilePolish} from './owner-mobile-polish-authorized-2026-10-29.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -6,6 +7,7 @@ const sha=b=>createHash('sha256').update(b).digest('hex');
 export function withoutAuthorizedMobileFeedback(path,bytes){
  const file=mobileDelta.files.find(f=>f.path===path);
  if(!file||sha(bytes)===file.beforeSha256)return bytes;
+ bytes=withoutAuthorizedMobilePolish(path,bytes);
  assert.equal(sha(bytes),file.afterSha256,'Exact owner mobile feedback scope: '+path);
  let value=bytes;
  for(const change of [...file.replacements].reverse()){

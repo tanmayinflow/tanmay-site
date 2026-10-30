@@ -1,9 +1,12 @@
 import { useEffect, useRef } from 'react';
 import { previewCopy as p, previewText } from '../preview-copy';
 
-export function PreviewComparison({lang}:{lang:string}) {
+export function PreviewComparisonKey({lang}:{lang:string}) {
+ return <div className="preview-comparison-key"><span>✕ {lang==='en'?'Old way':'Stará cesta'}</span><strong>✓ {lang==='en'?'New practice':'Nová praxe'}</strong></div>;
+}
+export function PreviewComparison({lang,showKey=true}:{lang:string;showKey?:boolean}) {
  const c=(v:readonly string[])=>previewText(v,lang);
- return <div className="preview-comparison"><div className="preview-comparison-key"><span>✕ {lang==='en'?'Old way':'Stará cesta'}</span><strong>✓ {lang==='en'?'New practice':'Nová praxe'}</strong></div>{p.oldWays.map((x,i)=><article key={i}><p className="preview-old-way"><span aria-hidden="true">✕</span>{c(x[0])}</p><h3><span aria-hidden="true">✓</span>{c(x[1])}</h3></article>)}</div>;
+ return <div className="preview-comparison">{showKey&&<PreviewComparisonKey lang={lang}/ >}{p.oldWays.map((x,i)=><article key={i}><p className="preview-old-way"><span aria-hidden="true">✕</span>{c(x[0])}</p><h3><span aria-hidden="true">✓</span>{c(x[1])}</h3></article>)}</div>;
 }
 
 export function PreviewWants({lang}:{lang:string}) {
