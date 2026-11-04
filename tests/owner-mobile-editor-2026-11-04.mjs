@@ -1,9 +1,11 @@
+import {restorePhoneIfCurrent} from './owner-mobile-iphone-2026-11-04.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 export const editorDelta=JSON.parse(readFileSync(new URL('./owner-mobile-editor-2026-11-04.json',import.meta.url)));
 const sha=b=>createHash('sha256').update(b).digest('hex');
 export function withoutAuthorizedEditor(path,bytes){
+ bytes=restorePhoneIfCurrent(path,bytes);
  const file=editorDelta.files.find(f=>f.path===path);
  if(!file||sha(bytes)===file.beforeSha256)return bytes;
  assert.equal(sha(bytes),file.afterSha256,'Exact mobile editor and annotation scope: '+path);
@@ -17,6 +19,7 @@ export function withoutAuthorizedEditor(path,bytes){
  return value;
 }
 export function restoreEditorIfCurrent(path,bytes){
+ bytes=restorePhoneIfCurrent(path,bytes);
  const file=editorDelta.files.find(f=>f.path===path);
  return file&&sha(bytes)===file.afterSha256?withoutAuthorizedEditor(path,bytes):bytes;
 }

@@ -1,0 +1,105 @@
+{
+  "approvedOn": "2026-11-04",
+  "baselineCommit": "1255102fbb29afd70a5aa8cf74188476aa1ce574",
+  "scope": "Centered one-line bullet statements without underline; mirrored quiet process arrows and wider body text on Home and Collaboration; separate final hero statement line. iPhone 16 Pro Max wrapper defaults are outside the source repository. No desktop or production changes.",
+  "files": [
+    {
+      "path": "src/mobile/PreviewDetails.tsx",
+      "beforeSha256": "b78531d61acdb62ee9a4287cc25e134403429f9254bc461335de801a6e068603",
+      "afterSha256": "0353f194637e7a70f710916bb9e9c80ea4ed7a52c8090e802de090f29bc91c1f",
+      "replacements": [
+        {
+          "offset": 1602,
+          "before": " return <ol ref={root} className=\"preview-process-steps\">{(work?previewCopy.workSteps:previewCopy.steps).map((step,i)=><li key={i}><div><h3><span className=\"preview-step-number\" aria-hidden=\"true\">0{i+1}</span><span className=\"preview-step-title\">{previewText(step[0],lang)}</span></h3><p><span className=\"preview-step-copy\">{previewText(step[1],lang)}</span></p></div>{i<2&&<PreviewCurveArrow connector className={i===0?'preview-turn-right':'preview-turn-left'}/>}</li>)}</ol>;\n",
+          "after": " return <ol ref={root} className=\"preview-process-steps\">{(work?previewCopy.workSteps:previewCopy.steps).map((step,i)=><li key={i}><div><h3><span className=\"preview-step-number\" aria-hidden=\"true\">0{i+1}</span><span className=\"preview-step-title\">{previewText(step[0],lang)}</span></h3><p><span className=\"preview-step-copy\">{work&&i===0?previewText(step[1],lang).split(/ (?=Odejdeš |You leave )/).map((sentence,index)=><span className=\"preview-step-sentence\" key={sentence}>{index>0?' ':''}{sentence}</span>):previewText(step[1],lang)}</span></p></div>{i<2&&<PreviewCurveArrow connector className={i===0?'preview-turn-right':'preview-turn-left'}/>}</li>)}</ol>;\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/PreviewMotion.tsx",
+      "beforeSha256": "ca9c163b760db651357824e196d1cf2f65d26dca892eb58551efa265d5ab1f3c",
+      "afterSha256": "4339fb91fd4da695dd185ce175c0d117c41b98ccf27117f27812e0d40b01ee4f",
+      "replacements": [
+        {
+          "offset": 0,
+          "before": "import { useEffect, useRef, type RefObject } from 'react';\nimport { TerrainArtwork } from '../components/TerrainArtwork';\n",
+          "after": "import { useEffect, type RefObject } from 'react';\n"
+        },
+        {
+          "offset": 112,
+          "before": "/** The copy never moves. Scroll progressively uncovers the original terrain line. */\n",
+          "after": "/** Four centered statements; the owner prefers simple bullets to underlines. */\n"
+        },
+        {
+          "offset": 252,
+          "before": " const root=useRef<HTMLUListElement>(null);\n useEffect(()=>{\n  const reduced=matchMedia('(prefers-reduced-motion: reduce)');\n  let frame=0;\n  const paint=()=>{\n   frame=0;\n   root.current?.querySelectorAll<HTMLElement>('.preview-want-line').forEach(line=>{\n    const box=line.parentElement!.getBoundingClientRect();\n    const progress=reduced.matches?1:Math.max(0,Math.min(1,(innerHeight*.84-box.bottom)/(innerHeight*.25)));\n    line.style.clipPath=line.parentElement!.matches(':nth-child(even)')?`inset(0 0 0 ${100-progress*100}%)`:`inset(0 ${100-progress*100}% 0 0)`;\n   });\n  };\n  const queue=()=>{if(!frame)frame=requestAnimationFrame(paint);};\n  window.addEventListener('scroll',queue,{passive:true});window.addEventListener('resize',queue);reduced.addEventListener('change',queue);paint();\n  return()=>{cancelAnimationFrame(frame);window.removeEventListener('scroll',queue);window.removeEventListener('resize',queue);reduced.removeEventListener('change',queue);};\n },[lang]);\n return <ul ref={root} className=\"preview-wants-editorial\">{previewCopy.wants.map(pair=><li key={pair[0]}><p className=\"preview-want-text\">{previewText(pair,lang)}</p><span className=\"preview-want-line\" aria-hidden=\"true\"><TerrainArtwork variant=\"l02\" compact/></span></li>)}</ul>;\n",
+          "after": " return <ul className=\"preview-wants-editorial\">{previewCopy.wants.map(pair=><li key={pair[0]}><p className=\"preview-want-text\">{previewText(pair,lang)}</p></li>)}</ul>;\n"
+        },
+        {
+          "offset": 425,
+          "before": "/** Anchor each connector to the actual last line, including translated/wrapped copy. */\n",
+          "after": "/** Mirrored curves share one size and begin beside the paragraph's final line. */\n"
+        },
+        {
+          "offset": 911,
+          "before": "    const item=arrow.closest('li')!,copy=item.querySelector('.preview-step-copy')!,next=item.nextElementSibling?.querySelector('.preview-step-title');\n    if(!next)return;\n",
+          "after": "    const item=arrow.closest('li')!,copy=item.querySelector('.preview-step-copy')!;\n"
+        },
+        {
+          "offset": 1182,
+          "before": "    const box=item.getBoundingClientRect(),destination=next.getBoundingClientRect(),direction=i===0?1:-1;\n    const sx=(i===0?last.right+8:last.left-8)-box.left,sy=last.top+last.height*.64-box.top;\n    const ex=(i===0?destination.right-20:destination.left+18)-box.left,ey=destination.top-box.top-12;\n    const left=Math.min(sx,ex)-48,top=sy-18,width=Math.abs(ex-sx)+96,height=Math.max(70,ey-sy+36);\n    const x=sx-left,y=sy-top,endX=ex-left,endY=ey-top;\n",
+          "after": "    const box=item.getBoundingClientRect(),width=96,height=84;\n    const left=i===0?box.width-width-16:16,top=last.top+last.height*.55-box.top-8;\n"
+        },
+        {
+          "offset": 1632,
+          "before": "    arrow.children[0].setAttribute('d',`M${x} ${y} C${x+36*direction} ${y-5} ${endX+30*direction} ${endY-26} ${endX} ${endY}`);\n    const angle=Math.atan2(26,-30*direction),arm=13;\n    arrow.children[1].setAttribute('d',`M${endX-arm*Math.cos(angle-.55)} ${endY-arm*Math.sin(angle-.55)} L${endX} ${endY} L${endX-arm*Math.cos(angle+.55)} ${endY-arm*Math.sin(angle+.55)}`);\n",
+          "after": "    arrow.children[0].setAttribute('d',i===0?'M10 8 C72 5 86 40 68 67':'M86 8 C24 5 10 40 28 67');\n    arrow.children[1].setAttribute('d',i===0?'M67 53 L68 67 L81 62':'M29 53 L28 67 L15 62');\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileShared.tsx",
+      "beforeSha256": "46b9a29c8a38d6f82572ee0bca74303f85980fd468206be41c1aa4a822cfdb20",
+      "afterSha256": "bb750fdadc2524f0bdb306fa1d04597cc39734385cd64369643fa777e6b51011",
+      "replacements": [
+        {
+          "offset": 3986,
+          "before": "  </header>{preview&&page==='collaboration'&&<div className=\"preview-collab-caption m-inner\"><p>{benefits.map(benefit=><span key={benefit}>{benefit}</span>)}</p></div>}{page==='home'&&<div className=\"m-hero-caption m10-home-caption m-dark\"><h2 id=\"m-home-statement\">{preview?previewText(p.homeTitle,lang):copy('Opening',1,lang)}</h2></div>}</>;\r\n",
+          "after": "  </header>{preview&&page==='collaboration'&&<div className=\"preview-collab-caption m-inner\"><p>{benefits.map(benefit=><span key={benefit}>{benefit}</span>)}</p></div>}{page==='home'&&<div className=\"m-hero-caption m10-home-caption m-dark\"><h2 id=\"m-home-statement\">{preview?previewText(p.homeTitle,lang).split(/(?<=\\.) (?=A |And )/).map(line=><span className=\"preview-statement-line\" key={line}>{line}</span>):copy('Opening',1,lang)}</h2></div>}</>;\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/preview-v3.css",
+      "beforeSha256": "8c4c38e1f34d4c307a81491728b896d5e46a90fab3343814dc347c781050802a",
+      "afterSha256": "97c4b58a685d907f62f83c91a02098afc80d4b65e216d3380dfcc126aa7028fa",
+      "replacements": [
+        {
+          "offset": 34511,
+          "before": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps > li { position:relative; display:block; padding:0 44px 76px 0; margin:0; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps > li:nth-child(2) { padding:0 0 76px 44px; text-align:right; }\n",
+          "after": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps > li { position:relative; display:block; padding:0 0 84px; margin:0; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps > li:nth-child(2) { text-align:right; }\n"
+        },
+        {
+          "offset": 35516,
+          "before": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps p { font-size:1rem; line-height:1.6; margin:0 0 0 32px; text-align:inherit; }\n",
+          "after": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps p { font-size:.9375rem; line-height:1.6; margin:0; text-align:inherit; }\n"
+        },
+        {
+          "offset": 37895,
+          "before": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-wants-editorial {list-style:none;padding:0;margin:24px 0 38px;display:grid;gap:32px}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-wants-editorial li {position:relative;width:88%;margin:0;padding:0 0 14px}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-wants-editorial li:nth-child(even) {margin-left:auto;text-align:right}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-wants-editorial p {font-family:var(--ff-display);font-size:1.75rem;line-height:1.2;font-weight:500;margin:0;text-wrap:balance;color:var(--m-text)}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-want-line {position:absolute;left:calc(-1 * var(--m-gutter));right:0;bottom:0;height:11px;color:#a55c4b;pointer-events:none;overflow:hidden}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-wants-editorial li:nth-child(even) .preview-want-line {left:0;right:calc(-1 * var(--m-gutter))}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-want-line svg.terrain-art {display:block;width:100%;height:100%;color:#a55c4b}\n",
+          "after": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] #m-home-statement .preview-statement-line {display:block}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-wants-editorial {list-style:none;padding:0;margin:24px 0 38px;display:grid;gap:18px}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-wants-editorial li {position:relative;width:100%;margin:0;padding:0;text-align:center}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-wants-editorial p {display:inline;position:relative;font-family:var(--ff-body);font-size:clamp(.875rem,3.7vw,1rem);line-height:1.6;font-weight:500;margin:0;text-wrap:pretty;color:var(--m-text)}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-wants-editorial p::before {content:'•';position:absolute;right:calc(100% + 10px);color:#c8a58b}\n"
+        },
+        {
+          "offset": 39336,
+          "before": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps .preview-curve-arrow {right:auto;bottom:auto;transform:none;opacity:0;transition:opacity 400ms cubic-bezier(.23,1,.32,1);overflow:visible}\n",
+          "after": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps .preview-curve-arrow {right:auto;bottom:auto;transform:none;color:#b78e77;opacity:0;transition:opacity 400ms cubic-bezier(.23,1,.32,1);overflow:visible}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps .preview-curve-arrow path {stroke-width:2}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-step-sentence {display:block}\n"
+        },
+        {
+          "offset": 40057,
+          "before": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-want-line {clip-path:none!important}\n",
+          "after": ""
+        }
+      ]
+    }
+  ]
+}
