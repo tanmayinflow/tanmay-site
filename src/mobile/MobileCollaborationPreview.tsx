@@ -6,7 +6,7 @@ import MobileReviews from './MobileReviews';
 import { TerrainArtwork } from '../components/TerrainArtwork';
 import { routePath } from '../site.js';
 import { approved } from './preview-approved-content';
-import { Chapter, Photo, TextLink } from './MobileElements';
+import { Arrow, Chapter, Photo, TextLink } from './MobileElements';
 import { MobileHero, MobileProof, MobileContact } from './MobileShared';
 import { previewCopy as p, previewText, previewWhatsApp } from '../preview-copy';
 
@@ -14,15 +14,57 @@ export default function MobileCollaborationPreview({lang}:{lang:string}) {
  const c=(pair:readonly string[])=>previewText(pair,lang);
  return <>
   <MobileHero page="collaboration" lang={lang} preview/>
-  <div className="m-inner m-proof-start"><MobileProof lang={lang} preview/></div>
-  <div className="m-inner preview-work-intro"><p className="m-eyebrow">{c(p.workKicker)}</p><p>{c(p.workLead)}</p><TextLink href="#kontakt">{c(p.cta)}</TextLink><p className="small">{c(p.micro)}</p><TextLink href="#co-dostanes" down arrow>{lang==='en'?'What you get':'Co dostaneš'}</TextLink></div>
-  <Chapter title={c(p.needsTitle)} id="mobilni-obsah" className="m-needs"><div className="m-needs-opening"><div><p><strong>{lang==='en'?'Now:':'Teď:'}</strong> {c(p.now)}</p><p><strong>{lang==='en'?'Where you want to be:':'Kam chceš:'}</strong> {c(p.destination)}</p></div></div><PreviewBenefits lang={lang} kind="barriers"/><p>{c(p.needsClose)}</p><TextLink href="#kontakt">{c(p.cta)}</TextLink></Chapter>
-  <Chapter title={c(p.forTitle)} className="m-boundaries"><ul>{p.forItems.map(x=><li key={x[0]}>{c(x)}</li>)}</ul><p><strong>{c(p.forClose)}</strong></p><p>{c(p.notFor)}</p></Chapter>
-  <Chapter title={c(p.oldTitle)} className="m-formats"><PreviewComparison lang={lang}/><p>{c(p.oldClose)}</p><TextLink href="#kontakt">{c(p.cta)}</TextLink></Chapter>
-  <Chapter title={c(p.startTitle)} eyebrow={c(p.startLabel)} id="co-dostanes" className="m-between m-process m-dark preview-cotton"><div className="m-editorial-stack">{p.startItems.map((x,i)=><article key={i}><h3>{c(x[0])}</h3><p>{c(x[1])}</p></article>)}</div><MobileCycle lang={lang}/><p><strong>{c(p.weekTitle)}</strong></p><p>{c(p.week)}</p><p><strong>{c(p.why)}</strong></p><p><strong>{c(p.price)}</strong></p><p className="small">{c(p.priceSmall)}</p><TextLink href="#kontakt">{c(p.cta)}</TextLink><a className="m-text-link" href={previewWhatsApp(lang,true)} target="_blank" rel="noopener noreferrer">{c(p.direct)}</a></Chapter>
-  <div className="m-dark preview-cotton"><MobileReviews lang={lang} preview/></div>
-  <Chapter title={lang==='en'?'How do you start?':'Jak začneš?'} className="m-process m-dark preview-dark-end preview-cotton"><div className="m-process-opening"><Photo asset="equipment" alt={c(approved.PageSpoluprace[25])} className="m-equipment"/></div><ol className="m-process-steps m-editorial-stack">{p.workSteps.map((x,i)=><li key={i}><span className="m-process-number" aria-hidden="true">0{i+1}</span><div><h3>{c(x[0])}</h3><p>{c(x[1])}</p></div></li>)}</ol><TextLink href="#kontakt">{lang==='en'?'I want to start':'Chci začít'}</TextLink><TerrainArtwork variant="home" className="m-process-current"/></Chapter>
-  <Chapter title={c(p.aboutTitle)} eyebrow="Kryštof Švec" className="m-boundaries"><p className="m-accent-copy">{c(p.bio)}</p><p>{c(p.cheer)}</p><p><strong>{c(p.live)}</strong></p><TextLink href={routePath('pribeh',lang)+'#vzdelani'}>{c(p.qualification)}</TextLink><TextLink href={routePath('pribeh',lang)} arrow>{lang==='en'?'My story':'Můj příběh'}</TextLink></Chapter>
-  <MobileCollaborationFaq lang={lang} preview/><CollaborationPricing lang={lang} preview/><MobileContact lang={lang} collaboration preview/>
+  <div className="preview-work-story">
+   <section className="m-inner preview-work-welcome" aria-label={c(p.startLabel)}>
+    <p className="preview-work-manifesto">{c(p.workLead)}</p>
+    <p className="preview-work-location">{c(p.workKicker)}</p>
+    <a className="preview-work-button" href="#co-dostanes">{lang==='en'?'What you get':'Co dostaneš'}<Arrow down/></a>
+   </section>
+
+   <Chapter title={c(p.needsTitle)} id="mobilni-obsah" className="preview-work-needs">
+    <div className="preview-work-journey">
+     <div><h3>{lang==='en'?'Now':'Teď'}</h3><p>{c(p.now)}</p></div>
+     <Arrow down/>
+     <div className="preview-work-destination"><h3>{lang==='en'?'Where you want to be':'Kam chceš'}</h3><p>{c(p.destination)}</p></div>
+    </div>
+    <PreviewBenefits lang={lang} kind="barriers"/>
+    <p className="preview-work-bridge">{c(p.needsClose)}</p>
+   </Chapter>
+
+   <Chapter title={c(p.forTitle)} className="m-boundaries preview-work-fit">
+    <ul>{p.forItems.map(x=><li key={x[0]}>{c(x)}</li>)}</ul>
+    <p><strong>{c(p.forClose)}</strong></p><p>{c(p.notFor)}</p>
+   </Chapter>
+
+   <Chapter title={c(p.oldTitle)} className="m-formats preview-work-contrast">
+    <PreviewComparison lang={lang}/><p>{c(p.oldClose)}</p>
+   </Chapter>
+
+   <div className="m-dark preview-work-ink">
+    <Chapter title={c(p.startLabel)} id="co-dostanes" className="m-between preview-work-start">
+     <p className="preview-work-start-lead">{c(p.startTitle)}</p>
+     <div className="preview-work-included">{p.startItems.map((x,i)=><article key={i}><h3>{c(x[0])}</h3><p>{c(x[1])}</p></article>)}</div>
+     <div className="preview-work-week"><h3>{c(p.weekTitle)}</h3><p>{c(p.week)}</p><MobileCycle lang={lang}/></div>
+     <p className="preview-work-reason">{c(p.why)}</p>
+     <div className="preview-work-price"><p><strong>{c(p.price)}</strong></p><p className="small">{c(p.priceSmall)}</p><a className="preview-work-button" href="#kontakt">{c(p.cta)}<Arrow/></a><a className="m-text-link" href={previewWhatsApp(lang,true)} target="_blank" rel="noopener noreferrer">{c(p.direct)}</a></div>
+    </Chapter>
+
+    <Chapter title={lang==='en'?'How do you start?':'Jak začneš?'} className="m-process preview-work-process">
+     <div className="m-process-opening"><Photo asset="equipment" alt={c(approved.PageSpoluprace[25])} className="m-equipment"/></div>
+     <ol className="m-process-steps">{p.workSteps.map((x,i)=><li key={i}><span className="m-process-number" aria-hidden="true">0{i+1}</span><div><h3>{c(x[0])}</h3><p>{c(x[1])}</p></div></li>)}</ol>
+     <TextLink href="#kontakt" arrow>{lang==='en'?'I want to start':'Chci začít'}</TextLink>
+    </Chapter>
+    <MobileReviews lang={lang} preview/>
+    <TerrainArtwork variant="home" className="preview-work-terrain"/>
+   </div>
+
+   <Chapter title={c(p.aboutTitle)} id="kdo-te-povede" className="m-boundaries preview-work-about">
+    <div className="preview-work-person"><Photo asset="prague" alt={lang==='en'?'Kryštof Švec overlooking Prague.':'Kryštof Švec s výhledem na Prahu.'}/><div><h3>Kryštof Švec</h3><p>{c(p.cheer)}</p><p><strong>{c(p.live)}</strong></p></div></div>
+    <p className="preview-work-bio">{c(p.bio)}</p>
+    <TextLink href={routePath('pribeh',lang)} arrow>{lang==='en'?'My story':'Můj příběh'}</TextLink>
+    <div className="preview-work-proof"><MobileProof lang={lang} preview/></div>
+   </Chapter>
+   <MobileCollaborationFaq lang={lang} preview/><CollaborationPricing lang={lang} preview/><MobileContact lang={lang} collaboration preview/>
+  </div>
  </>;
 }
