@@ -1,0 +1,92 @@
+{
+  "approvedOn": "2026-11-04",
+  "baselineCommit": "d8654c8d1889018e7eabe8c9d9d6380505f907df",
+  "scope": "Seven mobile annotations and owner-expanded local visual editor: light translucent benefits, editorial wants with terrain underline, last-line anchored fading arrows and centered final step, remove contact note, encourage wording, local opt-in move/rotate/resize/typography/layout/appearance/text editor. No publication or desktop/original appearance changes.",
+  "files": [
+    {
+      "path": "src/mobile/PreviewDetails.tsx",
+      "beforeSha256": "be71571a964e78b5fd64ca56204410d3fc8a803717e45eda59ff8d4026cc413d",
+      "afterSha256": "b78531d61acdb62ee9a4287cc25e134403429f9254bc461335de801a6e068603",
+      "replacements": [
+        {
+          "offset": 60,
+          "before": "",
+          "after": "import { useRef } from 'react';\nimport { useProcessConnectors } from './PreviewMotion';\n"
+        },
+        {
+          "offset": 465,
+          "before": "",
+          "after": " cheer:previewCopy.cheer.map(text=>text.replace('hecuju tě','povzbuzuju').replace('push you on','encourage you')),\n"
+        },
+        {
+          "offset": 1521,
+          "before": " return <ol className=\"preview-process-steps\">{(work?previewCopy.workSteps:previewCopy.steps).map((step,i)=><li key={i}><div><h3><span className=\"preview-step-number\" aria-hidden=\"true\">0{i+1}</span><span className=\"preview-step-title\">{previewText(step[0],lang)}</span></h3><p>{previewText(step[1],lang)}</p></div>{i<2&&<PreviewCurveArrow connector className={i===0?'preview-turn-right':'preview-turn-left'}/>}</li>)}</ol>;\n",
+          "after": " const root=useRef<HTMLOListElement>(null);useProcessConnectors(root,lang+work);\n return <ol ref={root} className=\"preview-process-steps\">{(work?previewCopy.workSteps:previewCopy.steps).map((step,i)=><li key={i}><div><h3><span className=\"preview-step-number\" aria-hidden=\"true\">0{i+1}</span><span className=\"preview-step-title\">{previewText(step[0],lang)}</span></h3><p><span className=\"preview-step-copy\">{previewText(step[1],lang)}</span></p></div>{i<2&&<PreviewCurveArrow connector className={i===0?'preview-turn-right':'preview-turn-left'}/>}</li>)}</ol>;\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileHomePreview.tsx",
+      "beforeSha256": "b85819fc427e34895d13e6fc59eb2003bd74d7ba4f2ce6d3c8b8ceac19bffcf0",
+      "afterSha256": "65405fbd19c10267e9b61575bdbd3d49e1a5a90f76fca7b894d0ecdf3060a8d6",
+      "replacements": [
+        {
+          "offset": 0,
+          "before": "import { PreviewHandstand, PreviewWants, PreviewBenefits } from '../components/PreviewReading';\r\n",
+          "after": "import { PreviewHandstand, PreviewBenefits } from '../components/PreviewReading';\r\nimport { MobilePreviewWants as PreviewWants } from './PreviewMotion';\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileShared.tsx",
+      "beforeSha256": "0f1f9e3c88d386b54df7d523e0ca4b0febc84befef46819fc4c845e0c4cbf374",
+      "afterSha256": "46b9a29c8a38d6f82572ee0bca74303f85980fd468206be41c1aa4a822cfdb20",
+      "replacements": [
+        {
+          "offset": 6912,
+          "before": "  return <section className=\"m-chapter m-contact\" id={home?'rezervace':'kontakt'} aria-labelledby={headingId}><div className=\"m-inner\"><div className=\"m-contact-target\" data-mobile-contact-target=\"\" style={{scrollMarginTop:'max(16px, env(safe-area-inset-top, 0px))'}}><p className=\"m-eyebrow\">{c(3)}</p><h2 id={headingId} tabIndex={-1}>{collaboration&&!preview?copy('PageSpoluprace',38,lang):c(4)}</h2><p className=\"m-lead\"><RichText>{c(5)}</RichText></p><div className=\"m-contact-actions\"><a className=\"m-contact-main\" href={whatsapp} target=\"_blank\" rel=\"noopener noreferrer\">{c(6)}<MessageIcon /></a>{preview&&<><a className=\"m-contact-mail\" href={previewWhatsApp(lang)} target=\"_blank\" rel=\"noopener noreferrer\"><MessageIcon/>{previewText(p.cta,lang)}</a></>}<a className=\"m-contact-mail\" href={mail}><MailIcon/>{c(7)}</a></div>{preview&&collaboration&&<a className=\"m-text-link\" href={IG_URL} target=\"_blank\" rel=\"noopener noreferrer\">Instagram</a>}{preview&&<p className=\"preview-contact-note\">{previewText(p.closingMicro,lang)}</p>}</div><ClientAccess lang={lang}/></div></section>;\r\n",
+          "after": "  return <section className=\"m-chapter m-contact\" id={home?'rezervace':'kontakt'} aria-labelledby={headingId}><div className=\"m-inner\"><div className=\"m-contact-target\" data-mobile-contact-target=\"\" style={{scrollMarginTop:'max(16px, env(safe-area-inset-top, 0px))'}}><p className=\"m-eyebrow\">{c(3)}</p><h2 id={headingId} tabIndex={-1}>{collaboration&&!preview?copy('PageSpoluprace',38,lang):c(4)}</h2><p className=\"m-lead\"><RichText>{c(5)}</RichText></p><div className=\"m-contact-actions\"><a className=\"m-contact-main\" href={whatsapp} target=\"_blank\" rel=\"noopener noreferrer\">{c(6)}<MessageIcon /></a>{preview&&<><a className=\"m-contact-mail\" href={previewWhatsApp(lang)} target=\"_blank\" rel=\"noopener noreferrer\"><MessageIcon/>{previewText(p.cta,lang)}</a></>}<a className=\"m-contact-mail\" href={mail}><MailIcon/>{c(7)}</a></div>{preview&&collaboration&&<a className=\"m-text-link\" href={IG_URL} target=\"_blank\" rel=\"noopener noreferrer\">Instagram</a>}</div><ClientAccess lang={lang}/></div></section>;\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileSite.tsx",
+      "beforeSha256": "abf887a049892354fec79b8619e887d4bef1c44bbd2b111929b34fdc5ea7b3cf",
+      "afterSha256": "e74ef5818777d402a0d73ed4290453e72400cf6c4759fe78217fedcab898ce3d",
+      "replacements": [
+        {
+          "offset": 3118,
+          "before": "",
+          "after": "  useEffect(()=>{\r\n    if(!['127.0.0.1','localhost'].includes(location.hostname)||new URLSearchParams(location.search).get('layoutEditor')!=='1')return;\r\n    let live=true,stop=()=>{};\r\n    import('./preview-layout-editor').then(({startLayoutEditor})=>{if(live&&root.current)stop=startLayoutEditor(root.current);});\r\n    return()=>{live=false;stop();};\r\n  },[routeId,lang]);\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/preview-v3.css",
+      "beforeSha256": "15f520583417415954c7ae5f6bc31c69f1481ab1cb2ee87b72be9619ea57df4a",
+      "afterSha256": "8c4c38e1f34d4c307a81491728b896d5e46a90fab3343814dc347c781050802a",
+      "replacements": [
+        {
+          "offset": 12164,
+          "before": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits:not(.preview-barriers) article { border-color:color-mix(in srgb,var(--m-accent) 48%,transparent); background:color-mix(in srgb,var(--m-accent) 8%,transparent); }\n",
+          "after": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits:not(.preview-barriers):not(.preview-handstand) article { border-color:rgba(244,240,235,.22); background:rgba(244,240,235,.055); }\n"
+        },
+        {
+          "offset": 37836,
+          "before": "",
+          "after": "\n/* Owner's mobile reading and process refinements, 2026-11-04. */\n@media(max-width:899px){\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-wants-editorial {list-style:none;padding:0;margin:24px 0 38px;display:grid;gap:32px}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-wants-editorial li {position:relative;width:88%;margin:0;padding:0 0 14px}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-wants-editorial li:nth-child(even) {margin-left:auto;text-align:right}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-wants-editorial p {font-family:var(--ff-display);font-size:1.75rem;line-height:1.2;font-weight:500;margin:0;text-wrap:balance;color:var(--m-text)}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-want-line {position:absolute;left:calc(-1 * var(--m-gutter));right:0;bottom:0;height:11px;color:#a55c4b;pointer-events:none;overflow:hidden}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-wants-editorial li:nth-child(even) .preview-want-line {left:0;right:calc(-1 * var(--m-gutter))}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-want-line svg.terrain-art {display:block;width:100%;height:100%;color:#a55c4b}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps > li:last-child {text-align:center}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps > li:last-child h3 {display:block;text-wrap:balance}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps > li:last-child .preview-step-number {margin-right:12px}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps > li:last-child .preview-step-title {display:inline;max-width:none}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps > li:last-child p {margin-left:0}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps .preview-curve-arrow {right:auto;bottom:auto;transform:none;opacity:0;transition:opacity 400ms cubic-bezier(.23,1,.32,1);overflow:visible}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps .preview-curve-arrow.is-visible {opacity:1}\n}\n@media(prefers-reduced-motion:reduce){\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps .preview-curve-arrow {opacity:1;transition:none}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-want-line {clip-path:none!important}\n}\n"
+        }
+      ]
+    }
+  ],
+  "newFiles": [
+    {
+      "path": "src/mobile/PreviewMotion.tsx",
+      "sha256": "ca9c163b760db651357824e196d1cf2f65d26dca892eb58551efa265d5ab1f3c"
+    },
+    {
+      "path": "src/mobile/preview-layout-editor.ts",
+      "sha256": "abd68d5140afa8f4bc060f8a8d34e15e2c0f08693c61ba8cf2bb88bfa46f2f60"
+    }
+  ]
+}

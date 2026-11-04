@@ -1,4 +1,5 @@
-import { PreviewHandstand, PreviewWants, PreviewBenefits } from '../components/PreviewReading';
+import { PreviewHandstand, PreviewBenefits } from '../components/PreviewReading';
+import { MobilePreviewWants as PreviewWants } from './PreviewMotion';
 import { routePath } from '../site.js';
 import { approved } from './preview-approved-content';
 import { mobileText as t } from './mobile-copy';

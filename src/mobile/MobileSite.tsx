@@ -63,6 +63,12 @@ export default function MobileSite({ loc, children, preview=false }: { loc: Loca
   const dock = useRef<HTMLDivElement>(null);
   const header = useRef<HTMLElement>(null);
   const root = useRef<HTMLDivElement>(null);
+  useEffect(()=>{
+    if(!['127.0.0.1','localhost'].includes(location.hostname)||new URLSearchParams(location.search).get('layoutEditor')!=='1')return;
+    let live=true,stop=()=>{};
+    import('./preview-layout-editor').then(({startLayoutEditor})=>{if(live&&root.current)stop=startLayoutEditor(root.current);});
+    return()=>{live=false;stop();};
+  },[routeId,lang]);
   const closeTimer = useRef<number>();
   useMobileInputFocus(root);
   useMobileSurfacePhase(root,routeId+lang+(loc.postId||''));

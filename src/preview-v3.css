@@ -126,7 +126,7 @@
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-wants li > span { font-size:0; padding:0; width:8px; height:8px; border-radius:50%; background:var(--m-accent); opacity:1; margin-top:12px; }
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-wants li:nth-child(even) > span { background:var(--sandstone); }
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-benefit-number { display:none; }
- .tm-mobile[data-mobile-version][data-preview="v3"] .preview-benefits:not(.preview-barriers) article { border-color:color-mix(in srgb,var(--m-accent) 48%,transparent); background:color-mix(in srgb,var(--m-accent) 8%,transparent); }
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-benefits:not(.preview-barriers):not(.preview-handstand) article { border-color:rgba(244,240,235,.22); background:rgba(244,240,235,.055); }
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-benefits:not(.preview-barriers) article h3 { color:var(--m-accent); margin-top:0; }
  .tm-mobile[data-mobile-version][data-preview="v3"] .m-home-work .m-work-layout { grid-template-columns:55% minmax(0,1fr); gap:12px; padding-left:8px; max-width:490px; align-items:start; }
  .tm-mobile[data-mobile-version][data-preview="v3"] .m-home-work .m-handstand-composition { position:sticky; top:28px; width:100%; height:auto; grid-column:1; grid-row:1; align-self:start; margin-top:0; }
@@ -334,4 +334,26 @@
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-about-aside p { margin-top:12px; }
  .tm-mobile[data-mobile-version][data-preview="v3"] .m-contact .preview-contact-note { margin:18px 0 0; font-size:.9375rem; line-height:1.5; text-align:center; }
  .tm-mobile[data-mobile-version][data-preview="v3"] .m-home-about .m-text-link { max-width:100%; line-height:1.6; }
+}
+
+/* Owner's mobile reading and process refinements, 2026-11-04. */
+@media(max-width:899px){
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-wants-editorial {list-style:none;padding:0;margin:24px 0 38px;display:grid;gap:32px}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-wants-editorial li {position:relative;width:88%;margin:0;padding:0 0 14px}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-wants-editorial li:nth-child(even) {margin-left:auto;text-align:right}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-wants-editorial p {font-family:var(--ff-display);font-size:1.75rem;line-height:1.2;font-weight:500;margin:0;text-wrap:balance;color:var(--m-text)}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-want-line {position:absolute;left:calc(-1 * var(--m-gutter));right:0;bottom:0;height:11px;color:#a55c4b;pointer-events:none;overflow:hidden}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-wants-editorial li:nth-child(even) .preview-want-line {left:0;right:calc(-1 * var(--m-gutter))}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-want-line svg.terrain-art {display:block;width:100%;height:100%;color:#a55c4b}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-steps > li:last-child {text-align:center}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-steps > li:last-child h3 {display:block;text-wrap:balance}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-steps > li:last-child .preview-step-number {margin-right:12px}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-steps > li:last-child .preview-step-title {display:inline;max-width:none}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-steps > li:last-child p {margin-left:0}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-steps .preview-curve-arrow {right:auto;bottom:auto;transform:none;opacity:0;transition:opacity 400ms cubic-bezier(.23,1,.32,1);overflow:visible}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-steps .preview-curve-arrow.is-visible {opacity:1}
+}
+@media(prefers-reduced-motion:reduce){
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-steps .preview-curve-arrow {opacity:1;transition:none}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-want-line {clip-path:none!important}
 }
