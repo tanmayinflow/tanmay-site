@@ -1,0 +1,18 @@
+import { previewCopy, previewText } from '../preview-copy';
+
+// Owner's latest mobile wording; the desktop proposal keeps its reviewed copy.
+export const mobilePreviewCopy={...previewCopy,
+ oldTitle:['Stará cesta, nebo nová praxe?','The old way, or a new practice?'],
+ bio:previewCopy.bio.map(text=>text.replace(' a jasná priorita','').replace(' and a clear priority','')),
+ qualification:['Moje celé akreditované vzdělání a osobní příběh','My full accredited education and personal story'],
+ firstCta:['Chci první trénink.','I want my first session.'],
+ week:previewCopy.week.map(text=>text.replace('20 minut','30 minut').replace('20 minutes','30 minutes')),
+};
+
+export function PreviewCurveArrow({className=''}:{className?:string}) {
+ return <svg className={'preview-curve-arrow '+className} viewBox="0 0 88 110" fill="none" aria-hidden="true"><path d="M68 7 C72 49 53 72 18 92" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeDasharray="5 8"/><path d="M22 77 L16 94 L34 97" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg>;
+}
+
+export function PreviewSteps({lang,work=false}:{lang:string;work?:boolean}) {
+ return <ol className="preview-process-steps">{(work?previewCopy.workSteps:previewCopy.steps).map((step,i)=><li key={i}><span className="preview-step-number" aria-hidden="true">0{i+1}</span><div><h3>{previewText(step[0],lang)}</h3><p>{previewText(step[1],lang)}</p></div>{i<2&&<PreviewCurveArrow className={i===0?'preview-turn-right':'preview-turn-left'}/>}</li>)}</ol>;
+}

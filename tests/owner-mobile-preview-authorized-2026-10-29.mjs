@@ -1,3 +1,4 @@
+import {restoreReview16IfCurrent} from './owner-mobile-review-16-2026-11-04.mjs';
 import {withoutAuthorizedMobilePolish} from './owner-mobile-polish-authorized-2026-10-29.mjs';
 import {withoutAuthorizedCollaborationProposal} from './owner-collaboration-proposal-2026-11-04.mjs';
 import assert from 'node:assert/strict';
@@ -6,6 +7,7 @@ import {createHash} from 'node:crypto';
 export const mobileDelta=JSON.parse(readFileSync(new URL('./owner-mobile-preview-authorized-2026-10-29.json',import.meta.url)));
 const sha=b=>createHash('sha256').update(b).digest('hex');
 export function withoutAuthorizedMobileFeedback(path,bytes){
+ bytes=restoreReview16IfCurrent(path,bytes);
  const file=mobileDelta.files.find(f=>f.path===path);
  if(!file||sha(bytes)===file.beforeSha256)return bytes;
  bytes=withoutAuthorizedCollaborationProposal(path,bytes);

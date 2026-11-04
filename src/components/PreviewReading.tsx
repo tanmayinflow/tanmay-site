@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { previewCopy as p, previewText } from '../preview-copy';
 import { Photo } from '../mobile/MobileElements';
+import { mobilePreviewCopy } from '../mobile/PreviewDetails';
 import { mobileText } from '../mobile/mobile-copy';
 
 export function PreviewComparisonKey({lang}:{lang:string}) {
@@ -38,6 +39,7 @@ function usePreviewRail(key:string,handstand=false) {
   const host=root.current!,panel=pin.current!,row=track.current!;
   const preference=matchMedia('(prefers-reduced-motion: reduce)');
   const mobile=matchMedia('(max-width:899px)');
+  if(mobile.matches)return; // The mobile page controller owns all rails together.
   let distance=0,frame=0,pinTop=24,disposed=false;
   const paint=()=>{frame=0;if(!distance)return;const progress=Math.max(0,Math.min(distance,-host.getBoundingClientRect().top+pinTop));row.style.transform=`translate3d(${-progress}px,0,0)`;};
   const queue=()=>{if(!frame)frame=requestAnimationFrame(paint);};
@@ -74,7 +76,7 @@ export function PreviewHandstand({lang}:{lang:string}) {
  const {root,pin,track}=usePreviewRail(lang+'comparison',true);
  const c=(v:readonly string[])=>previewText(v,lang);
  return <section className="preview-benefits preview-handstand" ref={root} aria-labelledby="preview-handstand-title"><div className="preview-benefits-pin" ref={pin}>
-  <h2 id="preview-handstand-title">{c(p.oldTitle)}</h2>
+  <h2 id="preview-handstand-title">{c(mobilePreviewCopy.oldTitle)}</h2>
   <div className="preview-benefits-window"><div className="preview-benefits-track preview-pairs" ref={track}>{p.oldWays.map((x,i)=><article key={i}><p className="preview-pair-old"><span className="preview-pair-label">✕ {lang==='en'?'Old way':'Stará cesta'}</span>{c(x[0])}</p><h3><span className="preview-pair-label">✓ {lang==='en'?'New practice':'Nová praxe'}</span>{c(x[1])}</h3></article>)}</div></div>
   <div className="preview-handstand-photo"><Photo asset="earthField" alt="" className="preview-handstand-earth"/><Photo asset="handstand" alt={mobileText('handstandAlt',lang)} className="preview-handstand-person"/></div>
   <p className="preview-benefits-close">{c(p.oldClose)}</p>
