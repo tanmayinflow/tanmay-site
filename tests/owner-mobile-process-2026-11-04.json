@@ -1,0 +1,68 @@
+{
+  "approvedOn": "2026-11-04",
+  "baselineCommit": "aeffa0431859c4b38e6ca20023ccff83d89602e5",
+  "scope": "Three owner annotations on both mobile previews: rotated process arrows connecting adjacent steps, numbers beside headings, start buttons matching the transparent outline plan CTA. No copy, desktop, original route, material or scrolling-controller changes.",
+  "files": [
+    {
+      "path": "src/mobile/PreviewDetails.tsx",
+      "beforeSha256": "54c9406b9642f0ee03a9d3b5beb2d060fff592f6de6af8a9d7527d99a7dcae9c",
+      "afterSha256": "be71571a964e78b5fd64ca56204410d3fc8a803717e45eda59ff8d4026cc413d",
+      "replacements": [
+        {
+          "offset": 678,
+          "before": "export function PreviewCurveArrow({className=''}:{className?:string}) {\n return <svg className={'preview-curve-arrow '+className} viewBox=\"0 0 88 110\" fill=\"none\" aria-hidden=\"true\"><path d=\"M68 7 C72 49 53 72 18 92\" stroke=\"currentColor\" strokeWidth=\"3\" strokeLinecap=\"round\" strokeDasharray=\"5 8\"/><path d=\"M22 77 L16 94 L34 97\" stroke=\"currentColor\" strokeWidth=\"3\" strokeLinecap=\"round\" strokeLinejoin=\"round\"/></svg>;\n",
+          "after": "export function PreviewCurveArrow({className='',connector=false}:{className?:string;connector?:boolean}) {\n return <svg className={'preview-curve-arrow '+className} viewBox={connector?'0 0 100 100':'0 0 88 110'} fill=\"none\" aria-hidden=\"true\"><path d={connector?'M14 12 C78 2 88 48 48 83':'M68 7 C72 49 53 72 18 92'} stroke=\"currentColor\" strokeWidth=\"3\" strokeLinecap=\"round\" strokeDasharray=\"5 8\"/><path d={connector?'M48 68 L45 85 L62 81':'M22 77 L16 94 L34 97'} stroke=\"currentColor\" strokeWidth=\"3\" strokeLinecap=\"round\" strokeLinejoin=\"round\"/></svg>;\n"
+        },
+        {
+          "offset": 1317,
+          "before": " return <ol className=\"preview-process-steps\">{(work?previewCopy.workSteps:previewCopy.steps).map((step,i)=><li key={i}><span className=\"preview-step-number\" aria-hidden=\"true\">0{i+1}</span><div><h3>{previewText(step[0],lang)}</h3><p>{previewText(step[1],lang)}</p></div>{i<2&&<PreviewCurveArrow className={i===0?'preview-turn-right':'preview-turn-left'}/>}</li>)}</ol>;\n",
+          "after": " return <ol className=\"preview-process-steps\">{(work?previewCopy.workSteps:previewCopy.steps).map((step,i)=><li key={i}><div><h3><span className=\"preview-step-number\" aria-hidden=\"true\">0{i+1}</span><span className=\"preview-step-title\">{previewText(step[0],lang)}</span></h3><p>{previewText(step[1],lang)}</p></div>{i<2&&<PreviewCurveArrow connector className={i===0?'preview-turn-right':'preview-turn-left'}/>}</li>)}</ol>;\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileCollaborationPreview.tsx",
+      "beforeSha256": "e06de3d32275b2074f288cdb236caf5e5482b61a1e9a73ed629410e327369855",
+      "afterSha256": "a7a9a40bf9b067f070c4d7afd42bc09e2759dd3bc12a4e2d19b301d9efa01eff",
+      "replacements": [
+        {
+          "offset": 3341,
+          "before": "     <TextLink href=\"#kontakt\" arrow>{lang==='en'?'I want to start':'Chci začít'}</TextLink>\r\n",
+          "after": "     <TextLink href=\"#kontakt\">{lang==='en'?'I want to start':'Chci začít'}</TextLink>\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/preview-v3.css",
+      "beforeSha256": "0981401bc91f05c5c86468109221833445472ee3ae3f474ff29ab4c082752d12",
+      "afterSha256": "15f520583417415954c7ae5f6bc31c69f1481ab1cb2ee87b72be9619ea57df4a",
+      "replacements": [
+        {
+          "offset": 33844,
+          "before": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-missing > .m-text-link {\n",
+          "after": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-missing > .m-text-link,\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-links > .m-text-link:first-child,\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-work-process > .m-inner > .m-text-link {\n"
+        },
+        {
+          "offset": 34543,
+          "before": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps > li { position:relative; display:grid; grid-template-columns:20px minmax(0,1fr); gap:12px; padding:0 44px 62px 0; margin:0; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps > li:nth-child(2) { padding:0 0 62px 44px; text-align:right; }\n",
+          "after": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps > li { position:relative; display:block; padding:0 44px 76px 0; margin:0; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps > li:nth-child(2) { padding:0 0 76px 44px; text-align:right; }\n"
+        },
+        {
+          "offset": 34938,
+          "before": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-step-number { color:var(--m-accent); font-family:var(--ff-label); font-size:.75rem; padding-top:5px; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps h3 { font-family:var(--ff-display); font-size:1.5rem; font-weight:400; line-height:1.25; margin:0 0 12px; text-wrap:balance; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps p { font-size:1rem; line-height:1.6; margin:0; text-align:inherit; }\n",
+          "after": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-step-number { color:var(--m-accent); font-family:var(--ff-label); font-size:.75rem; line-height:1; flex-shrink:0; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps h3 { display:flex; align-items:baseline; gap:12px; font-family:var(--ff-display); font-size:1.5rem; font-weight:400; line-height:1.25; margin:0 0 12px; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps li:nth-child(2) h3 { justify-content:flex-end; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-step-title { min-width:0; text-wrap:balance; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps p { font-size:1rem; line-height:1.6; margin:0 0 0 32px; text-align:inherit; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps li:nth-child(2) p { margin-left:0; }\n"
+        },
+        {
+          "offset": 35996,
+          "before": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps .preview-curve-arrow { position:absolute; bottom:0; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-turn-right { right:0; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-turn-left { left:0; transform:scaleX(-1); }\n",
+          "after": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps .preview-curve-arrow { position:absolute; width:86px; height:86px; bottom:-2px; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-turn-right { right:8px; transform:rotate(-12deg); }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-turn-left { left:8px; transform:scaleX(-1) rotate(-12deg); }\n"
+        },
+        {
+          "offset": 36995,
+          "before": "",
+          "after": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-links > .m-text-link:first-child { margin:0; justify-content:center; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-work-process > .m-inner > .m-text-link { margin:24px 0 0; }\n"
+        }
+      ]
+    }
+  ]
+}

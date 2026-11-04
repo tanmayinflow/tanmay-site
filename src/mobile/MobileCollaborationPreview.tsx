@@ -51,7 +51,7 @@ export default function MobileCollaborationPreview({lang}:{lang:string}) {
     <Chapter title={lang==='en'?'How do you start?':'Jak začneš?'} className="m-process preview-work-process">
      <div className="m-process-opening"><Photo asset="equipment" alt={c(approved.PageSpoluprace[25])} className="m-equipment"/></div>
      <PreviewSteps lang={lang} work/>
-     <TextLink href="#kontakt" arrow>{lang==='en'?'I want to start':'Chci začít'}</TextLink>
+     <TextLink href="#kontakt">{lang==='en'?'I want to start':'Chci začít'}</TextLink>
      <TerrainArtwork variant="home" className="m-process-current"/>
     </Chapter>
     <MobileReviews lang={lang} preview/>
