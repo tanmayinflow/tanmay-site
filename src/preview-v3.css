@@ -242,9 +242,8 @@
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-process .m-process-steps h3 { font-size:1.5rem; }
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-process .m-process-steps p { font-size:1rem; line-height:1.6; }
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-process .m-text-link { margin-top:24px; }
- .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-terrain { display:block; width:100%; height:56px; color:var(--m-accent); }
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-person { display:flow-root; }
- .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-person .m-photo { float:left; width:44%; aspect-ratio:3/5; margin:0 20px 10px 0; border-radius:44% 44% 10px 10px; overflow:hidden; }
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-person .m-photo { float:left; width:44%; aspect-ratio:3/5; margin:0 20px 10px 0; border-radius:var(--m-radius); overflow:hidden; }
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-person img { height:100%; object-fit:cover; }
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-person h3 { font-size:1.5rem; color:var(--m-accent); margin:0 0 12px; }
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-person p { font-size:.9375rem; line-height:1.6; }
@@ -256,4 +255,27 @@
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-proof .preview-education-list { gap:28px; }
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-proof .preview-education-list li { padding:0; border:0; }
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-story .m-contact { padding-bottom:48px; }
+}
+
+/* One still mobile scene: title, paired comparison, original photograph and
+   closing copy remain in place while native scroll moves only the cards. */
+@media (max-width:899px) {
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-benefits-pin { box-sizing:border-box; }
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-handstand { margin-block:24px 12px; }
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-handstand .preview-benefits-pin { padding-block:12px; }
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-handstand[data-pinned="true"] .preview-benefits-pin { top:12px; }
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-handstand h2 { font-size:1.75rem; margin:0 0 18px; text-align:center; }
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-handstand .preview-pairs article { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:20px; flex-basis:100%; padding:0; border:0; background:none; border-radius:0; }
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-handstand .preview-pairs article :is(p,h3) { margin:0; font-size:1rem; line-height:1.4; }
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-handstand .preview-pairs article p { color:var(--m-body); }
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-handstand .preview-pairs article h3 { color:var(--m-heading); font-size:1.1875rem; }
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-handstand .preview-pair-label { display:block; font-family:var(--ff-body); font-size:.875rem; font-weight:400; color:var(--m-heading); margin-bottom:12px; }
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-handstand h3 .preview-pair-label { color:var(--m-accent); font-weight:600; }
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-handstand-photo { position:relative; width:100%; height:min(126vw,492px); margin:14px auto 0; }
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-handstand-photo .m-photo { position:absolute; margin:0; top:0; height:100%; width:auto; }
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-handstand-photo img { display:block; height:100%; width:auto; max-width:none; object-fit:contain; }
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-handstand-photo .preview-handstand-person { left:50%; transform:translateX(-50%); }
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-handstand-photo .preview-handstand-earth { left:50%; top:16%; height:70%; transform:translateX(-50%); }
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-handstand .preview-benefits-close { margin:16px 0 0; font-size:.9375rem; line-height:1.45; }
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-needs .preview-benefits-close { margin:20px 0 0; }
 }

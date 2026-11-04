@@ -1,3 +1,4 @@
+import {withoutAuthorizedScrollFixes} from './owner-mobile-scroll-fixes-2026-11-04.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -6,6 +7,7 @@ const sha=b=>createHash('sha256').update(b).digest('hex');
 export function withoutAuthorizedCollaborationProposal(path,bytes){
  const file=proposalDelta.files.find(f=>f.path===path);
  if(!file||sha(bytes)===file.beforeSha256)return bytes;
+ bytes=withoutAuthorizedScrollFixes(path,bytes);
  assert.equal(sha(bytes),file.afterSha256,'Exact owner Collaboration proposal scope: '+path);
  let value=bytes;
  for(const change of [...file.replacements].reverse()){

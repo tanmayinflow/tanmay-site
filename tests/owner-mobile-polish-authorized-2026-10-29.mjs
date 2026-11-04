@@ -1,4 +1,5 @@
 import {withoutAuthorizedCollaborationProposal} from './owner-collaboration-proposal-2026-11-04.mjs';
+import {withoutAuthorizedScrollFixes} from './owner-mobile-scroll-fixes-2026-11-04.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -7,6 +8,7 @@ const sha=b=>createHash('sha256').update(b).digest('hex');
 export function withoutAuthorizedMobilePolish(path,bytes){
  const file=polishDelta.files.find(f=>f.path===path);
  if(!file||sha(bytes)===file.beforeSha256)return bytes;
+ if(sha(bytes)!==file.afterSha256)bytes=withoutAuthorizedScrollFixes(path,bytes);
  bytes=withoutAuthorizedCollaborationProposal(path,bytes);
  assert.equal(sha(bytes),file.afterSha256,'Exact owner mobile polish scope: '+path);
  let value=bytes;

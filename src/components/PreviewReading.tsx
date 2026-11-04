@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { previewCopy as p, previewText } from '../preview-copy';
+import { Photo } from '../mobile/MobileElements';
+import { mobileText } from '../mobile/mobile-copy';
 
 export function PreviewComparisonKey({lang}:{lang:string}) {
  return <div className="preview-comparison-key"><span>✕ {lang==='en'?'Old way':'Stará cesta'}</span><strong>✓ {lang==='en'?'New practice':'Nová praxe'}</strong></div>;
@@ -29,24 +31,34 @@ export function PreviewWants({lang}:{lang:string}) {
  return <ul className="preview-wants" ref={root}>{p.wants.map((x,i)=><li key={x[0]}><span aria-hidden="true">0{i+1}</span><p>{previewText(x,lang)}</p></li>)}</ul>;
 }
 
-/** Native document scroll owns the distance. No wheel/touch interception or focus trap. */
-export function PreviewBenefits({lang,kind='benefits'}:{lang:string;kind?:'benefits'|'barriers'}) {
+/** Native scroll moves only the row; the full mobile scene releases at its end. */
+function usePreviewRail(key:string,handstand=false) {
  const root=useRef<HTMLElement>(null), pin=useRef<HTMLDivElement>(null), track=useRef<HTMLDivElement>(null);
- const c=(v:readonly string[])=>previewText(v,lang);
  useEffect(()=>{
   const host=root.current!,panel=pin.current!,row=track.current!;
   const preference=matchMedia('(prefers-reduced-motion: reduce)');
+  const mobile=matchMedia('(max-width:899px)');
   let distance=0,frame=0,pinTop=24,disposed=false;
   const paint=()=>{frame=0;if(!distance)return;const progress=Math.max(0,Math.min(distance,-host.getBoundingClientRect().top+pinTop));row.style.transform=`translate3d(${-progress}px,0,0)`;};
   const queue=()=>{if(!frame)frame=requestAnimationFrame(paint);};
   const measure=()=>{
-   host.dataset.pinned='true';row.style.transform='';host.style.height='';
+   host.dataset.pinned='true';row.style.transform='';host.style.height='';panel.style.minHeight='';
    pinTop=parseFloat(getComputedStyle(panel).top)||24;
-   const height=panel.offsetHeight;
    const viewport=window.visualViewport?.height||innerHeight;
+   const portrait=handstand?panel.querySelector<HTMLElement>('.preview-handstand-photo'):null;
+   if(portrait){
+    portrait.style.height='';
+    const available=viewport-pinTop-96-(panel.offsetHeight-portrait.offsetHeight);
+    portrait.style.height=`${Math.max(240,Math.min(portrait.offsetHeight,available))}px`;
+   }
+   const height=panel.offsetHeight;
    distance=preference.matches||height>viewport-pinTop-96?0:Math.max(0,row.scrollWidth-row.clientWidth);
    host.dataset.pinned=distance?'true':'false';
-   if(distance)host.style.height=`${height+distance}px`;
+   if(distance){
+    // The next chapter stays below the viewport until every card has passed.
+    if(mobile.matches)panel.style.minHeight=`${viewport-pinTop}px`;
+    host.style.height=`${panel.offsetHeight+distance}px`;
+   }else if(portrait)portrait.style.height='';
    queue();
   };
   let measuredWidth=0;
@@ -54,7 +66,24 @@ export function PreviewBenefits({lang,kind='benefits'}:{lang:string;kind?:'benef
   preference.addEventListener('change',measure);window.addEventListener('resize',measure);window.addEventListener('scroll',queue,{passive:true});
   document.fonts.ready.then(()=>{if(!disposed)measure();});measure();
   return()=>{disposed=true;observer.disconnect();cancelAnimationFrame(frame);preference.removeEventListener('change',measure);window.removeEventListener('resize',measure);window.removeEventListener('scroll',queue);};
- },[lang,kind]);
+ },[key,handstand]);
+ return {root,pin,track};
+}
+
+export function PreviewHandstand({lang}:{lang:string}) {
+ const {root,pin,track}=usePreviewRail(lang+'comparison',true);
+ const c=(v:readonly string[])=>previewText(v,lang);
+ return <section className="preview-benefits preview-handstand" ref={root} aria-labelledby="preview-handstand-title"><div className="preview-benefits-pin" ref={pin}>
+  <h2 id="preview-handstand-title">{c(p.oldTitle)}</h2>
+  <div className="preview-benefits-window"><div className="preview-benefits-track preview-pairs" ref={track}>{p.oldWays.map((x,i)=><article key={i}><p className="preview-pair-old"><span className="preview-pair-label">✕ {lang==='en'?'Old way':'Stará cesta'}</span>{c(x[0])}</p><h3><span className="preview-pair-label">✓ {lang==='en'?'New practice':'Nová praxe'}</span>{c(x[1])}</h3></article>)}</div></div>
+  <div className="preview-handstand-photo"><Photo asset="earthField" alt="" className="preview-handstand-earth"/><Photo asset="handstand" alt={mobileText('handstandAlt',lang)} className="preview-handstand-person"/></div>
+  <p className="preview-benefits-close">{c(p.oldClose)}</p>
+ </div></section>;
+}
+
+export function PreviewBenefits({lang,kind='benefits',close}:{lang:string;kind?:'benefits'|'barriers';close?:string}) {
+ const {root,pin,track}=usePreviewRail(lang+kind);
+ const c=(v:readonly string[])=>previewText(v,lang);
  const barriers=kind==='barriers',titleId=barriers?'preview-barriers-title':'preview-benefits-title';
- return <section className={'preview-benefits'+(barriers?' preview-barriers':'')} ref={root} aria-labelledby={titleId}><div className="preview-benefits-pin" ref={pin}><h2 id={titleId}>{c(barriers?p.barriersTitle:p.benefitsTitle)}</h2><div className="preview-benefits-window"><div className="preview-benefits-track" ref={track}>{(barriers?p.barriers:p.benefits).map((x,i)=><article key={x[0][0]}>{!barriers&&<span className="preview-benefit-number" aria-hidden="true">0{i+1}</span>}<h3>{c(x[0])}</h3><p>{barriers&&<span className="preview-solution-arrow" aria-hidden="true">→</span>}{c(x[1])}</p></article>)}</div></div>{!barriers&&<p className="preview-benefits-close"><strong>{c(p.benefitsClose)}</strong></p>}</div></section>;
+ return <section className={'preview-benefits'+(barriers?' preview-barriers':'')} ref={root} aria-labelledby={titleId}><div className="preview-benefits-pin" ref={pin}><h2 id={titleId}>{c(barriers?p.barriersTitle:p.benefitsTitle)}</h2><div className="preview-benefits-window"><div className="preview-benefits-track" ref={track}>{(barriers?p.barriers:p.benefits).map((x,i)=><article key={x[0][0]}>{!barriers&&<span className="preview-benefit-number" aria-hidden="true">0{i+1}</span>}<h3>{c(x[0])}</h3><p>{barriers&&<span className="preview-solution-arrow" aria-hidden="true">→</span>}{c(x[1])}</p></article>)}</div></div>{barriers?close&&<p className="preview-benefits-close preview-work-bridge">{close}</p>:<p className="preview-benefits-close"><strong>{c(p.benefitsClose)}</strong></p>}</div></section>;
 }

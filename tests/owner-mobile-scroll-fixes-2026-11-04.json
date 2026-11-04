@@ -1,0 +1,130 @@
+{
+  "approvedOn": "2026-11-04",
+  "baselineCommit": "2330b689e33487a50a7e9eb185b7748dd3121994",
+  "scope": "Five owner mobile corrections: fixed title/footer around native horizontal rails; centered handstand beneath paired old/new points; original process terrain placement; original rectangular photograph frame. Original material assets, facts and desktop appearance retained.",
+  "files": [
+    {
+      "path": "src/components/PreviewReading.tsx",
+      "beforeSha256": "6199a0a0fa5bb639ab5c6fac5619fc9ddcfae18ccb9378bdc92716c05cdd4822",
+      "afterSha256": "6e0f07a579fba87a65be55133aab368723c887b140369da97747fe4e52d2625b",
+      "replacements": [
+        {
+          "offset": 108,
+          "before": "",
+          "after": "import { Photo } from '../mobile/MobileElements';\nimport { mobileText } from '../mobile/mobile-copy';\n"
+        },
+        {
+          "offset": 2031,
+          "before": "/** Native document scroll owns the distance. No wheel/touch interception or focus trap. */\nexport function PreviewBenefits({lang,kind='benefits'}:{lang:string;kind?:'benefits'|'barriers'}) {\n",
+          "after": "/** Native scroll moves only the row; the full mobile scene releases at its end. */\nfunction usePreviewRail(key:string,handstand=false) {\n"
+        },
+        {
+          "offset": 2278,
+          "before": " const c=(v:readonly string[])=>previewText(v,lang);\n",
+          "after": ""
+        },
+        {
+          "offset": 2428,
+          "before": "",
+          "after": "  const mobile=matchMedia('(max-width:899px)');\n"
+        },
+        {
+          "offset": 2807,
+          "before": "   host.dataset.pinned='true';row.style.transform='';host.style.height='';\n",
+          "after": "   host.dataset.pinned='true';row.style.transform='';host.style.height='';panel.style.minHeight='';\n"
+        },
+        {
+          "offset": 2962,
+          "before": "",
+          "after": "   const viewport=window.visualViewport?.height||innerHeight;\n   const portrait=handstand?panel.querySelector<HTMLElement>('.preview-handstand-photo'):null;\n   if(portrait){\n    portrait.style.height='';\n    const available=viewport-pinTop-96-(panel.offsetHeight-portrait.offsetHeight);\n    portrait.style.height=`${Math.max(240,Math.min(portrait.offsetHeight,available))}px`;\n   }\n"
+        },
+        {
+          "offset": 3380,
+          "before": "   const viewport=window.visualViewport?.height||innerHeight;\n",
+          "after": ""
+        },
+        {
+          "offset": 3533,
+          "before": "   if(distance)host.style.height=`${height+distance}px`;\n",
+          "after": "   if(distance){\n    // The next chapter stays below the viewport until every card has passed.\n    if(mobile.matches)panel.style.minHeight=`${viewport-pinTop}px`;\n    host.style.height=`${panel.offsetHeight+distance}px`;\n   }else if(portrait)portrait.style.height='';\n"
+        },
+        {
+          "offset": 4446,
+          "before": " },[lang,kind]);\n",
+          "after": " },[key,handstand]);\n return {root,pin,track};\n}\n\nexport function PreviewHandstand({lang}:{lang:string}) {\n const {root,pin,track}=usePreviewRail(lang+'comparison',true);\n const c=(v:readonly string[])=>previewText(v,lang);\n return <section className=\"preview-benefits preview-handstand\" ref={root} aria-labelledby=\"preview-handstand-title\"><div className=\"preview-benefits-pin\" ref={pin}>\n  <h2 id=\"preview-handstand-title\">{c(p.oldTitle)}</h2>\n  <div className=\"preview-benefits-window\"><div className=\"preview-benefits-track preview-pairs\" ref={track}>{p.oldWays.map((x,i)=><article key={i}><p className=\"preview-pair-old\"><span className=\"preview-pair-label\">✕ {lang==='en'?'Old way':'Stará cesta'}</span>{c(x[0])}</p><h3><span className=\"preview-pair-label\">✓ {lang==='en'?'New practice':'Nová praxe'}</span>{c(x[1])}</h3></article>)}</div></div>\n  <div className=\"preview-handstand-photo\"><Photo asset=\"earthField\" alt=\"\" className=\"preview-handstand-earth\"/><Photo asset=\"handstand\" alt={mobileText('handstandAlt',lang)} className=\"preview-handstand-person\"/></div>\n  <p className=\"preview-benefits-close\">{c(p.oldClose)}</p>\n </div></section>;\n}\n\nexport function PreviewBenefits({lang,kind='benefits',close}:{lang:string;kind?:'benefits'|'barriers';close?:string}) {\n const {root,pin,track}=usePreviewRail(lang+kind);\n const c=(v:readonly string[])=>previewText(v,lang);\n"
+        },
+        {
+          "offset": 5933,
+          "before": " return <section className={'preview-benefits'+(barriers?' preview-barriers':'')} ref={root} aria-labelledby={titleId}><div className=\"preview-benefits-pin\" ref={pin}><h2 id={titleId}>{c(barriers?p.barriersTitle:p.benefitsTitle)}</h2><div className=\"preview-benefits-window\"><div className=\"preview-benefits-track\" ref={track}>{(barriers?p.barriers:p.benefits).map((x,i)=><article key={x[0][0]}>{!barriers&&<span className=\"preview-benefit-number\" aria-hidden=\"true\">0{i+1}</span>}<h3>{c(x[0])}</h3><p>{barriers&&<span className=\"preview-solution-arrow\" aria-hidden=\"true\">→</span>}{c(x[1])}</p></article>)}</div></div>{!barriers&&<p className=\"preview-benefits-close\"><strong>{c(p.benefitsClose)}</strong></p>}</div></section>;\n",
+          "after": " return <section className={'preview-benefits'+(barriers?' preview-barriers':'')} ref={root} aria-labelledby={titleId}><div className=\"preview-benefits-pin\" ref={pin}><h2 id={titleId}>{c(barriers?p.barriersTitle:p.benefitsTitle)}</h2><div className=\"preview-benefits-window\"><div className=\"preview-benefits-track\" ref={track}>{(barriers?p.barriers:p.benefits).map((x,i)=><article key={x[0][0]}>{!barriers&&<span className=\"preview-benefit-number\" aria-hidden=\"true\">0{i+1}</span>}<h3>{c(x[0])}</h3><p>{barriers&&<span className=\"preview-solution-arrow\" aria-hidden=\"true\">→</span>}{c(x[1])}</p></article>)}</div></div>{barriers?close&&<p className=\"preview-benefits-close preview-work-bridge\">{close}</p>:<p className=\"preview-benefits-close\"><strong>{c(p.benefitsClose)}</strong></p>}</div></section>;\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileHomePreview.tsx",
+      "beforeSha256": "5132f07db74eefe57653f2e17a2a3dcca7713e37da2cca6d105acd0a26d8b323",
+      "afterSha256": "a0520d21143f2ddbc66442e8a1d31281ac56509987b0e271286fb232741ea2ee",
+      "replacements": [
+        {
+          "offset": 0,
+          "before": "import { PreviewComparison, PreviewComparisonKey, PreviewWants, PreviewBenefits } from '../components/PreviewReading';\r\n",
+          "after": "import { PreviewHandstand, PreviewWants, PreviewBenefits } from '../components/PreviewReading';\r\n"
+        },
+        {
+          "offset": 1964,
+          "before": "   <section className=\"m-chapter m-home-work\" aria-labelledby=\"m-work-title\"><div className=\"m-inner\"><header className=\"preview-work-heading\"><h2 id=\"m-work-title\">{c(p.oldTitle)}</h2><PreviewComparisonKey lang={lang}/></header><div className=\"m-work-layout\"><div className=\"m-handstand-composition\"><Photo asset=\"earthField\" alt=\"\" className=\"m-handstand-earth\"/><Photo asset=\"handstand\" alt={t('handstandAlt',lang)} className=\"m-handstand\"/></div><div className=\"m-work-text\"><PreviewComparison lang={lang} showKey={false}/></div></div><p>{c(p.oldClose)}</p></div></section>\r\n",
+          "after": "   <PreviewHandstand lang={lang}/>\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileCollaborationPreview.tsx",
+      "beforeSha256": "4bd83c187c89be323dcf69ef17d16d2533fbdc1315aac7ed02fe2a92cd812585",
+      "afterSha256": "02c619e60e9da4e8b43ab58df198c2583e44294bd34821797397c6bbbae214d9",
+      "replacements": [
+        {
+          "offset": 1664,
+          "before": "    <PreviewBenefits lang={lang} kind=\"barriers\"/>\r\n    <p className=\"preview-work-bridge\">{c(p.needsClose)}</p>\r\n",
+          "after": "    <PreviewBenefits lang={lang} kind=\"barriers\" close={c(p.needsClose)}/>\r\n"
+        },
+        {
+          "offset": 3541,
+          "before": "",
+          "after": "     <TerrainArtwork variant=\"home\" className=\"m-process-current\"/>\r\n"
+        },
+        {
+          "offset": 3668,
+          "before": "    <TerrainArtwork variant=\"home\" className=\"preview-work-terrain\"/>\r\n",
+          "after": ""
+        },
+        {
+          "offset": 3782,
+          "before": "    <div className=\"preview-work-person\"><Photo asset=\"prague\" alt={lang==='en'?'Kryštof Švec overlooking Prague.':'Kryštof Švec s výhledem na Prahu.'}/><div><h3>Kryštof Švec</h3><p>{c(p.cheer)}</p><p><strong>{c(p.live)}</strong></p></div></div>\r\n",
+          "after": "    <div className=\"preview-work-person\"><Photo asset=\"prague\" className=\"m-prague\" alt={lang==='en'?'Kryštof Švec overlooking Prague.':'Kryštof Švec s výhledem na Prahu.'}/><div><h3>Kryštof Švec</h3><p>{c(p.cheer)}</p><p><strong>{c(p.live)}</strong></p></div></div>\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/preview-v3.css",
+      "beforeSha256": "089283fed2eeb60ef6393a69007b6ad2b744ad7235554c49bdf2be9292c9fd9f",
+      "afterSha256": "da692c45d3d4ec513018c1603c66c9757f83ba94bdabafbe4b3f2fc338b489c8",
+      "replacements": [
+        {
+          "offset": 27564,
+          "before": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-work-terrain { display:block; width:100%; height:56px; color:var(--m-accent); }\n",
+          "after": ""
+        },
+        {
+          "offset": 27660,
+          "before": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-work-person .m-photo { float:left; width:44%; aspect-ratio:3/5; margin:0 20px 10px 0; border-radius:44% 44% 10px 10px; overflow:hidden; }\n",
+          "after": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-work-person .m-photo { float:left; width:44%; aspect-ratio:3/5; margin:0 20px 10px 0; border-radius:var(--m-radius); overflow:hidden; }\n"
+        },
+        {
+          "offset": 29171,
+          "before": "",
+          "after": "\n/* One still mobile scene: title, paired comparison, original photograph and\n   closing copy remain in place while native scroll moves only the cards. */\n@media (max-width:899px) {\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits-pin { box-sizing:border-box; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-handstand { margin-block:24px 12px; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-handstand .preview-benefits-pin { padding-block:12px; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-handstand[data-pinned=\"true\"] .preview-benefits-pin { top:12px; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-handstand h2 { font-size:1.75rem; margin:0 0 18px; text-align:center; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-handstand .preview-pairs article { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:20px; flex-basis:100%; padding:0; border:0; background:none; border-radius:0; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-handstand .preview-pairs article :is(p,h3) { margin:0; font-size:1rem; line-height:1.4; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-handstand .preview-pairs article p { color:var(--m-body); }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-handstand .preview-pairs article h3 { color:var(--m-heading); font-size:1.1875rem; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-handstand .preview-pair-label { display:block; font-family:var(--ff-body); font-size:.875rem; font-weight:400; color:var(--m-heading); margin-bottom:12px; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-handstand h3 .preview-pair-label { color:var(--m-accent); font-weight:600; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-handstand-photo { position:relative; width:100%; height:min(126vw,492px); margin:14px auto 0; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-handstand-photo .m-photo { position:absolute; margin:0; top:0; height:100%; width:auto; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-handstand-photo img { display:block; height:100%; width:auto; max-width:none; object-fit:contain; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-handstand-photo .preview-handstand-person { left:50%; transform:translateX(-50%); }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-handstand-photo .preview-handstand-earth { left:50%; top:16%; height:70%; transform:translateX(-50%); }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-handstand .preview-benefits-close { margin:16px 0 0; font-size:.9375rem; line-height:1.45; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-work-needs .preview-benefits-close { margin:20px 0 0; }\n}\n"
+        }
+      ]
+    }
+  ]
+}

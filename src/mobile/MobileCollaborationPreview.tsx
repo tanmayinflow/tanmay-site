@@ -27,8 +27,7 @@ export default function MobileCollaborationPreview({lang}:{lang:string}) {
      <Arrow down/>
      <div className="preview-work-destination"><h3>{lang==='en'?'Where you want to be':'Kam chceš'}</h3><p>{c(p.destination)}</p></div>
     </div>
-    <PreviewBenefits lang={lang} kind="barriers"/>
-    <p className="preview-work-bridge">{c(p.needsClose)}</p>
+    <PreviewBenefits lang={lang} kind="barriers" close={c(p.needsClose)}/>
    </Chapter>
 
    <Chapter title={c(p.forTitle)} className="m-boundaries preview-work-fit">
@@ -53,13 +52,13 @@ export default function MobileCollaborationPreview({lang}:{lang:string}) {
      <div className="m-process-opening"><Photo asset="equipment" alt={c(approved.PageSpoluprace[25])} className="m-equipment"/></div>
      <ol className="m-process-steps">{p.workSteps.map((x,i)=><li key={i}><span className="m-process-number" aria-hidden="true">0{i+1}</span><div><h3>{c(x[0])}</h3><p>{c(x[1])}</p></div></li>)}</ol>
      <TextLink href="#kontakt" arrow>{lang==='en'?'I want to start':'Chci začít'}</TextLink>
+     <TerrainArtwork variant="home" className="m-process-current"/>
     </Chapter>
     <MobileReviews lang={lang} preview/>
-    <TerrainArtwork variant="home" className="preview-work-terrain"/>
    </div>
 
    <Chapter title={c(p.aboutTitle)} id="kdo-te-povede" className="m-boundaries preview-work-about">
-    <div className="preview-work-person"><Photo asset="prague" alt={lang==='en'?'Kryštof Švec overlooking Prague.':'Kryštof Švec s výhledem na Prahu.'}/><div><h3>Kryštof Švec</h3><p>{c(p.cheer)}</p><p><strong>{c(p.live)}</strong></p></div></div>
+    <div className="preview-work-person"><Photo asset="prague" className="m-prague" alt={lang==='en'?'Kryštof Švec overlooking Prague.':'Kryštof Švec s výhledem na Prahu.'}/><div><h3>Kryštof Švec</h3><p>{c(p.cheer)}</p><p><strong>{c(p.live)}</strong></p></div></div>
     <p className="preview-work-bio">{c(p.bio)}</p>
     <TextLink href={routePath('pribeh',lang)} arrow>{lang==='en'?'My story':'Můj příběh'}</TextLink>
     <div className="preview-work-proof"><MobileProof lang={lang} preview/></div>
