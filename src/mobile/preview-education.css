@@ -4,10 +4,18 @@
  .tm-mobile[data-mobile-version] .preview-credential .education-provider {display:block;margin-top:8px;font-weight:400}
  .tm-mobile[data-mobile-version] .preview-credential .education-provider a {text-decoration:underline;text-underline-offset:.2em}
  .tm-mobile[data-mobile-version] .preview-credential .education-duration {display:block;margin-top:6px;font-size:.9em;line-height:1.6;font-weight:400}
- .tm-mobile[data-mobile-version] .preview-credential .education-hours-detail {display:block}
  .tm-mobile[data-mobile-version] .preview-education-list {list-style:none;padding:0;margin:0}
- .tm-mobile[data-mobile-version] .m-education .m-education-columns {grid-template-columns:minmax(0,1fr);gap:28px}
- .tm-mobile[data-mobile-version] .m-education .m-education-columns dd {font-size:.9375rem}
  .tm-mobile[data-mobile-version] .m-text-link.preview-story-cta {display:flex;justify-content:center;width:fit-content;max-width:100%;box-sizing:border-box;padding:14px 18px;margin-top:24px;border:1px dashed currentColor;border-radius:20px 25px 18px 24px / 24px 17px 25px 19px;line-height:1.5;text-align:center;background:none}
  .tm-mobile[data-mobile-version] .m-offer .preview-story-cta {margin-inline:auto}
+}
+
+@media(max-width:899px){
+ .tm-mobile[data-mobile-version] .preview-education-columns {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:26px}
+ .tm-mobile[data-mobile-version] .preview-education-column {min-width:0}
+ .tm-mobile[data-mobile-version] .preview-education-group + .preview-education-group {margin-top:26px}
+ .tm-mobile[data-mobile-version] .preview-education-group > h3 {font-family:var(--ff-label);font-size:.6875rem;font-weight:500;letter-spacing:.06em;line-height:1.5;text-transform:uppercase;color:var(--m-accent);margin:0 0 14px}
+ .tm-mobile[data-mobile-version] .preview-education-columns .preview-credential {font-family:var(--ff-body);font-size:.8125rem;line-height:1.55;overflow-wrap:normal}
+ .tm-mobile[data-mobile-version] .preview-education-columns .preview-credential strong {font-family:inherit;font-size:inherit;font-weight:600}
+ .tm-mobile[data-mobile-version] .preview-education-columns .education-duration {font-size:1em}
+ .tm-mobile[data-mobile-version] .preview-education-columns .education-provider {margin-top:6px}
 }

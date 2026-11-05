@@ -1,3 +1,4 @@
+import { MobileVajra } from './MobileVajra';
 import { PreviewHandstand, PreviewBenefits } from '../components/PreviewReading';
 import { MobilePreviewWants as PreviewWants } from './PreviewMotion';
 import { routePath } from '../site.js';
@@ -25,7 +26,7 @@ export default function MobileHomePreview({lang}:{lang:string}) {
    <PreviewBenefits lang={lang}/>
    <Chapter title={c(p.howTitle)} id="jak-to-funguje" className="m-process m-dark"><PreviewSteps lang={lang}/><div className="preview-process-links"><TextLink href="#rezervace">{lang==='en'?'I want to start':'Chci začít'}</TextLink><TextLink href={routePath('spoluprace-preview',lang)+'#co-dostanes'} arrow>{lang==='en'?'What exactly you get':'Co přesně dostaneš'}</TextLink></div></Chapter>
    <MobileReviews lang={lang} preview/>
-   <section className="m-chapter m-home-about" aria-labelledby="m-about-home-title"><div className="m-inner"><div className="m-about-composition"><Photo asset="prague" alt={c(approved.HomeAbout[3])} className="m-prague"/><div className="m-about-heading"><p className="m-eyebrow">Kryštof Švec</p><h2 id="m-about-home-title">{c(p.aboutTitle)}</h2><div className="preview-about-aside"><p>{c(p.cheer)}</p></div></div></div><p className="m-about-bio m-bio-highlight-practice">{c(p.bio)}</p><a className="m-text-link preview-education-link" href={routePath('pribeh',lang)+'#vzdelani'}>{c(p.qualification)}</a><MobileDoubleLine/></div></section>
+   <section className="m-chapter m-home-about" aria-labelledby="m-about-home-title"><div className="m-inner"><div className="m-about-composition"><Photo asset="prague" alt={c(approved.HomeAbout[3])} className="m-prague"/><div className="m-about-heading"><p className="m-eyebrow">Kryštof Švec</p><h2 id="m-about-home-title">{c(p.aboutTitle)}</h2><div className="preview-about-aside"><p>{c(p.cheer)}</p><MobileVajra className="preview-coach-vajra"/></div></div></div><p className="m-about-bio m-bio-highlight-practice">{c(p.bio)}</p><a className="m-text-link preview-education-link" href={routePath('pribeh',lang)}>{c(p.qualification)}</a><MobileDoubleLine/></div></section>
    <MobileContact lang={lang} home preview/>
   </div><MobileClosing lang={lang}/>
  </>;

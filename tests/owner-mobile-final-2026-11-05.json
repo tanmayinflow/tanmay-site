@@ -1,0 +1,218 @@
+{
+  "approvedOn": "2026-11-05",
+  "baselineCommit": "a443c2e57f469b51423349d39d6149f6051602f3",
+  "scope": "Nineteen owner annotations plus the fourteen saved layout edits: quiet light cards, italic review leads, original small vajras, story-top links, compact captions, centered cycle, two open road-edge pairs, two-column credentials, copy and FAQ alignment. Only mobile; no production deployment.",
+  "files": [
+    {
+      "path": "src/mobile/MobileAbout.tsx",
+      "beforeSha256": "178655adb929a20f27cd4242e63e7571a07b44bbb6e555cb715cb7d78f0fadab",
+      "afterSha256": "f77a0877dcedc4ac46c814264d8ea6b4e489345556e82e6c5e2672817bb43c23",
+      "replacements": [
+        {
+          "offset": 0,
+          "before": "import { EducationDetail } from './PreviewEducation';\r\n",
+          "after": "import { EducationColumns } from './PreviewEducation';\r\n"
+        },
+        {
+          "offset": 2064,
+          "before": "      <div className=\"m-education-columns\">{[[25,29],[27,31]].map(column=><dl key={column[0]}>{column.map(i=><div key={i}><dt>{c(i)}</dt><dd><EducationDetail index={{25:0,27:1,29:2,31:3}[i]!} lang={lang}/></dd></div>)}</dl>)}</div>\r\n",
+          "after": "      <EducationColumns lang={lang}/>\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileHomePreview.tsx",
+      "beforeSha256": "1959db0db7d10f14caef091fa716b09962cd8bea75cbe05d32ab703088b0d77f",
+      "afterSha256": "77651024b3a9e3408ae8d2ef53cc6962cdf8eef858b0b53a636b9b40e0e2e163",
+      "replacements": [
+        {
+          "offset": 0,
+          "before": "",
+          "after": "import { MobileVajra } from './MobileVajra';\r\n"
+        },
+        {
+          "offset": 2614,
+          "before": "   <section className=\"m-chapter m-home-about\" aria-labelledby=\"m-about-home-title\"><div className=\"m-inner\"><div className=\"m-about-composition\"><Photo asset=\"prague\" alt={c(approved.HomeAbout[3])} className=\"m-prague\"/><div className=\"m-about-heading\"><p className=\"m-eyebrow\">Kryštof Švec</p><h2 id=\"m-about-home-title\">{c(p.aboutTitle)}</h2><div className=\"preview-about-aside\"><p>{c(p.cheer)}</p></div></div></div><p className=\"m-about-bio m-bio-highlight-practice\">{c(p.bio)}</p><a className=\"m-text-link preview-education-link\" href={routePath('pribeh',lang)+'#vzdelani'}>{c(p.qualification)}</a><MobileDoubleLine/></div></section>\r\n",
+          "after": "   <section className=\"m-chapter m-home-about\" aria-labelledby=\"m-about-home-title\"><div className=\"m-inner\"><div className=\"m-about-composition\"><Photo asset=\"prague\" alt={c(approved.HomeAbout[3])} className=\"m-prague\"/><div className=\"m-about-heading\"><p className=\"m-eyebrow\">Kryštof Švec</p><h2 id=\"m-about-home-title\">{c(p.aboutTitle)}</h2><div className=\"preview-about-aside\"><p>{c(p.cheer)}</p><MobileVajra className=\"preview-coach-vajra\"/></div></div></div><p className=\"m-about-bio m-bio-highlight-practice\">{c(p.bio)}</p><a className=\"m-text-link preview-education-link\" href={routePath('pribeh',lang)}>{c(p.qualification)}</a><MobileDoubleLine/></div></section>\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileCollaborationPreview.tsx",
+      "beforeSha256": "44111c7bbd07e29994831e5a2a830ad1a0598506163c487da8f3490682cda635",
+      "afterSha256": "3f0afce0732e52ff0102e056edc9c282e3e122e6cb7a92b73e12580a3390be13",
+      "replacements": [
+        {
+          "offset": 0,
+          "before": "",
+          "after": "import { MobileVajra } from './MobileVajra';\r\n"
+        },
+        {
+          "offset": 2491,
+          "before": "     <div className=\"preview-work-week\"><h3>{c(p.weekTitle)}</h3><p>{c(p.week)}</p><MobileCycle lang={lang}/></div>\r\n",
+          "after": "     <div className=\"preview-work-week\"><h3>{c(p.weekTitle).split(/(\\([^)]*\\))/).map((part,i)=>part.startsWith('(')?<span className=\"preview-week-example\" key={i}>{part}</span>:part)}</h3><p>{c(p.week)}</p><MobileCycle lang={lang}/></div>\r\n"
+        },
+        {
+          "offset": 3744,
+          "before": "    <div className=\"preview-work-person\"><Photo asset=\"prague\" className=\"m-prague\" alt={lang==='en'?'Kryštof Švec overlooking Prague.':'Kryštof Švec s výhledem na Prahu.'}/><div><h3>Kryštof Švec</h3><p>{c(p.cheer)}</p></div></div>\r\n",
+          "after": "    <div className=\"preview-work-person\"><Photo asset=\"prague\" className=\"m-prague\" alt={lang==='en'?'Kryštof Švec overlooking Prague.':'Kryštof Švec s výhledem na Prahu.'}/><div><h3>Kryštof Švec</h3><p>{c(p.cheer)}</p><MobileVajra className=\"preview-coach-vajra\"/></div></div>\r\n"
+        },
+        {
+          "offset": 4082,
+          "before": "    <a className=\"m-text-link preview-education-link\" href={routePath('pribeh',lang)+'#vzdelani'}>{c(p.qualification)}</a>\r\n",
+          "after": "    <a className=\"m-text-link preview-education-link\" href={routePath('pribeh',lang)}>{c(p.qualification)}</a>\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileCollaborationFaq.tsx",
+      "beforeSha256": "9a9628e6cd3bf7b80ec2f07431e701ac12ca7097a8167b523257f74273aea0d0",
+      "afterSha256": "d1bf1b8b98ee0a79d77e3da6663cfa6ad3cb09ca67b820014736ffe4e41f248e",
+      "replacements": [
+        {
+          "offset": 483,
+          "before": "  const questions = preview ? p.faq.map(q=>[q.id,previewText(q.question,lang),previewText(q.answer,lang)]) : [\n",
+          "after": "  const questions = preview ? p.faq.map(q=>[q.id,previewText(q.question,lang),previewText(q.answer,lang).replace('dvakrát 20 minut','dvakrát 30 minut').replace('twice 20 minutes','twice 30 minutes')]) : [\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileReviews.tsx",
+      "beforeSha256": "aa99bed67b977c3563b5d4fca795d155f229b38ce2949be364230f7eb25a01b6",
+      "afterSha256": "0c3e6490af7f5360a0341964c10dbf4b1fbd2ce6a47f53ddc4c2c360c1aaf652",
+      "replacements": [
+        {
+          "offset": 1972,
+          "before": "    {preview&&<p>{previewText(p.reviewLead,lang)}</p>}\r\n",
+          "after": "    {preview&&<p className=\"preview-review-lead\"><em>{previewText(p.reviewLead,lang)}</em></p>}\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/PreviewDetails.tsx",
+      "beforeSha256": "e5e3f7da469dd634f77dfe63631b56c8983dcdb5092f42b37c4f7cb182066908",
+      "afterSha256": "1b668f75122eda4f4684fca1305dbc5dede5a1b2fb1d8e77271d1df079cc15a6",
+      "replacements": [
+        {
+          "offset": 2144,
+          "before": "",
+          "after": " why:['Proč 4 týdny? Začne tě to bavit a uvidíš, že plán drží i v horším týdnu.','Why 4 weeks? You will start enjoying it and see that the plan holds up even during a difficult week.'],\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/PreviewEducation.tsx",
+      "beforeSha256": "3ff172378610229da65e564258c3390ee53549eaed2c5ca483f7b5fae62152d3",
+      "afterSha256": "a1ad5f9d24de34d1d582b7a850e19f249bf040af88b7cdd212dd08c55a8ff310",
+      "replacements": [
+        {
+          "offset": 956,
+          "before": " {title:['Instruktor jógy','Yoga instructor'],school:'Kabir Yoga',detail:['Dva výcviky, celkem 400 hodin.','Two training programmes, 400 hours in total.'],url:'https://kabiryoga.com/certifikovany-instruktorsky-kurz-jogy-yofyz-2020-osnova-a-podrobnosti/'},\n",
+          "after": " {title:['Instruktor jógy','Yoga instructor'],school:'Kabir Yoga',detail:['Celkem 400 hodin.','400 hours in total.'],url:'https://kabiryoga.com/certifikovany-instruktorsky-kurz-jogy-yofyz-2020-osnova-a-podrobnosti/'},\n"
+        },
+        {
+          "offset": 1503,
+          "before": " return <div className=\"preview-credential\"><strong>{item.title[n]}</strong><span className=\"education-provider\"><a href={item.url} target=\"_blank\" rel=\"noopener noreferrer\">{item.school}</a></span><span className=\"education-duration\">{'hours' in item?<><b>{item.hours} {n?'hours':'hodin'}</b><span className=\"education-hours-detail\">{item.theory} {n?'theory':'teorie'} + {item.practice} {n?'practice':'praxe'}</span></>:item.detail[n]}</span></div>;\n",
+          "after": " return <div className=\"preview-credential\"><strong>{item.title[n]}</strong><span className=\"education-provider\"><a href={item.url} target=\"_blank\" rel=\"noopener noreferrer\">{item.school}</a></span><span className=\"education-duration\">{'hours' in item?<b>{item.hours} {n?'hours':'hodin'}</b>:item.detail[n]}</span></div>;\n"
+        },
+        {
+          "offset": 1828,
+          "before": "export function EducationDetail({index,lang}:{index:number;lang:string}) {\n return <>{[[0],[1,2,3],[4],[5]][index].map(i=><Credential key={i} index={i} lang={lang}/>)}</>;\n",
+          "after": "/** The same grouping is used on the story and collaboration pages. */\nexport function EducationColumns({lang}:{lang:string}) {\n const n=lang==='en'?1:0;\n const groups=[\n  [{title:['Profesní kvalifikace','Professional qualification'],items:[0]},{title:['Jóga','Yoga'],items:[4]},{title:['Studium','Studies'],items:[5]}],\n  [{title:['Pohyb a trénink','Movement and training'],items:[1,2,3]}],\n ];\n return <div className=\"preview-education-columns\">{groups.map((column,i)=><div className=\"preview-education-column\" key={i}>{column.map(group=><section className=\"preview-education-group\" key={group.title[0]}><h3>{group.title[n]}</h3>{group.items.map(index=><Credential key={index} index={index} lang={lang}/>)}</section>)}</div>)}</div>;\n"
+        },
+        {
+          "offset": 2569,
+          "before": "\nexport function EducationList({lang}:{lang:string}) {\n return <ul className=\"preview-education-list\">{mobileEducation.map((item,i)=><li key={item.url}><Credential index={i} lang={lang}/></li>)}</ul>;\n}\n",
+          "after": "export function EducationList({lang}:{lang:string}) {return <EducationColumns lang={lang}/>;}\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/PreviewProcessRoad.tsx",
+      "beforeSha256": "2f489d35bc3a2b433e6210e05d73b1f290151911731a953341611289013cb93a",
+      "afterSha256": "bdd6476e15b80378760c976addbb0e8e80879292fef758b805231d648d0697e8",
+      "replacements": [
+        {
+          "offset": 60,
+          "before": "/** One ribbon follows the free space beside and between the three steps.\n * Its width grows towards the reader; the text always remains unobstructed. */\n",
+          "after": "/** Two open pairs of road edges; the second is wider and closer to the reader. */\n"
+        },
+        {
+          "offset": 394,
+          "before": "  const centre=svg.querySelector<SVGPathElement>('.preview-road-centre')!;\n  const ribbon=svg.querySelector<SVGPathElement>('.preview-road-ribbon')!;\n",
+          "after": "  const edges=Array.from(svg.querySelectorAll<SVGPathElement>('.preview-road-edge'));\n"
+        },
+        {
+          "offset": 797,
+          "before": "   const [a,b,c]=bounds.map(rect=>({top:rect.top-box.top,bottom:rect.bottom-box.top}));\n   const right=w-15,left=15,middle=w*.5;\n   const d=`M ${right} ${a.top+12} C ${right+4} ${a.bottom-24}, ${right+4} ${a.bottom+18}, ${w*.8} ${a.bottom+30} S ${left} ${b.top-40}, ${left} ${b.top+14} L ${left} ${b.bottom-12} C ${left} ${b.bottom+32}, ${middle} ${b.bottom+30}, ${middle} ${c.top-12}`;\n",
+          "after": ""
+        },
+        {
+          "offset": 861,
+          "before": "   centre.setAttribute('d',d);\n   const length=centre.getTotalLength(),sides:[string[],string[]]=[[],[]];\n   for(let i=0;i<=160;i++){\n    const t=i/160,at=t*length,p=centre.getPointAtLength(at);\n    const before=centre.getPointAtLength(Math.max(0,at-.5)),after=centre.getPointAtLength(Math.min(length,at+.5));\n    const dx=after.x-before.x,dy=after.y-before.y,norm=Math.hypot(dx,dy)||1,half=1.1+6.5*t*t;\n    sides[0].push(`${(p.x-dy/norm*half).toFixed(2)},${(p.y+dx/norm*half).toFixed(2)}`);\n    sides[1].push(`${(p.x+dy/norm*half).toFixed(2)},${(p.y-dx/norm*half).toFixed(2)}`);\n",
+          "after": "   for(let i=0;i<2;i++){\n    const top=bounds[i].bottom-box.top+8,bottom=bounds[i+1].top-box.top-22;\n    const h=Math.max(40,bottom-top),mirror=i===1;\n    const width=i===0?76:112,edge=mirror?24:w-24;\n    const x=(local:number)=>mirror?edge+local:edge-local;\n    const points=[{x:x(width*.75),y:top},{x:x(0),y:top+2},{x:x(0),y:top+h*.65},{x:x(width*.44),y:top+h}];\n    const sides:[string[],string[]]=[[],[]];\n    for(let j=0;j<=72;j++){\n     const t=j/72,u=1-t,[a,b,c,d]=points;\n     const px=u*u*u*a.x+3*u*u*t*b.x+3*u*t*t*c.x+t*t*t*d.x;\n     const py=u*u*u*a.y+3*u*u*t*b.y+3*u*t*t*c.y+t*t*t*d.y;\n     const dx=3*u*u*(b.x-a.x)+6*u*t*(c.x-b.x)+3*t*t*(d.x-c.x);\n     const dy=3*u*u*(b.y-a.y)+6*u*t*(c.y-b.y)+3*t*t*(d.y-c.y);\n     const norm=Math.hypot(dx,dy)||1,half=i===0?1.5+5*t:6.5+8*t;\n     sides[0].push(`${(px-dy/norm*half).toFixed(2)},${(py+dx/norm*half).toFixed(2)}`);\n     sides[1].push(`${(px+dy/norm*half).toFixed(2)},${(py-dx/norm*half).toFixed(2)}`);\n    }\n    sides.forEach((side,j)=>edges[i*2+j].setAttribute('d',`M${side.join(' L')}`));\n"
+        },
+        {
+          "offset": 1918,
+          "before": "   ribbon.setAttribute('d',`M${sides[0].join(' L')} L${sides[1].reverse().join(' L')} Z`);\n",
+          "after": ""
+        },
+        {
+          "offset": 2287,
+          "before": " return <div ref={root} className=\"preview-process-road\"><svg className=\"preview-process-road-art\" aria-hidden=\"true\" fill=\"none\"><path className=\"preview-road-centre\" visibility=\"hidden\"/><path className=\"preview-road-ribbon\"/></svg>{children}</div>;\n",
+          "after": " return <div ref={root} className=\"preview-process-road\"><svg className=\"preview-process-road-art\" aria-hidden=\"true\" fill=\"none\">{[0,1,2,3].map(i=><path className=\"preview-road-edge\" data-road-pair={Math.floor(i/2)+1} key={i}/>)}</svg>{children}</div>;\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/preview-education.css",
+      "beforeSha256": "348d05bf128c12c3947304544ede8d53930c604f3f9054c3d1fdaf0f68d7d866",
+      "afterSha256": "e03c89aca3010de6746b690f6a72897968c0f717b9d01166a4e0a65e8baace1a",
+      "replacements": [
+        {
+          "offset": 603,
+          "before": " .tm-mobile[data-mobile-version] .preview-credential .education-hours-detail {display:block}\n",
+          "after": ""
+        },
+        {
+          "offset": 697,
+          "before": " .tm-mobile[data-mobile-version] .m-education .m-education-columns {grid-template-columns:minmax(0,1fr);gap:28px}\n .tm-mobile[data-mobile-version] .m-education .m-education-columns dd {font-size:.9375rem}\n",
+          "after": ""
+        },
+        {
+          "offset": 1109,
+          "before": "",
+          "after": "\n@media(max-width:899px){\n .tm-mobile[data-mobile-version] .preview-education-columns {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:26px}\n .tm-mobile[data-mobile-version] .preview-education-column {min-width:0}\n .tm-mobile[data-mobile-version] .preview-education-group + .preview-education-group {margin-top:26px}\n .tm-mobile[data-mobile-version] .preview-education-group > h3 {font-family:var(--ff-label);font-size:.6875rem;font-weight:500;letter-spacing:.06em;line-height:1.5;text-transform:uppercase;color:var(--m-accent);margin:0 0 14px}\n .tm-mobile[data-mobile-version] .preview-education-columns .preview-credential {font-family:var(--ff-body);font-size:.8125rem;line-height:1.55;overflow-wrap:normal}\n .tm-mobile[data-mobile-version] .preview-education-columns .preview-credential strong {font-family:inherit;font-size:inherit;font-weight:600}\n .tm-mobile[data-mobile-version] .preview-education-columns .education-duration {font-size:1em}\n .tm-mobile[data-mobile-version] .preview-education-columns .education-provider {margin-top:6px}\n}\n"
+        }
+      ]
+    },
+    {
+      "path": "src/preview-v3.css",
+      "beforeSha256": "4422765486b49a33fcf9be2b05fa7a8965a4a7c76662cf1d6f8ad65bcc36e42e",
+      "afterSha256": "24d08ec895b9f8f2110fa4a4c8cdbb8820032b532c37886a1e9adcfe6d9eff33",
+      "replacements": [
+        {
+          "offset": 42430,
+          "before": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits:not(.preview-handstand) .preview-benefits-track > article::before {content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;background:radial-gradient(ellipse closest-side at 50% 45%,rgba(244,240,235,.12) 0%,rgba(244,240,235,.06) 50%,rgba(244,240,235,0) 100%)}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits.preview-barriers:not(.preview-handstand) .preview-benefits-track > article {border:1px solid rgba(117,68,55,.38);background:rgba(244,240,235,.26)}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits.preview-barriers:not(.preview-handstand) .preview-benefits-track > article::before {content:none}\n",
+          "after": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits:not(.preview-handstand) .preview-benefits-track > article::before {content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:0;background:radial-gradient(ellipse closest-side at 50% 45%,rgba(244,240,235,.12) 0%,rgba(244,240,235,.06) 50%,rgba(244,240,235,0) 100%)}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits.preview-barriers:not(.preview-handstand) .preview-benefits-track > article {border:0;background:none}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits.preview-barriers:not(.preview-handstand) .preview-benefits-track > article::before {content:'';background:radial-gradient(ellipse closest-side at 50% 45%,rgba(255,250,237,.6),rgba(255,250,237,.25) 52%,transparent 100%)}\n"
+        },
+        {
+          "offset": 43351,
+          "before": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits:not(.preview-handstand):not(.preview-barriers) .preview-benefits-track > article {flex-basis:94%;min-height:280px;padding:30px 26px}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits:not(.preview-handstand):not(.preview-barriers) .preview-benefits-track > article::before {background:radial-gradient(ellipse at 42% 40%,rgba(244,240,235,.12) 0%,rgba(244,240,235,.055) 50%,transparent 76%)}\n",
+          "after": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits:not(.preview-handstand):not(.preview-barriers) .preview-benefits-track > article {flex-basis:85%;min-height:0;padding:24px}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits:not(.preview-handstand):not(.preview-barriers) .preview-benefits-track > article::before {background:radial-gradient(ellipse closest-side at 50% 45%,rgba(244,240,235,.12),rgba(244,240,235,.06) 50%,transparent 100%)}\n"
+        },
+        {
+          "offset": 45358,
+          "before": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-road-ribbon {fill:currentColor;fill-opacity:.15;stroke:currentColor;stroke-opacity:.65;stroke-width:.85;stroke-linejoin:round}\n",
+          "after": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-road-edge {fill:none;stroke:currentColor;stroke-opacity:.65;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round}\n"
+        },
+        {
+          "offset": 45543,
+          "before": "",
+          "after": "\n/* Owner layout saved 2026-11-05 16:47 UTC, integrated using stable components.\n   The editor offsets stay exact at 440 px and horizontal offsets scale down. */\n@media(max-width:899px){\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-intro-words > .m-story-trigger {translate:0 -8px}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-intro-words > .m-story-trigger > .m-story-preview {translate:1px -8px}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps:not(.preview-included-steps) > li:first-child > .preview-curve-arrow {translate:calc(-13 * 100vw / 440) 22px;rotate:22deg}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-steps:not(.preview-included-steps) > li:nth-child(2) > .preview-curve-arrow {translate:calc(110 * 100vw / 440) 18px;rotate:-30deg}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-work-journey > .preview-curve-arrow {translate:calc(-32 * 100vw / 440) -10px;rotate:-46deg}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-included-steps > li:not(:last-child) .preview-step-title {color:#ca795b}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-included-steps > li:first-child > .preview-curve-arrow {translate:calc(-21 * 100vw / 440) 23px;rotate:-8deg;width:55px!important;height:66px!important;max-width:none;max-height:none}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-included-steps > li:nth-child(2) > .preview-curve-arrow {translate:calc(-35 * 100vw / 440) -8px;rotate:10deg;width:71px!important;height:80px!important;max-width:none;max-height:none}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-included-steps > li:nth-child(3) > .preview-curve-arrow {translate:calc(12 * 100vw / 440) -7px;rotate:-11deg;width:92px!important;height:103px!important;max-width:none;max-height:none}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-review-lead em {font-style:italic}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-coach-vajra {display:block;width:54px;height:auto;margin:14px auto 0;color:var(--m-body);opacity:.75;transform:rotate(-24deg)}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-collab-caption p {justify-content:center;gap:16px;font-size:clamp(1rem,4.2vw,1.1875rem)}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-work-welcome .preview-work-location {max-width:none;font-size:clamp(.6875rem,2.8vw,.8125rem);white-space:nowrap}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-week-example {color:#ca795b}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-between .m-cycle-row {width:fit-content;max-width:100%;margin:28px auto;grid-template-columns:104px minmax(0,180px);gap:20px}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-between .m-cycle-illustration {width:104px}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-between .m-cycle-controls button {min-height:44px;padding:10px 0;font-size:1.25rem;font-weight:600;color:#ca795b;white-space:nowrap}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-between .m-cycle-controls button:nth-child(2) {padding-left:18px}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-collaboration-faq summary {justify-content:center;text-align:center}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-collaboration-faq .faq-answer {text-align:left}\n}\n"
+        }
+      ]
+    }
+  ],
+  "newFiles": []
+}

@@ -23,7 +23,7 @@ export default function MobileReviews({lang,preview=false}:{lang:string;preview?
   const title=preview?previewText(p.reviewTitle,lang):lang==='en'?'What people say about the work':'Co říkají klienti';
   const activate=(index:number)=>{rail.goTo(index);rail.ref.current?.querySelector<HTMLButtonElement>(`.m-review-original-card--${index}>.m-story-trigger`)?.click();};
   return <Chapter title={title} className="m-reviews m-reviews-m4">
-    {preview&&<p>{previewText(p.reviewLead,lang)}</p>}
+    {preview&&<p className="preview-review-lead"><em>{previewText(p.reviewLead,lang)}</em></p>}
     <div className="m-review-rail" role="region" aria-label={title}>
       <div className="m-review-viewport m-circular-viewport" ref={rail.ref} id={rail.id} tabIndex={0} aria-label={lang==='en'?'Client reviews. Swipe or use arrow keys.':'Zkušenosti klientů. Posouvej tahem nebo šipkami na klávesnici.'} {...rail.viewportProps}>
         {rail.slots.map(({physical,index,clone})=>{

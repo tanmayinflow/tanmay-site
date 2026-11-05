@@ -15,6 +15,7 @@ export const mobilePreviewCopy={...previewCopy,
  qualification:['Moje celé akreditované vzdělání a osobní příběh','My full accredited education and personal story'],
  firstCta:['Chci první trénink.','I want my first session.'],
  week:previewCopy.week.map(text=>text.replace('20 minut','30 minut').replace('20 minutes','30 minutes').replace('Neděle','Průběžně').replace('Sunday','Throughout the week')),
+ why:['Proč 4 týdny? Začne tě to bavit a uvidíš, že plán drží i v horším týdnu.','Why 4 weeks? You will start enjoying it and see that the plan holds up even during a difficult week.'],
 };
 
 export function PreviewCurveArrow({className='',connector=false}:{className?:string;connector?:boolean}) {

@@ -5,7 +5,7 @@ import '../components/collaboration-faq.css';
  * the final price/duration sentence. The locked desktop component is untouched. */
 export default function MobileCollaborationFaq({ lang, preview = false }: { lang: string; preview?: boolean }) {
   const t = (cs: string, en: string) => lang === 'en' ? en : cs;
-  const questions = preview ? p.faq.map(q=>[q.id,previewText(q.question,lang),previewText(q.answer,lang)]) : [
+  const questions = preview ? p.faq.map(q=>[q.id,previewText(q.question,lang),previewText(q.answer,lang).replace('dvakrát 20 minut','dvakrát 30 minut').replace('twice 20 minutes','twice 30 minutes')]) : [
     ['experience', t('Potřebuji zkušenosti?', 'Do I need experience?'), t('Ne. První setkání slouží i k tomu, abychom zjistili, kde právě jsi a co má pro tebe smysl.', 'No. The first session also helps us see where you are now and what makes sense for you.')],
     ['place', t('Kde probíhají osobní tréninky?', 'Where do in-person sessions take place?'), t('V Praze, uvnitř nebo venku podle toho, na čem pracujeme. Konkrétní místo domluvíme před prvním setkáním.', 'In Prague, indoors or outdoors depending on what we are working on. We agree the exact place before the first session.')],
     ['frequency', t('Jak často se budeme vídat?', 'How often will we meet?'), t('Frekvence není předem daná. U delší spolupráce ji nastavíme podle cíle, tvého týdne a životního rytmu.', 'The frequency is not fixed in advance. In longer-term work we set it according to the goal, your week and the rhythm of your life.')],

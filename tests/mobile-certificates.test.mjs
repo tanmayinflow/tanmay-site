@@ -1,3 +1,4 @@
+import {restoreFinalIfCurrent} from './owner-mobile-final-2026-11-05.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -11,5 +12,5 @@ test('Sixteen mobile annotations restore the approved baseline and reject unrela
   assert.equal(sha(withoutAuthorizedCertificates(f.path,bytes)),f.beforeSha256);
   assert.throws(()=>withoutAuthorizedCertificates(f.path,Buffer.concat([bytes,Buffer.from(' ')])));
  }
- for(const f of certificatesDelta.newFiles)assert.equal(sha(readFileSync(new URL('../'+f.path,import.meta.url))),f.sha256,f.path);
+ for(const f of certificatesDelta.newFiles)assert.equal(sha(restoreFinalIfCurrent(f.path,readFileSync(new URL('../'+f.path,import.meta.url)))),f.sha256,f.path);
 });
