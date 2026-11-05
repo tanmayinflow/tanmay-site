@@ -15,24 +15,37 @@ export function PreviewProcessRoad({children,lang}:{children:ReactNode;lang:stri
    const box=host.getBoundingClientRect(),w=box.width;
    const bounds=items.map(item=>item.firstElementChild!.getBoundingClientRect());
    svg.setAttribute('viewBox',`0 0 ${w} ${host.offsetHeight}`);
-   for(let i=0;i<2;i++){
-    const top=bounds[i].bottom-box.top+8,bottom=bounds[i+1].top-box.top-22;
-    const h=Math.max(40,bottom-top),mirror=i===1;
-    const width=i===0?76:112,edge=mirror?24:w-24;
-    const x=(local:number)=>mirror?edge+local:edge-local;
-    const points=[{x:x(width*.75),y:top},{x:x(0),y:top+2},{x:x(0),y:top+h*.65},{x:x(width*.44),y:top+h}];
-    const sides:[string[],string[]]=[[],[]];
-    for(let j=0;j<=72;j++){
-     const t=j/72,u=1-t,[a,b,c,d]=points;
-     const px=u*u*u*a.x+3*u*u*t*b.x+3*u*t*t*c.x+t*t*t*d.x;
-     const py=u*u*u*a.y+3*u*u*t*b.y+3*u*t*t*c.y+t*t*t*d.y;
-     const dx=3*u*u*(b.x-a.x)+6*u*t*(c.x-b.x)+3*t*t*(d.x-c.x);
-     const dy=3*u*u*(b.y-a.y)+6*u*t*(c.y-b.y)+3*t*t*(d.y-c.y);
-     const norm=Math.hypot(dx,dy)||1,half=i===0?1.5+5*t:6.5+8*t;
-     sides[0].push(`${(px-dy/norm*half).toFixed(2)},${(py+dx/norm*half).toFixed(2)}`);
-     sides[1].push(`${(px+dy/norm*half).toFixed(2)},${(py-dx/norm*half).toFixed(2)}`);
-    }
-    sides.forEach((side,j)=>edges[i*2+j].setAttribute('d',`M${side.join(' L')}`));
+   const top=bounds[0].bottom-box.top+8;
+   const end={x:w-66,y:bounds[1].top-box.top-22};
+   const start={x:w*.27,y:bounds[1].bottom-box.top+8};
+   const bottom=bounds[2].top-box.top-22;
+   // The hidden straight span defines BOTH tangents and a constant join width.
+   // Horizontal end sections keep the two edges level, rather than clipping
+   // a normal-offset curve (which used to leave the inner edge short).
+   const dx=start.x-end.x,dy=start.y-end.y,length=Math.hypot(dx,dy)||1;
+   const ux=dx/length,uy=dy/length,half=6.5;
+   const upperHandle=Math.min(26,(end.y-top)*.45/uy);
+   const lowerHeight=bottom-start.y;
+   const lowerHandle=Math.min(58,(start.x-24)/-ux,lowerHeight*.32/uy);
+   const point=(x:number,y:number)=>`${x.toFixed(2)},${y.toFixed(2)}`;
+   for(let side=0;side<2;side++){
+    const offset=side===0?half:-half;
+    const a=point(w-98,top+(side===0?0:3));
+    const b=point(w-(side===0?8:24),top+(side===0?0:3));
+    const c=point(end.x-ux*upperHandle+offset,end.y-uy*upperHandle);
+    const d=point(end.x+offset,end.y);
+    edges[side].setAttribute('d',`M${a} C${b} ${c} ${d}`);
+    const near=side===0?14.5:-14.5;
+    const e=point(start.x+offset,start.y);
+    const f=point(start.x+ux*lowerHandle+offset,start.y+uy*lowerHandle);
+    const bendOffset=side===0?10:-10;
+    const bendX=24+bendOffset,bendY=start.y+lowerHeight*.5;
+    const g=point(bendX,bendY-lowerHeight*.2);
+    const h=point(bendX,bendY);
+    const j=point(bendX,bendY+lowerHeight*.23);
+    const k=point(w*.27-36+near,bottom-8);
+    const l=point(w*.27+near,bottom);
+    edges[side+2].setAttribute('d',`M${e} C${f} ${g} ${h} C${j} ${k} ${l}`);
    }
   };
   const queue=()=>{if(!frame)frame=requestAnimationFrame(measure);};

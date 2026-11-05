@@ -420,3 +420,9 @@
  .tm-mobile[data-mobile-version][data-preview="v3"] .m-collaboration-faq summary {justify-content:center;text-align:center}
  .tm-mobile[data-mobile-version][data-preview="v3"] .m-collaboration-faq .faq-answer {text-align:left}
 }
+
+/* Owner's additional layout saved 5 November, 18:56 UTC. */
+@media(max-width:899px){
+ .tm-mobile[data-mobile-version][data-preview="v3"] .m-home-about .preview-coach-vajra {width:66px;height:60px;max-width:none;max-height:none;translate:calc(-10 * 100vw / 440) 0}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-person .preview-coach-vajra {width:78px;height:56px;max-width:none;max-height:none;translate:calc(-5 * 100vw / 440) 5px}
+}

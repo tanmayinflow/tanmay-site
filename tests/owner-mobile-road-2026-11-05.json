@@ -1,0 +1,29 @@
+{
+  "baselineCommit": "9717120bfea88c07fb5075a0f6bfd211d1ddd827",
+  "files": [
+    {
+      "path": "src/mobile/PreviewProcessRoad.tsx",
+      "beforeSha256": "bdd6476e15b80378760c976addbb0e8e80879292fef758b805231d648d0697e8",
+      "afterSha256": "fb5bceb29978594d464d73945263ecc24ccacc2471c6b6fb976d10a1a31b8505",
+      "replacements": [
+        {
+          "offset": 864,
+          "before": "for(let i=0;i<2;i++){\n    const top=bounds[i].bottom-box.top+8,bottom=bounds[i+1].top-box.top-22;\n    const h=Math.max(40,bottom-top),mirror=i===1;\n    const width=i===0?76:112,edge=mirror?24:w-24;\n    const x=(local:number)=>mirror?edge+local:edge-local;\n    const points=[{x:x(width*.75),y:top},{x:x(0),y:top+2},{x:x(0),y:top+h*.65},{x:x(width*.44),y:top+h}];\n    const sides:[string[],string[]]=[[],[]];\n    for(let j=0;j<=72;j++){\n     const t=j/72,u=1-t,[a,b,c,d]=points;\n     const px=u*u*u*a.x+3*u*u*t*b.x+3*u*t*t*c.x+t*t*t*d.x;\n     const py=u*u*u*a.y+3*u*u*t*b.y+3*u*t*t*c.y+t*t*t*d.y;\n     const dx=3*u*u*(b.x-a.x)+6*u*t*(c.x-b.x)+3*t*t*(d.x-c.x);\n     const dy=3*u*u*(b.y-a.y)+6*u*t*(c.y-b.y)+3*t*t*(d.y-c.y);\n     const norm=Math.hypot(dx,dy)||1,half=i===0?1.5+5*t:6.5+8*t;\n     sides[0].push(`${(px-dy/norm*half).toFixed(2)},${(py+dx/norm*half).toFixed(2)}`);\n     sides[1].push(`${(px+dy/norm*half).toFixed(2)},${(py-dx/norm*half).toFixed(2)}`);\n    }\n    sides.forEach((side,j)=>edges[i*2+j].setAttribute('d',`M${side.join(' L')}`)",
+          "after": "const top=bounds[0].bottom-box.top+8;\n   const end={x:w-66,y:bounds[1].top-box.top-22};\n   const start={x:w*.27,y:bounds[1].bottom-box.top+8};\n   const bottom=bounds[2].top-box.top-22;\n   // The hidden straight span defines BOTH tangents and a constant join width.\n   // Horizontal end sections keep the two edges level, rather than clipping\n   // a normal-offset curve (which used to leave the inner edge short).\n   const dx=start.x-end.x,dy=start.y-end.y,length=Math.hypot(dx,dy)||1;\n   const ux=dx/length,uy=dy/length,half=6.5;\n   const upperHandle=Math.min(26,(end.y-top)*.45/uy);\n   const lowerHeight=bottom-start.y;\n   const lowerHandle=Math.min(58,(start.x-24)/-ux,lowerHeight*.32/uy);\n   const point=(x:number,y:number)=>`${x.toFixed(2)},${y.toFixed(2)}`;\n   for(let side=0;side<2;side++){\n    const offset=side===0?half:-half;\n    const a=point(w-98,top+(side===0?0:3));\n    const b=point(w-(side===0?8:24),top+(side===0?0:3));\n    const c=point(end.x-ux*upperHandle+offset,end.y-uy*upperHandle);\n    const d=point(end.x+offset,end.y);\n    edges[side].setAttribute('d',`M${a} C${b} ${c} ${d}`);\n    const near=side===0?14.5:-14.5;\n    const e=point(start.x+offset,start.y);\n    const f=point(start.x+ux*lowerHandle+offset,start.y+uy*lowerHandle);\n    const bendOffset=side===0?10:-10;\n    const bendX=24+bendOffset,bendY=start.y+lowerHeight*.5;\n    const g=point(bendX,bendY-lowerHeight*.2);\n    const h=point(bendX,bendY);\n    const j=point(bendX,bendY+lowerHeight*.23);\n    const k=point(w*.27-36+near,bottom-8);\n    const l=point(w*.27+near,bottom);\n    edges[side+2].setAttribute('d',`M${e} C${f} ${g} ${h} C${j} ${k} ${l}`"
+        }
+      ]
+    },
+    {
+      "path": "src/preview-v3.css",
+      "beforeSha256": "24d08ec895b9f8f2110fa4a4c8cdbb8820032b532c37886a1e9adcfe6d9eff33",
+      "afterSha256": "eb6da6f3629bc6787a15bd69a3bf9e7b154c36140ea8eafa63ff9a964f44654e",
+      "replacements": [
+        {
+          "offset": 48897,
+          "before": "",
+          "after": "\n/* Owner's additional layout saved 5 November, 18:56 UTC. */\n@media(max-width:899px){\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-home-about .preview-coach-vajra {width:66px;height:60px;max-width:none;max-height:none;translate:calc(-10 * 100vw / 440) 0}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-work-person .preview-coach-vajra {width:78px;height:56px;max-width:none;max-height:none;translate:calc(-5 * 100vw / 440) 5px}\n}\n"
+        }
+      ]
+    }
+  ]
+}

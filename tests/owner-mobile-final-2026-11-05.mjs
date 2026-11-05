@@ -1,9 +1,11 @@
+import {restoreRoadIfCurrent} from './owner-mobile-road-2026-11-05.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 export const finalDelta=JSON.parse(readFileSync(new URL('./owner-mobile-final-2026-11-05.json',import.meta.url)));
 const sha=b=>createHash('sha256').update(b).digest('hex');
 export function withoutAuthorizedFinal(path,bytes){
+ bytes=restoreRoadIfCurrent(path,bytes);
  const file=finalDelta.files.find(f=>f.path===path);
  if(!file||sha(bytes)===file.beforeSha256)return bytes;
  assert.equal(sha(bytes),file.afterSha256,'Exact nineteen annotations and saved owner layout: '+path);
@@ -17,6 +19,7 @@ export function withoutAuthorizedFinal(path,bytes){
  return value;
 }
 export function restoreFinalIfCurrent(path,bytes){
+ bytes=restoreRoadIfCurrent(path,bytes);
  const file=finalDelta.files.find(f=>f.path===path);
  return file&&sha(bytes)===file.afterSha256?withoutAuthorizedFinal(path,bytes):bytes;
 }
