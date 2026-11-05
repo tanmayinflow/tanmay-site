@@ -1,0 +1,13 @@
+/* Shared mobile credentials and story links; desktop keeps its existing styles. */
+@media(max-width:899px){
+ .tm-mobile[data-mobile-version] .preview-credential + .preview-credential {margin-top:24px}
+ .tm-mobile[data-mobile-version] .preview-credential .education-provider {display:block;margin-top:8px;font-weight:400}
+ .tm-mobile[data-mobile-version] .preview-credential .education-provider a {text-decoration:underline;text-underline-offset:.2em}
+ .tm-mobile[data-mobile-version] .preview-credential .education-duration {display:block;margin-top:6px;font-size:.9em;line-height:1.6;font-weight:400}
+ .tm-mobile[data-mobile-version] .preview-credential .education-hours-detail {display:block}
+ .tm-mobile[data-mobile-version] .preview-education-list {list-style:none;padding:0;margin:0}
+ .tm-mobile[data-mobile-version] .m-education .m-education-columns {grid-template-columns:minmax(0,1fr);gap:28px}
+ .tm-mobile[data-mobile-version] .m-education .m-education-columns dd {font-size:.9375rem}
+ .tm-mobile[data-mobile-version] .m-text-link.preview-story-cta {display:flex;justify-content:center;width:fit-content;max-width:100%;box-sizing:border-box;padding:14px 18px;margin-top:24px;border:1px dashed currentColor;border-radius:20px 25px 18px 24px / 24px 17px 25px 19px;line-height:1.5;text-align:center;background:none}
+ .tm-mobile[data-mobile-version] .m-offer .preview-story-cta {margin-inline:auto}
+}

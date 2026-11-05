@@ -1,0 +1,131 @@
+{
+  "approvedOn": "2026-11-05",
+  "baselineCommit": "46c79cfb4627b275f134657dd40a805744f150d7",
+  "scope": "Sixteen owner annotations: larger home fading cards, restored collaboration frames, mirrored and tall connectors, continuous widening collaboration path, red terrain, revised mobile copy and story CTAs, certificate-backed Vital hours and separate course links. No desktop or production deployment changes.",
+  "files": [
+    {
+      "path": "src/mobile/MobileAbout.tsx",
+      "beforeSha256": "b145209290ebd2be8fe3cbc766ca7b69b6d1e3eee5b1be79e03aac0fa4534ca2",
+      "afterSha256": "178655adb929a20f27cd4242e63e7571a07b44bbb6e555cb715cb7d78f0fadab",
+      "replacements": [
+        {
+          "offset": 0,
+          "before": "import { EducationDetail } from '../components/EducationDetails';\r\n",
+          "after": "import { EducationDetail } from './PreviewEducation';\r\n"
+        },
+        {
+          "offset": 353,
+          "before": "import { MobileEditorialLink } from './MobileEditorialLink';\n",
+          "after": ""
+        },
+        {
+          "offset": 690,
+          "before": "    <div id=\"mobilni-obsah\" className=\"m-about-intro-copy\"><div className=\"m-inner\"><p><RichText>{introduction}</RichText></p><MobileEditorialLink href={routePath('spoluprace',lang)}>{lang==='en'?'Ways to work together':'Možnosti spolupráce'}</MobileEditorialLink></div></div>\n",
+          "after": "    <div id=\"mobilni-obsah\" className=\"m-about-intro-copy\"><div className=\"m-inner\"><p><RichText>{introduction}</RichText></p><a className=\"m-text-link preview-story-cta\" href={routePath('spoluprace',lang)}>{lang==='en'?'Ways to work together':'Možnosti spolupráce'}</a></div></div>\r\n"
+        },
+        {
+          "offset": 2296,
+          "before": "        <p className=\"m-professional-boundary\"><RichText>{c(33)}</RichText></p>\r\n",
+          "after": ""
+        },
+        {
+          "offset": 2312,
+          "before": "    <Chapter title={c(34)} className=\"m-offer\"><p><RichText>{c(35)}</RichText></p><MobileEditorialLink href={routePath('spoluprace',lang)}>{lang==='en'?'Ways to work together':'Možnosti spolupráce'}</MobileEditorialLink></Chapter>\n",
+          "after": "    <Chapter title={c(34)} className=\"m-offer\"><p>{lang==='en'?'Want to get stronger, feel firmer and stop starting again every Monday? Start with a session in Prague or online. Get a plan tailored to you and guidance that fits your week.':'Chceš zesílit, zpevnit se a přestat začínat od pondělí? Začni prvním tréninkem v Praze nebo online. Dostaneš plán na míru a vedení, které se přizpůsobí tvému týdnu.'}</p><a className=\"m-text-link preview-story-cta\" href={routePath('spoluprace',lang)}>{lang==='en'?'Ways to work together':'Možnosti spolupráce'}</a></Chapter>\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileShared.tsx",
+      "beforeSha256": "bb750fdadc2524f0bdb306fa1d04597cc39734385cd64369643fa777e6b51011",
+      "afterSha256": "1a5f766577a3f610c4bb84ddf1afbb57f66b0fc0bb35c95681aa0827a7d66310",
+      "replacements": [
+        {
+          "offset": 0,
+          "before": "import { EducationList } from '../components/EducationDetails';\r\n",
+          "after": "import { EducationList } from './PreviewEducation';\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/PreviewDetails.tsx",
+      "beforeSha256": "52ec0be9b46cbec6b0532bcd517b2e45cb2bf264a42c3373dc02c4b7767a4d88",
+      "afterSha256": "e5e3f7da469dd634f77dfe63631b56c8983dcdb5092f42b37c4f7cb182066908",
+      "replacements": [
+        {
+          "offset": 148,
+          "before": "",
+          "after": "import { PreviewProcessRoad } from './PreviewProcessRoad';\n"
+        },
+        {
+          "offset": 1245,
+          "before": " forItems:previewCopy.forItems.map(pair=>pair.map(text=>{const sentence=text.replace('máš málo času, protože práce a rodina,','máš málo času kvůli práci a rodině.').replace(/[,.;]$/,'.');return sentence.charAt(0).toUpperCase()+sentence.slice(1);})),\n",
+          "after": " forItems:previewCopy.forItems.map(pair=>pair.map(text=>{const sentence=text.replace('máš málo času, protože práce a rodina,','máš málo času kvůli práci a rodině.').replace('v síle,','v síle a bez bolesti.').replace('many strong years ahead,','many strong, pain-free years ahead.').replace(/[,.;]$/,'.');return sentence.charAt(0).toUpperCase()+sentence.slice(1);})),\n"
+        },
+        {
+          "offset": 1964,
+          "before": " week:previewCopy.week.map(text=>text.replace('20 minut','30 minut').replace('20 minutes','30 minutes')),\n",
+          "after": " week:previewCopy.week.map(text=>text.replace('20 minut','30 minut').replace('20 minutes','30 minutes').replace('Neděle','Průběžně').replace('Sunday','Throughout the week')),\n"
+        },
+        {
+          "offset": 3001,
+          "before": " return <ol ref={root} className={'preview-process-steps'+(included?' preview-included-steps':'')}>{steps.map((step,i)=><li key={i}><div><h3>{!included&&<span className=\"preview-step-number\" aria-hidden=\"true\">0{i+1}</span>}<span className=\"preview-step-title\">{previewText(step[0],lang)}</span></h3><p><span className=\"preview-step-copy\">{work&&i===0?previewText(step[1],lang).split(/ (?=Odejdeš |You leave )/).map((sentence,index)=><span className=\"preview-step-sentence\" key={sentence}>{index>0?' ':''}{sentence}</span>):previewText(step[1],lang)}</span></p></div>{i<steps.length-1&&<PreviewCurveArrow connector className={i%2===0?'preview-turn-right':'preview-turn-left'}/>}</li>)}</ol>;\n",
+          "after": " const content=<ol ref={root} className={'preview-process-steps'+(included?' preview-included-steps':'')}>{steps.map((step,i)=><li key={i}><div><h3>{!included&&<span className=\"preview-step-number\" aria-hidden=\"true\">0{i+1}</span>}<span className=\"preview-step-title\">{previewText(step[0],lang)}</span></h3><p><span className=\"preview-step-copy\">{work&&i===0?previewText(step[1],lang).split(/ (?=Odejdeš |You leave )/).map((sentence,index)=><span className=\"preview-step-sentence\" key={sentence}>{index>0?' ':''}{sentence}</span>):previewText(step[1],lang)}</span></p></div>{!work&&i<steps.length-1&&<PreviewCurveArrow connector className={i%2===0?'preview-turn-right':'preview-turn-left'}/>}</li>)}</ol>;\n return work?<PreviewProcessRoad lang={lang}>{content}</PreviewProcessRoad>:content;\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/PreviewMotion.tsx",
+      "beforeSha256": "9f94cef983e5987340893a5bab0a811555f727e264e9c52a6e723920de95186f",
+      "afterSha256": "9720fb7288ba4fde0da685074c710cb05158289801db25e88911a2cac467ae06",
+      "replacements": [
+        {
+          "offset": 528,
+          "before": "/** Identical quiet curves alternate sides beside the paragraph's final line. */\n",
+          "after": "/** Matching, mirrored curves alternate sides beside the paragraph's final line. */\n"
+        },
+        {
+          "offset": 1286,
+          "before": "    const box=item.getBoundingClientRect(),width=96,height=84;\n",
+          "after": "    const included=list.classList.contains('preview-included-steps');\n    const box=item.getBoundingClientRect(),width=included?76:96,height=included?88:84;\n"
+        },
+        {
+          "offset": 2111,
+          "before": "    arrow.children[0].setAttribute('d','M10 8 C72 5 86 40 68 67');\n    arrow.children[1].setAttribute('d','M67 53 L68 67 L81 62');\n",
+          "after": "    // The offer uses the owner's tall down-left reference. Home retains its\n    // reviewed down-right curve, with only the second connector mirrored.\n    const paths=included?['M57 5 C61 36 45 60 13 77','M18 63 L12 79 L28 82']:['M10 8 C72 5 86 40 68 67','M67 53 L68 67 L81 62'];\n    Array.from(arrow.children).forEach((path,j)=>{\n     path.setAttribute('d',paths[j]);\n     if(i%2)path.setAttribute('transform',`translate(${width} 0) scale(-1 1)`);else path.removeAttribute('transform');\n    });\n"
+        }
+      ]
+    },
+    {
+      "path": "src/preview-v3.css",
+      "beforeSha256": "d2c6309a51dd23e051680c633777e427e84665f138d4baad27b6928ffff8d3a3",
+      "afterSha256": "4422765486b49a33fcf9be2b05fa7a8965a4a7c76662cf1d6f8ad65bcc36e42e",
+      "replacements": [
+        {
+          "offset": 42794,
+          "before": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits.preview-barriers:not(.preview-handstand) .preview-benefits-track > article::before {background:radial-gradient(ellipse closest-side at 50% 45%,rgba(244,240,235,.55) 0%,rgba(244,240,235,.28) 50%,rgba(244,240,235,0) 100%)}\n",
+          "after": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits.preview-barriers:not(.preview-handstand) .preview-benefits-track > article {border:1px solid rgba(117,68,55,.38);background:rgba(244,240,235,.26)}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits.preview-barriers:not(.preview-handstand) .preview-benefits-track > article::before {content:none}\n"
+        },
+        {
+          "offset": 43181,
+          "before": "",
+          "after": "\n/* Owner's certificate and second annotation review, 5 November 2026. */\n@media(max-width:899px){\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits:not(.preview-handstand):not(.preview-barriers) .preview-benefits-track > article {flex-basis:94%;min-height:280px;padding:30px 26px}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits:not(.preview-handstand):not(.preview-barriers) .preview-benefits-track > article::before {background:radial-gradient(ellipse at 42% 40%,rgba(244,240,235,.12) 0%,rgba(244,240,235,.055) 50%,transparent 76%)}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-work-story .m-review-card {border:1px solid rgba(117,68,55,.24);background:rgba(244,240,235,.38);padding:24px 22px}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-work-proof .m-proof-numbers {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-work-process .m-process-current {color:#743627;--terrain-color:#743627;filter:none}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-work-process .m-process-current .terrain-home__pigment {background-color:#743627}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-road {position:relative;isolation:isolate;margin-block:28px 24px}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-road .preview-process-steps {margin:0}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-road .preview-process-steps > li:not(:last-child) {padding-bottom:88px}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-road .preview-process-steps > li:first-child > div {width:calc(100% - 58px)}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-road .preview-process-steps > li:nth-child(2) > div {width:calc(100% - 58px);margin-left:auto}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-road-art {position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:-1;color:#9c5949}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-road-ribbon {fill:currentColor;fill-opacity:.15;stroke:currentColor;stroke-opacity:.65;stroke-width:.85;stroke-linejoin:round}\n}\n"
+        }
+      ]
+    }
+  ],
+  "newFiles": [
+    {
+      "path": "src/mobile/PreviewEducation.tsx",
+      "sha256": "3ff172378610229da65e564258c3390ee53549eaed2c5ca483f7b5fae62152d3"
+    },
+    {
+      "path": "src/mobile/PreviewProcessRoad.tsx",
+      "sha256": "2f489d35bc3a2b433e6210e05d73b1f290151911731a953341611289013cb93a"
+    },
+    {
+      "path": "src/mobile/preview-education.css",
+      "sha256": "348d05bf128c12c3947304544ede8d53930c604f3f9054c3d1fdaf0f68d7d866"
+    }
+  ]
+}

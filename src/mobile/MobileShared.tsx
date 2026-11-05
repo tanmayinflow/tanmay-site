@@ -1,4 +1,4 @@
-import { EducationList } from '../components/EducationDetails';
+import { EducationList } from './PreviewEducation';
 import { previewText, previewWhatsApp, previewMail } from "../preview-copy";
 import { mobilePreviewCopy as p } from "./PreviewDetails";
 import { useId, useLayoutEffect, useRef } from 'react';

@@ -375,5 +375,23 @@
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-story > .preview-work-process::after {display:none}
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-benefits:not(.preview-handstand) .preview-benefits-track > article {position:relative;isolation:isolate;border:0;background:none;box-shadow:none}
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-benefits:not(.preview-handstand) .preview-benefits-track > article::before {content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;background:radial-gradient(ellipse closest-side at 50% 45%,rgba(244,240,235,.12) 0%,rgba(244,240,235,.06) 50%,rgba(244,240,235,0) 100%)}
- .tm-mobile[data-mobile-version][data-preview="v3"] .preview-benefits.preview-barriers:not(.preview-handstand) .preview-benefits-track > article::before {background:radial-gradient(ellipse closest-side at 50% 45%,rgba(244,240,235,.55) 0%,rgba(244,240,235,.28) 50%,rgba(244,240,235,0) 100%)}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-benefits.preview-barriers:not(.preview-handstand) .preview-benefits-track > article {border:1px solid rgba(117,68,55,.38);background:rgba(244,240,235,.26)}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-benefits.preview-barriers:not(.preview-handstand) .preview-benefits-track > article::before {content:none}
+}
+
+/* Owner's certificate and second annotation review, 5 November 2026. */
+@media(max-width:899px){
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-benefits:not(.preview-handstand):not(.preview-barriers) .preview-benefits-track > article {flex-basis:94%;min-height:280px;padding:30px 26px}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-benefits:not(.preview-handstand):not(.preview-barriers) .preview-benefits-track > article::before {background:radial-gradient(ellipse at 42% 40%,rgba(244,240,235,.12) 0%,rgba(244,240,235,.055) 50%,transparent 76%)}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-story .m-review-card {border:1px solid rgba(117,68,55,.24);background:rgba(244,240,235,.38);padding:24px 22px}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-proof .m-proof-numbers {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-process .m-process-current {color:#743627;--terrain-color:#743627;filter:none}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-process .m-process-current .terrain-home__pigment {background-color:#743627}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-road {position:relative;isolation:isolate;margin-block:28px 24px}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-road .preview-process-steps {margin:0}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-road .preview-process-steps > li:not(:last-child) {padding-bottom:88px}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-road .preview-process-steps > li:first-child > div {width:calc(100% - 58px)}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-road .preview-process-steps > li:nth-child(2) > div {width:calc(100% - 58px);margin-left:auto}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-road-art {position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:-1;color:#9c5949}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-road-ribbon {fill:currentColor;fill-opacity:.15;stroke:currentColor;stroke-opacity:.65;stroke-width:.85;stroke-linejoin:round}
 }

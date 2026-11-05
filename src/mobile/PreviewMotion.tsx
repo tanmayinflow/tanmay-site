@@ -7,7 +7,7 @@ export function MobilePreviewWants({lang}:{lang:string}) {
  return <ul className="preview-wants-editorial">{wants.map(pair=><li key={pair[0]}><p className="preview-want-text">{previewText(pair,lang)}</p></li>)}</ul>;
 }
 
-/** Identical quiet curves alternate sides beside the paragraph's final line. */
+/** Matching, mirrored curves alternate sides beside the paragraph's final line. */
 export function useProcessConnectors(root:RefObject<HTMLOListElement>,key:string) {
  useEffect(()=>{
   const list=root.current;if(!list)return;
@@ -20,7 +20,8 @@ export function useProcessConnectors(root:RefObject<HTMLOListElement>,key:string
     const item=arrow.closest('li')!,copy=item.querySelector('.preview-step-copy')!;
     const range=document.createRange();range.selectNodeContents(copy);
     const lines=Array.from(range.getClientRects()).filter(b=>b.width>0),last=lines[lines.length-1];if(!last)return;
-    const box=item.getBoundingClientRect(),width=96,height=84;
+    const included=list.classList.contains('preview-included-steps');
+    const box=item.getBoundingClientRect(),width=included?76:96,height=included?88:84;
     const left=i%2===0?box.width-width-16:16;
     // Keep the curve beside the final line where there is room. A full line
     // gets a small clearance below it instead of drawing through the words.
@@ -30,8 +31,13 @@ export function useProcessConnectors(root:RefObject<HTMLOListElement>,key:string
     if(arrow.style.getPropertyPriority('width')!=='important')arrow.style.width=width+'px';
     if(arrow.style.getPropertyPriority('height')!=='important')arrow.style.height=height+'px';
     arrow.setAttribute('viewBox',`0 0 ${width} ${height}`);
-    arrow.children[0].setAttribute('d','M10 8 C72 5 86 40 68 67');
-    arrow.children[1].setAttribute('d','M67 53 L68 67 L81 62');
+    // The offer uses the owner's tall down-left reference. Home retains its
+    // reviewed down-right curve, with only the second connector mirrored.
+    const paths=included?['M57 5 C61 36 45 60 13 77','M18 63 L12 79 L28 82']:['M10 8 C72 5 86 40 68 67','M67 53 L68 67 L81 62'];
+    Array.from(arrow.children).forEach((path,j)=>{
+     path.setAttribute('d',paths[j]);
+     if(i%2)path.setAttribute('transform',`translate(${width} 0) scale(-1 1)`);else path.removeAttribute('transform');
+    });
    });
   };
   const queue=()=>{if(!frame)frame=requestAnimationFrame(measure);};
