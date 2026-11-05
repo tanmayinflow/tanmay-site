@@ -1,3 +1,4 @@
+import { roadPair, roadPath } from './road-geometry.mjs';
 import { useEffect, useRef, type ReactNode } from 'react';
 
 /** Two open pairs of road edges; the second is wider and closer to the reader. */
@@ -19,34 +20,10 @@ export function PreviewProcessRoad({children,lang}:{children:ReactNode;lang:stri
    const end={x:w-66,y:bounds[1].top-box.top-22};
    const start={x:w*.27,y:bounds[1].bottom-box.top+8};
    const bottom=bounds[2].top-box.top-22;
-   // The hidden straight span defines BOTH tangents and a constant join width.
-   // Horizontal end sections keep the two edges level, rather than clipping
-   // a normal-offset curve (which used to leave the inner edge short).
-   const dx=start.x-end.x,dy=start.y-end.y,length=Math.hypot(dx,dy)||1;
-   const ux=dx/length,uy=dy/length,half=6.5;
-   const upperHandle=Math.min(26,(end.y-top)*.45/uy);
-   const lowerHeight=bottom-start.y;
-   const lowerHandle=Math.min(58,(start.x-24)/-ux,lowerHeight*.32/uy);
-   const point=(x:number,y:number)=>`${x.toFixed(2)},${y.toFixed(2)}`;
-   for(let side=0;side<2;side++){
-    const offset=side===0?half:-half;
-    const a=point(w-98,top+(side===0?0:3));
-    const b=point(w-(side===0?8:24),top+(side===0?0:3));
-    const c=point(end.x-ux*upperHandle+offset,end.y-uy*upperHandle);
-    const d=point(end.x+offset,end.y);
-    edges[side].setAttribute('d',`M${a} C${b} ${c} ${d}`);
-    const near=side===0?14.5:-14.5;
-    const e=point(start.x+offset,start.y);
-    const f=point(start.x+ux*lowerHandle+offset,start.y+uy*lowerHandle);
-    const bendOffset=side===0?10:-10;
-    const bendX=24+bendOffset,bendY=start.y+lowerHeight*.5;
-    const g=point(bendX,bendY-lowerHeight*.2);
-    const h=point(bendX,bendY);
-    const j=point(bendX,bendY+lowerHeight*.23);
-    const k=point(w*.27-36+near,bottom-8);
-    const l=point(w*.27+near,bottom);
-    edges[side+2].setAttribute('d',`M${e} C${f} ${g} ${h} C${j} ${k} ${l}`);
-   }
+   const upperHeight=Math.max(48,end.y-top),lowerHeight=Math.max(60,bottom-start.y);
+   const upper=roadPair({x:w-80,y:top,height:upperHeight,bend:upperHeight*.55},3,11);
+   const lower=roadPair({x:start.x,y:start.y,height:lowerHeight,bend:-lowerHeight*.55},11,23);
+   [...upper,...lower].forEach((points,i)=>edges[i].setAttribute('d',roadPath(points)));
   };
   const queue=()=>{if(!frame)frame=requestAnimationFrame(measure);};
   const observer=new ResizeObserver(queue);observer.observe(host);

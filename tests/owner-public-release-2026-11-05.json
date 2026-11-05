@@ -1,0 +1,272 @@
+{
+  "baselineCommit": "9778c02ea53192900c2736be9a74f3e7bf7d93cd",
+  "authorization": "Owner requested final ten annotations, tablet/desktop adaptation and direct publication on 2026-11-05. Previously saved layout retained.",
+  "files": [
+    {
+      "path": "src/App.tsx",
+      "beforeSha256": "a7d1901de73649d744a4213e4854f227b0bb8107f3b7ea311961070bf5bb4e3f",
+      "afterSha256": "cccab3c686bc45ac92d35f735176e18a74ce3c6a30b99b10e1c230e2d3fc931d",
+      "replacements": [
+        {
+          "offset": 0,
+          "before": "import { EducationDetail, EducationList } from './components/EducationDetails';\n",
+          "after": "import './release-2026-11.css';\nimport { mobilePreviewCopy as p } from './mobile/PreviewDetails';\nimport { EducationDetail } from './components/EducationDetails';\nimport { EducationList } from './mobile/PreviewEducation';\n"
+        },
+        {
+          "offset": 318,
+          "before": "import { previewCopy as p, previewText, previewWhatsApp, previewMail } from \"./preview-copy\";\n",
+          "after": "import { previewText, previewWhatsApp, previewMail } from \"./preview-copy\";\n"
+        },
+        {
+          "offset": 167274,
+          "before": "",
+          "after": "function StoryIntroText({text}:{text:string}) {return <>{text.split(/(držet sám|sustain on their own)/).map((part,i)=>/^(držet sám|sustain on their own)$/.test(part)?<strong key={i}>{part}</strong>:part)}</>;}\n"
+        },
+        {
+          "offset": 169775,
+          "before": "          <div className=\"about-hero-copy\"><p className=\"label rv\">{E(\"O mně\",\"About me\")}</p><h1 className=\"h-display h1 rv d1\">Kryštof Švec</h1><p className=\"lead rv d2\">{E(\"Jsem osobní trenér v Praze. Síla, kalistenika a schopnost dobře ovládat vlastní tělo a mysl tvoří základ mé práce. Nejvíc mě ale zajímá, jak z jednotlivých tréninků vzniká praxe, kterou člověk dokáže držet sám.\",\"I am a personal trainer in Prague. Strength, calisthenics and the ability to control your own body and mind form the foundation of my work. What interests me most, though, is how individual training sessions become a practice a person can sustain on their own.\")}</p><p className=\"act rv d3\"><Go href={routePath(\"spoluprace\",lang)} cs=\"Možnosti spolupráce\" en=\"Ways to work together\" /></p></div>\n",
+          "after": "          <div className=\"about-hero-copy\"><p className=\"label rv\">{E(\"O mně\",\"About me\")}</p><h1 className=\"h-display h1 rv d1\">Kryštof Švec</h1><p className=\"lead rv d2\"><StoryIntroText text={L(\"Jsem osobní trenér v Praze. Síla, kalistenika a schopnost dobře ovládat vlastní tělo a mysl tvoří základ mé práce. Nejvíc mě ale zajímá, jak z jednotlivých tréninků vzniká praxe, kterou člověk dokáže držet sám.\",\"I am a personal trainer in Prague. Strength, calisthenics and the ability to control your own body and mind form the foundation of my work. What interests me most, though, is how individual training sessions become a practice a person can sustain on their own.\")}/></p><p className=\"act rv d3\"><Go href={routePath(\"spoluprace\",lang)} cs=\"Možnosti spolupráce\" en=\"Ways to work together\" /></p></div>\n"
+        },
+        {
+          "offset": 176898,
+          "before": "        </div><div className=\"education-list rv\"><div className=\"education-item\"><p className=\"label\">{E(\"Profesní kvalifikace\",\"Professional qualification\")}</p><p className=\"education-credential-value\"><EducationDetail index={0} lang={lang}/></p></div><div className=\"education-item\"><p className=\"label\">{E(\"Pohyb a trénink\",\"Movement and training\")}</p><p><EducationDetail index={1} lang={lang}/></p></div><div className=\"education-item\"><p className=\"label\">{E(\"Jóga\",\"Yoga\")}</p><p className=\"education-credential-value\"><EducationDetail index={2} lang={lang}/></p></div><div className=\"education-item\"><p className=\"label\">{E(\"Studium\",\"Study\")}</p><p><EducationDetail index={3} lang={lang}/></p></div></div><p className=\"small rv\" style={{marginTop:24}}>{E(\"Rehabilitační trénink je součást mého vzdělání. Nenahrazuje ale plnohodnotnou fyzioterapii.\",\"Rehabilitation training is part of my education. It does not, however, replace full physiotherapy care.\")}</p></div></section>\n",
+          "after": "        </div><EducationList lang={lang}/></div></section>\n"
+        },
+        {
+          "offset": 176958,
+          "before": "    <section className=\"site-earth contact-coda\"><div className=\"material-edge material-edge--linen\" aria-hidden=\"true\"/><div className=\"wrap\"><h2 className=\"h-display h2 rv\">{L(\"Co nabízím dnes\",\"What I offer today\")}</h2><p className=\"body-txt rv d1\" style={{margin:\"18px auto 0\"}}>{E(\"Pracuji individuálně i s menšími skupinami, osobně v Praze nebo online. Může jít o jedno setkání nebo delší vedení.\",\"I work one-to-one and with small groups, in person in Prague or online. It can be one session or longer-term guidance.\")}</p><p className=\"rv d2\" style={{marginTop:28}}><Go href={routePath(\"spoluprace\",lang)} cs=\"Možnosti spolupráce\" en=\"Ways to work together\" /></p></div></section>\n",
+          "after": "    <section className=\"site-earth contact-coda\"><div className=\"material-edge material-edge--linen\" aria-hidden=\"true\"/><div className=\"wrap\"><h2 className=\"h-display h2 rv\">{L(\"Co nabízím dnes\",\"What I offer today\")}</h2><p className=\"body-txt rv d1\" style={{margin:\"18px auto 0\"}}>{E(\"Chceš zesílit, zpevnit se a přestat začínat od pondělí? Začni prvním tréninkem v Praze nebo online. Dostaneš plán na míru a vedení, které se přizpůsobí tvému týdnu.\",\"Want to get stronger, feel firmer and stop starting again every Monday? Start with a session in Prague or online. Get a plan tailored to you and guidance that fits your week.\")}</p><p className=\"rv d2\" style={{marginTop:28}}><Go href={routePath(\"spoluprace\",lang)} cs=\"Možnosti spolupráce\" en=\"Ways to work together\" /></p></div></section>\n"
+        },
+        {
+          "offset": 203578,
+          "before": "      {preview&&<p className=\"preview-original\">{L(\"Náhled nové verze · \",\"Preview of the new version · \")}<a href={routePath(original,lang)}>{L(\"Původní stránka →\",\"Original page →\")}</a></p>}\n",
+          "after": ""
+        },
+        {
+          "offset": 205161,
+          "before": "function OpeningPreview({ lang }: any) {\n",
+          "after": "function OpeningPreview({ lang, work=false }: any) {\n"
+        },
+        {
+          "offset": 205340,
+          "before": "    <header className={\"opening surf--sand\" + (noPortrait ? \"\" : \" has-portrait\")}>\n",
+          "after": "    <header className={\"opening surf--sand\" + (work ? \" release-work-hero\" : \"\") + (noPortrait ? \"\" : \" has-portrait\")}>\n"
+        },
+        {
+          "offset": 205526,
+          "before": "          <p className=\"kicker label rv\">{c(p.homeKicker)}</p>\n",
+          "after": "          <p className=\"kicker label rv\">{c(work?p.workKicker:p.homeKicker)}</p>\n"
+        },
+        {
+          "offset": 205653,
+          "before": "            {c(p.homeTitle)}\n",
+          "after": "            {c(work?p.workTitle:p.homeTitle)}\n"
+        },
+        {
+          "offset": 205715,
+          "before": "          <p className=\"body-txt rv d2\">{c(p.homeLead)}</p>\n",
+          "after": "          <p className=\"body-txt rv d2\">{c(work?p.workLead:p.homeLead)}</p>\n"
+        },
+        {
+          "offset": 205827,
+          "before": "            <Go href=\"#rezervace\" cs={p.cta[0]} en={p.cta[1]} /><a className=\"collaboration-price-jump\" href=\"#jak-to-funguje\">{L(\"Jak to funguje ↓\",\"How it works ↓\")}</a>\n",
+          "after": "            <Go href={work?\"#kontakt\":\"#rezervace\"} cs={p.cta[0]} en={p.cta[1]} /><a className=\"collaboration-price-jump\" href={work?\"#co-dostanes\":\"#jak-to-funguje\"}>{L(\"Jak to funguje ↓\",\"How it works ↓\")}</a>\n"
+        },
+        {
+          "offset": 208787,
+          "before": "  return <section className=\"sec home-about\" aria-labelledby=\"h-about-short\"><div className=\"wrap about-short-grid\"><div className=\"about-short-copy\"><p className=\"label rv\">Kryštof Švec</p><h2 className=\"h-display h2 rv d1\" id=\"h-about-short\">{c(p.aboutTitle)}</h2><p className=\"body-txt rv d2\">{c(p.bio)}</p><p className=\"body-txt rv d2\">{c(p.cheer)}</p><p className=\"body-txt\"><strong>{c(p.live)}</strong></p><p className=\"body-txt\"><a href={routePath(\"pribeh\",lang)+\"#vzdelani\"}>{c(p.qualification)}</a></p><p className=\"act rv d3\"><Go href={routePath(\"pribeh\",lang)} cs=\"Můj příběh\" en=\"My story\"/></p></div><HomeAboutPhoto pic={MEDIA.homeAboutPrague} alt={L(\"Portrét z profilu s Pražským hradem v pozadí.\",\"Profile portrait with Prague Castle in the background.\")} sizes=\"(min-width:521px) 410px, (min-width:366px) 330px, calc(100vw - 36px)\"/></div></section>;\n",
+          "after": "  return <section className=\"sec home-about\" aria-labelledby=\"h-about-short\"><div className=\"wrap about-short-grid\"><div className=\"about-short-copy\"><p className=\"label rv\">Kryštof Švec</p><h2 className=\"h-display h2 rv d1\" id=\"h-about-short\">{c(p.aboutTitle)}</h2><p className=\"body-txt rv d2\">{c(p.bio)}</p><p className=\"body-txt rv d2\">{c(p.cheer)}</p><p className=\"body-txt\"><a href={routePath(\"pribeh\",lang)}>{c(p.qualification)}</a></p></div><HomeAboutPhoto pic={MEDIA.homeAboutPrague} alt={L(\"Portrét z profilu s Pražským hradem v pozadí.\",\"Profile portrait with Prague Castle in the background.\")} sizes=\"(min-width:521px) 410px, (min-width:366px) 330px, calc(100vw - 36px)\"/></div></section>;\n"
+        },
+        {
+          "offset": 209625,
+          "before": "  return <section className={collaboration?\"site-linen contact-coda\":\"home-booking\"} id={collaboration?\"kontakt\":\"rezervace\"} aria-labelledby=\"h-booking\"><div className=\"wrap\"><div className=\"booking-inner\"><p className=\"booking-kicker label rv\">{L(\"První krok\",\"First step\")}</p><h2 className=\"h-display h2 rv d1\" id=\"h-booking\">{c(p.closingTitle)}</h2><p className=\"booking-lead rv d2\">{c(p.closingLead)}</p><div className=\"booking-actions rv d3\"><div><a className=\"contact-action contact-action--primary\" href={previewWhatsApp(lang,true)} target=\"_blank\" rel=\"noopener noreferrer\"><IconWhatsApp/><span>{c(p.firstCta)}<small className=\"preview-cta-note\">{c(p.closingMicro)}</small></span></a></div><a className=\"contact-action\" href={previewWhatsApp(lang)} target=\"_blank\" rel=\"noopener noreferrer\"><IconWhatsApp/>{c(p.cta)}</a><a className=\"contact-action\" href={previewMail(lang)}><IconMail/>{L(\"Napsat e-mail\",\"Send an email\")}</a></div>{collaboration&&<a href={IG_URL} target=\"_blank\" rel=\"noopener noreferrer\">Instagram</a>}</div></div></section>;\n",
+          "after": "  return <section className={collaboration?\"site-linen contact-coda\":\"home-booking\"} id={collaboration?\"kontakt\":\"rezervace\"} aria-labelledby=\"h-booking\"><div className=\"wrap\"><div className=\"booking-inner\"><p className=\"booking-kicker label rv\">{L(\"První krok\",\"First step\")}</p><h2 className=\"h-display h2 rv d1\" id=\"h-booking\">{c(p.closingTitle)}</h2><p className=\"booking-lead rv d2\">{c(p.closingLead)}</p><div className=\"booking-actions rv d3\"><div><a className=\"contact-action contact-action--primary\" href={previewWhatsApp(lang,true)} target=\"_blank\" rel=\"noopener noreferrer\"><IconWhatsApp/><span>{c(p.firstCta)}</span></a></div><a className=\"contact-action\" href={previewWhatsApp(lang)} target=\"_blank\" rel=\"noopener noreferrer\"><IconWhatsApp/>{c(p.cta)}</a><a className=\"contact-action\" href={previewMail(lang)}><IconMail/>{L(\"Napsat e-mail\",\"Send an email\")}</a></div>{collaboration&&<a href={IG_URL} target=\"_blank\" rel=\"noopener noreferrer\">Instagram</a>}</div></div></section>;\n"
+        },
+        {
+          "offset": 210943,
+          "before": "        <section className=\"sec\" id=\"jak-to-funguje\"><div className=\"wrap\"><h2 className=\"h-display h2 rv\">{c(p.howTitle)}</h2><div className=\"process-three\">{p.steps.map((x,i)=><article className=\"rv\" key={i}><span className=\"num\">0{i+1}</span><h3>{c(x[0])}</h3><p>{c(x[1])}</p></article>)}</div><p className=\"act\"><Go href=\"#rezervace\" cs=\"Chci začít\" en=\"I want to start\"/></p><Go href={routePath(\"spoluprace-preview\",lang)+\"#co-dostanes\"} cs=\"Co přesně dostaneš →\" en=\"What exactly you get →\"/></div></section>\n",
+          "after": "        <section className=\"sec\" id=\"jak-to-funguje\"><div className=\"wrap\"><h2 className=\"h-display h2 rv\">{c(p.howTitle)}</h2><div className=\"process-three\">{p.steps.map((x,i)=><article className=\"rv\" key={i}><span className=\"num\">0{i+1}</span><h3>{c(x[0])}</h3><p>{c(x[1])}</p></article>)}</div><p className=\"act\"><Go href=\"#rezervace\" cs=\"Chci začít\" en=\"I want to start\"/></p><Go href={routePath(\"spoluprace\",lang)+\"#co-dostanes\"} cs=\"Co přesně dostaneš →\" en=\"What exactly you get →\"/></div></section>\n"
+        },
+        {
+          "offset": 211884,
+          "before": "    <header className=\"site-linen page-hero collaboration-hero-v8 hero-unified\">\n      <div className=\"wrap\">\n        <div className=\"page-hero-grid collaboration-hero-grid\">\n          \n          \n          <div className=\"collaboration-hero-copy\">\n            <p className=\"label rv\">{c(p.workKicker)}</p>\n            <h1 className=\"h-display h1 rv d1\">{c(p.workTitle)}</h1>\n            <p className=\"hero-dominant rv d1\">{c(p.workLead)}</p>\n            <p className=\"lead rv d2\">{c(p.micro)}</p>\n            <div className=\"act rv d3 collaboration-entry-actions\"><Go href=\"#kontakt\" cs={p.cta[0]} en={p.cta[1]} /><a className=\"collaboration-price-jump\" href=\"#co-dostanes\">{L(\"Co dostaneš\",\"What you get\")}<span aria-hidden=\"true\">↓</span></a></div>\n          </div>\n          <SecondaryHeroPhoto className=\"collaboration-hero-cutout preview-smile\" src=\"/media/material/portrait-cutout.webp\" width={1153} height={1364} sizes=\"(min-width:900px) 43vw, 100vw\" alt={L(\"Kryštof Švec s úsměvem ve vzorované vestě.\",\"Kryštof Švec, smiling, in a patterned waistcoat.\")} />\n        </div>\n      </div>\n    </header>\n",
+          "after": "    <OpeningPreview lang={lang} work/>\n"
+        },
+        {
+          "offset": 211924,
+          "before": "    <div className=\"site-linen collaboration-proof-v919\" role=\"group\" aria-label={L(\"Zkušenosti a odborné zázemí\",\"Experience and professional background\")}>\n      <div className=\"collaboration-linen-lip\" aria-hidden=\"true\" />\n      <div className=\"wrap\"><div className=\"proof-row about-proof-v918 rv\">\n        <div className=\"proof-item\"><strong>{L(\"10 LET\",\"10 YEARS\")}</strong><span>{L(\"vlastní pohybové praxe\",\"of personal movement practice\")}</span></div>\n        <div className=\"proof-item\"><strong>100+</strong><span>{L(\"klientů\",\"clients\")}</span></div>\n        <div className=\"proof-item proof-item--education\"><strong>{L(\"ODBORNÉ ZÁZEMÍ\",\"PROFESSIONAL BACKGROUND\")}</strong>\n          <EducationList lang={lang}/>\n          <a className=\"proof-study\" href={routePath(\"pribeh\",lang)+\"#vzdelani\"}>{L(\"celé vzdělání →\",\"full education →\")}</a>\n        </div>\n      </div></div>\n    </div>\n",
+          "after": ""
+        },
+        {
+          "offset": 211925,
+          "before": "<section className=\"site-linen page-section collaboration-needs-v99\" id=\"potreby\"><div className=\"wrap\"><div className=\"section-head section-head--split\"><h2 className=\"h-display h2 rv\">{c(p.needsTitle)}</h2><div className=\"page-intro rv d1\"><p><strong>{L(\"Teď:\",\"Now:\")}</strong> {c(p.now)}</p><p><strong>{L(\"Kam chceš:\",\"Where you want to be:\")}</strong> {c(p.destination)}</p></div></div><h3 className=\"h3\">{c(p.barriersTitle)}</h3><div className=\"secondary-illustrated secondary-illustrated--needs\"><div className=\"editorial-grid\">{p.barriers.map((x,i)=><article className=\"rv\" key={i}><span className=\"num\">0{i+1}</span><h3>{c(x[0])}</h3><p>{c(x[1])}</p></article>)}</div></div><p className=\"stance-line\">{c(p.needsClose)}</p><Go href=\"#kontakt\" cs={p.cta[0]} en={p.cta[1]}/></div></section><section className=\"site-linen page-section collaboration-experience\" id=\"zkusenost\"><div className=\"wrap\"><div className=\"section-head section-head--split\"><h2 className=\"h-display h2 rv\">{c(p.forTitle)}</h2><div className=\"page-intro rv d1\"><ul>{p.forItems.map(x=><li key={x[0]}>{c(x)}</li>)}</ul><p><strong>{c(p.forClose)}</strong></p><p>{c(p.notFor)}</p></div></div></div></section><section className=\"site-linen page-section collaboration-formats\" id=\"moznosti\"><div className=\"wrap\"><h2 className=\"h-display h2 rv\">{c(p.oldTitle)}</h2><PreviewComparison lang={lang}/><p className=\"stance-line\">{c(p.oldClose)}</p><Go href=\"#kontakt\" cs={p.cta[0]} en={p.cta[1]}/></div></section><section className=\"site-ink page-section--tight between-v8 between-v919 preview-cotton\" id=\"co-dostanes\"><div className=\"material-edge material-edge--linen\" aria-hidden=\"true\"/><DesktopCycle lang={lang}><div className=\"between-copy-v919\"><p className=\"label rv\">{c(p.startLabel)}</p><h2 className=\"h-display h2 rv d1\" style={{marginTop:12}}>{c(p.startTitle)}</h2><div className=\"between-visual-row-v919\"><p className=\"scan-line rv d2\">{L(\"PLÁN · ZÁZNAM · ÚPRAVA\",\"PLAN · RECORD · ADJUST\")}</p><CollaborationCycle/></div></div><div className=\"between-items\">{p.startItems.map((x,i)=><div className=\"preview-start-item rv\" key={i}><h3>{c(x[0])}</h3><p>{c(x[1])}</p></div>)}</div></DesktopCycle><div className=\"wrap preview-week\"><p className=\"body-txt\"><strong>{c(p.weekTitle)}</strong></p><p className=\"body-txt\">{c(p.week)}</p><p className=\"body-txt\"><strong>{c(p.why)}</strong></p><p className=\"body-txt\"><strong>{c(p.price)}</strong></p><p className=\"small\">{c(p.priceSmall)}</p><p className=\"act\"><Go href=\"#kontakt\" cs={p.cta[0]} en={p.cta[1]}/></p><a className=\"go\" href={previewWhatsApp(lang,true)} target=\"_blank\" rel=\"noopener noreferrer\">{c(p.direct)}</a></div></section>\n<div className=\"site-ink preview-cotton\"><HomeReferences lang={lang} preview/></div>    <section className=\"site-ink page-section process-v8 preview-cotton\">\n",
+          "after": "<section className=\"site-linen page-section collaboration-needs-v99\" id=\"potreby\"><div className=\"wrap\"><div className=\"section-head section-head--split\"><h2 className=\"h-display h2 rv\">{c(p.needsTitle)}</h2><div className=\"page-intro rv d1\"><p><strong>{L(\"Teď:\",\"Now:\")}</strong> {c(p.now)}</p><p><strong>{L(\"Kam chceš:\",\"Where you want to be:\")}</strong> {c(p.destination)}</p></div></div><h3 className=\"h3\">{c(p.barriersTitle)}</h3><div className=\"secondary-illustrated secondary-illustrated--needs\"><div className=\"editorial-grid\">{p.barriers.map((x,i)=><article className=\"rv\" key={i}><span className=\"num\">0{i+1}</span><h3>{c(x[0])}</h3><p>{c(x[1])}</p></article>)}</div></div><p className=\"stance-line\">{c(p.needsClose)}</p><Go href=\"#kontakt\" cs={p.cta[0]} en={p.cta[1]}/></div></section><section className=\"site-linen page-section collaboration-experience\" id=\"zkusenost\"><div className=\"wrap\"><div className=\"section-head section-head--split\"><h2 className=\"h-display h2 rv\">{c(p.forTitle)}</h2><div className=\"page-intro rv d1\"><ul>{p.forItems.map(x=><li key={x[0]}>{c(x)}</li>)}</ul><p><strong>{c(p.forClose)}</strong></p><p>{c(p.notFor)}</p></div></div></div></section><div className=\"site-ink preview-cotton\"><HomeWorkPreview lang={lang}/></div><section className=\"site-ink page-section--tight between-v8 between-v919 preview-cotton\" id=\"co-dostanes\"><div className=\"material-edge material-edge--linen\" aria-hidden=\"true\"/><DesktopCycle lang={lang}><div className=\"between-copy-v919\"><p className=\"label rv\">{c(p.startLabel)}</p><h2 className=\"h-display h2 rv d1\" style={{marginTop:12}}>{c(p.startTitle)}</h2><div className=\"between-visual-row-v919\"><p className=\"scan-line rv d2\">{L(\"PLÁN · ZÁZNAM · ÚPRAVA\",\"PLAN · RECORD · ADJUST\")}</p><CollaborationCycle/></div></div><div className=\"between-items\">{p.startItems.map((x,i)=><div className=\"preview-start-item rv\" key={i}><h3>{c(x[0])}</h3><p>{c(x[1])}</p></div>)}</div></DesktopCycle><div className=\"wrap preview-week\"><p className=\"body-txt\"><strong>{c(p.weekTitle).split(/(\\([^)]*\\))/).map((part,i)=>part.startsWith(\"(\")?<span className=\"preview-week-example\" key={i}>{part}</span>:part)}</strong></p><p className=\"body-txt\">{c(p.week)}</p><p className=\"body-txt\"><strong>{c(p.why)}</strong></p><p className=\"body-txt\"><strong>{c(p.price)}</strong></p><p className=\"small\">{c(p.priceSmall)}</p><p className=\"act\"><Go href=\"#kontakt\" cs={p.cta[0]} en={p.cta[1]}/></p><a className=\"go\" href={previewWhatsApp(lang,true)} target=\"_blank\" rel=\"noopener noreferrer\">{c(p.direct)}</a></div></section>\n    <section className=\"site-linen page-section process-v8 release-work-process\">\n"
+        },
+        {
+          "offset": 215864,
+          "before": "<section className=\"site-linen page-section--tight\"><div className=\"material-edge material-edge--ink\" aria-hidden=\"true\"/><div className=\"wrap\"><div className=\"boundary rv\"><p className=\"label rv\">Kryštof Švec</p><h2 className=\"h-display h2 rv d1\" id=\"h-about-short\">{c(p.aboutTitle)}</h2><p className=\"body-txt rv d2\">{c(p.bio)}</p><p className=\"body-txt rv d2\">{c(p.cheer)}</p><p className=\"body-txt\"><strong>{c(p.live)}</strong></p><p className=\"body-txt\"><a href={routePath(\"pribeh\",lang)+\"#vzdelani\"}>{c(p.qualification)}</a></p><p className=\"act rv d3\"><Go href={routePath(\"pribeh\",lang)} cs=\"Můj příběh\" en=\"My story\"/></p></div></div></section><CollaborationFaq lang={lang} preview/><CollaborationPricing lang={lang} preview/><HomeBookingPreview lang={lang} collaboration/></div>;\n",
+          "after": "<div className=\"site-linen\"><HomeReferences lang={lang} preview/></div><section className=\"site-linen page-section--tight\"><div className=\"wrap\"><div className=\"boundary rv\"><p className=\"label rv\">Kryštof Švec</p><h2 className=\"h-display h2 rv d1\" id=\"h-about-short\">{c(p.aboutTitle)}</h2><p className=\"body-txt rv d2\">{c(p.bio)}</p><p className=\"body-txt rv d2\">{c(p.cheer)}</p><p className=\"body-txt\"><a href={routePath(\"pribeh\",lang)}>{c(p.qualification)}</a></p></div></div></section>    <div className=\"site-linen collaboration-proof-v919\" role=\"group\" aria-label={L(\"Zkušenosti a odborné zázemí\",\"Experience and professional background\")}>\n      <div className=\"collaboration-linen-lip\" aria-hidden=\"true\" />\n      <div className=\"wrap\"><div className=\"proof-row about-proof-v918 rv\">\n        <div className=\"proof-item\"><strong>{L(\"10 LET\",\"10 YEARS\")}</strong><span>{L(\"vlastní pohybové praxe\",\"of personal movement practice\")}</span></div>\n        <div className=\"proof-item\"><strong>100+</strong><span>{L(\"klientů\",\"clients\")}</span></div>\n        <div className=\"proof-item proof-item--education\"><strong>{L(\"ODBORNÉ ZÁZEMÍ\",\"PROFESSIONAL BACKGROUND\")}</strong>\n          <EducationList lang={lang}/>\n          <a className=\"proof-study\" href={routePath(\"pribeh\",lang)}>{L(\"celé vzdělání →\",\"full education →\")}</a>\n        </div>\n      </div></div>\n    </div>\n\n<CollaborationFaq lang={lang} preview/><CollaborationPricing lang={lang} preview/><HomeBookingPreview lang={lang} collaboration/></div>;\n"
+        },
+        {
+          "offset": 220347,
+          "before": "    if (!hash || (hash !== \"#vzdelani\" && !loc.routeId.endsWith(\"-preview\"))) return;\n",
+          "after": "    if (!hash) return;\n"
+        },
+        {
+          "offset": 221971,
+          "before": "      {mobile ? <MobileSite loc={loc} preview={loc.routeId.endsWith(\"-preview\")}>\n",
+          "after": "      {mobile ? <MobileSite loc={loc} preview={[\"home\",\"spoluprace\",\"home-preview\",\"spoluprace-preview\"].includes(loc.routeId)}>\n"
+        },
+        {
+          "offset": 222271,
+          "before": "        {loc.routeId === \"home\" && <MobileHome lang={lang} />}\n",
+          "after": "        {loc.routeId === \"home\" && <MobileHomePreview lang={lang} />}\n"
+        },
+        {
+          "offset": 222475,
+          "before": "        {loc.routeId === \"spoluprace\" && <MobileCollaboration lang={lang} />}\n",
+          "after": "        {loc.routeId === \"spoluprace\" && <MobileCollaborationPreview lang={lang} />}\n"
+        },
+        {
+          "offset": 223202,
+          "before": "      <main data-preview={loc.routeId.endsWith(\"-preview\") ? \"v3\" : undefined} id=\"main\" key={loc.routeId + lang + (loc.postId || \"\")}>\n",
+          "after": "      <main data-preview={[\"home\",\"spoluprace\",\"home-preview\",\"spoluprace-preview\"].includes(loc.routeId) ? \"v3\" : undefined} id=\"main\" key={loc.routeId + lang + (loc.postId || \"\")}>\n"
+        },
+        {
+          "offset": 223549,
+          "before": "        {loc.routeId === \"home\" && <PageHome lang={lang} />}\n",
+          "after": "        {loc.routeId === \"home\" && <PageHomePreview lang={lang} />}\n"
+        },
+        {
+          "offset": 223745,
+          "before": "        {loc.routeId === \"spoluprace\" && <PageSpoluprace lang={lang} />}\n",
+          "after": "        {loc.routeId === \"spoluprace\" && <PageSpolupracePreview lang={lang} />}\n"
+        }
+      ]
+    },
+    {
+      "path": "src/components/PreviewReading.tsx",
+      "beforeSha256": "6f22168ef0cf6803ab4c4aa04f8b2a0661c0d8ba82a44b520167f8d501f97ad8",
+      "afterSha256": "bde2ea350e8c8acef56ba7d8457df25cf019c91315610fa19bc0960eca5451b4",
+      "replacements": [
+        {
+          "offset": 1926,
+          "before": " return <ul className=\"preview-wants\" ref={root}>{p.wants.map((x,i)=><li key={x[0]}><span aria-hidden=\"true\">0{i+1}</span><p>{previewText(x,lang)}</p></li>)}</ul>;\n",
+          "after": " return <ul className=\"preview-wants\" ref={root}>{[...p.wants,['Cítit klid a jistotu ve svém těle.','Feel calm and confidence in my own body.']].map((x,i)=><li key={x[0]}><span aria-hidden=\"true\">0{i+1}</span><p>{previewText(x,lang)}</p></li>)}</ul>;\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileAbout.tsx",
+      "beforeSha256": "f77a0877dcedc4ac46c814264d8ea6b4e489345556e82e6c5e2672817bb43c23",
+      "afterSha256": "6ce6420ac061df6ce3ce7939724e173f0a05da4d433f55cbfbf536a93f2fea2b",
+      "replacements": [
+        {
+          "offset": 691,
+          "before": "    <div id=\"mobilni-obsah\" className=\"m-about-intro-copy\"><div className=\"m-inner\"><p><RichText>{introduction}</RichText></p><a className=\"m-text-link preview-story-cta\" href={routePath('spoluprace',lang)}>{lang==='en'?'Ways to work together':'Možnosti spolupráce'}</a></div></div>\r\n",
+          "after": "    <div id=\"mobilni-obsah\" className=\"m-about-intro-copy\"><div className=\"m-inner\"><p>{introduction.split(/(držet sám|sustain on their own)/).map((part,i)=>/^(držet sám|sustain on their own)$/.test(part)?<strong key={i}>{part}</strong>:part)}</p><a className=\"m-text-link preview-story-cta\" href={routePath('spoluprace',lang)}>{lang==='en'?'Ways to work together':'Možnosti spolupráce'}</a></div></div>\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileHomePreview.tsx",
+      "beforeSha256": "77651024b3a9e3408ae8d2ef53cc6962cdf8eef858b0b53a636b9b40e0e2e163",
+      "afterSha256": "85e927dfb7b8345455c6009f193d191b9fc869ae0585c4afd0c6bf6ff3b10637",
+      "replacements": [
+        {
+          "offset": 2175,
+          "before": "   <Chapter title={c(p.howTitle)} id=\"jak-to-funguje\" className=\"m-process m-dark\"><PreviewSteps lang={lang}/><div className=\"preview-process-links\"><TextLink href=\"#rezervace\">{lang==='en'?'I want to start':'Chci začít'}</TextLink><TextLink href={routePath('spoluprace-preview',lang)+'#co-dostanes'} arrow>{lang==='en'?'What exactly you get':'Co přesně dostaneš'}</TextLink></div></Chapter>\r\n",
+          "after": "   <Chapter title={c(p.howTitle)} id=\"jak-to-funguje\" className=\"m-process m-dark\"><PreviewSteps lang={lang}/><div className=\"preview-process-links\"><TextLink href=\"#rezervace\">{lang==='en'?'I want to start':'Chci začít'}</TextLink><TextLink href={routePath('spoluprace',lang)+'#co-dostanes'} arrow>{lang==='en'?'What exactly you get':'Co přesně dostaneš'}</TextLink></div></Chapter>\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileSite.tsx",
+      "beforeSha256": "e74ef5818777d402a0d73ed4290453e72400cf6c4759fe78217fedcab898ce3d",
+      "afterSha256": "7db70d940fc1d7c3c63353a687211db0e789e864b40d5a2b284c3dd2f95aa015",
+      "replacements": [
+        {
+          "offset": 3928,
+          "before": "  const contactHref = preview ? '#'+contactId : ['spoluprace','praxe','pribeh'].includes(routeId) ? routePath(preview?'home-preview':'home',lang)+'#rezervace' : '#'+contactId;\r\n",
+          "after": "  const contactHref = preview ? '#'+contactId : ['spoluprace','praxe','pribeh'].includes(routeId) ? routePath('home',lang)+'#rezervace' : '#'+contactId;\r\n"
+        },
+        {
+          "offset": 8073,
+          "before": "  return <div className=\"tm-mobile\" lang={lang} ref={root} data-preview={loc.routeId.endsWith(\"-preview\") ? \"v3\" : undefined} data-mobile-version=\"M10\" data-page={routeId}>\r\n",
+          "after": "  return <div className=\"tm-mobile\" lang={lang} ref={root} data-preview={preview ? \"v3\" : undefined} data-mobile-version=\"M10\" data-page={routeId}>\r\n"
+        },
+        {
+          "offset": 8331,
+          "before": "      <a className=\"m-logo\" href={routePath(preview?'home-preview':'home',lang)} aria-label={'tanmay · '+t('home',lang)}><BrandWordmark /></a>\r\n",
+          "after": "      <a className=\"m-logo\" href={routePath('home',lang)} aria-label={'tanmay · '+t('home',lang)}><BrandWordmark /></a>\r\n"
+        },
+        {
+          "offset": 9886,
+          "before": "        <nav aria-label={lang==='en'?'Main navigation':'Hlavní navigace'}>{nav.map(([route,key])=><a key={route} href={routePath(preview&&['home','spoluprace'].includes(route)?route+'-preview':route,lang)} onClick={close} aria-current={routeId===route?'page':undefined}>{t(key,lang)}</a>)}</nav>\r\n",
+          "after": "        <nav aria-label={lang==='en'?'Main navigation':'Hlavní navigace'}>{nav.map(([route,key])=><a key={route} href={routePath(route,lang)} onClick={close} aria-current={routeId===route?'page':undefined}>{t(key,lang)}</a>)}</nav>\r\n"
+        },
+        {
+          "offset": 10336,
+          "before": "    <main id=\"main\" key={routeId+lang+(loc.postId||'')}>{children}{!['home','spoluprace','praxe','pribeh'].includes(routeId)&&<MobileContact lang={lang}/>}</main>\r\n    {preview&&<p className=\"preview-original\">{lang==='en'?'Preview of the new version · ':'Náhled nové verze · '}<a href={routePath(routeId,lang)}>{lang==='en'?'Original page →':'Původní stránka →'}</a></p>}\r\n    <footer className=\"m-footer\">{routeId!=='home'&&<a className=\"m-logo\" href={routePath(preview?'home-preview':'home',lang)} aria-label={'tanmay · '+t('home',lang)}><BrandWordmark /></a>}<p>© {new Date().getFullYear()} Kryštof Švec<span className=\"m-footer-brand\"> · Tanmay Practice · {t('prague',lang)}</span></p><a href={routePath('soukromi',lang)}>{t('privacy',lang)}</a></footer>\r\n    <div ref={dock} className=\"m-dock\" hidden={blocked||keyboard} aria-label={lang==='en'?'Quick contact':'Rychlý kontakt'}><a className=\"m-dock-primary\" href={contactHref} onClick={toContact}>{preview?(lang==='en'?'Free 15 minutes':'15 minut zdarma'):t('book',lang)}</a><a className=\"m-dock-message\" href={preview ? previewWhatsApp(lang) : WHATSAPP_URL + (['home','spoluprace'].includes(routeId) ? '?text=' + encodeURIComponent(copy('HomeBooking',0,lang)) : '')} target=\"_blank\" rel=\"noopener noreferrer\" aria-label={t('wa',lang)}><MessageIcon /></a></div>\r\n",
+          "after": "    <main id=\"main\" key={routeId+lang+(loc.postId||'')}>{children}{!['home','spoluprace','praxe','pribeh'].includes(routeId)&&<MobileContact lang={lang} preview/>}</main>\r\n    <footer className=\"m-footer\">{routeId!=='home'&&<a className=\"m-logo\" href={routePath('home',lang)} aria-label={'tanmay · '+t('home',lang)}><BrandWordmark /></a>}<p>© {new Date().getFullYear()} Kryštof Švec<span className=\"m-footer-brand\"> · Tanmay Practice · {t('prague',lang)}</span></p><a href={routePath('soukromi',lang)}>{t('privacy',lang)}</a></footer>\r\n    <div ref={dock} className=\"m-dock\" hidden={blocked||keyboard} aria-label={lang==='en'?'Quick contact':'Rychlý kontakt'}><a className=\"m-dock-primary\" href={contactHref} onClick={toContact}>{lang==='en'?'Free 15 minutes':'15 minut zdarma'}</a><a className=\"m-dock-message\" href={previewWhatsApp(lang)} target=\"_blank\" rel=\"noopener noreferrer\" aria-label={t('wa',lang)}><MessageIcon /></a></div>\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/PreviewEducation.tsx",
+      "beforeSha256": "a1ad5f9d24de34d1d582b7a850e19f249bf040af88b7cdd212dd08c55a8ff310",
+      "afterSha256": "ac5e03baa09f6053e49b7a048b7b54b039e00640e4a53aea47c7edca67c59195",
+      "replacements": [
+        {
+          "offset": 1899,
+          "before": "export function EducationColumns({lang}:{lang:string}) {\n",
+          "after": "export function EducationColumns({lang,illustration=false}:{lang:string;illustration?:boolean}) {\n"
+        },
+        {
+          "offset": 2268,
+          "before": " return <div className=\"preview-education-columns\">{groups.map((column,i)=><div className=\"preview-education-column\" key={i}>{column.map(group=><section className=\"preview-education-group\" key={group.title[0]}><h3>{group.title[n]}</h3>{group.items.map(index=><Credential key={index} index={index} lang={lang}/>)}</section>)}</div>)}</div>;\n",
+          "after": " return <div className=\"preview-education-columns\">{groups.map((column,i)=><div className=\"preview-education-column\" key={i}>{column.map(group=><section className=\"preview-education-group\" key={group.title[0]}><h3>{group.title[n]}</h3>{group.items.map(index=><Credential key={index} index={index} lang={lang}/>)}</section>)}{illustration&&i===1&&<img className=\"release-education-equipment\" src=\"/media/refine-v9-17/equipment-linen-540.webp\" width=\"540\" height=\"347\" alt={n?'Rings, a kettlebell and parallettes.':'Kruhy, kettlebell a bradla.'} loading=\"lazy\"/>}</div>)}</div>;\n"
+        },
+        {
+          "offset": 2847,
+          "before": "export function EducationList({lang}:{lang:string}) {return <EducationColumns lang={lang}/>;}\n",
+          "after": "export function EducationList({lang}:{lang:string}) {return <EducationColumns lang={lang} illustration/>;}\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/PreviewProcessRoad.tsx",
+      "beforeSha256": "fb5bceb29978594d464d73945263ecc24ccacc2471c6b6fb976d10a1a31b8505",
+      "afterSha256": "adbfa5001cb36a97e577d3dc9540dcb5e960f1bc872b17bd309f9ca9705c8ea0",
+      "replacements": [
+        {
+          "offset": 0,
+          "before": "",
+          "after": "import { roadPair, roadPath } from './road-geometry.mjs';\n"
+        },
+        {
+          "offset": 1107,
+          "before": "   // The hidden straight span defines BOTH tangents and a constant join width.\n   // Horizontal end sections keep the two edges level, rather than clipping\n   // a normal-offset curve (which used to leave the inner edge short).\n   const dx=start.x-end.x,dy=start.y-end.y,length=Math.hypot(dx,dy)||1;\n   const ux=dx/length,uy=dy/length,half=6.5;\n   const upperHandle=Math.min(26,(end.y-top)*.45/uy);\n   const lowerHeight=bottom-start.y;\n   const lowerHandle=Math.min(58,(start.x-24)/-ux,lowerHeight*.32/uy);\n   const point=(x:number,y:number)=>`${x.toFixed(2)},${y.toFixed(2)}`;\n   for(let side=0;side<2;side++){\n    const offset=side===0?half:-half;\n    const a=point(w-98,top+(side===0?0:3));\n    const b=point(w-(side===0?8:24),top+(side===0?0:3));\n    const c=point(end.x-ux*upperHandle+offset,end.y-uy*upperHandle);\n    const d=point(end.x+offset,end.y);\n    edges[side].setAttribute('d',`M${a} C${b} ${c} ${d}`);\n    const near=side===0?14.5:-14.5;\n    const e=point(start.x+offset,start.y);\n    const f=point(start.x+ux*lowerHandle+offset,start.y+uy*lowerHandle);\n    const bendOffset=side===0?10:-10;\n    const bendX=24+bendOffset,bendY=start.y+lowerHeight*.5;\n    const g=point(bendX,bendY-lowerHeight*.2);\n    const h=point(bendX,bendY);\n    const j=point(bendX,bendY+lowerHeight*.23);\n    const k=point(w*.27-36+near,bottom-8);\n    const l=point(w*.27+near,bottom);\n    edges[side+2].setAttribute('d',`M${e} C${f} ${g} ${h} C${j} ${k} ${l}`);\n   }\n",
+          "after": "   const upperHeight=Math.max(48,end.y-top),lowerHeight=Math.max(60,bottom-start.y);\n   const upper=roadPair({x:w-80,y:top,height:upperHeight,bend:upperHeight*.55},3,11);\n   const lower=roadPair({x:start.x,y:start.y,height:lowerHeight,bend:-lowerHeight*.55},11,23);\n   [...upper,...lower].forEach((points,i)=>edges[i].setAttribute('d',roadPath(points)));\n"
+        }
+      ]
+    },
+    {
+      "path": "src/preview-copy.ts",
+      "beforeSha256": "c78c54d218c1f8639b6ad32752fae5b09c82673ce68f67a74aa6ada505084865",
+      "afterSha256": "10cf672af425464341797d03eb95f6e7f156201787f1a09c6d6d0196dab2af11",
+      "replacements": [
+        {
+          "offset": 15767,
+          "before": "    \"Jak, kdy a za kolik?\",\r\n    \"How, when and how much?\"\r\n",
+          "after": "    \"Jak, kdy a proč?\",\r\n    \"How, when and why?\"\r\n"
+        },
+        {
+          "offset": 18475,
+          "before": "        \"Na start stačí jeden trénink týdně se mnou a dvakrát 20 minut podle plánu. Termíny domluvíme podle tvého týdne.\",\r\n        \"One session a week with me and twice 20 minutes from the plan is enough to start. We fit the sessions to your week.\"\r\n",
+          "after": "        \"Na start stačí jeden trénink týdně se mnou a dvakrát 30 minut podle plánu. Termíny domluvíme podle tvého týdne.\",\r\n        \"One session a week with me and twice 30 minutes from the plan is enough to start. We fit the sessions to your week.\"\r\n"
+        }
+      ]
+    }
+  ]
+}

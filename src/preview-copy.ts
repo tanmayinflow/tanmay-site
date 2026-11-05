@@ -436,8 +436,8 @@ export const previewCopy = {
     "Know you want to start? Book your first session now →"
   ],
   "faqTitle": [
-    "Jak, kdy a za kolik?",
-    "How, when and how much?"
+    "Jak, kdy a proč?",
+    "How, when and why?"
   ],
   "faq": [
     {
@@ -511,8 +511,8 @@ export const previewCopy = {
         "I have kids and a job. When will I find the time?"
       ],
       "answer": [
-        "Na start stačí jeden trénink týdně se mnou a dvakrát 20 minut podle plánu. Termíny domluvíme podle tvého týdne.",
-        "One session a week with me and twice 20 minutes from the plan is enough to start. We fit the sessions to your week."
+        "Na start stačí jeden trénink týdně se mnou a dvakrát 30 minut podle plánu. Termíny domluvíme podle tvého týdne.",
+        "One session a week with me and twice 30 minutes from the plan is enough to start. We fit the sessions to your week."
       ],
       "label": [
         "Najdeme ti čas →",

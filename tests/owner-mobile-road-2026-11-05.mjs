@@ -1,9 +1,11 @@
+import {restoreReleaseIfCurrent} from './owner-public-release-2026-11-05.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 export const roadDelta=JSON.parse(readFileSync(new URL('./owner-mobile-road-2026-11-05.json',import.meta.url)));
 const sha=b=>createHash('sha256').update(b).digest('hex');
 export function restoreRoadIfCurrent(path,bytes){
+ bytes=restoreReleaseIfCurrent(path,bytes);
  const file=roadDelta.files.find(f=>f.path===path);
  if(!file||sha(bytes)!==file.afterSha256)return bytes;
  let value=bytes;

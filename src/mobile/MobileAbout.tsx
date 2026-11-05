@@ -13,7 +13,7 @@ export default function MobileAbout({lang}:{lang:string}) {
   const introduction=c(1).slice(c(1).indexOf('.')+1).trimStart();
   return <>
     <MobileHero page="about" lang={lang}/>
-    <div id="mobilni-obsah" className="m-about-intro-copy"><div className="m-inner"><p><RichText>{introduction}</RichText></p><a className="m-text-link preview-story-cta" href={routePath('spoluprace',lang)}>{lang==='en'?'Ways to work together':'Možnosti spolupráce'}</a></div></div>
+    <div id="mobilni-obsah" className="m-about-intro-copy"><div className="m-inner"><p>{introduction.split(/(držet sám|sustain on their own)/).map((part,i)=>/^(držet sám|sustain on their own)$/.test(part)?<strong key={i}>{part}</strong>:part)}</p><a className="m-text-link preview-story-cta" href={routePath('spoluprace',lang)}>{lang==='en'?'Ways to work together':'Možnosti spolupráce'}</a></div></div>
     <Chapter title={c(9)} eyebrow={c(8)} className="m-roots"><p><RichText>{c(10)}</RichText></p><Rail title={c(9)} items={approvedLists.PagePribeh.roots} lang={lang}/></Chapter>
     <Chapter title={c(12)} eyebrow={c(11)} className="m-return m-dark">
       <p className="m-return-lead"><RichText>{c(13)}</RichText></p>

@@ -17,12 +17,12 @@ function Credential({index,lang}:{index:number;lang:string}) {
 }
 
 /** The same grouping is used on the story and collaboration pages. */
-export function EducationColumns({lang}:{lang:string}) {
+export function EducationColumns({lang,illustration=false}:{lang:string;illustration?:boolean}) {
  const n=lang==='en'?1:0;
  const groups=[
   [{title:['Profesní kvalifikace','Professional qualification'],items:[0]},{title:['Jóga','Yoga'],items:[4]},{title:['Studium','Studies'],items:[5]}],
   [{title:['Pohyb a trénink','Movement and training'],items:[1,2,3]}],
  ];
- return <div className="preview-education-columns">{groups.map((column,i)=><div className="preview-education-column" key={i}>{column.map(group=><section className="preview-education-group" key={group.title[0]}><h3>{group.title[n]}</h3>{group.items.map(index=><Credential key={index} index={index} lang={lang}/>)}</section>)}</div>)}</div>;
+ return <div className="preview-education-columns">{groups.map((column,i)=><div className="preview-education-column" key={i}>{column.map(group=><section className="preview-education-group" key={group.title[0]}><h3>{group.title[n]}</h3>{group.items.map(index=><Credential key={index} index={index} lang={lang}/>)}</section>)}{illustration&&i===1&&<img className="release-education-equipment" src="/media/refine-v9-17/equipment-linen-540.webp" width="540" height="347" alt={n?'Rings, a kettlebell and parallettes.':'Kruhy, kettlebell a bradla.'} loading="lazy"/>}</div>)}</div>;
 }
-export function EducationList({lang}:{lang:string}) {return <EducationColumns lang={lang}/>;}
+export function EducationList({lang}:{lang:string}) {return <EducationColumns lang={lang} illustration/>;}

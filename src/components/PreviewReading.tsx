@@ -29,7 +29,7 @@ export function PreviewWants({lang}:{lang:string}) {
   preference.addEventListener('change',cancel);
   return()=>{observer.disconnect();cancel();preference.removeEventListener('change',cancel);};
  },[]);
- return <ul className="preview-wants" ref={root}>{p.wants.map((x,i)=><li key={x[0]}><span aria-hidden="true">0{i+1}</span><p>{previewText(x,lang)}</p></li>)}</ul>;
+ return <ul className="preview-wants" ref={root}>{[...p.wants,['Cítit klid a jistotu ve svém těle.','Feel calm and confidence in my own body.']].map((x,i)=><li key={x[0]}><span aria-hidden="true">0{i+1}</span><p>{previewText(x,lang)}</p></li>)}</ul>;
 }
 
 /** Native scroll moves only the row; the full mobile scene releases at its end. */

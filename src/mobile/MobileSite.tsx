@@ -76,7 +76,7 @@ export default function MobileSite({ loc, children, preview=false }: { loc: Loca
   useMobileMotion(root,routeId+lang+(loc.postId||''));
   useMobileStoryScroll(root,routeId+lang+(loc.postId||''));
   const contactId = preview ? (routeId==='home'?'rezervace':'kontakt') : ['home','spoluprace','praxe','pribeh'].includes(routeId) ? 'rezervace' : 'kontakt';
-  const contactHref = preview ? '#'+contactId : ['spoluprace','praxe','pribeh'].includes(routeId) ? routePath(preview?'home-preview':'home',lang)+'#rezervace' : '#'+contactId;
+  const contactHref = preview ? '#'+contactId : ['spoluprace','praxe','pribeh'].includes(routeId) ? routePath('home',lang)+'#rezervace' : '#'+contactId;
   const toContact = useMobileContactScroll({root,dock,contactId,routeKey:routeId+lang+(loc.postId||'')});
   const nav = [['home','home'],['spoluprace','collaboration'],['praxe','practice'],['pribeh','about']] as const;
   const finishClose = useCallback(() => {
@@ -136,24 +136,23 @@ export default function MobileSite({ loc, children, preview=false }: { loc: Loca
     addEventListener('scroll',update,{passive:true});addEventListener('resize',update);update();
     return()=>{layout.disconnect();removeEventListener('scroll',update);removeEventListener('resize',update);cancelAnimationFrame(frame);};
   },[routeId,lang]);
-  return <div className="tm-mobile" lang={lang} ref={root} data-preview={loc.routeId.endsWith("-preview") ? "v3" : undefined} data-mobile-version="M10" data-page={routeId}>
+  return <div className="tm-mobile" lang={lang} ref={root} data-preview={preview ? "v3" : undefined} data-mobile-version="M10" data-page={routeId}>
     <a className="m-skip" href="#main">{t('skip',lang)}</a>
     <header className="m-header" ref={header}>
-      <a className="m-logo" href={routePath(preview?'home-preview':'home',lang)} aria-label={'tanmay · '+t('home',lang)}><BrandWordmark /></a>
+      <a className="m-logo" href={routePath('home',lang)} aria-label={'tanmay · '+t('home',lang)}><BrandWordmark /></a>
       <MobileLanguageSwitch lang={lang} href={otherLangPath(loc.routeId,lang,loc.postId)}/>
       <button className="m-menu-trigger" type="button" ref={trigger} onClick={()=>setOpen(true)} aria-label={t('menu',lang)} aria-controls="mobile-menu" aria-expanded={open}><span /><span /></button>
     </header>
     <dialog className="m-menu" ref={menu} id="mobile-menu" data-visible={shown} aria-label={lang==='en'?'Navigation':'Navigace'} onKeyDown={e=>{if(e.key!=='Tab')return;const stops=Array.from(e.currentTarget.querySelectorAll<HTMLElement>('a[href],button:not([disabled]),[tabindex]:not([tabindex="-1"])')).filter(el=>el.getClientRects().length>0);const first=stops[0],last=stops[stops.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last?.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus();}}} onCancel={e=>{e.preventDefault();close();}} onClose={()=>{setOpen(false);setShown(false);}} onClick={e=>{const sheet=e.currentTarget.querySelector('.m-menu-sheet');if(sheet&&!sheet.contains(e.target as Node))close();}}>
       <div className="m-menu-sheet"><MobileMenuLines/>
         <div className="m-menu-head"><a className="m-menu-client" href={CLIENT_APP_URL} target="_blank" rel="noopener noreferrer">{t('clients',lang)}</a><button type="button" data-menu-close="" className="m-menu-close" onClick={close} aria-label={t('close',lang)}>×</button></div>
-        <nav aria-label={lang==='en'?'Main navigation':'Hlavní navigace'}>{nav.map(([route,key])=><a key={route} href={routePath(preview&&['home','spoluprace'].includes(route)?route+'-preview':route,lang)} onClick={close} aria-current={routeId===route?'page':undefined}>{t(key,lang)}</a>)}</nav>
+        <nav aria-label={lang==='en'?'Main navigation':'Hlavní navigace'}>{nav.map(([route,key])=><a key={route} href={routePath(route,lang)} onClick={close} aria-current={routeId===route?'page':undefined}>{t(key,lang)}</a>)}</nav>
         <div className="m-menu-bottom"><a className="m-instagram" href={IG_URL} target="_blank" rel="noopener noreferrer" aria-label="Instagram · tanmayflow"><InstagramIcon/></a></div>
       </div>
     </dialog>
-    <main id="main" key={routeId+lang+(loc.postId||'')}>{children}{!['home','spoluprace','praxe','pribeh'].includes(routeId)&&<MobileContact lang={lang}/>}</main>
-    {preview&&<p className="preview-original">{lang==='en'?'Preview of the new version · ':'Náhled nové verze · '}<a href={routePath(routeId,lang)}>{lang==='en'?'Original page →':'Původní stránka →'}</a></p>}
-    <footer className="m-footer">{routeId!=='home'&&<a className="m-logo" href={routePath(preview?'home-preview':'home',lang)} aria-label={'tanmay · '+t('home',lang)}><BrandWordmark /></a>}<p>© {new Date().getFullYear()} Kryštof Švec<span className="m-footer-brand"> · Tanmay Practice · {t('prague',lang)}</span></p><a href={routePath('soukromi',lang)}>{t('privacy',lang)}</a></footer>
-    <div ref={dock} className="m-dock" hidden={blocked||keyboard} aria-label={lang==='en'?'Quick contact':'Rychlý kontakt'}><a className="m-dock-primary" href={contactHref} onClick={toContact}>{preview?(lang==='en'?'Free 15 minutes':'15 minut zdarma'):t('book',lang)}</a><a className="m-dock-message" href={preview ? previewWhatsApp(lang) : WHATSAPP_URL + (['home','spoluprace'].includes(routeId) ? '?text=' + encodeURIComponent(copy('HomeBooking',0,lang)) : '')} target="_blank" rel="noopener noreferrer" aria-label={t('wa',lang)}><MessageIcon /></a></div>
+    <main id="main" key={routeId+lang+(loc.postId||'')}>{children}{!['home','spoluprace','praxe','pribeh'].includes(routeId)&&<MobileContact lang={lang} preview/>}</main>
+    <footer className="m-footer">{routeId!=='home'&&<a className="m-logo" href={routePath('home',lang)} aria-label={'tanmay · '+t('home',lang)}><BrandWordmark /></a>}<p>© {new Date().getFullYear()} Kryštof Švec<span className="m-footer-brand"> · Tanmay Practice · {t('prague',lang)}</span></p><a href={routePath('soukromi',lang)}>{t('privacy',lang)}</a></footer>
+    <div ref={dock} className="m-dock" hidden={blocked||keyboard} aria-label={lang==='en'?'Quick contact':'Rychlý kontakt'}><a className="m-dock-primary" href={contactHref} onClick={toContact}>{lang==='en'?'Free 15 minutes':'15 minut zdarma'}</a><a className="m-dock-message" href={previewWhatsApp(lang)} target="_blank" rel="noopener noreferrer" aria-label={t('wa',lang)}><MessageIcon /></a></div>
   </div>;
 }
 
