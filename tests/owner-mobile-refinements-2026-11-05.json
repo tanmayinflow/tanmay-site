@@ -1,0 +1,122 @@
+{
+  "approvedOn": "2026-11-05",
+  "baselineCommit": "94a81712956d54e9a227d91260fb256625bbf03b",
+  "scope": "Seventeen owner mobile annotations: five left-aligned wants in a centered block, dashed CTAs, same process arrows and unnumbered offer steps, revised mobile copy, fading card trial, and earlier Collaboration light boundary. No desktop or production changes.",
+  "files": [
+    {
+      "path": "src/mobile/PreviewDetails.tsx",
+      "beforeSha256": "0353f194637e7a70f710916bb9e9c80ea4ed7a52c8090e802de090f29bc91c1f",
+      "afterSha256": "52ec0be9b46cbec6b0532bcd517b2e45cb2bf264a42c3373dc02c4b7767a4d88",
+      "replacements": [
+        {
+          "offset": 465,
+          "before": " cheer:previewCopy.cheer.map(text=>text.replace('hecuju tě','povzbuzuju').replace('push you on','encourage you')),\n",
+          "after": " cheer:previewCopy.cheer.map(text=>text.replace('roztleskávač a rovnocenný přítel','roztleskávač, průvodce a rovnocenný přítel').replace('cheerleader and a friend on equal terms','cheerleader, guide and a friend on equal terms').replace('hecuju tě','povzbuzuju').replace('push you on','encourage you')),\n destination:['Silnější a lehčí tělo, které se ti líbí. Energie na celý den. Sebevědomí a klid ve svém těle. Pohyb, na který se těšíš.','A stronger, lighter body you like. Energy for the whole day. Confidence and calm in your own body. Movement you look forward to.'],\n needsClose:['Ten rozdíl překonáme spolu.\\nKrok za krokem.','We will overcome the gap together.\\nStep by step.'],\n forItems:previewCopy.forItems.map(pair=>pair.map(text=>{const sentence=text.replace('máš málo času, protože práce a rodina,','máš málo času kvůli práci a rodině.').replace(/[,.;]$/,'.');return sentence.charAt(0).toUpperCase()+sentence.slice(1);})),\n notFor:['Není to pro tebe, když hledáš rychlé zázraky za týden.','This is not for you if you are looking for quick miracles in a week.'],\n"
+        },
+        {
+          "offset": 2457,
+          "before": "export function PreviewSteps({lang,work=false}:{lang:string;work?:boolean}) {\n const root=useRef<HTMLOListElement>(null);useProcessConnectors(root,lang+work);\n return <ol ref={root} className=\"preview-process-steps\">{(work?previewCopy.workSteps:previewCopy.steps).map((step,i)=><li key={i}><div><h3><span className=\"preview-step-number\" aria-hidden=\"true\">0{i+1}</span><span className=\"preview-step-title\">{previewText(step[0],lang)}</span></h3><p><span className=\"preview-step-copy\">{work&&i===0?previewText(step[1],lang).split(/ (?=Odejdeš |You leave )/).map((sentence,index)=><span className=\"preview-step-sentence\" key={sentence}>{index>0?' ':''}{sentence}</span>):previewText(step[1],lang)}</span></p></div>{i<2&&<PreviewCurveArrow connector className={i===0?'preview-turn-right':'preview-turn-left'}/>}</li>)}</ol>;\n",
+          "after": "export function PreviewSteps({lang,work=false,included=false}:{lang:string;work?:boolean;included?:boolean}) {\n const root=useRef<HTMLOListElement>(null);useProcessConnectors(root,lang+work+included);\n const steps=included?previewCopy.startItems:work?previewCopy.workSteps:previewCopy.steps;\n return <ol ref={root} className={'preview-process-steps'+(included?' preview-included-steps':'')}>{steps.map((step,i)=><li key={i}><div><h3>{!included&&<span className=\"preview-step-number\" aria-hidden=\"true\">0{i+1}</span>}<span className=\"preview-step-title\">{previewText(step[0],lang)}</span></h3><p><span className=\"preview-step-copy\">{work&&i===0?previewText(step[1],lang).split(/ (?=Odejdeš |You leave )/).map((sentence,index)=><span className=\"preview-step-sentence\" key={sentence}>{index>0?' ':''}{sentence}</span>):previewText(step[1],lang)}</span></p></div>{i<steps.length-1&&<PreviewCurveArrow connector className={i%2===0?'preview-turn-right':'preview-turn-left'}/>}</li>)}</ol>;\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/PreviewMotion.tsx",
+      "beforeSha256": "4339fb91fd4da695dd185ce175c0d117c41b98ccf27117f27812e0d40b01ee4f",
+      "afterSha256": "9f94cef983e5987340893a5bab0a811555f727e264e9c52a6e723920de95186f",
+      "replacements": [
+        {
+          "offset": 112,
+          "before": "/** Four centered statements; the owner prefers simple bullets to underlines. */\n",
+          "after": "/** Left-aligned statements inside one centered, naturally sized list. */\n"
+        },
+        {
+          "offset": 245,
+          "before": " return <ul className=\"preview-wants-editorial\">{previewCopy.wants.map(pair=><li key={pair[0]}><p className=\"preview-want-text\">{previewText(pair,lang)}</p></li>)}</ul>;\n",
+          "after": " const wants=[...previewCopy.wants,['Cítit klid a jistotu ve svém těle.','Feel calm and confidence in my own body.']];\n return <ul className=\"preview-wants-editorial\">{wants.map(pair=><li key={pair[0]}><p className=\"preview-want-text\">{previewText(pair,lang)}</p></li>)}</ul>;\n"
+        },
+        {
+          "offset": 528,
+          "before": "/** Mirrored curves share one size and begin beside the paragraph's final line. */\n",
+          "after": "/** Identical quiet curves alternate sides beside the paragraph's final line. */\n"
+        },
+        {
+          "offset": 1346,
+          "before": "    const left=i===0?box.width-width-16:16,top=last.top+last.height*.55-box.top-8;\n",
+          "after": "    const left=i%2===0?box.width-width-16:16;\n    // Keep the curve beside the final line where there is room. A full line\n    // gets a small clearance below it instead of drawing through the words.\n    const intersects=last.right>box.left+left+10&&last.left<box.left+left+width;\n    const top=intersects?last.bottom-box.top+6:last.top+last.height*.55-box.top-8;\n"
+        },
+        {
+          "offset": 2014,
+          "before": "    arrow.children[0].setAttribute('d',i===0?'M10 8 C72 5 86 40 68 67':'M86 8 C24 5 10 40 28 67');\n    arrow.children[1].setAttribute('d',i===0?'M67 53 L68 67 L81 62':'M29 53 L28 67 L15 62');\n",
+          "after": "    arrow.children[0].setAttribute('d','M10 8 C72 5 86 40 68 67');\n    arrow.children[1].setAttribute('d','M67 53 L68 67 L81 62');\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileHomePreview.tsx",
+      "beforeSha256": "65405fbd19c10267e9b61575bdbd3d49e1a5a90f76fca7b894d0ecdf3060a8d6",
+      "afterSha256": "1959db0db7d10f14caef091fa716b09962cd8bea75cbe05d32ab703088b0d77f",
+      "replacements": [
+        {
+          "offset": 1189,
+          "before": "   <section className=\"m-chapter m-home-intro\" id=\"mobilni-obsah\" aria-labelledby=\"m-home-statement\"><div className=\"m-inner\"><StoryCard closeOnNavigate title={t('intro',lang)} lang={lang} className=\"m-intro-words\" preview={keywords}><p>{c(p.homeLead)}</p><p>{c(p.micro)}</p><TextLink href=\"#rezervace\">{c(p.cta)}</TextLink></StoryCard></div><MobileHomeLines/><p className=\"m-eyebrow m-home-anchors\">{c(approved.Opening[3])}</p></section>\r\n",
+          "after": "   <section className=\"m-chapter m-home-intro\" id=\"mobilni-obsah\" aria-labelledby=\"m-home-statement\"><div className=\"m-inner\"><StoryCard closeOnNavigate title={t('intro',lang)} lang={lang} className=\"m-intro-words\" preview={keywords}><p>{c(p.homeLead)}</p><p>{c(p.micro)}</p><TextLink href=\"#rezervace\">{c(p.cta)}</TextLink></StoryCard></div><MobileHomeLines/></section>\r\n"
+        },
+        {
+          "offset": 2568,
+          "before": "   <section className=\"m-chapter m-home-about\" aria-labelledby=\"m-about-home-title\"><div className=\"m-inner\"><div className=\"m-about-composition\"><Photo asset=\"prague\" alt={c(approved.HomeAbout[3])} className=\"m-prague\"/><div className=\"m-about-heading\"><p className=\"m-eyebrow\">Kryštof Švec</p><h2 id=\"m-about-home-title\">{c(p.aboutTitle)}</h2><div className=\"preview-about-aside\"><p>{c(p.cheer)}</p></div></div></div><p className=\"m-about-bio m-bio-highlight-practice\">{c(p.bio)}</p><TextLink href={routePath('pribeh',lang)+'#vzdelani'} arrow>{c(p.qualification)}</TextLink><MobileDoubleLine/></div></section>\r\n",
+          "after": "   <section className=\"m-chapter m-home-about\" aria-labelledby=\"m-about-home-title\"><div className=\"m-inner\"><div className=\"m-about-composition\"><Photo asset=\"prague\" alt={c(approved.HomeAbout[3])} className=\"m-prague\"/><div className=\"m-about-heading\"><p className=\"m-eyebrow\">Kryštof Švec</p><h2 id=\"m-about-home-title\">{c(p.aboutTitle)}</h2><div className=\"preview-about-aside\"><p>{c(p.cheer)}</p></div></div></div><p className=\"m-about-bio m-bio-highlight-practice\">{c(p.bio)}</p><a className=\"m-text-link preview-education-link\" href={routePath('pribeh',lang)+'#vzdelani'}>{c(p.qualification)}</a><MobileDoubleLine/></div></section>\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileCollaborationPreview.tsx",
+      "beforeSha256": "a7a9a40bf9b067f070c4d7afd42bc09e2759dd3bc12a4e2d19b301d9efa01eff",
+      "afterSha256": "44111c7bbd07e29994831e5a2a830ad1a0598506163c487da8f3490682cda635",
+      "replacements": [
+        {
+          "offset": 2402,
+          "before": "     <div className=\"preview-work-included\">{p.startItems.map((x,i)=><article key={i}><h3>{c(x[0])}</h3><p>{c(x[1])}</p></article>)}</div>\r\n",
+          "after": "     <PreviewSteps lang={lang} included/>\r\n"
+        },
+        {
+          "offset": 2954,
+          "before": "",
+          "after": "   </div>\r\n"
+        },
+        {
+          "offset": 3472,
+          "before": "   </div>\r\n",
+          "after": ""
+        },
+        {
+          "offset": 3867,
+          "before": "    <TextLink href={routePath('pribeh',lang)+'#vzdelani'} arrow>{c(p.qualification)}</TextLink>\r\n",
+          "after": "    <a className=\"m-text-link preview-education-link\" href={routePath('pribeh',lang)+'#vzdelani'}>{c(p.qualification)}</a>\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/preview-v3.css",
+      "beforeSha256": "97c4b58a685d907f62f83c91a02098afc80d4b65e216d3380dfcc126aa7028fa",
+      "afterSha256": "d2c6309a51dd23e051680c633777e427e84665f138d4baad27b6928ffff8d3a3",
+      "replacements": [
+        {
+          "offset": 34194,
+          "before": "  border:1px solid color-mix(in srgb,var(--m-accent) 65%,transparent);\n",
+          "after": "  border:1px dashed color-mix(in srgb,var(--m-accent) 65%,transparent);\n"
+        },
+        {
+          "offset": 38006,
+          "before": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-wants-editorial {list-style:none;padding:0;margin:24px 0 38px;display:grid;gap:18px}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-wants-editorial li {position:relative;width:100%;margin:0;padding:0;text-align:center}\n",
+          "after": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-wants-editorial {list-style:none;width:fit-content;max-width:100%;box-sizing:border-box;padding:0 0 0 18px;margin:24px auto 38px;display:grid;gap:18px}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-wants-editorial li {position:relative;width:100%;margin:0;padding:0;text-align:left}\n"
+        },
+        {
+          "offset": 40125,
+          "before": "",
+          "after": "\n/* Owner's 5 November mobile annotations. The borderless card treatment is a\n   reversible trial: only its background fades; all reading content stays opaque. */\n@media(max-width:899px){\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-intro-words > .m-story-trigger .m-story-preview::after {color:inherit}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-intro-words .m-story-body > .m-text-link,\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-education-link {display:flex;justify-content:center;align-items:center;width:fit-content;max-width:100%;box-sizing:border-box;margin:28px auto 0;padding:14px 18px;border:1px dashed color-mix(in srgb,var(--m-accent) 65%,transparent);border-radius:20px 25px 18px 24px / 24px 17px 25px 19px;background:none;text-align:center;line-height:1.6}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-collab-caption {padding-block:8px 0}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-collab-caption p {display:flex;justify-content:space-between;gap:8px;font-size:clamp(.875rem,3.5vw,1rem);line-height:1.4}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-collab-caption span {white-space:nowrap}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-work-story .preview-work-bridge {text-align:center;white-space:pre-line;font-size:clamp(1.375rem,5.6vw,1.75rem)}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-included-steps .preview-step-title {color:var(--m-accent)}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-included-steps > li:nth-child(2n):not(:last-child) {text-align:right}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-included-steps > li:nth-child(2n):not(:last-child) h3 {justify-content:flex-end}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-work-story > .preview-work-process {background:none}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-work-story > .preview-work-process::before,\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-work-story > .preview-work-process::after {display:none}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits:not(.preview-handstand) .preview-benefits-track > article {position:relative;isolation:isolate;border:0;background:none;box-shadow:none}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits:not(.preview-handstand) .preview-benefits-track > article::before {content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;background:radial-gradient(ellipse closest-side at 50% 45%,rgba(244,240,235,.12) 0%,rgba(244,240,235,.06) 50%,rgba(244,240,235,0) 100%)}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-benefits.preview-barriers:not(.preview-handstand) .preview-benefits-track > article::before {background:radial-gradient(ellipse closest-side at 50% 45%,rgba(244,240,235,.55) 0%,rgba(244,240,235,.28) 50%,rgba(244,240,235,0) 100%)}\n}\n"
+        }
+      ]
+    }
+  ]
+}

@@ -1,12 +1,13 @@
 import { useEffect, type RefObject } from 'react';
 import { previewCopy, previewText } from '../preview-copy';
 
-/** Four centered statements; the owner prefers simple bullets to underlines. */
+/** Left-aligned statements inside one centered, naturally sized list. */
 export function MobilePreviewWants({lang}:{lang:string}) {
- return <ul className="preview-wants-editorial">{previewCopy.wants.map(pair=><li key={pair[0]}><p className="preview-want-text">{previewText(pair,lang)}</p></li>)}</ul>;
+ const wants=[...previewCopy.wants,['Cítit klid a jistotu ve svém těle.','Feel calm and confidence in my own body.']];
+ return <ul className="preview-wants-editorial">{wants.map(pair=><li key={pair[0]}><p className="preview-want-text">{previewText(pair,lang)}</p></li>)}</ul>;
 }
 
-/** Mirrored curves share one size and begin beside the paragraph's final line. */
+/** Identical quiet curves alternate sides beside the paragraph's final line. */
 export function useProcessConnectors(root:RefObject<HTMLOListElement>,key:string) {
  useEffect(()=>{
   const list=root.current;if(!list)return;
@@ -20,13 +21,17 @@ export function useProcessConnectors(root:RefObject<HTMLOListElement>,key:string
     const range=document.createRange();range.selectNodeContents(copy);
     const lines=Array.from(range.getClientRects()).filter(b=>b.width>0),last=lines[lines.length-1];if(!last)return;
     const box=item.getBoundingClientRect(),width=96,height=84;
-    const left=i===0?box.width-width-16:16,top=last.top+last.height*.55-box.top-8;
+    const left=i%2===0?box.width-width-16:16;
+    // Keep the curve beside the final line where there is room. A full line
+    // gets a small clearance below it instead of drawing through the words.
+    const intersects=last.right>box.left+left+10&&last.left<box.left+left+width;
+    const top=intersects?last.bottom-box.top+6:last.top+last.height*.55-box.top-8;
     arrow.style.left=left+'px';arrow.style.top=top+'px';
     if(arrow.style.getPropertyPriority('width')!=='important')arrow.style.width=width+'px';
     if(arrow.style.getPropertyPriority('height')!=='important')arrow.style.height=height+'px';
     arrow.setAttribute('viewBox',`0 0 ${width} ${height}`);
-    arrow.children[0].setAttribute('d',i===0?'M10 8 C72 5 86 40 68 67':'M86 8 C24 5 10 40 28 67');
-    arrow.children[1].setAttribute('d',i===0?'M67 53 L68 67 L81 62':'M29 53 L28 67 L15 62');
+    arrow.children[0].setAttribute('d','M10 8 C72 5 86 40 68 67');
+    arrow.children[1].setAttribute('d','M67 53 L68 67 L81 62');
    });
   };
   const queue=()=>{if(!frame)frame=requestAnimationFrame(measure);};

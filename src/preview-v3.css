@@ -306,7 +306,7 @@
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-links > .m-text-link:first-child,
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-process > .m-inner > .m-text-link {
   display:flex; width:fit-content; max-width:100%; margin:24px 0 0 auto; padding:14px 18px;
-  border:1px solid color-mix(in srgb,var(--m-accent) 65%,transparent);
+  border:1px dashed color-mix(in srgb,var(--m-accent) 65%,transparent);
   border-radius:20px 25px 18px 24px / 24px 17px 25px 19px; background:none; text-align:center;
  }
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-steps { list-style:none; padding:0; margin:28px 0 24px; display:grid; gap:0; }
@@ -339,8 +339,8 @@
 /* Owner's mobile reading and process refinements, 2026-11-04. */
 @media(max-width:899px){
  .tm-mobile[data-mobile-version][data-preview="v3"] #m-home-statement .preview-statement-line {display:block}
- .tm-mobile[data-mobile-version][data-preview="v3"] .preview-wants-editorial {list-style:none;padding:0;margin:24px 0 38px;display:grid;gap:18px}
- .tm-mobile[data-mobile-version][data-preview="v3"] .preview-wants-editorial li {position:relative;width:100%;margin:0;padding:0;text-align:center}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-wants-editorial {list-style:none;width:fit-content;max-width:100%;box-sizing:border-box;padding:0 0 0 18px;margin:24px auto 38px;display:grid;gap:18px}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-wants-editorial li {position:relative;width:100%;margin:0;padding:0;text-align:left}
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-wants-editorial p {display:inline;position:relative;font-family:var(--ff-body);font-size:clamp(.875rem,3.7vw,1rem);line-height:1.6;font-weight:500;margin:0;text-wrap:pretty;color:var(--m-text)}
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-wants-editorial p::before {content:'•';position:absolute;right:calc(100% + 10px);color:#c8a58b}
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-steps > li:last-child {text-align:center}
@@ -355,4 +355,25 @@
 }
 @media(prefers-reduced-motion:reduce){
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-steps .preview-curve-arrow {opacity:1;transition:none}
+}
+
+/* Owner's 5 November mobile annotations. The borderless card treatment is a
+   reversible trial: only its background fades; all reading content stays opaque. */
+@media(max-width:899px){
+ .tm-mobile[data-mobile-version][data-preview="v3"] .m-intro-words > .m-story-trigger .m-story-preview::after {color:inherit}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .m-intro-words .m-story-body > .m-text-link,
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-education-link {display:flex;justify-content:center;align-items:center;width:fit-content;max-width:100%;box-sizing:border-box;margin:28px auto 0;padding:14px 18px;border:1px dashed color-mix(in srgb,var(--m-accent) 65%,transparent);border-radius:20px 25px 18px 24px / 24px 17px 25px 19px;background:none;text-align:center;line-height:1.6}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-collab-caption {padding-block:8px 0}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-collab-caption p {display:flex;justify-content:space-between;gap:8px;font-size:clamp(.875rem,3.5vw,1rem);line-height:1.4}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-collab-caption span {white-space:nowrap}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-story .preview-work-bridge {text-align:center;white-space:pre-line;font-size:clamp(1.375rem,5.6vw,1.75rem)}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-included-steps .preview-step-title {color:var(--m-accent)}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-included-steps > li:nth-child(2n):not(:last-child) {text-align:right}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-included-steps > li:nth-child(2n):not(:last-child) h3 {justify-content:flex-end}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-story > .preview-work-process {background:none}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-story > .preview-work-process::before,
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-story > .preview-work-process::after {display:none}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-benefits:not(.preview-handstand) .preview-benefits-track > article {position:relative;isolation:isolate;border:0;background:none;box-shadow:none}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-benefits:not(.preview-handstand) .preview-benefits-track > article::before {content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;background:radial-gradient(ellipse closest-side at 50% 45%,rgba(244,240,235,.12) 0%,rgba(244,240,235,.06) 50%,rgba(244,240,235,0) 100%)}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-benefits.preview-barriers:not(.preview-handstand) .preview-benefits-track > article::before {background:radial-gradient(ellipse closest-side at 50% 45%,rgba(244,240,235,.55) 0%,rgba(244,240,235,.28) 50%,rgba(244,240,235,0) 100%)}
 }
