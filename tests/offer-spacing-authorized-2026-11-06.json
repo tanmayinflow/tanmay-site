@@ -1,0 +1,30 @@
+{
+  "baseline": "51ed1574a056c701ac6f53ba206a133c4159d5a9",
+  "authorization": "2026-11-06 owner annotations: remove overlapping orange dots in the cycle descriptions and keep offer arrows clear of text on iPhone. Preserve the existing curves, copy and other sections.",
+  "files": [
+    {
+      "path": "src/mobile/PreviewMotion.tsx",
+      "beforeSha256": "9720fb7288ba4fde0da685074c710cb05158289801db25e88911a2cac467ae06",
+      "afterSha256": "d22d3ae4ac8670b04d94de1662aa76a3f86dcbcc94511cf8c47bf83430e17274",
+      "replacements": [
+        {
+          "offset": 1026,
+          "before": "tem=arrow.closest('li')!,copy=item.querySelector('.preview-step-copy')!;\n    const range=document.createRange();range.selectNodeContents(copy);\n    const lines=Array.from(range.getClientRects()).filter(b=>b.width>0),last=lines[lines.length-1];if(!last)return;\n    const included=list.classList.contains('preview-included-steps');\n    const box=item.getBoundingClientRect(),width=included?76:96,height=included?88:84;\n    const left=i%2===0?box.width-width-16:16;\n    // Keep the curve beside the final line where there is room. A full line\n    // gets a small clearance below it instead of drawing through the words.\n    const intersects=last.right>box.left+left+10&&last.left<box.left+left+width;\n    const top=intersects?last.bottom-box.top+6:last.top+last.height*.55-box.top-8;\n    arrow.style.left=left+'px';arrow.style.top=top+'px';",
+          "after": "ncluded=list.classList.contains('preview-included-steps');\n    const width=included?76:96,height=included?88:84;\n    // Offer arrows occupy their own space in normal flow. Font loading,\n    // text enlargement and wrapping must never move them over the copy.\n    if(!included){\n     const item=arrow.closest('li')!,copy=item.querySelector('.preview-step-copy')!;\n     const range=document.createRange();range.selectNodeContents(copy);\n     const lines=Array.from(range.getClientRects()).filter(b=>b.width>0),last=lines[lines.length-1];if(!last)return;\n     const box=item.getBoundingClientRect(),left=i%2===0?box.width-width-16:16;\n     const intersects=last.right>box.left+left+10&&last.left<box.left+left+width;\n     const top=intersects?last.bottom-box.top+6:last.top+last.height*.55-box.top-8;\n     arrow.style.left=left+'px';arrow.style.top=top+'px';\n    }"
+        }
+      ]
+    },
+    {
+      "path": "src/preview-v3.css",
+      "beforeSha256": "eb6da6f3629bc6787a15bd69a3bf9e7b154c36140ea8eafa63ff9a964f44654e",
+      "afterSha256": "05e17cd73d25149d090871e8fa3f64b8be4763a2cec378d0919e0c74f452c747",
+      "replacements": [
+        {
+          "offset": 46727,
+          "before": "first-child > .preview-curve-arrow {translate:calc(-21 * 100vw / 440) 23px;rotate:-8deg;width:55px!important;height:66px!important;max-width:none;max-height:none}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-included-steps > li:nth-child(2) > .preview-curve-arrow {translate:calc(-35 * 100vw / 440) -8px;rotate:10deg;width:71px!important;height:80px!important;max-width:none;max-height:none}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-included-steps > li:nth-child(3) > .preview-curve-arrow {translate:calc(12 * 100vw / 440) -7px;rotate:-11deg;width:92px!important;height:103px!important;max-width:none;max-heigh",
+          "after": "not(:last-child) {padding-bottom:0}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-included-steps > li > .preview-curve-arrow {position:relative;inset:auto;translate:none;margin:24px 16px 24px auto;max-width:none;max-height:none}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-included-steps > li:first-child > .preview-curve-arrow {rotate:-8deg;width:55px!important;height:66px!important}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-included-steps > li:nth-child(2) > .preview-curve-arrow {rotate:10deg;width:71px!important;height:80px!important;margin-left:16px;margin-right:auto}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-included-steps > li:nth-child(3) > .preview-curve-arrow {rotate:-11deg;width:92px!important;height:103px!important}\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .m-interactive-cycle .m-figure-panel-inner p::before {conten"
+        }
+      ]
+    }
+  ]
+}

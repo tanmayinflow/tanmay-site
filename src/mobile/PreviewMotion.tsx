@@ -17,17 +17,19 @@ export function useProcessConnectors(root:RefObject<HTMLOListElement>,key:string
   const measure=()=>{
    frame=0;if(!live)return;
    arrows.forEach((arrow,i)=>{
-    const item=arrow.closest('li')!,copy=item.querySelector('.preview-step-copy')!;
-    const range=document.createRange();range.selectNodeContents(copy);
-    const lines=Array.from(range.getClientRects()).filter(b=>b.width>0),last=lines[lines.length-1];if(!last)return;
     const included=list.classList.contains('preview-included-steps');
-    const box=item.getBoundingClientRect(),width=included?76:96,height=included?88:84;
-    const left=i%2===0?box.width-width-16:16;
-    // Keep the curve beside the final line where there is room. A full line
-    // gets a small clearance below it instead of drawing through the words.
-    const intersects=last.right>box.left+left+10&&last.left<box.left+left+width;
-    const top=intersects?last.bottom-box.top+6:last.top+last.height*.55-box.top-8;
-    arrow.style.left=left+'px';arrow.style.top=top+'px';
+    const width=included?76:96,height=included?88:84;
+    // Offer arrows occupy their own space in normal flow. Font loading,
+    // text enlargement and wrapping must never move them over the copy.
+    if(!included){
+     const item=arrow.closest('li')!,copy=item.querySelector('.preview-step-copy')!;
+     const range=document.createRange();range.selectNodeContents(copy);
+     const lines=Array.from(range.getClientRects()).filter(b=>b.width>0),last=lines[lines.length-1];if(!last)return;
+     const box=item.getBoundingClientRect(),left=i%2===0?box.width-width-16:16;
+     const intersects=last.right>box.left+left+10&&last.left<box.left+left+width;
+     const top=intersects?last.bottom-box.top+6:last.top+last.height*.55-box.top-8;
+     arrow.style.left=left+'px';arrow.style.top=top+'px';
+    }
     if(arrow.style.getPropertyPriority('width')!=='important')arrow.style.width=width+'px';
     if(arrow.style.getPropertyPriority('height')!=='important')arrow.style.height=height+'px';
     arrow.setAttribute('viewBox',`0 0 ${width} ${height}`);

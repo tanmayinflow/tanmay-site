@@ -1,10 +1,12 @@
 import assert from 'node:assert/strict';
+import {restoreSpacingIfCurrent} from './offer-spacing-authorized-2026-11-06.mjs';
 import {restoreFirstLoadIfCurrent} from './first-load-authorized-2026-11-06.mjs';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 export const releaseDelta=JSON.parse(readFileSync(new URL('./owner-public-release-2026-11-05.json',import.meta.url)));
 const sha=b=>createHash('sha256').update(b).digest('hex');
 export function withoutAuthorizedRelease(path,bytes){
+ bytes=restoreSpacingIfCurrent(path,bytes);
  bytes=restoreFirstLoadIfCurrent(path,bytes);
  const file=releaseDelta.files.find(f=>f.path===path);
  if(!file)return bytes;
@@ -19,6 +21,7 @@ export function withoutAuthorizedRelease(path,bytes){
  return value;
 }
 export function restoreReleaseIfCurrent(path,bytes){
+ bytes=restoreSpacingIfCurrent(path,bytes);
  bytes=restoreFirstLoadIfCurrent(path,bytes);
  const file=releaseDelta.files.find(f=>f.path===path);
  return file&&sha(bytes)===file.afterSha256?withoutAuthorizedRelease(path,bytes):bytes;

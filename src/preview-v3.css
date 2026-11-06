@@ -405,9 +405,12 @@
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-steps:not(.preview-included-steps) > li:nth-child(2) > .preview-curve-arrow {translate:calc(110 * 100vw / 440) 18px;rotate:-30deg}
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-journey > .preview-curve-arrow {translate:calc(-32 * 100vw / 440) -10px;rotate:-46deg}
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-included-steps > li:not(:last-child) .preview-step-title {color:#ca795b}
- .tm-mobile[data-mobile-version][data-preview="v3"] .preview-included-steps > li:first-child > .preview-curve-arrow {translate:calc(-21 * 100vw / 440) 23px;rotate:-8deg;width:55px!important;height:66px!important;max-width:none;max-height:none}
- .tm-mobile[data-mobile-version][data-preview="v3"] .preview-included-steps > li:nth-child(2) > .preview-curve-arrow {translate:calc(-35 * 100vw / 440) -8px;rotate:10deg;width:71px!important;height:80px!important;max-width:none;max-height:none}
- .tm-mobile[data-mobile-version][data-preview="v3"] .preview-included-steps > li:nth-child(3) > .preview-curve-arrow {translate:calc(12 * 100vw / 440) -7px;rotate:-11deg;width:92px!important;height:103px!important;max-width:none;max-height:none}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-included-steps > li:not(:last-child) {padding-bottom:0}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-included-steps > li > .preview-curve-arrow {position:relative;inset:auto;translate:none;margin:24px 16px 24px auto;max-width:none;max-height:none}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-included-steps > li:first-child > .preview-curve-arrow {rotate:-8deg;width:55px!important;height:66px!important}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-included-steps > li:nth-child(2) > .preview-curve-arrow {rotate:10deg;width:71px!important;height:80px!important;margin-left:16px;margin-right:auto}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-included-steps > li:nth-child(3) > .preview-curve-arrow {rotate:-11deg;width:92px!important;height:103px!important}
+ .tm-mobile[data-mobile-version][data-preview="v3"] .m-interactive-cycle .m-figure-panel-inner p::before {content:none}
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-review-lead em {font-style:italic}
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-coach-vajra {display:block;width:54px;height:auto;margin:14px auto 0;color:var(--m-body);opacity:.75;transform:rotate(-24deg)}
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-collab-caption p {justify-content:center;gap:16px;font-size:clamp(1rem,4.2vw,1.1875rem)}
