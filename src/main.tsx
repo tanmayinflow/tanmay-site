@@ -1,4 +1,7 @@
 import { createRoot } from "react-dom/client";
 import App from "./App";
+import { stylesReady } from "./styles-ready";
 
-createRoot(document.getElementById("root")!).render(<App />);
+void stylesReady().then(()=>{
+  createRoot(document.getElementById("root")!).render(<App />);
+});

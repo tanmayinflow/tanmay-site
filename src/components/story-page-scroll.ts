@@ -17,7 +17,7 @@ export function attachStoryPageScroll(host:HTMLElement, reader:HTMLElement, runw
   const savedPin=page?.style.getPropertyValue('--story-page-pin')||'';
   const savedPriority=page?.style.getPropertyPriority('--story-page-pin')||'';
   const savedRootMarker=page?.getAttribute('data-story-page-root');
-  let live=true,frame=0,hashFrame=0,flow:boolean|undefined,escaped=false,travel=0,active=0,capacityFailure='',start=0;
+  let live=true,frame=0,layoutFrame=0,hashFrame=0,flow:boolean|undefined,escaped=false,travel=0,active=0,capacityFailure='',start=0;
   const attachPage=()=>{
     if(!page)return;
     page.after(spacer);page.dataset.storyPageRoot='true';runway.dataset.storyPage='true';
@@ -120,14 +120,21 @@ export function attachStoryPageScroll(host:HTMLElement, reader:HTMLElement, runw
     if(link.hash&&link.origin===location.origin&&link.pathname===location.pathname)onHash();
   };
   const onScroll=()=>{if(!blocked())queue();};
-  const resize=new ResizeObserver(configure);if(page)resize.observe(page);resize.observe(host);resize.observe(reader);stages.forEach(stage=>resize.observe(stage));
+  const queueLayout=()=>{if(live&&!layoutFrame)layoutFrame=requestAnimationFrame(()=>{layoutFrame=0;configure();});};
+  // A capacity failure prevents observer feedback loops, but must not outlive
+  // the font/image load or page restoration that invalidated that measurement.
+  const settled=()=>{if(live){capacityFailure='';queueLayout();}};
+  const resize=new ResizeObserver(queueLayout);if(page)resize.observe(page);resize.observe(host);resize.observe(reader);stages.forEach(stage=>resize.observe(stage));
   window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',configure,{passive:true});
   visualViewport?.addEventListener('resize',configure);reduced.addEventListener('change',configure);
   window.addEventListener('hashchange',onHash);document.addEventListener('click',onAnchor);
   window.addEventListener('keydown',onKey);host.addEventListener('tanmay:story-phase',choose);reader.addEventListener('scroll',read,{passive:true});
-  document.fonts.ready.then(()=>{if(live)configure();});configure();
+  window.addEventListener('load',settled);window.addEventListener('pageshow',settled);
+  document.fonts.addEventListener('loadingdone',settled);
+  document.fonts.ready.then(settled);configure();
   return()=>{
-    live=false;cancelAnimationFrame(frame);cancelAnimationFrame(hashFrame);resize.disconnect();
+    live=false;cancelAnimationFrame(frame);cancelAnimationFrame(layoutFrame);cancelAnimationFrame(hashFrame);resize.disconnect();
+    window.removeEventListener('load',settled);window.removeEventListener('pageshow',settled);document.fonts.removeEventListener('loadingdone',settled);
     window.removeEventListener('hashchange',onHash);document.removeEventListener('click',onAnchor);
     window.removeEventListener('scroll',onScroll);window.removeEventListener('resize',configure);window.removeEventListener('keydown',onKey);
     visualViewport?.removeEventListener('resize',configure);reduced.removeEventListener('change',configure);host.removeEventListener('tanmay:story-phase',choose);reader.removeEventListener('scroll',read);

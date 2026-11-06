@@ -115,13 +115,15 @@ export default function MobileSite({ loc, children, preview=false }: { loc: Loca
     return()=>{observer.disconnect();viewport?.removeEventListener('resize',keyboardState);document.removeEventListener('focusin',keyboardState);document.removeEventListener('focusout',keyboardState);};
   },[]);
   useEffect(()=>{
-    const observer=new ResizeObserver(()=>{
+    let frame=0;
+    const measure=()=>{
       if(dock.current?.offsetHeight)root.current?.style.setProperty('--m-dock-height',`${dock.current.offsetHeight}px`);
       if(header.current?.offsetHeight)root.current?.style.setProperty('--m-header-height',`${header.current.offsetHeight}px`);
-    });
+    };
+    const observer=new ResizeObserver(()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(measure);});
     if(dock.current)observer.observe(dock.current);
     if(header.current)observer.observe(header.current);
-    return()=>observer.disconnect();
+    return()=>{cancelAnimationFrame(frame);observer.disconnect();};
   },[]);
   useEffect(()=>{
     let frame=0;

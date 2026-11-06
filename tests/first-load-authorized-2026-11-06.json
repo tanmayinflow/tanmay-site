@@ -1,0 +1,155 @@
+{
+  "baseline": "515248f6be1c1e490c15dba688c098e874452f35",
+  "authorization": "2026-11-06: fix the reported first-open iPhone/Vivaldi hero crop and inactive Story without requiring refresh. Runtime only; no copy, offers, artwork or styling changes.",
+  "files": [
+    {
+      "path": "src/components/story-page-scroll.ts",
+      "beforeSha256": "dcff9de03464e6d499c5d15998813ef89b9fe6f2fcc5d78ee2b62a2ccaf0a3f3",
+      "afterSha256": "2f1b31399f62475e6db94b6dbfeb180edd9923e4d1fd12cbd77496db1fe0e621",
+      "replacements": [
+        {
+          "offset": 1382,
+          "before": "  let live=true,frame=0,hashFrame=0,flow:boolean|undefined,escaped=false,travel=0,active=0,capacityFailure='',start=0;\n",
+          "after": "  let live=true,frame=0,layoutFrame=0,hashFrame=0,flow:boolean|undefined,escaped=false,travel=0,active=0,capacityFailure='',start=0;\n"
+        },
+        {
+          "offset": 8699,
+          "before": "  const resize=new ResizeObserver(configure);if(page)resize.observe(page);resize.observe(host);resize.observe(reader);stages.forEach(stage=>resize.observe(stage));\n",
+          "after": "  const queueLayout=()=>{if(live&&!layoutFrame)layoutFrame=requestAnimationFrame(()=>{layoutFrame=0;configure();});};\n  // A capacity failure prevents observer feedback loops, but must not outlive\n  // the font/image load or page restoration that invalidated that measurement.\n  const settled=()=>{if(live){capacityFailure='';queueLayout();}};\n  const resize=new ResizeObserver(queueLayout);if(page)resize.observe(page);resize.observe(host);resize.observe(reader);stages.forEach(stage=>resize.observe(stage));\n"
+        },
+        {
+          "offset": 9671,
+          "before": "  document.fonts.ready.then(()=>{if(live)configure();});configure();\n",
+          "after": "  window.addEventListener('load',settled);window.addEventListener('pageshow',settled);\n  document.fonts.addEventListener('loadingdone',settled);\n  document.fonts.ready.then(settled);configure();\n"
+        },
+        {
+          "offset": 9880,
+          "before": "    live=false;cancelAnimationFrame(frame);cancelAnimationFrame(hashFrame);resize.disconnect();\n",
+          "after": "    live=false;cancelAnimationFrame(frame);cancelAnimationFrame(layoutFrame);cancelAnimationFrame(hashFrame);resize.disconnect();\n    window.removeEventListener('load',settled);window.removeEventListener('pageshow',settled);document.fonts.removeEventListener('loadingdone',settled);\n"
+        }
+      ]
+    },
+    {
+      "path": "src/main.tsx",
+      "beforeSha256": "cae0540d8d93a09581b095dd6246cf5a5d91921e5d5a7d9642dfd026256d4191",
+      "afterSha256": "208c08920ec9f0ecacc8f13ceb7b7b0570f5e9a502749dda05bfb630216c1fa1",
+      "replacements": [
+        {
+          "offset": 72,
+          "before": "",
+          "after": "import { stylesReady } from \"./styles-ready\";\n"
+        },
+        {
+          "offset": 119,
+          "before": "createRoot(document.getElementById(\"root\")!).render(<App />);\n",
+          "after": "void stylesReady().then(()=>{\n  createRoot(document.getElementById(\"root\")!).render(<App />);\n});\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileShared.tsx",
+      "beforeSha256": "1a5f766577a3f610c4bb84ddf1afbb57f66b0fc0bb35c95681aa0827a7d66310",
+      "afterSha256": "13a840f7838b2a7eb4f8ed8099dcab7d77ec584e426e41d25fa45923b4221e68",
+      "replacements": [
+        {
+          "offset": 1730,
+          "before": "    const observer=new ResizeObserver(measure);observer.observe(identity);observer.observe(scene);observer.observe(document.documentElement);measure();\n",
+          "after": "    let frame=0;\r\n    const queue=()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(measure);};\r\n    const observer=new ResizeObserver(queue);observer.observe(identity);observer.observe(scene);observer.observe(document.documentElement);measure();\r\n"
+        },
+        {
+          "offset": 2036,
+          "before": "    return()=>{observer.disconnect();window.removeEventListener('resize',measure);};\n",
+          "after": "    return()=>{cancelAnimationFrame(frame);observer.disconnect();window.removeEventListener('resize',measure);};\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileSite.tsx",
+      "beforeSha256": "7db70d940fc1d7c3c63353a687211db0e789e864b40d5a2b284c3dd2f95aa015",
+      "afterSha256": "cc10af0d533187183ee4124ac2a15ee912998dab520a9a9685ea7cb5536e806b",
+      "replacements": [
+        {
+          "offset": 6699,
+          "before": "    const observer=new ResizeObserver(()=>{\r\n",
+          "after": "    let frame=0;\r\n    const measure=()=>{\r\n"
+        },
+        {
+          "offset": 6992,
+          "before": "    });\r\n",
+          "after": "    };\r\n    const observer=new ResizeObserver(()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(measure);});\r\n"
+        },
+        {
+          "offset": 7223,
+          "before": "    return()=>observer.disconnect();\r\n",
+          "after": "    return()=>{cancelAnimationFrame(frame);observer.disconnect();};\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/mobile-hero-viewport.ts",
+      "beforeSha256": "8889f3202f9fcf37499e706d852af69b02ba5b9acd7c774a710ab8e92384e4ff",
+      "afterSha256": "8d1258a492cacaead18ce2abe9bc4a17b1438d1bb5043111a13d58e7eaea232e",
+      "replacements": [
+        {
+          "offset": 543,
+          "before": "    let previousWidth=-1,previousOrientation='',screenLocked=false,frame=0;\n",
+          "after": "    let previousWidth=-1,previousOrientation='',screenLocked=false,frame=0,live=true;\n"
+        },
+        {
+          "offset": 2305,
+          "before": "",
+          "after": "    // A restored page or late font/style completion can change the header.\n    // Ordinary browser-bar resizing still keeps the portrait's locked height.\n    const settled=()=>{if(live){screenLocked=false;queue();}};\n"
+        },
+        {
+          "offset": 2583,
+          "before": "",
+          "after": "    window.addEventListener('load',settled);\n    window.addEventListener('pageshow',settled);\n    document.fonts.ready.then(settled);\n"
+        },
+        {
+          "offset": 2923,
+          "before": "",
+          "after": "      live=false;window.removeEventListener('load',settled);window.removeEventListener('pageshow',settled);\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/preview-mobile-scroll.ts",
+      "beforeSha256": "ff517cd229666643566055f7a3d1815aa6c79dc3170da2b8c62cf09ead3ff37d",
+      "afterSha256": "e7534c579a66eee03096b2e8b6c5c5c5fc0feaa490a8b0edce9ff60abcbf17a1",
+      "replacements": [
+        {
+          "offset": 1019,
+          "before": "  let stages:Stage[]=[],total=0,frame=0,hashFrame=0,live=true,escaped=false,boundary=-1;\n",
+          "after": "  let stages:Stage[]=[],total=0,frame=0,layoutFrame=0,hashFrame=0,live=true,escaped=false,boundary=-1;\n"
+        },
+        {
+          "offset": 5065,
+          "before": "  const resize=new ResizeObserver(configure);resize.observe(page);\n",
+          "after": "  const queueLayout=()=>{if(live&&!layoutFrame)layoutFrame=requestAnimationFrame(()=>{layoutFrame=0;configure();});};\n  const resize=new ResizeObserver(queueLayout);resize.observe(page);\n"
+        },
+        {
+          "offset": 5354,
+          "before": "",
+          "after": "  window.addEventListener('pageshow',queueLayout);visualViewport?.addEventListener('resize',queueLayout);\n"
+        },
+        {
+          "offset": 5787,
+          "before": "   live=false;resize.disconnect();cancelAnimationFrame(frame);cancelAnimationFrame(hashFrame);\n",
+          "after": "   live=false;resize.disconnect();cancelAnimationFrame(frame);cancelAnimationFrame(layoutFrame);cancelAnimationFrame(hashFrame);\n   window.removeEventListener('pageshow',queueLayout);visualViewport?.removeEventListener('resize',queueLayout);\n"
+        }
+      ]
+    },
+    {
+      "path": "src/styles-ready.ts",
+      "beforeSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterSha256": "45afeaa976aeb066d6ee5fbd197d7b1b57b1a84fb93e37da630369511794a415",
+      "replacements": [
+        {
+          "offset": 0,
+          "before": "",
+          "after": "/** WebKit can execute a module before the document's stylesheet finishes loading.\n * Layout effects must never freeze measurements of that unstyled document.\n * Wait only for CSS, not photographs or web fonts. Cached CSS is synchronous.\n */\nexport function stylesReady():Promise<void> {\n  const links=Array.from(document.querySelectorAll<HTMLLinkElement>('link[rel=\"stylesheet\"]'));\n  return Promise.all(links.map(link=>new Promise<void>(resolve=>{\n    if(link.sheet||link.disabled||document.readyState==='complete'){resolve();return;}\n    const finish=()=>{\n      link.removeEventListener('load',finish);link.removeEventListener('error',finish);\n      window.removeEventListener('load',finish);resolve();\n    };\n    link.addEventListener('load',finish);link.addEventListener('error',finish);\n    // Also covers a failed stylesheet whose error preceded module execution.\n    window.addEventListener('load',finish);\n  }))).then(()=>{});\n}\n"
+        }
+      ]
+    }
+  ]
+}

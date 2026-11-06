@@ -15,7 +15,7 @@ export function usePreviewPageScroll(key:string) {
   for(const spacer of [before,after]){spacer.dataset.previewTravel='';spacer.setAttribute('aria-hidden','true');}
   page.before(before);page.after(after);
   type Stage={host:HTMLElement;row:HTMLElement;start:number;distance:number;consumed:number};
-  let stages:Stage[]=[],total=0,frame=0,hashFrame=0,live=true,escaped=false,boundary=-1;
+  let stages:Stage[]=[],total=0,frame=0,layoutFrame=0,hashFrame=0,live=true,escaped=false,boundary=-1;
   const paint=()=>{
    frame=0;if(!live||!stages.length)return;
    const y=scrollY;
@@ -74,14 +74,17 @@ export function usePreviewPageScroll(key:string) {
    target.querySelector<HTMLElement>('h2[tabindex]')?.focus({preventScroll:true});
   };
   const onKey=(e:KeyboardEvent)=>{if(e.key==='Escape'&&!document.querySelector('dialog[open],.m-menu[data-open=true]')&&stages.some(s=>s.host.dataset.phase==='active')){escaped=true;configure();}};
-  const resize=new ResizeObserver(configure);resize.observe(page);
+  const queueLayout=()=>{if(live&&!layoutFrame)layoutFrame=requestAnimationFrame(()=>{layoutFrame=0;configure();});};
+  const resize=new ResizeObserver(queueLayout);resize.observe(page);
   window.addEventListener('scroll',queue,{passive:true});window.addEventListener('resize',configure);
+  window.addEventListener('pageshow',queueLayout);visualViewport?.addEventListener('resize',queueLayout);
   reduced.addEventListener('change',configure);window.addEventListener('hashchange',onHash);
   document.addEventListener('click',onClick,true);window.addEventListener('keydown',onKey);
   page.addEventListener('load',configure,true);configure();
   document.fonts.ready.then(()=>{if(live){configure();onHash();}});
   return()=>{
-   live=false;resize.disconnect();cancelAnimationFrame(frame);cancelAnimationFrame(hashFrame);
+   live=false;resize.disconnect();cancelAnimationFrame(frame);cancelAnimationFrame(layoutFrame);cancelAnimationFrame(hashFrame);
+   window.removeEventListener('pageshow',queueLayout);visualViewport?.removeEventListener('resize',queueLayout);
    before.remove();after.remove();delete page.dataset.previewPageRoot;page.style.removeProperty('--preview-page-pin');
    window.removeEventListener('scroll',queue);window.removeEventListener('resize',configure);reduced.removeEventListener('change',configure);
    window.removeEventListener('hashchange',onHash);document.removeEventListener('click',onClick,true);window.removeEventListener('keydown',onKey);page.removeEventListener('load',configure,true);

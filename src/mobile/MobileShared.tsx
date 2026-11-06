@@ -27,9 +27,11 @@ export function MobileHero({ page, lang, preview=false }: {page:'home'|'collabor
       const scale=Math.min(scene.clientHeight/1282,scene.clientWidth*.98/684);
       el.style.setProperty('--m-collab-scale',String(Math.max(.1,scale)));
     };
-    const observer=new ResizeObserver(measure);observer.observe(identity);observer.observe(scene);observer.observe(document.documentElement);measure();
+    let frame=0;
+    const queue=()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(measure);};
+    const observer=new ResizeObserver(queue);observer.observe(identity);observer.observe(scene);observer.observe(document.documentElement);measure();
     window.addEventListener('resize',measure);
-    return()=>{observer.disconnect();window.removeEventListener('resize',measure);};
+    return()=>{cancelAnimationFrame(frame);observer.disconnect();window.removeEventListener('resize',measure);};
   },[]);
   const topic=t(page,lang);
   const subtitle=preview ? previewText(page==='home'?p.homeKicker:p.workTitle,lang) : page==='home'?copy('Opening',0,lang):page==='collaboration'?copy('PageSpoluprace',5,lang):page==='practice'?copy('PagePraxe',3,lang):(lang==='en'?'A trainer who spent a year in a wheelchair':'Trenér, co strávil rok na vozíku');

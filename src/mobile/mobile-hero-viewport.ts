@@ -8,7 +8,7 @@ export function useStableHeroViewport(hero:RefObject<HTMLElement>) {
     probe.style.cssText='position:fixed;left:0;top:0;width:0;height:100vh;visibility:hidden;pointer-events:none;contain:strict';
     if(CSS.supports('height','100lvh'))probe.style.height='100lvh';
     el.append(probe);
-    let previousWidth=-1,previousOrientation='',screenLocked=false,frame=0;
+    let previousWidth=-1,previousOrientation='',screenLocked=false,frame=0,live=true;
     const measure=()=>{
       const width=document.documentElement.clientWidth;
       const orientation=screen.orientation?.type||(width>innerHeight?'landscape':'portrait');
@@ -33,12 +33,19 @@ export function useStableHeroViewport(hero:RefObject<HTMLElement>) {
       previousWidth=width;previousOrientation=orientation;
     };
     const queue=()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(measure);};
+    // A restored page or late font/style completion can change the header.
+    // Ordinary browser-bar resizing still keeps the portrait's locked height.
+    const settled=()=>{if(live){screenLocked=false;queue();}};
     measure();
     window.addEventListener('resize',queue);
+    window.addEventListener('load',settled);
+    window.addEventListener('pageshow',settled);
+    document.fonts.ready.then(settled);
     screen.orientation?.addEventListener('change',queue);
     // Older iOS exposes orientationchange but no ScreenOrientation events.
     window.addEventListener('orientationchange',queue);
     return()=>{
+      live=false;window.removeEventListener('load',settled);window.removeEventListener('pageshow',settled);
       cancelAnimationFrame(frame);window.removeEventListener('resize',queue);
       screen.orientation?.removeEventListener('change',queue);
       window.removeEventListener('orientationchange',queue);probe.remove();
