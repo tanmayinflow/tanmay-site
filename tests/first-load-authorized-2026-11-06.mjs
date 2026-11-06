@@ -1,9 +1,11 @@
 import assert from 'node:assert/strict';
+import {restoreViewportIfCurrent} from './visible-viewport-authorized-2026-11-06.mjs';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 export const firstLoadDelta=JSON.parse(readFileSync(new URL('./first-load-authorized-2026-11-06.json',import.meta.url)));
 const sha=b=>createHash('sha256').update(b).digest('hex');
 export function withoutAuthorizedFirstLoad(path,bytes){
+ bytes=restoreViewportIfCurrent(path,bytes);
  const file=firstLoadDelta.files.find(f=>f.path===path);
  if(!file)return bytes;
  assert.equal(sha(bytes),file.afterSha256,'Exact first-load runtime fix: '+path);
@@ -17,6 +19,7 @@ export function withoutAuthorizedFirstLoad(path,bytes){
  return value;
 }
 export function restoreFirstLoadIfCurrent(path,bytes){
+ bytes=restoreViewportIfCurrent(path,bytes);
  const file=firstLoadDelta.files.find(f=>f.path===path);
  return file&&sha(bytes)===file.afterSha256?withoutAuthorizedFirstLoad(path,bytes):bytes;
 }

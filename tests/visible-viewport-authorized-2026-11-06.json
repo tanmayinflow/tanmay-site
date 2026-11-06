@@ -1,0 +1,92 @@
+{
+  "baseline": "2683fdb7532e1865638b54b87df584057c77adbc",
+  "authorization": "2026-11-06: owner requests visible headings during horizontal scrolling and restoring scroll-controlled Story on iPhone/Vivaldi, then republication. Only viewport geometry, fitting and lifecycle measurements change.",
+  "files": [
+    {
+      "path": "src/components/story-page-scroll.ts",
+      "beforeSha256": "2f1b31399f62475e6db94b6dbfeb180edd9923e4d1fd12cbd77496db1fe0e621",
+      "afterSha256": "0c9fdde974e9c6b4bf7ebc75d9d4308d1e41748f7f3798726f8dfabbfec5c820",
+      "replacements": [
+        {
+          "offset": 624,
+          "before": "",
+          "after": "  const gallery=options.mobile?host.querySelector<HTMLElement>('.m-story-media'):null;\n  const savedReaderHeight=host.style.getPropertyValue('--story-reader-height');\n  const savedGalleryHeight=gallery?.style.height||'';\n  const restoreSlots=()=>{\n    if(savedReaderHeight)host.style.setProperty('--story-reader-height',savedReaderHeight);else host.style.removeProperty('--story-reader-height');\n    if(gallery)gallery.style.height=savedGalleryHeight;\n  };\n"
+        },
+        {
+          "offset": 5326,
+          "before": "    const dimensions=[innerWidth,viewport().height,font,scale].join(':');\n",
+          "after": "    const dimensions=[innerWidth,viewport().top,viewport().height,lowerEdge(),font,scale].join(':');\n"
+        },
+        {
+          "offset": 5711,
+          "before": "",
+          "after": "    // Fit the original reader and uncropped photo into the actual visible space,\n    // including the contact dock and safe area, before falling back to a list.\n    if(gallery){\n      restoreSlots();\n      const available=lowerEdge()-pinTop()-2;\n      const excess=host.getBoundingClientRect().height-available;\n      if(excess>0){\n        const photoHeight=gallery.getBoundingClientRect().height;\n        const trim=Math.min(excess,Math.max(0,photoHeight-130));\n        gallery.style.height=(photoHeight-trim)+'px';\n        if(excess>trim)host.style.setProperty('--story-reader-height',Math.max(160,reader.clientHeight-(excess-trim))+'px');\n      }\n    }\n"
+        },
+        {
+          "offset": 10470,
+          "before": "  visualViewport?.addEventListener('resize',configure);reduced.addEventListener('change',configure);\n",
+          "after": "  visualViewport?.addEventListener('resize',queueLayout);visualViewport?.addEventListener('scroll',queueLayout);reduced.addEventListener('change',configure);\n"
+        },
+        {
+          "offset": 11603,
+          "before": "    visualViewport?.removeEventListener('resize',configure);reduced.removeEventListener('change',configure);host.removeEventListener('tanmay:story-phase',choose);reader.removeEventListener('scroll',read);\n    restorePage();delete runway.dataset.storySticky;['--story-height','--story-travel','--story-pin-top'].forEach(name=>runway.style.removeProperty(name));\n",
+          "after": "    visualViewport?.removeEventListener('resize',queueLayout);visualViewport?.removeEventListener('scroll',queueLayout);reduced.removeEventListener('change',configure);host.removeEventListener('tanmay:story-phase',choose);reader.removeEventListener('scroll',read);\n    restorePage();restoreSlots();delete runway.dataset.storySticky;['--story-height','--story-travel','--story-pin-top'].forEach(name=>runway.style.removeProperty(name));\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/mobile-story-viewport.ts",
+      "beforeSha256": "7c57b3238d87cf54f6d9352bf021af9969bf1eca552d96c6ec58a3ca77386085",
+      "afterSha256": "8db6617f57a726e210ff19de9e50d777b4c9b244cc5519194b756e7da2bb833c",
+      "replacements": [
+        {
+          "offset": 1458,
+          "before": "    // Height-only browser changes never replace this orientation's pixel basis.\n",
+          "after": "    // Keep a stable basis, but allow it to shrink when browser chrome covers more\n    // of the screen. A first measurement must not lock in an oversized reader.\n"
+        },
+        {
+          "offset": 1670,
+          "before": "    if(key!==nextKey){\n      const visible=(visualViewport?.scale||1)<=1.01?(visualViewport?.height||innerHeight):innerHeight;\n      height=Math.min(probe.getBoundingClientRect().height||innerHeight,innerHeight,visible);\n",
+          "after": "    const visible=(visualViewport?.scale||1)<=1.01?(visualViewport?.height||innerHeight):innerHeight;\n    const available=Math.min(probe.getBoundingClientRect().height||innerHeight,innerHeight,visible);\n    if(key!==nextKey||available<height){\n      height=available;\n"
+        },
+        {
+          "offset": 2151,
+          "before": "    const actualBottom=(visualViewport?.offsetTop||0)+(visualViewport?.height||innerHeight);\n    const inset=dock&&dock.height>0?Math.max(0,actualBottom-dock.top)+12:16;\n    return {top:0,height,bottom:height-inset};\n",
+          "after": "    const visualTop=visualViewport?.offsetTop||0;\n    const bottom=Math.min(visualTop+height-16,dock&&dock.height>0?dock.top-12:Infinity);\n    return {top:visualTop,height,bottom};\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/preview-mobile-scroll.ts",
+      "beforeSha256": "e7534c579a66eee03096b2e8b6c5c5c5fc0feaa490a8b0edce9ff60abcbf17a1",
+      "afterSha256": "f6a267e921ed08d85e3aaddcc99d9cf834b5ff28357c370627302d9be4dea9c7",
+      "replacements": [
+        {
+          "offset": 2052,
+          "before": "",
+          "after": "   // iOS browser chrome can pan the visual viewport inside the layout viewport.\n   // Pin the heading inside that visible window, not behind its upper edge.\n   const pinTop=(visualViewport?.offsetTop||0)+24;\n   const dock=page.querySelector<HTMLElement>('.m-dock')?.getBoundingClientRect();\n   const bottom=Math.min((visualViewport?.offsetTop||0)+viewport-12,dock&&dock.height>0?dock.top-12:Infinity);\n   const available=bottom-pinTop-2;\n"
+        },
+        {
+          "offset": 3008,
+          "before": "    if(portrait){portrait.style.height='';if(!flow){const room=viewport-24-92-(panel.offsetHeight-portrait.offsetHeight);portrait.style.height=Math.max(240,Math.min(portrait.offsetHeight,room))+'px';}}\n    const distance=flow||panel.offsetHeight>viewport-24-88?0:Math.max(0,row.scrollWidth-row.clientWidth);\n",
+          "after": "    if(portrait){portrait.style.height='';if(!flow){const room=available-(panel.offsetHeight-portrait.offsetHeight);portrait.style.height=Math.max(120,Math.min(portrait.offsetHeight,room))+'px';}}\n    const distance=flow||panel.offsetHeight>available?0:Math.max(0,row.scrollWidth-row.clientWidth);\n"
+        },
+        {
+          "offset": 3324,
+          "before": "     const start=panel.getBoundingClientRect().top-page.getBoundingClientRect().top-24;\n",
+          "after": "     const start=panel.getBoundingClientRect().top-page.getBoundingClientRect().top-pinTop;\n"
+        },
+        {
+          "offset": 5787,
+          "before": "  window.addEventListener('pageshow',queueLayout);visualViewport?.addEventListener('resize',queueLayout);\n",
+          "after": "  window.addEventListener('pageshow',queueLayout);visualViewport?.addEventListener('resize',queueLayout);visualViewport?.addEventListener('scroll',queueLayout);\n"
+        },
+        {
+          "offset": 6404,
+          "before": "   window.removeEventListener('pageshow',queueLayout);visualViewport?.removeEventListener('resize',queueLayout);\n",
+          "after": "   window.removeEventListener('pageshow',queueLayout);visualViewport?.removeEventListener('resize',queueLayout);visualViewport?.removeEventListener('scroll',queueLayout);\n"
+        }
+      ]
+    }
+  ]
+}

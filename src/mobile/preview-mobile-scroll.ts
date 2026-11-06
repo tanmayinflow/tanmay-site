@@ -38,15 +38,21 @@ export function usePreviewPageScroll(key:string) {
    if(!live)return;
    stages=[];total=0;boundary=-1;
    const viewport=visualViewport?.height||innerHeight;
+   // iOS browser chrome can pan the visual viewport inside the layout viewport.
+   // Pin the heading inside that visible window, not behind its upper edge.
+   const pinTop=(visualViewport?.offsetTop||0)+24;
+   const dock=page.querySelector<HTMLElement>('.m-dock')?.getBoundingClientRect();
+   const bottom=Math.min((visualViewport?.offsetTop||0)+viewport-12,dock&&dock.height>0?dock.top-12:Infinity);
+   const available=bottom-pinTop-2;
    const flow=escaped||reduced.matches||innerWidth>=900||viewport<560||parseFloat(getComputedStyle(document.documentElement).fontSize)>20||(visualViewport?.scale||1)>1.01;
    for(const host of hosts){
     const panel=host.querySelector<HTMLElement>('.preview-benefits-pin')!,row=host.querySelector<HTMLElement>('.preview-benefits-track')!;
     host.dataset.pinned=flow?'false':'true';host.dataset.pageRail='true';row.style.transform='';
     const portrait=host.querySelector<HTMLElement>('.preview-handstand-photo');
-    if(portrait){portrait.style.height='';if(!flow){const room=viewport-24-92-(panel.offsetHeight-portrait.offsetHeight);portrait.style.height=Math.max(240,Math.min(portrait.offsetHeight,room))+'px';}}
-    const distance=flow||panel.offsetHeight>viewport-24-88?0:Math.max(0,row.scrollWidth-row.clientWidth);
+    if(portrait){portrait.style.height='';if(!flow){const room=available-(panel.offsetHeight-portrait.offsetHeight);portrait.style.height=Math.max(120,Math.min(portrait.offsetHeight,room))+'px';}}
+    const distance=flow||panel.offsetHeight>available?0:Math.max(0,row.scrollWidth-row.clientWidth);
     if(distance){
-     const start=panel.getBoundingClientRect().top-page.getBoundingClientRect().top-24;
+     const start=panel.getBoundingClientRect().top-page.getBoundingClientRect().top-pinTop;
      stages.push({host,row,start,distance,consumed:total});total+=distance;
     }else{host.dataset.pinned='false';delete host.dataset.phase;if(portrait)portrait.style.height='';}
    }
@@ -77,14 +83,14 @@ export function usePreviewPageScroll(key:string) {
   const queueLayout=()=>{if(live&&!layoutFrame)layoutFrame=requestAnimationFrame(()=>{layoutFrame=0;configure();});};
   const resize=new ResizeObserver(queueLayout);resize.observe(page);
   window.addEventListener('scroll',queue,{passive:true});window.addEventListener('resize',configure);
-  window.addEventListener('pageshow',queueLayout);visualViewport?.addEventListener('resize',queueLayout);
+  window.addEventListener('pageshow',queueLayout);visualViewport?.addEventListener('resize',queueLayout);visualViewport?.addEventListener('scroll',queueLayout);
   reduced.addEventListener('change',configure);window.addEventListener('hashchange',onHash);
   document.addEventListener('click',onClick,true);window.addEventListener('keydown',onKey);
   page.addEventListener('load',configure,true);configure();
   document.fonts.ready.then(()=>{if(live){configure();onHash();}});
   return()=>{
    live=false;resize.disconnect();cancelAnimationFrame(frame);cancelAnimationFrame(layoutFrame);cancelAnimationFrame(hashFrame);
-   window.removeEventListener('pageshow',queueLayout);visualViewport?.removeEventListener('resize',queueLayout);
+   window.removeEventListener('pageshow',queueLayout);visualViewport?.removeEventListener('resize',queueLayout);visualViewport?.removeEventListener('scroll',queueLayout);
    before.remove();after.remove();delete page.dataset.previewPageRoot;page.style.removeProperty('--preview-page-pin');
    window.removeEventListener('scroll',queue);window.removeEventListener('resize',configure);reduced.removeEventListener('change',configure);
    window.removeEventListener('hashchange',onHash);document.removeEventListener('click',onClick,true);window.removeEventListener('keydown',onKey);page.removeEventListener('load',configure,true);

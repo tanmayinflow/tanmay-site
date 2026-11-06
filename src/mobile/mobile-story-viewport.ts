@@ -18,17 +18,19 @@ export function createStableStoryViewport(host:HTMLElement) {
     const screenWidth=orientation.startsWith('landscape')?longSide:shortSide;
     const locked=self===top&&matchMedia('(pointer:coarse)').matches&&Math.abs(width-screenWidth)<=2&&screenWidth>0;
     if(!locked){if(key){key='';clear();}host.dataset.storyViewport='window';return;}
-    // Height-only browser changes never replace this orientation's pixel basis.
+    // Keep a stable basis, but allow it to shrink when browser chrome covers more
+    // of the screen. A first measurement must not lock in an oversized reader.
     const nextKey=[width,orientation].join(':');
-    if(key!==nextKey){
-      const visible=(visualViewport?.scale||1)<=1.01?(visualViewport?.height||innerHeight):innerHeight;
-      height=Math.min(probe.getBoundingClientRect().height||innerHeight,innerHeight,visible);
+    const visible=(visualViewport?.scale||1)<=1.01?(visualViewport?.height||innerHeight):innerHeight;
+    const available=Math.min(probe.getBoundingClientRect().height||innerHeight,innerHeight,visible);
+    if(key!==nextKey||available<height){
+      height=available;
       host.style.setProperty(property,height+'px');host.dataset.storyViewport='locked';key=nextKey;
     }
     const dock=host.closest('.tm-mobile')?.querySelector<HTMLElement>('.m-dock')?.getBoundingClientRect();
-    const actualBottom=(visualViewport?.offsetTop||0)+(visualViewport?.height||innerHeight);
-    const inset=dock&&dock.height>0?Math.max(0,actualBottom-dock.top)+12:16;
-    return {top:0,height,bottom:height-inset};
+    const visualTop=visualViewport?.offsetTop||0;
+    const bottom=Math.min(visualTop+height-16,dock&&dock.height>0?dock.top-12:Infinity);
+    return {top:visualTop,height,bottom};
   };
   const cleanup=()=>{probe.remove();clear();if(marker!==null)host.setAttribute('data-story-viewport',marker);else delete host.dataset.storyViewport;};
   return {measure,cleanup};

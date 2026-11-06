@@ -7,6 +7,13 @@ type Options = { mobile:boolean; viewport?:()=>{top:number;height:number;bottom:
 export function attachStoryPageScroll(host:HTMLElement, reader:HTMLElement, runway:HTMLElement, options:Options) {
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const stages=Array.from(reader.querySelectorAll<HTMLElement>('[data-story-phase]'));
+  const gallery=options.mobile?host.querySelector<HTMLElement>('.m-story-media'):null;
+  const savedReaderHeight=host.style.getPropertyValue('--story-reader-height');
+  const savedGalleryHeight=gallery?.style.height||'';
+  const restoreSlots=()=>{
+    if(savedReaderHeight)host.style.setProperty('--story-reader-height',savedReaderHeight);else host.style.removeProperty('--story-reader-height');
+    if(gallery)gallery.style.height=savedGalleryHeight;
+  };
   const candidate=host.closest<HTMLElement>('#root');
   const page=candidate?.parentElement===document.body?candidate:null;
   const spacer=document.createElement('div');
@@ -69,12 +76,25 @@ export function attachStoryPageScroll(host:HTMLElement, reader:HTMLElement, runw
   const configure=()=>{
     if(!live)return;
     const font=parseFloat(getComputedStyle(document.documentElement).fontSize),scale=visualViewport?.scale||1;
-    const dimensions=[innerWidth,viewport().height,font,scale].join(':');
+    const dimensions=[innerWidth,viewport().top,viewport().height,lowerEdge(),font,scale].join(':');
     const short=options.mobile?viewport().height<500:innerHeight<=620;
     const nextFlow=!page||escaped||reduced.matches||short||font>20||scale>1.01||capacityFailure===dimensions;
     const previous=flow;
     if(nextFlow!==flow)setLayout(nextFlow);
     if(nextFlow){queue();return;}
+    // Fit the original reader and uncropped photo into the actual visible space,
+    // including the contact dock and safe area, before falling back to a list.
+    if(gallery){
+      restoreSlots();
+      const available=lowerEdge()-pinTop()-2;
+      const excess=host.getBoundingClientRect().height-available;
+      if(excess>0){
+        const photoHeight=gallery.getBoundingClientRect().height;
+        const trim=Math.min(excess,Math.max(0,photoHeight-130));
+        gallery.style.height=(photoHeight-trim)+'px';
+        if(excess>trim)host.style.setProperty('--story-reader-height',Math.max(160,reader.clientHeight-(excess-trim))+'px');
+      }
+    }
     runway.style.setProperty('--story-pin-top',pinTop()+'px');
     // Relative geometry is independent of both scrolling and the native sticky offset.
     start=runway.getBoundingClientRect().top-page!.getBoundingClientRect().top-pinTop();
@@ -126,7 +146,7 @@ export function attachStoryPageScroll(host:HTMLElement, reader:HTMLElement, runw
   const settled=()=>{if(live){capacityFailure='';queueLayout();}};
   const resize=new ResizeObserver(queueLayout);if(page)resize.observe(page);resize.observe(host);resize.observe(reader);stages.forEach(stage=>resize.observe(stage));
   window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',configure,{passive:true});
-  visualViewport?.addEventListener('resize',configure);reduced.addEventListener('change',configure);
+  visualViewport?.addEventListener('resize',queueLayout);visualViewport?.addEventListener('scroll',queueLayout);reduced.addEventListener('change',configure);
   window.addEventListener('hashchange',onHash);document.addEventListener('click',onAnchor);
   window.addEventListener('keydown',onKey);host.addEventListener('tanmay:story-phase',choose);reader.addEventListener('scroll',read,{passive:true});
   window.addEventListener('load',settled);window.addEventListener('pageshow',settled);
@@ -137,8 +157,8 @@ export function attachStoryPageScroll(host:HTMLElement, reader:HTMLElement, runw
     window.removeEventListener('load',settled);window.removeEventListener('pageshow',settled);document.fonts.removeEventListener('loadingdone',settled);
     window.removeEventListener('hashchange',onHash);document.removeEventListener('click',onAnchor);
     window.removeEventListener('scroll',onScroll);window.removeEventListener('resize',configure);window.removeEventListener('keydown',onKey);
-    visualViewport?.removeEventListener('resize',configure);reduced.removeEventListener('change',configure);host.removeEventListener('tanmay:story-phase',choose);reader.removeEventListener('scroll',read);
-    restorePage();delete runway.dataset.storySticky;['--story-height','--story-travel','--story-pin-top'].forEach(name=>runway.style.removeProperty(name));
+    visualViewport?.removeEventListener('resize',queueLayout);visualViewport?.removeEventListener('scroll',queueLayout);reduced.removeEventListener('change',configure);host.removeEventListener('tanmay:story-phase',choose);reader.removeEventListener('scroll',read);
+    restorePage();restoreSlots();delete runway.dataset.storySticky;['--story-height','--story-travel','--story-pin-top'].forEach(name=>runway.style.removeProperty(name));
     delete host.dataset.storyLayout;delete host.dataset.pageScroll;delete host.dataset.storyExit;host.style.removeProperty('--story-progress');
   };
 }
