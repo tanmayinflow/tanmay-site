@@ -22,8 +22,8 @@ export const previewCopy = {
     "You’ll get stronger. You’ll lose fat. And this time it’ll last."
   ],
   "homeLead": [
-    "Síla s vlastní vahou a plán, který unese i těžký týden. Ty přijdeš, zbytek vedu já.",
-    "Bodyweight strength and a plan that survives a hard week. You show up, I lead the rest."
+    "Síla s vlastní vahou a plán, který unese i těžký týden. Ty jen přijdeš, zbytek vedu já.",
+    "Bodyweight strength and a plan that survives a hard week. You just show up, I lead the rest."
   ],
   "audienceTitle": [
     "Co od svého těla opravdu chceš?",
@@ -194,8 +194,8 @@ export const previewCopy = {
         "Message me on WhatsApp."
       ],
       [
-        "Domluvíme 15 minut zdarma. Najdeme 3 důvody, proč ti to zatím nejde. Odejdeš s jasným rozhodnutím.",
-        "We book 15 free minutes. We find 3 reasons it hasn’t worked yet. You leave with a clear decision."
+        "Domluvíme si setkání. Najdeme 3 důvody, proč ti to zatím nejde. Odejdeš s jasným rozhodnutím.",
+        "We arrange a meeting. We find 3 reasons it hasn’t worked yet. You leave with a clear decision."
       ]
     ],
     [
@@ -268,8 +268,8 @@ export const previewCopy = {
     "In 4 weeks you’ll be stronger, firmer and done with starting over on Monday."
   ],
   "workLead": [
-    "Bez hodin v posilovně a bez drastických diet. Ty přijdeš, zbytek vedu já.",
-    "No hours in the gym, no crash diets. You show up, I lead the rest."
+    "Bez hodin v posilovně a bez drastických diet. Ty jen přijdeš, zbytek vedu já.",
+    "No hours in the gym, no crash diets. You just show up, I lead the rest."
   ],
   "needsTitle": [
     "Kde jsi teď a kam chceš?",
@@ -290,22 +290,22 @@ export const previewCopy = {
   "barriers": [
     [
       [
-        "Nevíš, co dělat.",
-        "You don’t know what to do."
+        "Nevíš, kde začít.",
+        "You don’t know where to start."
       ],
       [
-        "Dostaneš plán na míru. Víš, co dělat dnes, za týden i za měsíc.",
-        "You get a plan made for you. You know what to do today, next week and next month."
+        "Dostaneš plán na míru a vedení krok za krokem. Víš, co cvičit, jak na to a proč.",
+        "You get a plan made for you and guidance step by step. You know what to practise, how and why."
       ]
     ],
     [
       [
-        "Vždycky to vzdáš.",
-        "You always give up."
+        "Motivace ti nevydrží.",
+        "Your motivation doesn’t last."
       ],
       [
-        "Máš pevné termíny a trenéra, který na tebe čeká. Disciplínu drží domluvený trénink, ne tvoje vůle.",
-        "Fixed sessions and a coach waiting for you. A booked session keeps the discipline, not your willpower."
+        "Pevné termíny ti pomůžou udržet pravidelnost. Společně hledáme radost, hru a smysl v pohybu, aby ses na trénink těšil.",
+        "Regular appointments help you stay consistent. Together we find joy, play and meaning in movement, so you look forward to training."
       ]
     ],
     [
@@ -349,8 +349,8 @@ export const previewCopy = {
       "you’re short on time because of work and family,"
     ],
     [
-      "zlobí tě záda nebo kolena a nechceš kvůli tomu přestat.",
-      "your back or knees bother you and you don’t want to stop because of it."
+      "zlobí tě záda nebo kolena a chceš vědět, jak přizpůsobit cvičení tomu, co zvládáš.",
+      "your back or knees bother you and you want to know how to adapt exercise to what you can manage."
     ]
   ],
   "forClose": [

@@ -1,9 +1,11 @@
 import assert from 'node:assert/strict';
+import {restoreAnnotationsIfCurrent} from './annotations-swipe-authorized-2026-11-06.mjs';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 export const viewportDelta=JSON.parse(readFileSync(new URL('./visible-viewport-authorized-2026-11-06.json',import.meta.url)));
 const sha=b=>createHash('sha256').update(b).digest('hex');
 export function withoutAuthorizedViewport(path,bytes){
+ bytes=restoreAnnotationsIfCurrent(path,bytes);
  const file=viewportDelta.files.find(f=>f.path===path);
  if(!file)return bytes;
  assert.equal(sha(bytes),file.afterSha256,'Exact visible-viewport repair: '+path);
@@ -17,6 +19,7 @@ export function withoutAuthorizedViewport(path,bytes){
  return value;
 }
 export function restoreViewportIfCurrent(path,bytes){
+ bytes=restoreAnnotationsIfCurrent(path,bytes);
  const file=viewportDelta.files.find(f=>f.path===path);
  return file&&sha(bytes)===file.afterSha256?withoutAuthorizedViewport(path,bytes):bytes;
 }

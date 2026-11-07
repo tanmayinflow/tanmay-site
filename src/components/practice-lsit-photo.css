@@ -1,0 +1,48 @@
+/* The same copper earth and black cotton as the two existing hero backgrounds. */
+.practice-lsit {
+  position:relative; isolation:isolate; width:100%; aspect-ratio:1.08;
+  margin:0; background:none; border:0; box-shadow:none;
+}
+.practice-lsit-material {position:absolute; pointer-events:none;}
+.practice-lsit-copper {
+  inset:0 6% 8% 2%; transform:rotate(-8deg);
+  border-radius:46% 54% 49% 51% / 41% 42% 58% 59%;
+  background:#754437 url('/media/secondary-v9-10/burnt-earth-1254.webp') center/cover;
+}
+.practice-lsit-ink {
+  inset:9% 1% 0 6%; transform:rotate(8deg);
+  border-radius:55% 45% 54% 46% / 46% 58% 42% 54%;
+  background:#1c1c1a var(--tex-cotton,url('/media/home-v9-1/ashes-1x.webp')) center/768px 768px;
+}
+.practice-lsit-crop {
+  position:absolute; inset:8% 8% 8% 8%; overflow:hidden;
+  border-radius:49% 51% 45% 55% / 47% 49% 51% 53%;
+}
+.practice-lsit .practice-lsit-crop img {
+  position:absolute; width:180%; max-width:none; height:auto;
+  left:-45%; top:-90%; display:block; margin:0; border:0;
+  transform:none; filter:none; opacity:1; object-fit:fill;
+}
+.tm-mobile[data-mobile-version] .m-hero.m-hero--practice[class] {
+  display:block; height:auto; min-height:0;
+}
+.tm-mobile[data-mobile-version] .m-hero.m-hero--practice .m-hero-scene {
+  flex:none;
+  display:block; position:relative; width:100%; height:auto; min-height:0;
+  max-height:none; aspect-ratio:auto; margin:12px 0 0; padding:10px 12px 22px;
+  overflow:visible;
+}
+.tm-mobile[data-mobile-version] .m-hero.m-hero--practice .m-hero-scene>.m-material-edge {display:none;}
+.tm-mobile[data-mobile-version] .m-hero.m-hero--practice .practice-lsit {max-width:660px;margin:0 auto;}
+[data-secondary-v8] .practice-lsit-hero .practice-rock-layout:not(:has(>.practice-rock-photo)) {
+  display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); align-items:center;
+  gap:clamp(28px,5vw,80px); padding:64px var(--gutter) 72px; max-width:var(--maxw); min-height:0;
+}
+[data-secondary-v8] .practice-lsit-hero .practice-rock-layout:not(:has(>.practice-rock-photo)) .practice-rock-copy {
+  grid-column:2; grid-row:1; width:100%; max-width:560px; margin:0; padding:0;
+}
+[data-secondary-v8] .practice-lsit-hero .practice-lsit {grid-column:1;grid-row:1;}
+@media(max-width:1099px) {
+  [data-secondary-v8] .practice-lsit-hero .practice-rock-layout:not(:has(>.practice-rock-photo)) {gap:28px;padding-top:40px;}
+  [data-secondary-v8] .practice-lsit-hero .practice-rock-copy .h1 {font-size:clamp(2rem,4vw,3.25rem);}
+}

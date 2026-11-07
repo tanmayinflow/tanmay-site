@@ -1,3 +1,4 @@
+import PracticeLsitPhoto from '../components/PracticeLsitPhoto';
 import { EducationList } from './PreviewEducation';
 import { previewText, previewWhatsApp, previewMail } from "../preview-copy";
 import { mobilePreviewCopy as p } from "./PreviewDetails";
@@ -40,7 +41,7 @@ export function MobileHero({ page, lang, preview=false }: {page:'home'|'collabor
   const alt=page==='home'?copy('Opening',4,lang):page==='collaboration'?copy('PageSpoluprace',8,lang):page==='practice'?copy('PagePraxe',4,lang):(lang==='en'?'Kryštof Švec, a portrait in a plain black T-shirt.':'Kryštof Švec, portrét v černém tričku bez potisku.');
   return <><header className={'m-hero m-hero--'+(preview&&page==='collaboration'?'home preview-collaboration-hero':page)} ref={hero}>
     <div className="m-hero-identity">{page==='practice'&&<MobileVajraBell/>}<h1>{page==='home'?'Kryštof Švec':page==='about'?'Kryštof':topic}</h1><p className="m-hero-service">{page==='about'?<><span>{lang==='en'?'A trainer':'Trenér,'}</span><span>{lang==='en'?'who spent a year in a wheelchair':'co strávil rok na vozíku'}</span></>:subtitle}</p>{page==='collaboration'&&!preview&&<p className="m-hero-intro m-hero-benefits">{benefits.map(benefit=><span key={benefit}>{benefit}</span>)}</p>}{intro&&<p className="m-hero-intro"><RichText>{intro}</RichText></p>}</div>
-    <div className="m-hero-scene">{page!=='practice'&&<Mineral kind={preview&&page==='collaboration'?'home':page}/>} {page==='collaboration'?(preview?<Photo asset="home" alt={copy('Opening',4,lang)} eager className="m-hero-photo"/>:<MobileCollaborationPortrait alt={alt}/>):<Photo asset={page} alt={alt} eager className="m-hero-photo"/>}<MaterialEdge tone={page==='home'?'dark':'linen'}/></div>
+    <div className="m-hero-scene">{page!=='practice'&&<Mineral kind={preview&&page==='collaboration'?'home':page}/>} {page==='collaboration'?(preview?<Photo asset="home" alt={copy('Opening',4,lang)} eager className="m-hero-photo"/>:<MobileCollaborationPortrait alt={alt}/>):<>{page==='practice'?<PracticeLsitPhoto lang={lang}/>:<Photo asset={page} alt={alt} eager className="m-hero-photo"/>}</>}<MaterialEdge tone={page==='home'?'dark':'linen'}/></div>
   </header>{preview&&page==='collaboration'&&<div className="preview-collab-caption m-inner"><p>{benefits.map(benefit=><span key={benefit}>{benefit}</span>)}</p></div>}{page==='home'&&<div className="m-hero-caption m10-home-caption m-dark"><h2 id="m-home-statement">{preview?previewText(p.homeTitle,lang).split(/(?<=\.) (?=A |And )/).map(line=><span className="preview-statement-line" key={line}>{line}</span>):copy('Opening',1,lang)}</h2></div>}</>;
 }
 export function MobileProof({lang,preview=false,educationLink=true}:{lang:string;preview?:boolean;educationLink?:boolean}) {

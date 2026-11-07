@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { bindPreviewRailSwipe } from './preview-rail-swipe';
 import './preview-mobile-scroll.css';
 
 /** Native page pin shared by every mobile rail. The two owned spacers exchange
@@ -14,11 +15,15 @@ export function usePreviewPageScroll(key:string) {
   const before=document.createElement('div'),after=document.createElement('div');
   for(const spacer of [before,after]){spacer.dataset.previewTravel='';spacer.setAttribute('aria-hidden','true');}
   page.before(before);page.after(after);
-  type Stage={host:HTMLElement;row:HTMLElement;start:number;distance:number;consumed:number};
+  type Stage={host:HTMLElement;row:HTMLElement;start:number;distance:number;consumed:number;progress:number;manual?:number};
   let stages:Stage[]=[],total=0,frame=0,layoutFrame=0,hashFrame=0,live=true,escaped=false,boundary=-1;
   const paint=()=>{
    frame=0;if(!live||!stages.length)return;
-   const y=scrollY;
+   let y=scrollY;
+   // A swipe before/after the pin never moves the document. On re-entering the
+   // pin, adopt that card position without changing the visible composition.
+   const entered=stages.find(s=>s.manual!==undefined&&y>=s.start+s.consumed&&y<=s.start+s.consumed+s.distance);
+   if(entered){y=entered.start+entered.consumed+entered.manual!;delete entered.manual;scrollTo({top:y,behavior:'instant'});}
    const next=stages.findIndex(s=>y<s.start+s.consumed+s.distance);
    const index=next<0?stages.length:next;
    if(index!==boundary){
@@ -28,7 +33,8 @@ export function usePreviewPageScroll(key:string) {
     page.style.setProperty('--preview-page-pin',-(stages[index]?.start??page.offsetHeight)+'px');
    }
    for(const s of stages){
-    const progress=Math.max(0,Math.min(s.distance,y-s.start-s.consumed));
+    const progress=s.manual??Math.max(0,Math.min(s.distance,y-s.start-s.consumed));
+    s.progress=progress;
     s.row.style.transform=`translate3d(${-progress}px,0,0)`;
     s.host.dataset.phase=progress<=0?'before':progress>=s.distance?'after':'active';
    }
@@ -36,7 +42,7 @@ export function usePreviewPageScroll(key:string) {
   const queue=()=>{if(!frame)frame=requestAnimationFrame(paint);};
   const configure=()=>{
    if(!live)return;
-   stages=[];total=0;boundary=-1;
+   const previous=stages;stages=[];total=0;boundary=-1;
    const viewport=visualViewport?.height||innerHeight;
    // iOS browser chrome can pan the visual viewport inside the layout viewport.
    // Pin the heading inside that visible window, not behind its upper edge.
@@ -46,14 +52,17 @@ export function usePreviewPageScroll(key:string) {
    const available=bottom-pinTop-2;
    const flow=escaped||reduced.matches||innerWidth>=900||viewport<560||parseFloat(getComputedStyle(document.documentElement).fontSize)>20||(visualViewport?.scale||1)>1.01;
    for(const host of hosts){
+    if(innerWidth>=900){delete host.dataset.pageRail;continue;} // Local desktop rail owns its geometry.
     const panel=host.querySelector<HTMLElement>('.preview-benefits-pin')!,row=host.querySelector<HTMLElement>('.preview-benefits-track')!;
     host.dataset.pinned=flow?'false':'true';host.dataset.pageRail='true';row.style.transform='';
     const portrait=host.querySelector<HTMLElement>('.preview-handstand-photo');
     if(portrait){portrait.style.height='';if(!flow){const room=available-(panel.offsetHeight-portrait.offsetHeight);portrait.style.height=Math.max(120,Math.min(portrait.offsetHeight,room))+'px';}}
     const distance=flow||panel.offsetHeight>available?0:Math.max(0,row.scrollWidth-row.clientWidth);
     if(distance){
+     host.querySelector<HTMLElement>('.preview-benefits-window')!.scrollLeft=0;
      const start=panel.getBoundingClientRect().top-page.getBoundingClientRect().top-pinTop;
-     stages.push({host,row,start,distance,consumed:total});total+=distance;
+     const manual=previous.find(s=>s.host===host)?.manual;
+     stages.push({host,row,start,distance,consumed:total,progress:0,manual:manual===undefined?undefined:Math.min(distance,manual)});total+=distance;
     }else{host.dataset.pinned='false';delete host.dataset.phase;if(portrait)portrait.style.height='';}
    }
    if(total){page.dataset.previewPageRoot='';paint();}
@@ -80,19 +89,35 @@ export function usePreviewPageScroll(key:string) {
    target.querySelector<HTMLElement>('h2[tabindex]')?.focus({preventScroll:true});
   };
   const onKey=(e:KeyboardEvent)=>{if(e.key==='Escape'&&!document.querySelector('dialog[open],.m-menu[data-open=true]')&&stages.some(s=>s.host.dataset.phase==='active')){escaped=true;configure();}};
+  const unbindSwipes=hosts.map(host=>bindPreviewRailSwipe(host.querySelector<HTMLElement>('.preview-benefits-window')!,
+   ()=>stages.find(s=>s.host===host)??null,
+   progress=>{
+    const stage=stages.find(s=>s.host===host);if(!stage)return;
+    const start=stage.start+stage.consumed;
+    if(scrollY>=start-1&&scrollY<=start+stage.distance+1){
+     delete stage.manual;scrollTo({top:start+progress,behavior:'instant'});
+    }else stage.manual=progress;
+    paint();
+   }));
   const queueLayout=()=>{if(live&&!layoutFrame)layoutFrame=requestAnimationFrame(()=>{layoutFrame=0;configure();});};
+  // VisualViewport also emits scroll events while a touch is stationary. Only
+  // actual viewport changes invalidate geometry; page scrolling just paints.
+  const viewportKey=()=>[innerWidth,innerHeight,visualViewport?.offsetTop||0,visualViewport?.height||innerHeight,visualViewport?.scale||1].join(':');
+  let lastViewport=viewportKey();
+  const onViewport=()=>{const next=viewportKey();if(next===lastViewport)return;lastViewport=next;queueLayout();};
   const resize=new ResizeObserver(queueLayout);resize.observe(page);
-  window.addEventListener('scroll',queue,{passive:true});window.addEventListener('resize',configure);
-  window.addEventListener('pageshow',queueLayout);visualViewport?.addEventListener('resize',queueLayout);visualViewport?.addEventListener('scroll',queueLayout);
+  window.addEventListener('scroll',queue,{passive:true});window.addEventListener('resize',onViewport);
+  window.addEventListener('pageshow',queueLayout);visualViewport?.addEventListener('resize',onViewport);visualViewport?.addEventListener('scroll',onViewport);
   reduced.addEventListener('change',configure);window.addEventListener('hashchange',onHash);
   document.addEventListener('click',onClick,true);window.addEventListener('keydown',onKey);
   page.addEventListener('load',configure,true);configure();
   document.fonts.ready.then(()=>{if(live){configure();onHash();}});
   return()=>{
    live=false;resize.disconnect();cancelAnimationFrame(frame);cancelAnimationFrame(layoutFrame);cancelAnimationFrame(hashFrame);
-   window.removeEventListener('pageshow',queueLayout);visualViewport?.removeEventListener('resize',queueLayout);visualViewport?.removeEventListener('scroll',queueLayout);
+   unbindSwipes.forEach(unbind=>unbind());
+   window.removeEventListener('pageshow',queueLayout);visualViewport?.removeEventListener('resize',onViewport);visualViewport?.removeEventListener('scroll',onViewport);
    before.remove();after.remove();delete page.dataset.previewPageRoot;page.style.removeProperty('--preview-page-pin');
-   window.removeEventListener('scroll',queue);window.removeEventListener('resize',configure);reduced.removeEventListener('change',configure);
+   window.removeEventListener('scroll',queue);window.removeEventListener('resize',onViewport);reduced.removeEventListener('change',configure);
    window.removeEventListener('hashchange',onHash);document.removeEventListener('click',onClick,true);window.removeEventListener('keydown',onKey);page.removeEventListener('load',configure,true);
   };
  },[key]);

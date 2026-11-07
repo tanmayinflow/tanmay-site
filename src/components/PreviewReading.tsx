@@ -3,6 +3,7 @@ import { previewCopy as p, previewText } from '../preview-copy';
 import { Photo } from '../mobile/MobileElements';
 import { mobilePreviewCopy } from '../mobile/PreviewDetails';
 import { mobileText } from '../mobile/mobile-copy';
+import { bindPreviewRailSwipe } from '../mobile/preview-rail-swipe';
 
 export function PreviewComparisonKey({lang}:{lang:string}) {
  return <div className="preview-comparison-key"><span>✕ {lang==='en'?'Old way':'Stará cesta'}</span><strong>✓ {lang==='en'?'New practice':'Nová praxe'}</strong></div>;
@@ -39,11 +40,17 @@ function usePreviewRail(key:string,handstand=false) {
   const host=root.current!,panel=pin.current!,row=track.current!;
   const preference=matchMedia('(prefers-reduced-motion: reduce)');
   const mobile=matchMedia('(max-width:899px)');
-  if(mobile.matches)return; // The mobile page controller owns all rails together.
-  let distance=0,frame=0,pinTop=24,disposed=false;
-  const paint=()=>{frame=0;if(!distance)return;const progress=Math.max(0,Math.min(distance,-host.getBoundingClientRect().top+pinTop));row.style.transform=`translate3d(${-progress}px,0,0)`;};
+  let distance=0,progress=0,manual:number|undefined,frame=0,pinTop=24,disposed=false;
+  const paint=()=>{
+   frame=0;if(mobile.matches||!distance)return;
+   const natural=-host.getBoundingClientRect().top+pinTop;
+   if(manual!==undefined&&natural>=0&&natural<=distance){scrollBy({top:manual-natural,behavior:'instant'});manual=undefined;}
+   progress=manual??Math.max(0,Math.min(distance,-host.getBoundingClientRect().top+pinTop));
+   row.style.transform=`translate3d(${-progress}px,0,0)`;
+  };
   const queue=()=>{if(!frame)frame=requestAnimationFrame(paint);};
   const measure=()=>{
+   if(mobile.matches){distance=0;manual=undefined;host.style.height='';panel.style.minHeight='';return;}
    host.dataset.pinned='true';row.style.transform='';host.style.height='';panel.style.minHeight='';
    pinTop=parseFloat(getComputedStyle(panel).top)||24;
    const viewport=window.visualViewport?.height||innerHeight;
@@ -57,17 +64,26 @@ function usePreviewRail(key:string,handstand=false) {
    distance=preference.matches||height>viewport-pinTop-96?0:Math.max(0,row.scrollWidth-row.clientWidth);
    host.dataset.pinned=distance?'true':'false';
    if(distance){
+    panel.querySelector<HTMLElement>('.preview-benefits-window')!.scrollLeft=0;
     // The next chapter stays below the viewport until every card has passed.
     if(mobile.matches)panel.style.minHeight=`${viewport-pinTop}px`;
     host.style.height=`${panel.offsetHeight+distance}px`;
    }else if(portrait)portrait.style.height='';
    queue();
   };
+  const unbindSwipe=bindPreviewRailSwipe(panel.querySelector<HTMLElement>('.preview-benefits-window')!,
+   ()=>!mobile.matches&&distance?{progress,distance}:null,
+   value=>{
+    const natural=-host.getBoundingClientRect().top+pinTop;
+    if(natural>=-1&&natural<=distance+1){manual=undefined;scrollBy({top:value-natural,behavior:'instant'});}
+    else manual=value;
+    paint();
+   });
   let measuredWidth=0;
   const observer=new ResizeObserver(entries=>{const width=entries[0].contentRect.width;if(width!==measuredWidth){measuredWidth=width;measure();}});observer.observe(panel);
   preference.addEventListener('change',measure);window.addEventListener('resize',measure);window.addEventListener('scroll',queue,{passive:true});
   document.fonts.ready.then(()=>{if(!disposed)measure();});measure();
-  return()=>{disposed=true;observer.disconnect();cancelAnimationFrame(frame);preference.removeEventListener('change',measure);window.removeEventListener('resize',measure);window.removeEventListener('scroll',queue);};
+  return()=>{disposed=true;unbindSwipe();observer.disconnect();cancelAnimationFrame(frame);preference.removeEventListener('change',measure);window.removeEventListener('resize',measure);window.removeEventListener('scroll',queue);};
  },[key,handstand]);
  return {root,pin,track};
 }

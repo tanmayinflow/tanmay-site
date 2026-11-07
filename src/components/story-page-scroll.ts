@@ -141,12 +141,15 @@ export function attachStoryPageScroll(host:HTMLElement, reader:HTMLElement, runw
   };
   const onScroll=()=>{if(!blocked())queue();};
   const queueLayout=()=>{if(live&&!layoutFrame)layoutFrame=requestAnimationFrame(()=>{layoutFrame=0;configure();});};
+  const viewportKey=()=>[innerWidth,innerHeight,visualViewport?.offsetTop||0,visualViewport?.height||innerHeight,visualViewport?.scale||1].join(':');
+  let lastViewport=viewportKey();
+  const onViewport=()=>{const next=viewportKey();if(next===lastViewport)return;lastViewport=next;queueLayout();};
   // A capacity failure prevents observer feedback loops, but must not outlive
   // the font/image load or page restoration that invalidated that measurement.
   const settled=()=>{if(live){capacityFailure='';queueLayout();}};
   const resize=new ResizeObserver(queueLayout);if(page)resize.observe(page);resize.observe(host);resize.observe(reader);stages.forEach(stage=>resize.observe(stage));
-  window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',configure,{passive:true});
-  visualViewport?.addEventListener('resize',queueLayout);visualViewport?.addEventListener('scroll',queueLayout);reduced.addEventListener('change',configure);
+  window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onViewport,{passive:true});
+  visualViewport?.addEventListener('resize',onViewport);visualViewport?.addEventListener('scroll',onViewport);reduced.addEventListener('change',configure);
   window.addEventListener('hashchange',onHash);document.addEventListener('click',onAnchor);
   window.addEventListener('keydown',onKey);host.addEventListener('tanmay:story-phase',choose);reader.addEventListener('scroll',read,{passive:true});
   window.addEventListener('load',settled);window.addEventListener('pageshow',settled);
@@ -156,8 +159,8 @@ export function attachStoryPageScroll(host:HTMLElement, reader:HTMLElement, runw
     live=false;cancelAnimationFrame(frame);cancelAnimationFrame(layoutFrame);cancelAnimationFrame(hashFrame);resize.disconnect();
     window.removeEventListener('load',settled);window.removeEventListener('pageshow',settled);document.fonts.removeEventListener('loadingdone',settled);
     window.removeEventListener('hashchange',onHash);document.removeEventListener('click',onAnchor);
-    window.removeEventListener('scroll',onScroll);window.removeEventListener('resize',configure);window.removeEventListener('keydown',onKey);
-    visualViewport?.removeEventListener('resize',queueLayout);visualViewport?.removeEventListener('scroll',queueLayout);reduced.removeEventListener('change',configure);host.removeEventListener('tanmay:story-phase',choose);reader.removeEventListener('scroll',read);
+    window.removeEventListener('scroll',onScroll);window.removeEventListener('resize',onViewport);window.removeEventListener('keydown',onKey);
+    visualViewport?.removeEventListener('resize',onViewport);visualViewport?.removeEventListener('scroll',onViewport);reduced.removeEventListener('change',configure);host.removeEventListener('tanmay:story-phase',choose);reader.removeEventListener('scroll',read);
     restorePage();restoreSlots();delete runway.dataset.storySticky;['--story-height','--story-travel','--story-pin-top'].forEach(name=>runway.style.removeProperty(name));
     delete host.dataset.storyLayout;delete host.dataset.pageScroll;delete host.dataset.storyExit;host.style.removeProperty('--story-progress');
   };

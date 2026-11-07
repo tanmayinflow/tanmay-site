@@ -5,3 +5,8 @@ body:has(> #root[data-preview-page-root]) { overflow-x:clip; overflow-anchor:non
 @media (max-width:899px) {
  .tm-mobile[data-preview="v3"] .preview-benefits[data-page-rail] .preview-benefits-pin { position:static; min-height:0; }
 }
+ /* Reserve only horizontal gestures for the enhanced rail, retaining zoom. */
+ .tm-mobile[data-preview="v3"] .preview-benefits[data-pinned="true"] .preview-benefits-window { touch-action:pan-y pinch-zoom; }
+ /* Short windows, enlarged text and reduced motion still allow a native swipe. */
+ .tm-mobile[data-preview="v3"] .preview-benefits[data-pinned="false"] .preview-benefits-window { overflow-x:auto; overscroll-behavior-x:contain; }
+ .tm-mobile[data-preview="v3"] .preview-benefits[data-pinned="false"] .preview-benefits-track { display:flex!important; transform:none!important; }

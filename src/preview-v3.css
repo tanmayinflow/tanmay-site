@@ -327,8 +327,9 @@
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-links .m-text-link { display:flex; margin:0; gap:8px; font-size:.8125rem; letter-spacing:.07em; line-height:1.45; }
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-links .m-text-link:last-child { justify-self:end; }
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-links svg { width:18px; flex-shrink:0; }
- .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-links > .m-text-link:first-child { margin:0; justify-content:center; }
- .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-process > .m-inner > .m-text-link { margin:24px 0 0; }
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-links > .m-text-link:first-child { margin:0; justify-content:center; grid-column:2; grid-row:1; justify-self:end; }
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-process-links > .m-text-link:last-child { grid-column:1; grid-row:1; justify-self:start; }
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-process > .m-inner > .m-text-link { margin:24px 0 0 auto; }
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-journey > .preview-curve-arrow { margin:6px 0 12px auto; }
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-process .m-process-opening { display:none; }
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-about-aside p { margin-top:12px; }
@@ -428,4 +429,9 @@
 @media(max-width:899px){
  .tm-mobile[data-mobile-version][data-preview="v3"] .m-home-about .preview-coach-vajra {width:66px;height:60px;max-width:none;max-height:none;translate:calc(-10 * 100vw / 440) 0}
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-person .preview-coach-vajra {width:78px;height:56px;max-width:none;max-height:none;translate:calc(-5 * 100vw / 440) 5px}
+}
+
+@media(min-width:900px){
+ [data-preview="v3"] .release-work-process > .wrap:last-child {text-align:right}
+ [data-preview="v3"] .preview-week .release-first-session {padding:16px 28px;border-radius:999px;background:var(--m-cream,#e4d9c3);color:#202323;font-family:inherit;font-weight:700}
 }

@@ -1,0 +1,347 @@
+{
+  "baseline": "270afa69d26c803b30844422c7a5fa25527b2cd6",
+  "authorization": "Owner 2026-11-06: all nine annotations, corresponding Home copy/CTA changes, horizontal finger swipe as well as page scrolling; publish after verification. Follow-up 2026-11-07: repair mobile stutter during a stationary held touch, including redundant viewport layout and circular carousel recentering. Owner 2026-11-07: replace Praxe hero with supplied authentic L-sit photograph, organic crop and overlapping existing copper/black textures on mobile and desktop. No price, qualification or original archive changes.",
+  "files": [
+    {
+      "path": "src/App.tsx",
+      "beforeSha256": "cccab3c686bc45ac92d35f735176e18a74ce3c6a30b99b10e1c230e2d3fc931d",
+      "afterSha256": "b892c70d7e70ca2323bbce2e600fc592030cdbf8e9fc750b37ccc5bc9b7fd384",
+      "replacements": [
+        {
+          "offset": 32,
+          "before": "",
+          "after": "import PracticeLsitPhoto from './components/PracticeLsitPhoto';\r\n"
+        },
+        {
+          "offset": 154201,
+          "before": "    <header className=\"site-linen page-hero practice-hero practice-rock-v963 hero-unified\">\n",
+          "after": "    <header className=\"site-linen page-hero practice-hero practice-rock-v963 hero-unified practice-lsit-hero\">\r\n"
+        },
+        {
+          "offset": 155092,
+          "before": "        <PracticeRockPhoto alt={L(\"Sedím bosý na skalním výběžku v přírodě.\",\"Sitting barefoot on a rocky outcrop outdoors.\")} />\n",
+          "after": "        <PracticeLsitPhoto lang={lang}/>\r\n"
+        },
+        {
+          "offset": 211913,
+          "before": "<section className=\"site-linen page-section collaboration-needs-v99\" id=\"potreby\"><div className=\"wrap\"><div className=\"section-head section-head--split\"><h2 className=\"h-display h2 rv\">{c(p.needsTitle)}</h2><div className=\"page-intro rv d1\"><p><strong>{L(\"Teď:\",\"Now:\")}</strong> {c(p.now)}</p><p><strong>{L(\"Kam chceš:\",\"Where you want to be:\")}</strong> {c(p.destination)}</p></div></div><h3 className=\"h3\">{c(p.barriersTitle)}</h3><div className=\"secondary-illustrated secondary-illustrated--needs\"><div className=\"editorial-grid\">{p.barriers.map((x,i)=><article className=\"rv\" key={i}><span className=\"num\">0{i+1}</span><h3>{c(x[0])}</h3><p>{c(x[1])}</p></article>)}</div></div><p className=\"stance-line\">{c(p.needsClose)}</p><Go href=\"#kontakt\" cs={p.cta[0]} en={p.cta[1]}/></div></section><section className=\"site-linen page-section collaboration-experience\" id=\"zkusenost\"><div className=\"wrap\"><div className=\"section-head section-head--split\"><h2 className=\"h-display h2 rv\">{c(p.forTitle)}</h2><div className=\"page-intro rv d1\"><ul>{p.forItems.map(x=><li key={x[0]}>{c(x)}</li>)}</ul><p><strong>{c(p.forClose)}</strong></p><p>{c(p.notFor)}</p></div></div></div></section><div className=\"site-ink preview-cotton\"><HomeWorkPreview lang={lang}/></div><section className=\"site-ink page-section--tight between-v8 between-v919 preview-cotton\" id=\"co-dostanes\"><div className=\"material-edge material-edge--linen\" aria-hidden=\"true\"/><DesktopCycle lang={lang}><div className=\"between-copy-v919\"><p className=\"label rv\">{c(p.startLabel)}</p><h2 className=\"h-display h2 rv d1\" style={{marginTop:12}}>{c(p.startTitle)}</h2><div className=\"between-visual-row-v919\"><p className=\"scan-line rv d2\">{L(\"PLÁN · ZÁZNAM · ÚPRAVA\",\"PLAN · RECORD · ADJUST\")}</p><CollaborationCycle/></div></div><div className=\"between-items\">{p.startItems.map((x,i)=><div className=\"preview-start-item rv\" key={i}><h3>{c(x[0])}</h3><p>{c(x[1])}</p></div>)}</div></DesktopCycle><div className=\"wrap preview-week\"><p className=\"body-txt\"><strong>{c(p.weekTitle).split(/(\\([^)]*\\))/).map((part,i)=>part.startsWith(\"(\")?<span className=\"preview-week-example\" key={i}>{part}</span>:part)}</strong></p><p className=\"body-txt\">{c(p.week)}</p><p className=\"body-txt\"><strong>{c(p.why)}</strong></p><p className=\"body-txt\"><strong>{c(p.price)}</strong></p><p className=\"small\">{c(p.priceSmall)}</p><p className=\"act\"><Go href=\"#kontakt\" cs={p.cta[0]} en={p.cta[1]}/></p><a className=\"go\" href={previewWhatsApp(lang,true)} target=\"_blank\" rel=\"noopener noreferrer\">{c(p.direct)}</a></div></section>\n",
+          "after": "<section className=\"site-linen page-section collaboration-needs-v99\" id=\"potreby\"><div className=\"wrap\"><div className=\"section-head section-head--split\"><h2 className=\"h-display h2 rv\">{c(p.needsTitle)}</h2><div className=\"page-intro rv d1\"><p><strong>{L(\"Teď:\",\"Now:\")}</strong> {c(p.now)}</p><p><strong>{L(\"Kam chceš:\",\"Where you want to be:\")}</strong> {c(p.destination)}</p></div></div><h3 className=\"h3\">{c(p.barriersTitle)}</h3><div className=\"secondary-illustrated secondary-illustrated--needs\"><div className=\"editorial-grid\">{p.barriers.map((x,i)=><article className=\"rv\" key={i}><span className=\"num\">0{i+1}</span><h3>{c(x[0])}</h3><p>{c(x[1])}</p></article>)}</div></div><p className=\"stance-line\">{c(p.needsClose)}</p><Go href=\"#kontakt\" cs={p.cta[0]} en={p.cta[1]}/></div></section><section className=\"site-linen page-section collaboration-experience\" id=\"zkusenost\"><div className=\"wrap\"><div className=\"section-head section-head--split\"><h2 className=\"h-display h2 rv\">{c(p.forTitle)}</h2><div className=\"page-intro rv d1\"><ul>{p.forItems.map(x=><li key={x[0]}>{c(x)}</li>)}</ul><p><strong>{c(p.forClose)}</strong></p></div></div></div></section><div className=\"site-ink preview-cotton\"><HomeWorkPreview lang={lang}/></div><section className=\"site-ink page-section--tight between-v8 between-v919 preview-cotton\" id=\"co-dostanes\"><div className=\"material-edge material-edge--linen\" aria-hidden=\"true\"/><DesktopCycle lang={lang}><div className=\"between-copy-v919\"><p className=\"label rv\">{c(p.startLabel)}</p><h2 className=\"h-display h2 rv d1\" style={{marginTop:12}}>{c(p.startTitle)}</h2><div className=\"between-visual-row-v919\"><p className=\"scan-line rv d2\">{L(\"PLÁN · ZÁZNAM · ÚPRAVA\",\"PLAN · RECORD · ADJUST\")}</p><CollaborationCycle/></div></div><div className=\"between-items\">{p.startItems.map((x,i)=><div className=\"preview-start-item rv\" key={i}><h3>{c(x[0])}</h3><p>{c(x[1])}</p></div>)}</div></DesktopCycle><div className=\"wrap preview-week\"><p className=\"body-txt\"><strong>{c(p.weekTitle).split(/(\\([^)]*\\))/).map((part,i)=>part.startsWith(\"(\")?<span className=\"preview-week-example\" key={i}>{part}</span>:part)}</strong></p><p className=\"body-txt\">{c(p.week)}</p><p className=\"body-txt\"><strong>{c(p.why)}</strong></p><p className=\"body-txt\"><strong>{c(p.price)}</strong></p><p className=\"small\">{c(p.priceSmall)}</p><p className=\"act\"><a className=\"go release-first-session\" href={previewWhatsApp(lang,true)} target=\"_blank\" rel=\"noopener noreferrer\">{c(p.firstCta)}</a></p><a className=\"go\" href={previewWhatsApp(lang)} target=\"_blank\" rel=\"noopener noreferrer\">{lang==='en'?'Still unsure? Book 15 free minutes.':'Ještě váháš? Domluv si 15 minut zdarma.'}</a></div></section>\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/components/PracticeLsitPhoto.tsx",
+      "beforeSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterSha256": "2791f447f88f22590005fe65b1a47c21f069f712856c9bc5ca76e3d6c43ccf1c",
+      "replacements": [
+        {
+          "offset": 0,
+          "before": "",
+          "after": "import './practice-lsit-photo.css';\n\n/** Owner's original photo: the crop is CSS-only, with no retouching of the person. */\nexport default function PracticeLsitPhoto({lang}:{lang:string}) {\n  return <figure className=\"practice-lsit\">\n    <span className=\"practice-lsit-material practice-lsit-copper\" aria-hidden=\"true\"/>\n    <span className=\"practice-lsit-material practice-lsit-ink\" aria-hidden=\"true\"/>\n    <div className=\"practice-lsit-crop\">\n      <img src=\"/media/practice-lsit-2026-11/praxe-original.jpg\" width={960} height={1280}\n        alt={lang==='en'?'Kryštof Švec holding an L-sit on a rock by the sea.':'Kryštof Švec drží L-sit na skále u moře.'}\n        loading=\"eager\" fetchPriority=\"high\" decoding=\"async\"/>\n    </div>\n  </figure>;\n}\n"
+        }
+      ]
+    },
+    {
+      "path": "src/components/PreviewReading.tsx",
+      "beforeSha256": "bde2ea350e8c8acef56ba7d8457df25cf019c91315610fa19bc0960eca5451b4",
+      "afterSha256": "7d57c772b502bb9dc6f8252cb9b8b7b2ac18301ac8d28ad0efdae4dcdb9ce40a",
+      "replacements": [
+        {
+          "offset": 272,
+          "before": "",
+          "after": "import { bindPreviewRailSwipe } from '../mobile/preview-rail-swipe';\n"
+        },
+        {
+          "offset": 2697,
+          "before": "  if(mobile.matches)return; // The mobile page controller owns all rails together.\n  let distance=0,frame=0,pinTop=24,disposed=false;\n  const paint=()=>{frame=0;if(!distance)return;const progress=Math.max(0,Math.min(distance,-host.getBoundingClientRect().top+pinTop));row.style.transform=`translate3d(${-progress}px,0,0)`;};\n",
+          "after": "  let distance=0,progress=0,manual:number|undefined,frame=0,pinTop=24,disposed=false;\n  const paint=()=>{\n   frame=0;if(mobile.matches||!distance)return;\n   const natural=-host.getBoundingClientRect().top+pinTop;\n   if(manual!==undefined&&natural>=0&&natural<=distance){scrollBy({top:manual-natural,behavior:'instant'});manual=undefined;}\n   progress=manual??Math.max(0,Math.min(distance,-host.getBoundingClientRect().top+pinTop));\n   row.style.transform=`translate3d(${-progress}px,0,0)`;\n  };\n"
+        },
+        {
+          "offset": 3281,
+          "before": "",
+          "after": "   if(mobile.matches){distance=0;manual=undefined;host.style.height='';panel.style.minHeight='';return;}\n"
+        },
+        {
+          "offset": 4129,
+          "before": "",
+          "after": "    panel.querySelector<HTMLElement>('.preview-benefits-window')!.scrollLeft=0;\n"
+        },
+        {
+          "offset": 4477,
+          "before": "",
+          "after": "  const unbindSwipe=bindPreviewRailSwipe(panel.querySelector<HTMLElement>('.preview-benefits-window')!,\n   ()=>!mobile.matches&&distance?{progress,distance}:null,\n   value=>{\n    const natural=-host.getBoundingClientRect().top+pinTop;\n    if(natural>=-1&&natural<=distance+1){manual=undefined;scrollBy({top:value-natural,behavior:'instant'});}\n    else manual=value;\n    paint();\n   });\n"
+        },
+        {
+          "offset": 5275,
+          "before": "  return()=>{disposed=true;observer.disconnect();cancelAnimationFrame(frame);preference.removeEventListener('change',measure);window.removeEventListener('resize',measure);window.removeEventListener('scroll',queue);};\n",
+          "after": "  return()=>{disposed=true;unbindSwipe();observer.disconnect();cancelAnimationFrame(frame);preference.removeEventListener('change',measure);window.removeEventListener('resize',measure);window.removeEventListener('scroll',queue);};\n"
+        }
+      ]
+    },
+    {
+      "path": "src/components/practice-lsit-photo.css",
+      "beforeSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterSha256": "dab28fc64515e78c91d7f5d4e36f6c9409651b9ab73fccadfa7adbcec55f73eb",
+      "replacements": [
+        {
+          "offset": 0,
+          "before": "",
+          "after": "/* The same copper earth and black cotton as the two existing hero backgrounds. */\n.practice-lsit {\n  position:relative; isolation:isolate; width:100%; aspect-ratio:1.08;\n  margin:0; background:none; border:0; box-shadow:none;\n}\n.practice-lsit-material {position:absolute; pointer-events:none;}\n.practice-lsit-copper {\n  inset:0 6% 8% 2%; transform:rotate(-8deg);\n  border-radius:46% 54% 49% 51% / 41% 42% 58% 59%;\n  background:#754437 url('/media/secondary-v9-10/burnt-earth-1254.webp') center/cover;\n}\n.practice-lsit-ink {\n  inset:9% 1% 0 6%; transform:rotate(8deg);\n  border-radius:55% 45% 54% 46% / 46% 58% 42% 54%;\n  background:#1c1c1a var(--tex-cotton,url('/media/home-v9-1/ashes-1x.webp')) center/768px 768px;\n}\n.practice-lsit-crop {\n  position:absolute; inset:8% 8% 8% 8%; overflow:hidden;\n  border-radius:49% 51% 45% 55% / 47% 49% 51% 53%;\n}\n.practice-lsit .practice-lsit-crop img {\n  position:absolute; width:180%; max-width:none; height:auto;\n  left:-45%; top:-90%; display:block; margin:0; border:0;\n  transform:none; filter:none; opacity:1; object-fit:fill;\n}\n.tm-mobile[data-mobile-version] .m-hero.m-hero--practice[class] {\n  display:block; height:auto; min-height:0;\n}\n.tm-mobile[data-mobile-version] .m-hero.m-hero--practice .m-hero-scene {\n  flex:none;\n  display:block; position:relative; width:100%; height:auto; min-height:0;\n  max-height:none; aspect-ratio:auto; margin:12px 0 0; padding:10px 12px 22px;\n  overflow:visible;\n}\n.tm-mobile[data-mobile-version] .m-hero.m-hero--practice .m-hero-scene>.m-material-edge {display:none;}\n.tm-mobile[data-mobile-version] .m-hero.m-hero--practice .practice-lsit {max-width:660px;margin:0 auto;}\n[data-secondary-v8] .practice-lsit-hero .practice-rock-layout:not(:has(>.practice-rock-photo)) {\n  display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); align-items:center;\n  gap:clamp(28px,5vw,80px); padding:64px var(--gutter) 72px; max-width:var(--maxw); min-height:0;\n}\n[data-secondary-v8] .practice-lsit-hero .practice-rock-layout:not(:has(>.practice-rock-photo)) .practice-rock-copy {\n  grid-column:2; grid-row:1; width:100%; max-width:560px; margin:0; padding:0;\n}\n[data-secondary-v8] .practice-lsit-hero .practice-lsit {grid-column:1;grid-row:1;}\n@media(max-width:1099px) {\n  [data-secondary-v8] .practice-lsit-hero .practice-rock-layout:not(:has(>.practice-rock-photo)) {gap:28px;padding-top:40px;}\n  [data-secondary-v8] .practice-lsit-hero .practice-rock-copy .h1 {font-size:clamp(2rem,4vw,3.25rem);}\n}\n"
+        }
+      ]
+    },
+    {
+      "path": "src/components/story-page-scroll.ts",
+      "beforeSha256": "0c9fdde974e9c6b4bf7ebc75d9d4308d1e41748f7f3798726f8dfabbfec5c820",
+      "afterSha256": "189b24037c6edfbfc7b65d4868e8880a3db2c6ba09c83cba2c128839f10250d8",
+      "replacements": [
+        {
+          "offset": 9958,
+          "before": "",
+          "after": "  const viewportKey=()=>[innerWidth,innerHeight,visualViewport?.offsetTop||0,visualViewport?.height||innerHeight,visualViewport?.scale||1].join(':');\n  let lastViewport=viewportKey();\n  const onViewport=()=>{const next=viewportKey();if(next===lastViewport)return;lastViewport=next;queueLayout();};\n"
+        },
+        {
+          "offset": 10648,
+          "before": "  window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',configure,{passive:true});\n  visualViewport?.addEventListener('resize',queueLayout);visualViewport?.addEventListener('scroll',queueLayout);reduced.addEventListener('change',configure);\n",
+          "after": "  window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onViewport,{passive:true});\n  visualViewport?.addEventListener('resize',onViewport);visualViewport?.addEventListener('scroll',onViewport);reduced.addEventListener('change',configure);\n"
+        },
+        {
+          "offset": 11758,
+          "before": "    window.removeEventListener('scroll',onScroll);window.removeEventListener('resize',configure);window.removeEventListener('keydown',onKey);\n    visualViewport?.removeEventListener('resize',queueLayout);visualViewport?.removeEventListener('scroll',queueLayout);reduced.removeEventListener('change',configure);host.removeEventListener('tanmay:story-phase',choose);reader.removeEventListener('scroll',read);\n",
+          "after": "    window.removeEventListener('scroll',onScroll);window.removeEventListener('resize',onViewport);window.removeEventListener('keydown',onKey);\n    visualViewport?.removeEventListener('resize',onViewport);visualViewport?.removeEventListener('scroll',onViewport);reduced.removeEventListener('change',configure);host.removeEventListener('tanmay:story-phase',choose);reader.removeEventListener('scroll',read);\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileCollaborationPreview.tsx",
+      "beforeSha256": "3f0afce0732e52ff0102e056edc9c282e3e122e6cb7a92b73e12580a3390be13",
+      "afterSha256": "de9cb79da767f5b2b6980a40b5b9d86786ec8158aaf61e9b7878f39bd8c044a8",
+      "replacements": [
+        {
+          "offset": 2119,
+          "before": "    <p><strong>{c(p.forClose)}</strong></p><p>{c(p.notFor)}</p>\r\n",
+          "after": "    <p><strong>{c(p.forClose)}</strong></p>\r\n"
+        },
+        {
+          "offset": 2767,
+          "before": "     <div className=\"preview-work-price\"><p><strong>{c(p.price)}</strong></p><p className=\"small\">{c(p.priceSmall)}</p><a className=\"preview-work-button\" href=\"#kontakt\">{c(p.cta)}<Arrow/></a><a className=\"m-text-link\" href={previewWhatsApp(lang,true)} target=\"_blank\" rel=\"noopener noreferrer\">{c(p.direct)}</a></div>\r\n",
+          "after": "     <div className=\"preview-work-price\"><p><strong>{c(p.price)}</strong></p><p className=\"small\">{c(p.priceSmall)}</p><a className=\"preview-work-button\" href={previewWhatsApp(lang,true)} target=\"_blank\" rel=\"noopener noreferrer\">{c(p.firstCta)}</a><a className=\"m-text-link\" href={previewWhatsApp(lang)} target=\"_blank\" rel=\"noopener noreferrer\">{lang==='en'?'Still unsure? Book 15 free minutes.':'Ještě váháš? Domluv si 15 minut zdarma.'}</a></div>\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileShared.tsx",
+      "beforeSha256": "13a840f7838b2a7eb4f8ed8099dcab7d77ec584e426e41d25fa45923b4221e68",
+      "afterSha256": "f65bb760af55e6b7d8354f21c3d8f0a2db1356dfbc9f468525f0f7b3c8a2f935",
+      "replacements": [
+        {
+          "offset": 0,
+          "before": "",
+          "after": "import PracticeLsitPhoto from '../components/PracticeLsitPhoto';\r\n"
+        },
+        {
+          "offset": 3780,
+          "before": "    <div className=\"m-hero-scene\">{page!=='practice'&&<Mineral kind={preview&&page==='collaboration'?'home':page}/>} {page==='collaboration'?(preview?<Photo asset=\"home\" alt={copy('Opening',4,lang)} eager className=\"m-hero-photo\"/>:<MobileCollaborationPortrait alt={alt}/>):<Photo asset={page} alt={alt} eager className=\"m-hero-photo\"/>}<MaterialEdge tone={page==='home'?'dark':'linen'}/></div>\r\n",
+          "after": "    <div className=\"m-hero-scene\">{page!=='practice'&&<Mineral kind={preview&&page==='collaboration'?'home':page}/>} {page==='collaboration'?(preview?<Photo asset=\"home\" alt={copy('Opening',4,lang)} eager className=\"m-hero-photo\"/>:<MobileCollaborationPortrait alt={alt}/>):<>{page==='practice'?<PracticeLsitPhoto lang={lang}/>:<Photo asset={page} alt={alt} eager className=\"m-hero-photo\"/>}</>}<MaterialEdge tone={page==='home'?'dark':'linen'}/></div>\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/preview-mobile-scroll.css",
+      "beforeSha256": "da1bbc8c4e6f3d92d7581d9f7b06115edbcdf3af000ef05150343886932aff74",
+      "afterSha256": "4cbe77ff9ce78ea9a1ee2f0e860faaefdcc5d5c3dc632dd221463c8eaec04f07",
+      "replacements": [
+        {
+          "offset": 554,
+          "before": "",
+          "after": " /* Reserve only horizontal gestures for the enhanced rail, retaining zoom. */\n .tm-mobile[data-preview=\"v3\"] .preview-benefits[data-pinned=\"true\"] .preview-benefits-window { touch-action:pan-y pinch-zoom; }\n /* Short windows, enlarged text and reduced motion still allow a native swipe. */\n .tm-mobile[data-preview=\"v3\"] .preview-benefits[data-pinned=\"false\"] .preview-benefits-window { overflow-x:auto; overscroll-behavior-x:contain; }\n .tm-mobile[data-preview=\"v3\"] .preview-benefits[data-pinned=\"false\"] .preview-benefits-track { display:flex!important; transform:none!important; }\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/preview-mobile-scroll.ts",
+      "beforeSha256": "f6a267e921ed08d85e3aaddcc99d9cf834b5ff28357c370627302d9be4dea9c7",
+      "afterSha256": "b000e3b409f15e59c2ee2b0e0135a410ef8997f384219bab0235dddc6d977d73",
+      "replacements": [
+        {
+          "offset": 35,
+          "before": "",
+          "after": "import { bindPreviewRailSwipe } from './preview-rail-swipe';\n"
+        },
+        {
+          "offset": 986,
+          "before": "  type Stage={host:HTMLElement;row:HTMLElement;start:number;distance:number;consumed:number};\n",
+          "after": "  type Stage={host:HTMLElement;row:HTMLElement;start:number;distance:number;consumed:number;progress:number;manual?:number};\n"
+        },
+        {
+          "offset": 1278,
+          "before": "   const y=scrollY;\n",
+          "after": "   let y=scrollY;\n   // A swipe before/after the pin never moves the document. On re-entering the\n   // pin, adopt that card position without changing the visible composition.\n   const entered=stages.find(s=>s.manual!==undefined&&y>=s.start+s.consumed&&y<=s.start+s.consumed+s.distance);\n   if(entered){y=entered.start+entered.consumed+entered.manual!;delete entered.manual;scrollTo({top:y,behavior:'instant'});}\n"
+        },
+        {
+          "offset": 2107,
+          "before": "    const progress=Math.max(0,Math.min(s.distance,y-s.start-s.consumed));\n",
+          "after": "    const progress=s.manual??Math.max(0,Math.min(s.distance,y-s.start-s.consumed));\n    s.progress=progress;\n"
+        },
+        {
+          "offset": 2483,
+          "before": "   stages=[];total=0;boundary=-1;\n",
+          "after": "   const previous=stages;stages=[];total=0;boundary=-1;\n"
+        },
+        {
+          "offset": 3234,
+          "before": "",
+          "after": "    if(innerWidth>=900){delete host.dataset.pageRail;continue;} // Local desktop rail owns its geometry.\n"
+        },
+        {
+          "offset": 3971,
+          "before": "",
+          "after": "     host.querySelector<HTMLElement>('.preview-benefits-window')!.scrollLeft=0;\n"
+        },
+        {
+          "offset": 4143,
+          "before": "     stages.push({host,row,start,distance,consumed:total});total+=distance;\n",
+          "after": "     const manual=previous.find(s=>s.host===host)?.manual;\n     stages.push({host,row,start,distance,consumed:total,progress:0,manual:manual===undefined?undefined:Math.min(distance,manual)});total+=distance;\n"
+        },
+        {
+          "offset": 6357,
+          "before": "",
+          "after": "  const unbindSwipes=hosts.map(host=>bindPreviewRailSwipe(host.querySelector<HTMLElement>('.preview-benefits-window')!,\n   ()=>stages.find(s=>s.host===host)??null,\n   progress=>{\n    const stage=stages.find(s=>s.host===host);if(!stage)return;\n    const start=stage.start+stage.consumed;\n    if(scrollY>=start-1&&scrollY<=start+stage.distance+1){\n     delete stage.manual;scrollTo({top:start+progress,behavior:'instant'});\n    }else stage.manual=progress;\n    paint();\n   }));\n"
+        },
+        {
+          "offset": 6951,
+          "before": "",
+          "after": "  // VisualViewport also emits scroll events while a touch is stationary. Only\n  // actual viewport changes invalidate geometry; page scrolling just paints.\n  const viewportKey=()=>[innerWidth,innerHeight,visualViewport?.offsetTop||0,visualViewport?.height||innerHeight,visualViewport?.scale||1].join(':');\n  let lastViewport=viewportKey();\n  const onViewport=()=>{const next=viewportKey();if(next===lastViewport)return;lastViewport=next;queueLayout();};\n"
+        },
+        {
+          "offset": 7475,
+          "before": "  window.addEventListener('scroll',queue,{passive:true});window.addEventListener('resize',configure);\n  window.addEventListener('pageshow',queueLayout);visualViewport?.addEventListener('resize',queueLayout);visualViewport?.addEventListener('scroll',queueLayout);\n",
+          "after": "  window.addEventListener('scroll',queue,{passive:true});window.addEventListener('resize',onViewport);\n  window.addEventListener('pageshow',queueLayout);visualViewport?.addEventListener('resize',onViewport);visualViewport?.addEventListener('scroll',onViewport);\n"
+        },
+        {
+          "offset": 8193,
+          "before": "   window.removeEventListener('pageshow',queueLayout);visualViewport?.removeEventListener('resize',queueLayout);visualViewport?.removeEventListener('scroll',queueLayout);\n",
+          "after": "   unbindSwipes.forEach(unbind=>unbind());\n   window.removeEventListener('pageshow',queueLayout);visualViewport?.removeEventListener('resize',onViewport);visualViewport?.removeEventListener('scroll',onViewport);\n"
+        },
+        {
+          "offset": 8524,
+          "before": "   window.removeEventListener('scroll',queue);window.removeEventListener('resize',configure);reduced.removeEventListener('change',configure);\n",
+          "after": "   window.removeEventListener('scroll',queue);window.removeEventListener('resize',onViewport);reduced.removeEventListener('change',configure);\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/preview-rail-swipe.ts",
+      "beforeSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterSha256": "a90529a003a24942638996b4db2a7e09cf55a43b8aa020e4b69a1b9f13260196",
+      "replacements": [
+        {
+          "offset": 0,
+          "before": "",
+          "after": "type RailPosition = { progress:number; distance:number };\n\n/** Horizontal pointer gestures share the page rail's progress. Vertical panning\n * and pinch zoom stay browser-owned; ordinary flow rails use native overflow. */\nexport function bindPreviewRailSwipe(surface:HTMLElement, read:()=>RailPosition|null, write:(progress:number)=>void) {\n let drag:{id:number;x:number;y:number;progress:number;horizontal:boolean}|null=null;\n let suppressClick=false;\n const down=(event:PointerEvent)=>{\n  if(!event.isPrimary||event.button!==0||surface.closest('.preview-editor-active'))return;\n  const position=read();if(!position||position.distance<=0)return;\n  drag={id:event.pointerId,x:event.clientX,y:event.clientY,progress:position.progress,horizontal:false};\n  suppressClick=false;\n };\n const move=(event:PointerEvent)=>{\n  if(!drag||drag.id!==event.pointerId)return;\n  const dx=event.clientX-drag.x,dy=event.clientY-drag.y;\n  if(!drag.horizontal){\n   if(Math.max(Math.abs(dx),Math.abs(dy))<8)return;\n   if(Math.abs(dx)<=Math.abs(dy)*1.2){drag=null;return;}\n   drag.horizontal=true;surface.setPointerCapture(event.pointerId);\n  }\n  const position=read();if(!position){drag=null;return;}\n  event.preventDefault();suppressClick=true;\n  write(Math.max(0,Math.min(position.distance,drag.progress-dx)));\n };\n const end=(event:PointerEvent)=>{\n  if(drag?.id!==event.pointerId)return;\n  if(surface.hasPointerCapture(event.pointerId))surface.releasePointerCapture(event.pointerId);\n  drag=null;\n };\n const click=(event:MouseEvent)=>{if(suppressClick){event.preventDefault();event.stopPropagation();suppressClick=false;}};\n // Updating the page's scroll position can release touch capture in Chromium.\n // Keep tracking the same pointer until up/cancel, including outside the rail.\n const blur=()=>{drag=null;};\n surface.addEventListener('pointerdown',down);document.addEventListener('pointermove',move);\n document.addEventListener('pointerup',end);document.addEventListener('pointercancel',end);window.addEventListener('blur',blur);\n surface.addEventListener('click',click,true);\n return()=>{\n  surface.removeEventListener('pointerdown',down);document.removeEventListener('pointermove',move);\n  document.removeEventListener('pointerup',end);document.removeEventListener('pointercancel',end);window.removeEventListener('blur',blur);\n  surface.removeEventListener('click',click,true);\n };\n}\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/useCircularRail.ts",
+      "beforeSha256": "e95e4a44c2df12e2fff17159f602c0bf7d96a0e2ab7dce1949f834c4fc99237a",
+      "afterSha256": "9454cb9d1bf7bf89e0c8af52f49c6b8c7bc5f032e90d7aeebb9c903cac6fa3fa",
+      "replacements": [
+        {
+          "offset": 421,
+          "before": "  const activeRef=useRef(0), timer=useRef<number>(), dragging=useRef(false);\r\n",
+          "after": "  const activeRef=useRef(0), timer=useRef<number>(), dragging=useRef(false), touching=useRef(false), resizePending=useRef(false);\r\n"
+        },
+        {
+          "offset": 1339,
+          "before": "    if(dragging.current)return;\r\n",
+          "after": "    if(dragging.current||touching.current)return;\r\n"
+        },
+        {
+          "offset": 2029,
+          "before": "    if(physical<count||physical>=count*2)jump(count+index);\r\n",
+          "after": "    if(resizePending.current||physical<count||physical>=count*2)jump(count+index);\r\n    resizePending.current=false;\r\n"
+        },
+        {
+          "offset": 2427,
+          "before": "    const size=new ResizeObserver(()=>{pending.current=[];moving.current=false;target.current=null;jump(count+activeRef.current);});size.observe(e);if(e.children[0])size.observe(e.children[0]);\r\n",
+          "after": "    const size=new ResizeObserver(()=>{if(touching.current||dragging.current){resizePending.current=true;return;}pending.current=[];moving.current=false;target.current=null;jump(count+activeRef.current);});size.observe(e);if(e.children[0])size.observe(e.children[0]);\r\n    // Native panning sends pointercancel before the user lifts their finger.\r\n    // Touch lifecycle remains authoritative, including a stationary long hold.\r\n    const touchStart=()=>{touching.current=true;dragging.current=true;pending.current=[];moving.current=false;target.current=null;clearTimeout(timer.current);};\r\n    const touchEnd=(event:TouchEvent)=>{if(event.touches.length)return;touching.current=false;dragging.current=false;clearTimeout(timer.current);timer.current=window.setTimeout(settle,180);};\r\n    const blur=()=>{touching.current=false;dragging.current=false;};\r\n    e.addEventListener('touchstart',touchStart,{passive:true});document.addEventListener('touchend',touchEnd,{passive:true});document.addEventListener('touchcancel',touchEnd,{passive:true});window.addEventListener('blur',blur);\r\n"
+        },
+        {
+          "offset": 3555,
+          "before": "    return()=>{size.disconnect();e.removeEventListener('scrollend',settle);clearTimeout(timer.current);cancelAnimationFrame(frame.current||0);};\r\n",
+          "after": "    return()=>{size.disconnect();e.removeEventListener('scrollend',settle);e.removeEventListener('touchstart',touchStart);document.removeEventListener('touchend',touchEnd);document.removeEventListener('touchcancel',touchEnd);window.removeEventListener('blur',blur);clearTimeout(timer.current);cancelAnimationFrame(frame.current||0);};\r\n"
+        },
+        {
+          "offset": 5753,
+          "before": "  const onPointerUp=()=>{dragging.current=false;clearTimeout(timer.current);timer.current=window.setTimeout(settle,180)};\r\n",
+          "after": "  const onPointerUp=()=>{if(touching.current)return;dragging.current=false;clearTimeout(timer.current);timer.current=window.setTimeout(settle,180)};\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/preview-copy.ts",
+      "beforeSha256": "10cf672af425464341797d03eb95f6e7f156201787f1a09c6d6d0196dab2af11",
+      "afterSha256": "f0e33bf3a6fa7cb0afae46d7f3507cca9b8d62df5c2c98fb93660c2ea2f0b728",
+      "replacements": [
+        {
+          "offset": 782,
+          "before": "    \"Síla s vlastní vahou a plán, který unese i těžký týden. Ty přijdeš, zbytek vedu já.\",\r\n    \"Bodyweight strength and a plan that survives a hard week. You show up, I lead the rest.\"\r\n",
+          "after": "    \"Síla s vlastní vahou a plán, který unese i těžký týden. Ty jen přijdeš, zbytek vedu já.\",\r\n    \"Bodyweight strength and a plan that survives a hard week. You just show up, I lead the rest.\"\r\n"
+        },
+        {
+          "offset": 6032,
+          "before": "        \"Domluvíme 15 minut zdarma. Najdeme 3 důvody, proč ti to zatím nejde. Odejdeš s jasným rozhodnutím.\",\r\n        \"We book 15 free minutes. We find 3 reasons it hasn’t worked yet. You leave with a clear decision.\"\r\n",
+          "after": "        \"Domluvíme si setkání. Najdeme 3 důvody, proč ti to zatím nejde. Odejdeš s jasným rozhodnutím.\",\r\n        \"We arrange a meeting. We find 3 reasons it hasn’t worked yet. You leave with a clear decision.\"\r\n"
+        },
+        {
+          "offset": 9789,
+          "before": "    \"Bez hodin v posilovně a bez drastických diet. Ty přijdeš, zbytek vedu já.\",\r\n    \"No hours in the gym, no crash diets. You show up, I lead the rest.\"\r\n",
+          "after": "    \"Bez hodin v posilovně a bez drastických diet. Ty jen přijdeš, zbytek vedu já.\",\r\n    \"No hours in the gym, no crash diets. You just show up, I lead the rest.\"\r\n"
+        },
+        {
+          "offset": 10681,
+          "before": "        \"Nevíš, co dělat.\",\r\n        \"You don’t know what to do.\"\r\n",
+          "after": "        \"Nevíš, kde začít.\",\r\n        \"You don’t know where to start.\"\r\n"
+        },
+        {
+          "offset": 10778,
+          "before": "        \"Dostaneš plán na míru. Víš, co dělat dnes, za týden i za měsíc.\",\r\n        \"You get a plan made for you. You know what to do today, next week and next month.\"\r\n",
+          "after": "        \"Dostaneš plán na míru a vedení krok za krokem. Víš, co cvičit, jak na to a proč.\",\r\n        \"You get a plan made for you and guidance step by step. You know what to practise, how and why.\"\r\n"
+        },
+        {
+          "offset": 11018,
+          "before": "        \"Vždycky to vzdáš.\",\r\n        \"You always give up.\"\r\n",
+          "after": "        \"Motivace ti nevydrží.\",\r\n        \"Your motivation doesn’t last.\"\r\n"
+        },
+        {
+          "offset": 11116,
+          "before": "        \"Máš pevné termíny a trenéra, který na tebe čeká. Disciplínu drží domluvený trénink, ne tvoje vůle.\",\r\n        \"Fixed sessions and a coach waiting for you. A booked session keeps the discipline, not your willpower.\"\r\n",
+          "after": "        \"Pevné termíny ti pomůžou udržet pravidelnost. Společně hledáme radost, hru a smysl v pohybu, aby ses na trénink těšil.\",\r\n        \"Regular appointments help you stay consistent. Together we find joy, play and meaning in movement, so you look forward to training.\"\r\n"
+        },
+        {
+          "offset": 12677,
+          "before": "      \"zlobí tě záda nebo kolena a nechceš kvůli tomu přestat.\",\r\n      \"your back or knees bother you and you don’t want to stop because of it.\"\r\n",
+          "after": "      \"zlobí tě záda nebo kolena a chceš vědět, jak přizpůsobit cvičení tomu, co zvládáš.\",\r\n      \"your back or knees bother you and you want to know how to adapt exercise to what you can manage.\"\r\n"
+        }
+      ]
+    },
+    {
+      "path": "src/preview-v3.css",
+      "beforeSha256": "05e17cd73d25149d090871e8fa3f64b8be4763a2cec378d0919e0c74f452c747",
+      "afterSha256": "ac7f768f8c17f98acbfc3afe71ef4829ea4f47140a014da016f2b17370b5470a",
+      "replacements": [
+        {
+          "offset": 36931,
+          "before": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-links > .m-text-link:first-child { margin:0; justify-content:center; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-work-process > .m-inner > .m-text-link { margin:24px 0 0; }\n",
+          "after": " .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-links > .m-text-link:first-child { margin:0; justify-content:center; grid-column:2; grid-row:1; justify-self:end; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-process-links > .m-text-link:last-child { grid-column:1; grid-row:1; justify-self:start; }\n .tm-mobile[data-mobile-version][data-preview=\"v3\"] .preview-work-process > .m-inner > .m-text-link { margin:24px 0 0 auto; }\n"
+        },
+        {
+          "offset": 49825,
+          "before": "",
+          "after": "\n@media(min-width:900px){\n [data-preview=\"v3\"] .release-work-process > .wrap:last-child {text-align:right}\n [data-preview=\"v3\"] .preview-week .release-first-session {padding:16px 28px;border-radius:999px;background:var(--m-cream,#e4d9c3);color:#202323;font-family:inherit;font-weight:700}\n}\n"
+        }
+      ]
+    }
+  ]
+}

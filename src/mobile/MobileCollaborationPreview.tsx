@@ -36,7 +36,7 @@ export default function MobileCollaborationPreview({lang}:{lang:string}) {
 
    <Chapter title={c(p.forTitle)} className="m-boundaries preview-work-fit">
     <ul>{p.forItems.map(x=><li key={x[0]}>{c(x)}</li>)}</ul>
-    <p><strong>{c(p.forClose)}</strong></p><p>{c(p.notFor)}</p>
+    <p><strong>{c(p.forClose)}</strong></p>
    </Chapter>
 
    <div className="m-dark preview-work-ink">
@@ -46,7 +46,7 @@ export default function MobileCollaborationPreview({lang}:{lang:string}) {
      <PreviewSteps lang={lang} included/>
      <div className="preview-work-week"><h3>{c(p.weekTitle).split(/(\([^)]*\))/).map((part,i)=>part.startsWith('(')?<span className="preview-week-example" key={i}>{part}</span>:part)}</h3><p>{c(p.week)}</p><MobileCycle lang={lang}/></div>
      <p className="preview-work-reason">{c(p.why)}</p>
-     <div className="preview-work-price"><p><strong>{c(p.price)}</strong></p><p className="small">{c(p.priceSmall)}</p><a className="preview-work-button" href="#kontakt">{c(p.cta)}<Arrow/></a><a className="m-text-link" href={previewWhatsApp(lang,true)} target="_blank" rel="noopener noreferrer">{c(p.direct)}</a></div>
+     <div className="preview-work-price"><p><strong>{c(p.price)}</strong></p><p className="small">{c(p.priceSmall)}</p><a className="preview-work-button" href={previewWhatsApp(lang,true)} target="_blank" rel="noopener noreferrer">{c(p.firstCta)}</a><a className="m-text-link" href={previewWhatsApp(lang)} target="_blank" rel="noopener noreferrer">{lang==='en'?'Still unsure? Book 15 free minutes.':'Ještě váháš? Domluv si 15 minut zdarma.'}</a></div>
     </Chapter>
    </div>
 
