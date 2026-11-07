@@ -44,6 +44,7 @@ import { MobileContact } from './MobileShared';
 import { useMobileDisclosures } from './useMobileDisclosures';
 import { useMobileInputFocus } from './mobile-input-focus';
 import { useMobileSurfacePhase } from './mobile-surface-phase';
+import { useMobileBrowserTheme } from './useMobileBrowserTheme';
 
 export function useMobileViewport() {
   const [mobile, setMobile] = useState(() => typeof window !== 'undefined' && window.matchMedia('(max-width: 899px)').matches);
@@ -72,6 +73,7 @@ export default function MobileSite({ loc, children, preview=false }: { loc: Loca
   const closeTimer = useRef<number>();
   useMobileInputFocus(root);
   useMobileSurfacePhase(root,routeId+lang+(loc.postId||''));
+  useMobileBrowserTheme(root,routeId+lang+(loc.postId||''));
   useMobileDisclosures(root);
   useMobileMotion(root,routeId+lang+(loc.postId||''));
   useMobileStoryScroll(root,routeId+lang+(loc.postId||''));

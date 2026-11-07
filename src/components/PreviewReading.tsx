@@ -4,6 +4,7 @@ import { Photo } from '../mobile/MobileElements';
 import { mobilePreviewCopy } from '../mobile/PreviewDetails';
 import { mobileText } from '../mobile/mobile-copy';
 import { bindPreviewRailSwipe } from '../mobile/preview-rail-swipe';
+import { createScrollLayoutScheduler, railProgress, type RailGestureAnchor } from '../mobile/scroll-layout-scheduler';
 
 export function PreviewComparisonKey({lang}:{lang:string}) {
  return <div className="preview-comparison-key"><span>✕ {lang==='en'?'Old way':'Stará cesta'}</span><strong>✓ {lang==='en'?'New practice':'Nová praxe'}</strong></div>;
@@ -40,12 +41,11 @@ function usePreviewRail(key:string,handstand=false) {
   const host=root.current!,panel=pin.current!,row=track.current!;
   const preference=matchMedia('(prefers-reduced-motion: reduce)');
   const mobile=matchMedia('(max-width:899px)');
-  let distance=0,progress=0,manual:number|undefined,frame=0,pinTop=24,disposed=false;
+  let distance=0,progress=0,manual:RailGestureAnchor|undefined,frame=0,pinTop=24,disposed=false;
   const paint=()=>{
    frame=0;if(mobile.matches||!distance)return;
    const natural=-host.getBoundingClientRect().top+pinTop;
-   if(manual!==undefined&&natural>=0&&natural<=distance){scrollBy({top:manual-natural,behavior:'instant'});manual=undefined;}
-   progress=manual??Math.max(0,Math.min(distance,-host.getBoundingClientRect().top+pinTop));
+   progress=railProgress(natural,distance,manual);
    row.style.transform=`translate3d(${-progress}px,0,0)`;
   };
   const queue=()=>{if(!frame)frame=requestAnimationFrame(paint);};
@@ -75,15 +75,15 @@ function usePreviewRail(key:string,handstand=false) {
    ()=>!mobile.matches&&distance?{progress,distance}:null,
    value=>{
     const natural=-host.getBoundingClientRect().top+pinTop;
-    if(natural>=-1&&natural<=distance+1){manual=undefined;scrollBy({top:value-natural,behavior:'instant'});}
-    else manual=value;
+    manual={progress:value,natural:Math.max(0,Math.min(distance,natural))};
     paint();
    });
+  const layout=createScrollLayoutScheduler(measure),queueLayout=layout.request;
   let measuredWidth=0;
-  const observer=new ResizeObserver(entries=>{const width=entries[0].contentRect.width;if(width!==measuredWidth){measuredWidth=width;measure();}});observer.observe(panel);
-  preference.addEventListener('change',measure);window.addEventListener('resize',measure);window.addEventListener('scroll',queue,{passive:true});
-  document.fonts.ready.then(()=>{if(!disposed)measure();});measure();
-  return()=>{disposed=true;unbindSwipe();observer.disconnect();cancelAnimationFrame(frame);preference.removeEventListener('change',measure);window.removeEventListener('resize',measure);window.removeEventListener('scroll',queue);};
+  const observer=new ResizeObserver(entries=>{const width=entries[0].contentRect.width;if(width!==measuredWidth){measuredWidth=width;queueLayout();}});observer.observe(panel);
+  preference.addEventListener('change',measure);window.addEventListener('resize',queueLayout);window.addEventListener('scroll',queue,{passive:true});
+  document.fonts.ready.then(()=>{if(!disposed)queueLayout();});measure();
+  return()=>{disposed=true;layout.dispose();unbindSwipe();observer.disconnect();cancelAnimationFrame(frame);preference.removeEventListener('change',measure);window.removeEventListener('resize',queueLayout);window.removeEventListener('scroll',queue);};
  },[key,handstand]);
  return {root,pin,track};
 }

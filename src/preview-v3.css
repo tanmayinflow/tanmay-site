@@ -435,3 +435,17 @@
  [data-preview="v3"] .release-work-process > .wrap:last-child {text-align:right}
  [data-preview="v3"] .preview-week .release-first-session {padding:16px 28px;border-radius:999px;background:var(--m-cream,#e4d9c3);color:#202323;font-family:inherit;font-weight:700}
 }
+
+/* Shared offer actions, reviewed 7 November. */
+[data-preview="v3"] :is(.preview-week,.preview-work-price) .release-consultation,
+.tm-mobile[data-mobile-version][data-preview="v3"] .preview-work-price .release-consultation {
+ display:flex;align-items:center;justify-content:center;width:fit-content;max-width:100%;
+ box-sizing:border-box;margin:24px auto 0;padding:12px 18px;
+ border:1px dashed currentColor;border-radius:22px 25px 20px 24px;
+ background:none;text-align:center;line-height:1.6;
+}
+@media(max-width:899px){
+ .tm-mobile[data-mobile-version][data-preview="v3"] .m-dock :is(.m-dock-primary,.m-dock-message) {
+  box-shadow:0 2px 7px rgba(28,28,26,.08);
+ }
+}

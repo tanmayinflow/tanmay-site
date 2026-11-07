@@ -13,7 +13,7 @@ export const mobilePreviewCopy={...previewCopy,
  forItems:previewCopy.forItems.map(pair=>pair.map(text=>{const sentence=text.replace('máš málo času, protože práce a rodina,','máš málo času kvůli práci a rodině.').replace('v síle,','v síle a bez bolesti.').replace('many strong years ahead,','many strong, pain-free years ahead.').replace(/[,.;]$/,'.');return sentence.charAt(0).toUpperCase()+sentence.slice(1);})),
  notFor:['Není to pro tebe, když hledáš rychlé zázraky za týden.','This is not for you if you are looking for quick miracles in a week.'],
  qualification:['Moje celé akreditované vzdělání a osobní příběh','My full accredited education and personal story'],
- firstCta:['Chci první trénink.','I want my first session.'],
+ firstCta:['Chci první trénink','I want my first session'],
  week:previewCopy.week.map(text=>text.replace('20 minut','30 minut').replace('20 minutes','30 minutes').replace('Neděle','Průběžně').replace('Sunday','Throughout the week')),
  why:['Proč 4 týdny? Začne tě to bavit a uvidíš, že plán drží i v horším týdnu.','Why 4 weeks? You will start enjoying it and see that the plan holds up even during a difficult week.'],
 };

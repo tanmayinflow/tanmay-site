@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { bindPreviewRailSwipe } from './preview-rail-swipe';
+import { createScrollLayoutScheduler, railProgress, type RailGestureAnchor } from './scroll-layout-scheduler';
 import './preview-mobile-scroll.css';
 
 /** Native page pin shared by every mobile rail. The two owned spacers exchange
@@ -15,15 +16,11 @@ export function usePreviewPageScroll(key:string) {
   const before=document.createElement('div'),after=document.createElement('div');
   for(const spacer of [before,after]){spacer.dataset.previewTravel='';spacer.setAttribute('aria-hidden','true');}
   page.before(before);page.after(after);
-  type Stage={host:HTMLElement;row:HTMLElement;start:number;distance:number;consumed:number;progress:number;manual?:number};
-  let stages:Stage[]=[],total=0,frame=0,layoutFrame=0,hashFrame=0,live=true,escaped=false,boundary=-1;
+  type Stage={host:HTMLElement;row:HTMLElement;start:number;distance:number;consumed:number;progress:number;manual?:RailGestureAnchor};
+  let stages:Stage[]=[],total=0,frame=0,hashFrame=0,live=true,escaped=false,boundary=-1;
   const paint=()=>{
    frame=0;if(!live||!stages.length)return;
-   let y=scrollY;
-   // A swipe before/after the pin never moves the document. On re-entering the
-   // pin, adopt that card position without changing the visible composition.
-   const entered=stages.find(s=>s.manual!==undefined&&y>=s.start+s.consumed&&y<=s.start+s.consumed+s.distance);
-   if(entered){y=entered.start+entered.consumed+entered.manual!;delete entered.manual;scrollTo({top:y,behavior:'instant'});}
+   const y=scrollY;
    const next=stages.findIndex(s=>y<s.start+s.consumed+s.distance);
    const index=next<0?stages.length:next;
    if(index!==boundary){
@@ -33,7 +30,7 @@ export function usePreviewPageScroll(key:string) {
     page.style.setProperty('--preview-page-pin',-(stages[index]?.start??page.offsetHeight)+'px');
    }
    for(const s of stages){
-    const progress=s.manual??Math.max(0,Math.min(s.distance,y-s.start-s.consumed));
+    const progress=railProgress(y-s.start-s.consumed,s.distance,s.manual);
     s.progress=progress;
     s.row.style.transform=`translate3d(${-progress}px,0,0)`;
     s.host.dataset.phase=progress<=0?'before':progress>=s.distance?'after':'active';
@@ -61,8 +58,8 @@ export function usePreviewPageScroll(key:string) {
     if(distance){
      host.querySelector<HTMLElement>('.preview-benefits-window')!.scrollLeft=0;
      const start=panel.getBoundingClientRect().top-page.getBoundingClientRect().top-pinTop;
-     const manual=previous.find(s=>s.host===host)?.manual;
-     stages.push({host,row,start,distance,consumed:total,progress:0,manual:manual===undefined?undefined:Math.min(distance,manual)});total+=distance;
+     const prior=previous.find(s=>s.host===host),manual=prior?.manual;
+     stages.push({host,row,start,distance,consumed:total,progress:0,manual:manual&&{progress:manual.progress*distance/prior!.distance,natural:manual.natural*distance/prior!.distance}});total+=distance;
     }else{host.dataset.pinned='false';delete host.dataset.phase;if(portrait)portrait.style.height='';}
    }
    if(total){page.dataset.previewPageRoot='';paint();}
@@ -93,13 +90,10 @@ export function usePreviewPageScroll(key:string) {
    ()=>stages.find(s=>s.host===host)??null,
    progress=>{
     const stage=stages.find(s=>s.host===host);if(!stage)return;
-    const start=stage.start+stage.consumed;
-    if(scrollY>=start-1&&scrollY<=start+stage.distance+1){
-     delete stage.manual;scrollTo({top:start+progress,behavior:'instant'});
-    }else stage.manual=progress;
+    stage.manual={progress,natural:Math.max(0,Math.min(stage.distance,scrollY-stage.start-stage.consumed))};
     paint();
    }));
-  const queueLayout=()=>{if(live&&!layoutFrame)layoutFrame=requestAnimationFrame(()=>{layoutFrame=0;configure();});};
+  const layout=createScrollLayoutScheduler(configure),queueLayout=layout.request;
   // VisualViewport also emits scroll events while a touch is stationary. Only
   // actual viewport changes invalidate geometry; page scrolling just paints.
   const viewportKey=()=>[innerWidth,innerHeight,visualViewport?.offsetTop||0,visualViewport?.height||innerHeight,visualViewport?.scale||1].join(':');
@@ -110,15 +104,15 @@ export function usePreviewPageScroll(key:string) {
   window.addEventListener('pageshow',queueLayout);visualViewport?.addEventListener('resize',onViewport);visualViewport?.addEventListener('scroll',onViewport);
   reduced.addEventListener('change',configure);window.addEventListener('hashchange',onHash);
   document.addEventListener('click',onClick,true);window.addEventListener('keydown',onKey);
-  page.addEventListener('load',configure,true);configure();
-  document.fonts.ready.then(()=>{if(live){configure();onHash();}});
+  page.addEventListener('load',queueLayout,true);configure();
+  document.fonts.ready.then(()=>{if(live){queueLayout();onHash();}});
   return()=>{
-   live=false;resize.disconnect();cancelAnimationFrame(frame);cancelAnimationFrame(layoutFrame);cancelAnimationFrame(hashFrame);
+   live=false;layout.dispose();resize.disconnect();cancelAnimationFrame(frame);cancelAnimationFrame(hashFrame);
    unbindSwipes.forEach(unbind=>unbind());
    window.removeEventListener('pageshow',queueLayout);visualViewport?.removeEventListener('resize',onViewport);visualViewport?.removeEventListener('scroll',onViewport);
    before.remove();after.remove();delete page.dataset.previewPageRoot;page.style.removeProperty('--preview-page-pin');
    window.removeEventListener('scroll',queue);window.removeEventListener('resize',onViewport);reduced.removeEventListener('change',configure);
-   window.removeEventListener('hashchange',onHash);document.removeEventListener('click',onClick,true);window.removeEventListener('keydown',onKey);page.removeEventListener('load',configure,true);
+   window.removeEventListener('hashchange',onHash);document.removeEventListener('click',onClick,true);window.removeEventListener('keydown',onKey);page.removeEventListener('load',queueLayout,true);
   };
  },[key]);
 }

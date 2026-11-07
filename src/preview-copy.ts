@@ -314,8 +314,8 @@ export const previewCopy = {
         "You get bored or something hurts."
       ],
       [
-        "Každý trénink je jiný. Když tě něco bolí, najdeme pohyb, který jde.",
-        "Every session is different. If something hurts, we find a movement that works."
+        "Každý trénink je jiný. Když tě něco bolí, najdeme pohyb, který nám to pomůže vyřešit.",
+        "Every session is different. If something hurts, we find movement that helps us work through it."
       ]
     ]
   ],

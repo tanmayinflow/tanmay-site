@@ -1,4 +1,5 @@
 import './story-page-scroll.css';
+import { createScrollLayoutScheduler } from '../mobile/scroll-layout-scheduler';
 
 type Options = { mobile:boolean; viewport?:()=>{top:number;height:number;bottom:number}|undefined; onRead?:(index:number)=>void; onLayout?:(flow:boolean)=>void };
 
@@ -24,7 +25,7 @@ export function attachStoryPageScroll(host:HTMLElement, reader:HTMLElement, runw
   const savedPin=page?.style.getPropertyValue('--story-page-pin')||'';
   const savedPriority=page?.style.getPropertyPriority('--story-page-pin')||'';
   const savedRootMarker=page?.getAttribute('data-story-page-root');
-  let live=true,frame=0,layoutFrame=0,hashFrame=0,flow:boolean|undefined,escaped=false,travel=0,active=0,capacityFailure='',start=0;
+  let live=true,frame=0,hashFrame=0,flow:boolean|undefined,escaped=false,travel=0,active=0,capacityFailure='',start=0;
   const attachPage=()=>{
     if(!page)return;
     page.after(spacer);page.dataset.storyPageRoot='true';runway.dataset.storyPage='true';
@@ -140,7 +141,7 @@ export function attachStoryPageScroll(host:HTMLElement, reader:HTMLElement, runw
     if(link.hash&&link.origin===location.origin&&link.pathname===location.pathname)onHash();
   };
   const onScroll=()=>{if(!blocked())queue();};
-  const queueLayout=()=>{if(live&&!layoutFrame)layoutFrame=requestAnimationFrame(()=>{layoutFrame=0;configure();});};
+  const layout=createScrollLayoutScheduler(configure),queueLayout=layout.request;
   const viewportKey=()=>[innerWidth,innerHeight,visualViewport?.offsetTop||0,visualViewport?.height||innerHeight,visualViewport?.scale||1].join(':');
   let lastViewport=viewportKey();
   const onViewport=()=>{const next=viewportKey();if(next===lastViewport)return;lastViewport=next;queueLayout();};
@@ -156,7 +157,7 @@ export function attachStoryPageScroll(host:HTMLElement, reader:HTMLElement, runw
   document.fonts.addEventListener('loadingdone',settled);
   document.fonts.ready.then(settled);configure();
   return()=>{
-    live=false;cancelAnimationFrame(frame);cancelAnimationFrame(layoutFrame);cancelAnimationFrame(hashFrame);resize.disconnect();
+    live=false;layout.dispose();cancelAnimationFrame(frame);cancelAnimationFrame(hashFrame);resize.disconnect();
     window.removeEventListener('load',settled);window.removeEventListener('pageshow',settled);document.fonts.removeEventListener('loadingdone',settled);
     window.removeEventListener('hashchange',onHash);document.removeEventListener('click',onAnchor);
     window.removeEventListener('scroll',onScroll);window.removeEventListener('resize',onViewport);window.removeEventListener('keydown',onKey);
