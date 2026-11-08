@@ -1,42 +1,20 @@
-/* The same copper earth and black cotton as the two existing hero backgrounds. */
+/* One authentic torn earth texture, shared with the homepage handstand. */
 .practice-lsit {
-  position:relative; isolation:isolate; width:100%; aspect-ratio:1.08;
+  position:relative; isolation:isolate; width:100%; aspect-ratio:1397/1126;
   margin:0; background:none; border:0; box-shadow:none;
 }
-.practice-lsit-layer {
-  position:absolute; pointer-events:none;
+.practice-lsit-earth {
+  position:absolute; inset:10% 10% 8% 12%; pointer-events:none;
+  background:url('/media/material/field-earth.webp') center/100% 100% no-repeat;
+  transform:rotate(-8deg);
   filter:drop-shadow(0 2px 4px rgb(28 28 26 / 9%));
 }
-.practice-lsit-material {
-  position:absolute; inset:0;
-  -webkit-mask-size:100% 100%; mask-size:100% 100%;
-  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
-}
-.practice-lsit-copper-layer {
-  inset:0 6% 8% 2%; transform:rotate(-8deg);
-}
-.practice-lsit-copper {
-  -webkit-mask-image:url('/media/practice-lsit-2026-11/copper-edge.svg');
-  mask-image:url('/media/practice-lsit-2026-11/copper-edge.svg');
-  background:#754437 url('/media/secondary-v9-10/burnt-earth-1254.webp') center/cover;
-}
-.practice-lsit-ink-layer {
-  inset:9% 1% 0 6%; transform:rotate(8deg);
-}
-.practice-lsit-ink {
-  -webkit-mask-image:url('/media/practice-lsit-2026-11/ink-edge.svg');
-  mask-image:url('/media/practice-lsit-2026-11/ink-edge.svg');
-  background:#1c1c1a var(--tex-cotton,url('/media/home-v9-1/ashes-1x.webp')) center/768px 768px;
-}
 .practice-lsit-crop {
-  position:absolute; inset:8% 8% 8% 8%; overflow:hidden;
-  border-radius:49% 51% 45% 55% / 47% 49% 51% 53%;
+  position:relative; width:100%; height:100%; overflow:visible; border-radius:0;
 }
 .practice-lsit .practice-lsit-crop img {
-  /* A wider view uses more original pixels: pine canopy above, sea below right. */
-  position:absolute; width:120%; max-width:none; height:auto;
-  left:-12%; top:-40%; display:block; margin:0; border:0;
-  transform:none; filter:none; opacity:1; object-fit:fill;
+  position:relative; display:block; width:100%; max-width:none; height:auto;
+  margin:0; border:0; transform:none; filter:none; opacity:1; object-fit:contain;
 }
 .tm-mobile[data-mobile-version] .m-hero.m-hero--practice[class] {
   display:block; height:auto; min-height:0;

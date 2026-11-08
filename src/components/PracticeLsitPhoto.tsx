@@ -1,16 +1,11 @@
 import './practice-lsit-photo.css';
 
-/** Owner's original photo: the crop is CSS-only, with no retouching of the person. */
+/** Owner-requested background extraction; the original photograph remains archived. */
 export default function PracticeLsitPhoto({lang}:{lang:string}) {
   return <figure className="practice-lsit">
-    <span className="practice-lsit-layer practice-lsit-copper-layer" aria-hidden="true">
-      <span className="practice-lsit-material practice-lsit-copper"/>
-    </span>
-    <span className="practice-lsit-layer practice-lsit-ink-layer" aria-hidden="true">
-      <span className="practice-lsit-material practice-lsit-ink"/>
-    </span>
+    <span className="practice-lsit-earth" aria-hidden="true"/>
     <div className="practice-lsit-crop">
-      <img src="/media/practice-lsit-2026-11/praxe-original.jpg" width={960} height={1280}
+      <img src="/media/practice-lsit-2026-11/lsit-rock-cutout.png" width={1397} height={1126}
         alt={lang==='en'?'Kryštof Švec holding an L-sit on a rock by the sea.':'Kryštof Švec drží L-sit na skále u moře.'}
         loading="eager" fetchPriority="high" decoding="async"/>
     </div>
