@@ -35,9 +35,12 @@ export function PreviewWants({lang}:{lang:string}) {
 }
 
 /** Native scroll moves only the row; the full mobile scene releases at its end. */
-function usePreviewRail(key:string,handstand=false) {
+function usePreviewRail(key:string,handstand=false,desktopRail=true) {
  const root=useRef<HTMLElement>(null), pin=useRef<HTMLDivElement>(null), track=useRef<HTMLDivElement>(null);
  useEffect(()=>{
+  // Benefits become a static grid on wide screens. The mobile page controller
+  // owns their touch rail; no second scroll loop is needed here.
+  if(!desktopRail)return;
   const host=root.current!,panel=pin.current!,row=track.current!;
   const preference=matchMedia('(prefers-reduced-motion: reduce)');
   const mobile=matchMedia('(max-width:899px)');
@@ -84,7 +87,7 @@ function usePreviewRail(key:string,handstand=false) {
   preference.addEventListener('change',measure);window.addEventListener('resize',queueLayout);window.addEventListener('scroll',queue,{passive:true});
   document.fonts.ready.then(()=>{if(!disposed)queueLayout();});measure();
   return()=>{disposed=true;layout.dispose();unbindSwipe();observer.disconnect();cancelAnimationFrame(frame);preference.removeEventListener('change',measure);window.removeEventListener('resize',queueLayout);window.removeEventListener('scroll',queue);};
- },[key,handstand]);
+ },[key,handstand,desktopRail]);
  return {root,pin,track};
 }
 
@@ -100,7 +103,7 @@ export function PreviewHandstand({lang}:{lang:string}) {
 }
 
 export function PreviewBenefits({lang,kind='benefits',close}:{lang:string;kind?:'benefits'|'barriers';close?:string}) {
- const {root,pin,track}=usePreviewRail(lang+kind);
+ const {root,pin,track}=usePreviewRail(lang+kind,false,kind==='barriers');
  const c=(v:readonly string[])=>previewText(v,lang);
  const barriers=kind==='barriers',titleId=barriers?'preview-barriers-title':'preview-benefits-title';
  return <section className={'preview-benefits'+(barriers?' preview-barriers':'')} ref={root} aria-labelledby={titleId}><div className="preview-benefits-pin" ref={pin}><h2 id={titleId}>{c(barriers?p.barriersTitle:p.benefitsTitle)}</h2><div className="preview-benefits-window"><div className="preview-benefits-track" ref={track}>{(barriers?p.barriers:p.benefits).map((x,i)=><article key={x[0][0]}>{!barriers&&<span className="preview-benefit-number" aria-hidden="true">0{i+1}</span>}<h3>{c(x[0])}</h3><p>{barriers&&<span className="preview-solution-arrow" aria-hidden="true">→</span>}{c(x[1])}</p></article>)}</div></div>{barriers?close&&<p className="preview-benefits-close preview-work-bridge">{close}</p>:<p className="preview-benefits-close"><strong>{c(p.benefitsClose)}</strong></p>}</div></section>;

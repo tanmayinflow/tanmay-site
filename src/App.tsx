@@ -6,6 +6,12 @@ import { EducationList } from './mobile/PreviewEducation';
 import { PreviewComparison, PreviewBenefits, PreviewWants } from './components/PreviewReading';
 import { previewText, previewWhatsApp, previewMail } from "./preview-copy";
 import "./preview-v3.css";
+import './desktop/responsive-hero.css';
+import './desktop/responsive-home-practice.css';
+import './desktop/responsive-accessibility.css';
+import { ResponsiveHomeProcess } from './desktop/ResponsiveHomeProcess';
+import { ResponsiveHomeAbout } from './desktop/ResponsiveHomeAbout';
+import { ResponsiveWorkNeeds, ResponsiveWorkOffer } from './desktop/ResponsiveWork';
 /**
  * tanmaypractice.com · veřejný web
  * ----------------------------------------------------------------------
@@ -3327,21 +3333,17 @@ function OpeningPreview({ lang, work=false }: any) {
   const c=(pair:readonly string[])=>previewText(pair,lang);
   const [noPortrait, setNoPortrait] = useState(false);
   return (
-    <header className={"opening surf--sand" + (work ? " release-work-hero" : "") + (noPortrait ? "" : " has-portrait")}>
+    <header className={"opening surf--sand responsive-opening" + (work ? " release-work-hero" : "") + (noPortrait ? "" : " has-portrait")}>
       <div className="wrap grid">
         <div className="copy">
-          <p className="kicker label rv">{c(work?p.workKicker:p.homeKicker)}</p>
           <h1 className="h-display h1 rv d1">
-            {c(work?p.workTitle:p.homeTitle)}
+            {work ? L('Spolupráce','Work together') : 'Kryštof Švec'}
           </h1>
+          <p className="kicker label rv">{c(work?p.workTitle:p.homeKicker)}</p>
+          {!work && <p className="responsive-opening-statement rv d2">{c(p.homeTitle).split(/(?<=\.) (?=A |And )/).map(line=><span key={line}>{line}</span>)}</p>}
+          {work && <p className="responsive-opening-values rv d2"><span>{L('Jistota v těle','Confidence in the body')}</span><span>{L('Radost v srdci','Joy in the heart')}</span><span>{L('Pohyb v životě','Movement in life')}</span></p>}
           <p className="body-txt rv d2">{c(work?p.workLead:p.homeLead)}</p>
-          <p className="act rv d3">
-            <Go href={work?"#kontakt":"#rezervace"} cs={p.cta[0]} en={p.cta[1]} /><a className="collaboration-price-jump" href={work?"#co-dostanes":"#jak-to-funguje"}>{L("Jak to funguje ↓","How it works ↓")}</a>
-          </p>
-          <p className="small rv d3">{c(p.micro)}</p>
-          <p className="stance rv d3">
-            {L("tělo · praxe · divoká příroda", "body · practice · wild nature")}
-          </p>
+          {work ? <><p className="small rv d3">{c(p.workKicker)}</p><a className="responsive-opening-action rv d3" href="#co-dostanes">{L('Co dostaneš','What you get')}<span aria-hidden="true">↓</span></a></> : <p className="small rv d3">{c(p.micro)}</p>}
         </div>
         {noPortrait ? null : (
           <div className="portrait-stage rv d1">
@@ -3357,7 +3359,7 @@ function OpeningPreview({ lang, work=false }: any) {
               )}
               width={MEDIA.portraitCutout.w}
               height={MEDIA.portraitCutout.h}
-              sizes="(min-width:1442px) 941px, (min-width:1100px) 65.28vw, (min-width:800px) 67.1vw, (min-width:674px) 620px, (min-width:521px) 92vw, 96vw"
+              sizes="(min-width:1440px) 760px, (min-width:900px) 53vw, 96vw"
               decoding="sync"
               onError={() => setNoPortrait(true)}
               {...({ fetchPriority: "high" } as any)}
@@ -3375,8 +3377,8 @@ function HomeAudiencePreview({ lang }: any) {
   return <section className="sec sec--edged who" aria-labelledby="h-audience">
  <div className="strata strata--ink strata--hero" aria-hidden="true"/><TerrainCurrent/>
  <div className="wrap grid"><div className="prose"><h2 className="h-display h2 rv" id="h-audience">{c(p.audienceTitle)}</h2>
- <div className="rv d1" style={{marginTop:18}}><PreviewWants lang={lang}/><p className="body-txt"><strong>{c(p.audienceClose)}</strong></p>
- <Go href="#rezervace" cs="Chci plán přesně pro mě" en="I want a plan made for me"/></div></div><SaltoField/></div></section>;
+ <div className="rv d1" style={{marginTop:18}}><PreviewWants lang={lang}/><h3 className="responsive-audience-missing">{L('Co ti chybí','What’s missing')}</h3><p className="body-txt">{c(p.audienceClose)}</p>
+ <div className="responsive-audience-action"><Go href="#rezervace" cs="Chci plán přesně pro mě" en="I want a plan made for me"/></div></div></div><SaltoField/></div></section>;
 }
 
 function HomeWorkPreview({ lang }: any) {
@@ -3389,18 +3391,12 @@ function HomeCollabPreview({ lang }: any) {
  return <PreviewBenefits lang={lang}/>;
 }
 
-function HomeAboutPreview({ lang }: any) {
-  const c=(pair:readonly string[])=>previewText(pair,lang);
-  return <section className="sec home-about" aria-labelledby="h-about-short"><div className="wrap about-short-grid"><div className="about-short-copy"><p className="label rv">Kryštof Švec</p><h2 className="h-display h2 rv d1" id="h-about-short">{c(p.aboutTitle)}</h2><p className="body-txt rv d2">{c(p.bio)}</p><p className="body-txt rv d2">{c(p.cheer)}</p><p className="body-txt"><a href={routePath("pribeh",lang)}>{c(p.qualification)}</a></p></div><HomeAboutPhoto pic={MEDIA.homeAboutPrague} alt={L("Portrét z profilu s Pražským hradem v pozadí.","Profile portrait with Prague Castle in the background.")} sizes="(min-width:521px) 410px, (min-width:366px) 330px, calc(100vw - 36px)"/></div></section>;
-}
-
 function HomeBookingPreview({ lang, collaboration=false }: any) {
   const c=(pair:readonly string[])=>previewText(pair,lang);
   return <section className={collaboration?"site-linen contact-coda":"home-booking"} id={collaboration?"kontakt":"rezervace"} aria-labelledby="h-booking"><div className="wrap"><div className="booking-inner"><p className="booking-kicker label rv">{L("První krok","First step")}</p><h2 className="h-display h2 rv d1" id="h-booking">{c(p.closingTitle)}</h2><p className="booking-lead rv d2">{c(p.closingLead)}</p><div className="booking-actions rv d3"><div><a className="contact-action contact-action--primary" href={previewWhatsApp(lang,true)} target="_blank" rel="noopener noreferrer"><IconWhatsApp/><span>{c(p.firstCta)}</span></a></div><a className="contact-action" href={previewWhatsApp(lang)} target="_blank" rel="noopener noreferrer"><IconWhatsApp/>{c(p.cta)}</a><a className="contact-action" href={previewMail(lang)}><IconMail/>{L("Napsat e-mail","Send an email")}</a></div>{collaboration&&<a href={IG_URL} target="_blank" rel="noopener noreferrer">Instagram</a>}</div></div></section>;
 }
 
 function PageHomePreview({ lang }: any) {
-  const c=(pair:readonly string[])=>previewText(pair,lang);
   return (
     <>
       <OpeningPreview lang={lang} />
@@ -3408,9 +3404,9 @@ function PageHomePreview({ lang }: any) {
         <HomeAudiencePreview lang={lang}/>
         <HomeWorkPreview lang={lang} />
         <HomeCollabPreview lang={lang} />
-        <section className="sec" id="jak-to-funguje"><div className="wrap"><h2 className="h-display h2 rv">{c(p.howTitle)}</h2><div className="process-three">{p.steps.map((x,i)=><article className="rv" key={i}><span className="num">0{i+1}</span><h3>{c(x[0])}</h3><p>{c(x[1])}</p></article>)}</div><p className="act"><Go href="#rezervace" cs="Chci začít" en="I want to start"/></p><Go href={routePath("spoluprace",lang)+"#co-dostanes"} cs="Co přesně dostaneš →" en="What exactly you get →"/></div></section>
+        <ResponsiveHomeProcess lang={lang}/>
         <HomeReferences lang={lang} preview/>
-        <HomeAboutPreview lang={lang} />
+        <ResponsiveHomeAbout lang={lang} />
         <HomeBookingPreview lang={lang}/>
         <ClientStrip lang={lang} />
       </div>
@@ -3420,25 +3416,17 @@ function PageHomePreview({ lang }: any) {
 }
 
 function PageSpolupracePreview({ lang }: any) {
-  const c=(pair:readonly string[])=>previewText(pair,lang);
   return <div className="site-page" data-secondary-v6="" data-secondary-v8="" data-collaboration-v99="">
     <OpeningPreview lang={lang} work/>
 
 
-<section className="site-linen page-section collaboration-needs-v99" id="potreby"><div className="wrap"><div className="section-head section-head--split"><h2 className="h-display h2 rv">{c(p.needsTitle)}</h2><div className="page-intro rv d1"><p><strong>{L("Teď:","Now:")}</strong> {c(p.now)}</p><p><strong>{L("Kam chceš:","Where you want to be:")}</strong> {c(p.destination)}</p></div></div><h3 className="h3">{c(p.barriersTitle)}</h3><div className="secondary-illustrated secondary-illustrated--needs"><div className="editorial-grid">{p.barriers.map((x,i)=><article className="rv" key={i}><span className="num">0{i+1}</span><h3>{c(x[0])}</h3><p>{c(x[1])}</p></article>)}</div></div><p className="stance-line">{c(p.needsClose)}</p><Go href="#kontakt" cs={p.cta[0]} en={p.cta[1]}/></div></section><section className="site-linen page-section collaboration-experience" id="zkusenost"><div className="wrap"><div className="section-head section-head--split"><h2 className="h-display h2 rv">{c(p.forTitle)}</h2><div className="page-intro rv d1"><ul>{p.forItems.map(x=><li key={x[0]}>{c(x)}</li>)}</ul><p><strong>{c(p.forClose)}</strong></p></div></div></div></section><div className="site-ink preview-cotton"><HomeWorkPreview lang={lang}/></div><section className="site-ink page-section--tight between-v8 between-v919 preview-cotton" id="co-dostanes"><div className="material-edge material-edge--linen" aria-hidden="true"/><DesktopCycle lang={lang}><div className="between-copy-v919"><p className="label rv">{c(p.startLabel)}</p><h2 className="h-display h2 rv d1" style={{marginTop:12}}>{c(p.startTitle)}</h2><div className="between-visual-row-v919"><p className="scan-line rv d2">{L("PLÁN · ZÁZNAM · ÚPRAVA","PLAN · RECORD · ADJUST")}</p><CollaborationCycle/></div></div><div className="between-items">{p.startItems.map((x,i)=><div className="preview-start-item rv" key={i}><h3>{c(x[0])}</h3><p>{c(x[1])}</p></div>)}</div></DesktopCycle><div className="wrap preview-week"><p className="body-txt"><strong>{c(p.weekTitle).split(/(\([^)]*\))/).map((part,i)=>part.startsWith("(")?<span className="preview-week-example" key={i}>{part}</span>:part)}</strong></p><p className="body-txt">{c(p.week)}</p><p className="body-txt"><strong>{c(p.why)}</strong></p><p className="body-txt"><strong>{c(p.price)}</strong></p><p className="small">{c(p.priceSmall)}</p><p className="act"><a className="go release-first-session" href={previewWhatsApp(lang,true)} target="_blank" rel="noopener noreferrer">{c(p.firstCta)}</a></p><a className="go release-consultation" href={previewWhatsApp(lang)} target="_blank" rel="noopener noreferrer">{lang==='en'?'Still unsure? Book 15 free minutes.':'Ještě váháš? Domluv si 15 minut zdarma.'}</a></div></section>
-    <section className="site-linen page-section process-v8 release-work-process">
-      <div className="wrap process-v8-grid process-with-equipment"><div className="process-v913-heading"><h2 className="h-display h2 rv">{L("Jak začneš?","How do you start?")}</h2>
-      </div>
-      <div className="process-three">{p.workSteps.map((x,i)=><article className="rv" key={i}><span className="num">0{i+1}</span><h3>{c(x[0])}</h3><p>{c(x[1])}</p></article>)}</div>
-      <SecondaryIllustration className="process-equipment-v913"
-        src="/media/refine-v9-17/equipment-linen-720.webp"
-        srcSet="/media/refine-v9-17/equipment-linen-360.webp 360w, /media/refine-v9-17/equipment-linen-540.webp 540w, /media/refine-v9-17/equipment-linen-720.webp 720w, /media/refine-v9-17/equipment-linen-960.webp 960w, /media/refine-v9-17/equipment-linen-1405.webp 1405w"
-        width={1405} height={903} sizes="(min-width:1200px) 430px, (min-width:900px) 35vw, (min-width:520px) 380px, calc(100vw - 64px)"
-        alt={L("Dřevěné kruhy se sbalenými popruhy, kettlebell a dvě nízké stálky, jemná konturová kresba.","Wooden rings with packed straps, a kettlebell and two low parallettes, a fine contour illustration.")} />
-      </div>
-      <div className="wrap"><Go href="#kontakt" cs="Chci začít" en="I want to start"/></div><SecondaryTerrain kind="l01" /></section>
+    <ResponsiveWorkNeeds lang={lang}/>
+    <div className="site-ink preview-cotton"><HomeWorkPreview lang={lang}/></div>
+    <ResponsiveWorkOffer lang={lang}/>
+    <ResponsiveHomeProcess lang={lang} work/>
 
-<div className="site-linen"><HomeReferences lang={lang} preview/></div><section className="site-linen page-section--tight"><div className="wrap"><div className="boundary rv"><p className="label rv">Kryštof Švec</p><h2 className="h-display h2 rv d1" id="h-about-short">{c(p.aboutTitle)}</h2><p className="body-txt rv d2">{c(p.bio)}</p><p className="body-txt rv d2">{c(p.cheer)}</p><p className="body-txt"><a href={routePath("pribeh",lang)}>{c(p.qualification)}</a></p></div></div></section>    <div className="site-linen collaboration-proof-v919" role="group" aria-label={L("Zkušenosti a odborné zázemí","Experience and professional background")}>
+<div className="site-linen"><HomeReferences lang={lang} preview/></div><ResponsiveHomeAbout lang={lang} work/>
+    <div className="site-linen collaboration-proof-v919" role="group" aria-label={L("Zkušenosti a odborné zázemí","Experience and professional background")}>
       <div className="collaboration-linen-lip" aria-hidden="true" />
       <div className="wrap"><div className="proof-row about-proof-v918 rv">
         <div className="proof-item"><strong>{L("10 LET","10 YEARS")}</strong><span>{L("vlastní pohybové praxe","of personal movement practice")}</span></div>

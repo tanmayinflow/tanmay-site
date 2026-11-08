@@ -1,0 +1,321 @@
+/* Desktop composition of the reviewed mobile content. The scroll scenes and
+   their geometry stay owned by PreviewReading / DesktopPractice. */
+@media (min-width:900px) {
+  /* Keep the original three geological lines, but let the wide-screen
+     transition remain a boundary rather than a chapter of its own. */
+  [data-preview="v3"] .who {padding-top:clamp(200px,16vw,232px);}
+  [data-preview="v3"] .who .terrain-window {
+    transform:translateX(-50%) scaleY(.8);
+    transform-origin:center top;
+  }
+  /* The wider reading surface can show every benefit together. Keep this
+     separate from the mobile rail and the handstand comparison scene. */
+  [data-preview="v3"] .preview-benefits:not(.preview-handstand):not(.preview-barriers) {
+    height:auto!important;
+    margin-block:56px 24px;
+  }
+  [data-preview="v3"] .preview-benefits:not(.preview-handstand):not(.preview-barriers) .preview-benefits-pin {
+    position:static;
+    min-height:0!important;
+    padding-block:24px;
+  }
+  [data-preview="v3"] .preview-benefits:not(.preview-handstand):not(.preview-barriers) .preview-benefits-window {overflow:visible;}
+  [data-preview="v3"] .preview-benefits:not(.preview-handstand):not(.preview-barriers) .preview-benefits-track {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:24px;
+    transform:none!important;
+    will-change:auto;
+  }
+  [data-preview="v3"] .preview-benefits:not(.preview-handstand):not(.preview-barriers) article {
+    position:relative;
+    isolation:isolate;
+    min-width:0;
+    min-height:0;
+    padding:30px 28px;
+    border:0;
+    border-radius:0;
+    background:none;
+    box-shadow:none;
+  }
+  [data-preview="v3"] .preview-benefits:not(.preview-handstand):not(.preview-barriers) article::before {
+    content:'';
+    position:absolute;
+    inset:0;
+    z-index:-1;
+    pointer-events:none;
+    background:radial-gradient(ellipse closest-side at 50% 45%,rgba(244,240,235,.10),rgba(244,240,235,.045) 52%,transparent 100%);
+  }
+  [data-preview="v3"] .preview-benefits:not(.preview-handstand):not(.preview-barriers) .preview-benefit-number {display:none;}
+  [data-preview="v3"] .preview-benefits:not(.preview-handstand):not(.preview-barriers) article h3 {
+    margin:0 0 14px;
+    color:var(--accent-on-ink,#e99a75);
+    font-size:clamp(27px,2.25vw,32px);
+    line-height:1.15;
+    text-wrap:balance;
+  }
+  [data-preview="v3"] .preview-benefits:not(.preview-handstand):not(.preview-barriers) article p {font-size:17px;line-height:1.65;}
+  [data-preview="v3"] .preview-benefits:not(.preview-handstand):not(.preview-barriers) .preview-benefits-close {margin-top:30px;max-width:780px;}
+  .responsive-home-process,
+  .responsive-home-about {
+    --responsive-accent:var(--accent-on-ink,#e99a75);
+    --responsive-copy:var(--on-dark-2);
+    padding-block:clamp(64px,6.5vw,96px);
+  }
+  .responsive-home-process--work,
+  .responsive-home-about--work {
+    --responsive-accent:var(--earth);
+    --responsive-copy:var(--text-2);
+    color:var(--text);
+  }
+  .responsive-home-process .h2,
+  .responsive-home-about .h2 {margin:0;max-width:none;}
+  .responsive-home-process__steps {
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    align-items:start;
+    gap:clamp(54px,5vw,80px);
+    margin:44px 0 0;
+    padding:0;
+    list-style:none;
+    counter-reset:none;
+  }
+  .responsive-home-process__steps>li {
+    position:relative;
+    min-width:0;
+    margin:0;
+    padding:0;
+    border:0;
+  }
+  .responsive-home-process__steps>li::before {content:none;}
+  .responsive-home-process__steps>li:nth-child(2) {margin-top:50px;}
+  .responsive-home-process__steps h3 {
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin:0 0 14px;
+    font-family:var(--ff-display);
+    font-size:clamp(27px,2.25vw,32px);
+    font-weight:400;
+    line-height:1.12;
+    text-wrap:balance;
+  }
+  .responsive-home-process__steps h3>span:last-child {min-width:0;}
+  .responsive-home-process__number {
+    flex:none;
+    font-family:var(--ff-meta);
+    font-size:13px;
+    font-weight:400;
+    line-height:1;
+    letter-spacing:.05em;
+    color:var(--responsive-accent);
+  }
+  .responsive-home-process__steps p {
+    margin:0;
+    color:var(--responsive-copy);
+    font-family:var(--ff-body);
+    font-size:17px;
+    line-height:1.75;
+    text-align:left;
+    max-width:34ch;
+  }
+  .responsive-home-process__connector {
+    position:absolute;
+    top:43px;
+    right:calc(-1 * clamp(54px,5vw,80px) + 5px);
+    width:clamp(50px,4.6vw,72px);
+    height:56px;
+    overflow:visible;
+    pointer-events:none;
+    stroke:currentColor;
+    stroke-width:1.4;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    color:var(--responsive-accent);
+    opacity:.65;
+  }
+  .responsive-home-process__connector--reverse {top:-10px;transform:scaleY(-1);}
+  .responsive-home-process--work .responsive-home-process__connector {stroke-width:1;opacity:.55;}
+  .responsive-home-process__actions {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    margin-top:42px;
+  }
+  .responsive-home-process--work .responsive-home-process__actions {justify-content:flex-end;}
+  .responsive-outline-action,
+  [data-preview="v3"] .responsive-audience-action .go {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:fit-content;
+    min-height:48px;
+    max-width:100%;
+    margin:0;
+    padding:12px 22px;
+    border:1px dashed currentColor;
+    border-radius:26px 24px 28px 23px;
+    background:transparent;
+    box-shadow:none;
+    color:var(--responsive-accent,var(--accent-on-ink,#e99a75));
+    font-family:var(--ff-meta);
+    font-size:14px;
+    font-weight:500;
+    line-height:1.45;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    text-align:center;
+    text-decoration:none;
+  }
+  [data-preview="v3"] .responsive-audience-action .go::after {content:none;}
+  .responsive-home-process__detail {
+    display:inline-flex;
+    align-items:center;
+    gap:16px;
+    min-height:48px;
+    color:var(--responsive-accent);
+    font-family:var(--ff-meta);
+    font-size:14px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    text-decoration:none;
+  }
+  .responsive-home-process__detail>span {font-family:var(--ff-body);font-size:22px;font-weight:400;}
+  .responsive-outline-action:focus-visible,
+  .responsive-home-process__detail:focus-visible,
+  [data-preview="v3"] .responsive-audience-action .go:focus-visible {
+    outline:2px solid currentColor;outline-offset:5px;
+  }
+  [data-preview="v3"] .responsive-audience-missing {
+    margin:28px 0 10px;
+    font-family:var(--ff-display);
+    font-size:28px;
+    font-weight:400;
+    line-height:1.2;
+  }
+  [data-preview="v3"] .responsive-audience-missing+.body-txt {margin-top:0;max-width:40ch;}
+  [data-preview="v3"] .responsive-audience-action {margin-top:26px;}
+
+  .responsive-home-about__layout {
+    display:grid;
+    grid-template-columns:minmax(270px,.82fr) minmax(0,1.18fr);
+    gap:clamp(44px,6vw,88px);
+    align-items:center;
+  }
+  .responsive-home-about__photo {
+    width:100%;
+    max-width:410px;
+    margin:0 auto;
+    padding:0;
+    aspect-ratio:4/5;
+    overflow:hidden;
+    border-radius:9px 11px 10px 8px;
+    background:none;
+  }
+  .responsive-home-about__photo img {display:block;width:100%;height:100%;object-fit:cover;}
+  .responsive-home-about__copy {min-width:0;max-width:620px;}
+  .responsive-home-about__name.label {margin:0 0 12px;color:var(--responsive-accent);}
+  .responsive-home-about__copy .h2 {font-size:clamp(37px,3.4vw,48px);line-height:1.05;}
+  .responsive-home-about__cheer {
+    margin:22px 0 0;
+    max-width:46ch;
+    font-family:var(--ff-body);
+    font-size:18px;
+    line-height:1.65;
+    color:var(--responsive-copy);
+  }
+  .responsive-home-about .responsive-coach-vajra {
+    display:block;
+    position:relative;
+    width:66px;
+    height:40px;
+    max-width:none;
+    margin:16px 0 18px;
+    transform:rotate(-24deg);
+    color:var(--responsive-copy);
+    opacity:.72;
+  }
+  .responsive-home-about__bio {
+    margin:0;
+    max-width:64ch;
+    font-family:var(--ff-body);
+    font-size:16px;
+    line-height:1.8;
+    text-align:left;
+    color:var(--responsive-copy);
+  }
+  .responsive-home-about__story {margin-top:27px;font-size:12.5px;padding-inline:20px;}
+
+  /* Praxe has its own wide composition, while retaining the same live diagram,
+     supplied artwork, materials and complete text as the mobile reading order. */
+  [data-secondary-v8]:has(.practice-lsit-hero) :is(.practice-anchors,.practice-work-v8,.reflection-v8) {
+    padding-block:clamp(64px,6.5vw,96px);
+  }
+  [data-secondary-v8] .practice-anchors .practice-anchors-layout {
+    grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);
+    gap:clamp(40px,5.5vw,76px);
+    align-items:center;
+  }
+  [data-secondary-v8] .practice-anchors .d-practice-diagram {width:min(100%,450px);}
+  [data-secondary-v8] .practice-work-layout:has(>.secondary-illustration) {
+    grid-template-columns:minmax(0,1fr) minmax(220px,.46fr);
+    gap:clamp(32px,4vw,56px);
+    align-items:center;
+  }
+  [data-secondary-v8] .practice-work-layout>.secondary-illustration {
+    position:relative;
+    inset:auto;
+    width:100%;
+    max-width:310px;
+    min-width:0;
+    margin:0 auto;
+    align-self:center;
+    transform:none;
+  }
+  [data-secondary-v8] .practice-work-layout>.secondary-illustration img {
+    display:block;
+    width:100%;
+    height:auto;
+    max-height:620px;
+    object-fit:contain;
+    object-position:center;
+    transform:none;
+  }
+  [data-secondary-v8] .practice-work-layout .editorial-list {margin-top:28px;}
+  [data-secondary-v8] .practice-work-layout .editorial-list h3 {font-size:27px;line-height:1.18;}
+  [data-secondary-v8] .practice-work-layout .editorial-list p {font-size:16px;line-height:1.75;max-width:45ch;}
+}
+
+@media (min-width:1200px) {
+  [data-preview="v3"] .preview-benefits:not(.preview-handstand):not(.preview-barriers) .preview-benefits-track {
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+  [data-secondary-v8] .practice-work-layout .editorial-list {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:28px 34px;
+    align-items:start;
+  }
+  [data-secondary-v8] .practice-work-layout .editorial-list>* {
+    min-width:0;
+    margin:0;
+    padding:0;
+    border:0;
+  }
+}
+
+@media (min-width:900px) and (max-width:1099px) {
+  .responsive-home-process__steps {gap:44px;}
+  .responsive-home-process__steps h3 {font-size:26px;}
+  .responsive-home-process__steps p {font-size:16px;line-height:1.75;}
+  .responsive-home-process__connector {right:-43px;width:42px;}
+  .responsive-home-about__layout {gap:36px;grid-template-columns:minmax(240px,.78fr) minmax(0,1.22fr);}
+  .responsive-home-about__photo {align-self:start;margin-top:26px;}
+  .responsive-home-about__cheer {font-size:17px;}
+  .responsive-home-about__bio {font-size:15.5px;}
+}
+
+@media (max-width:359px) {
+  .tm-mobile .m-client-access p {text-align:left;text-align-last:left;hyphens:none;}
+}

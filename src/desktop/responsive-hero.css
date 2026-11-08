@@ -1,0 +1,101 @@
+/* The same portrait and approved messages, composed for a wide viewport. */
+@media (min-width: 900px) {
+  .opening.responsive-opening.surf--sand {
+    --responsive-hero-height: clamp(690px, 58vw, 850px);
+    height: auto;
+    min-height: var(--responsive-hero-height);
+    padding: calc(var(--topbar-h) + 56px) 0 64px;
+    margin-top: calc(-1 * var(--topbar-h));
+  }
+  .opening.responsive-opening.surf--sand > .wrap.grid {
+    display: grid;
+    grid-template-columns: minmax(0, 46%) minmax(0, 54%);
+    align-items: center;
+    min-height: calc(var(--responsive-hero-height) - var(--topbar-h) - 120px);
+    height: auto;
+    gap: 0;
+  }
+  .opening.responsive-opening.surf--sand .copy {
+    width: auto;
+    max-width: 530px;
+    transform: none;
+    padding: 0;
+  }
+  .opening.responsive-opening.surf--sand .h1 {
+    font-size: clamp(64px, 6.1vw, 90px);
+    line-height: 1.04;
+    margin: 0;
+    max-width: 100%;
+  }
+  .opening.responsive-opening.surf--sand .kicker {
+    margin-top: 22px;
+    max-width: 31em;
+    line-height: 1.5;
+  }
+  .opening.responsive-opening.surf--sand .responsive-opening-statement {
+    font-family: var(--ff-display);
+    font-size: clamp(30px, 3vw, 43px);
+    line-height: 1.22;
+    margin: 36px 0 0;
+  }
+  .responsive-opening-statement > span { display: block; }
+  .opening.responsive-opening.surf--sand .body-txt { max-width: 28em; margin-top: 25px; }
+  .opening.responsive-opening.surf--sand .small { max-width: 30em; margin-top: 18px; }
+  .opening.responsive-opening.surf--sand .responsive-opening-values {
+    display: flex;
+    gap: 10px 22px;
+    flex-wrap: wrap;
+    font-family: var(--ff-display);
+    color: var(--earth);
+    font-size: clamp(17px, 1.6vw, 22px);
+    margin-top: 32px;
+  }
+  .responsive-opening-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 26px;
+    margin-top: 26px;
+    padding: 15px 28px;
+    border-radius: 28px 32px 26px 30px;
+    background: #75443b;
+    color: #f4f0eb;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .opening.responsive-opening.surf--sand .portrait-stage {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: min(55vw, 810px);
+    min-height: 0;
+    height: 100%;
+    margin: 0;
+  }
+  .opening.responsive-opening.surf--sand .portrait-cut {
+    width: min(100%, 760px);
+    height: auto;
+    max-height: calc(100% - var(--topbar-h) - 28px);
+    object-fit: contain;
+    object-position: bottom right;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    transform: none;
+  }
+  .opening.responsive-opening.surf--sand .portrait-monolith {
+    width: 112%;
+    height: 112%;
+    top: -3%;
+    right: -9%;
+  }
+  .opening.responsive-opening.surf--sand .portrait-shoulder { display: none; }
+  .opening.responsive-opening.surf--sand.release-work-hero .portrait-monolith {
+    background-color: #754437;
+    background-image: url('/media/secondary-v9-11/burnt-earth-band-2048.webp');
+  }
+}
+@media (min-width: 900px) and (max-width: 1099px) {
+  .opening.responsive-opening.surf--sand .h1 { font-size: 64px; }
+  .opening.responsive-opening.surf--sand .copy { max-width: 390px; }
+  .opening.responsive-opening.surf--sand .body-txt { font-size: 16px; }
+}
+

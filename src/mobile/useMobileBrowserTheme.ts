@@ -29,7 +29,8 @@ export function useMobileBrowserTheme(root: RefObject<HTMLElement>, routeKey: st
     const visibleColor = () => {
       // Sample the margin, not the photo or card occupying the page centre.
       // Transparencies inherit the first opaque surface beneath them.
-      const y = Math.min(window.innerHeight - 1, Math.max(1, (window.visualViewport?.offsetTop ?? 0) + 2));
+      const height = Math.max(1, window.innerHeight);
+      const y = Math.max(0, Math.min(height - 1, (window.visualViewport?.offsetTop ?? 0) + 2));
       const candidates = document.elementsFromPoint(Math.min(12, window.innerWidth / 4), y);
       for (const candidate of candidates) {
         if (!host.contains(candidate) || candidate.closest('.m-dock')) continue;
@@ -61,9 +62,14 @@ export function useMobileBrowserTheme(root: RefObject<HTMLElement>, routeKey: st
       observer?.disconnect();
       // Observe a thin strip at the visible top edge. Work happens at section
       // boundaries, never on each touch/scroll frame or in a polling loop.
-      const top = Math.min(window.innerHeight - 2, Math.max(0, window.visualViewport?.offsetTop ?? 0));
+      const height = Math.max(0, window.innerHeight);
+      // An iframe or tab can briefly have no layout viewport while resizing.
+      // Keep every inset numeric: concatenating a minus sign with a negative
+      // top offset would create an invalid rootMargin such as "--2px".
+      const top = Math.max(0, Math.min(Math.max(0, height - 2), window.visualViewport?.offsetTop ?? 0));
+      const bottom = Math.max(0, height - top - 8);
       observer = new IntersectionObserver(schedule, {
-        rootMargin: `-${top}px 0px -${Math.max(0, window.innerHeight - top - 8)}px 0px`,
+        rootMargin: `${-top}px 0px ${-bottom}px 0px`,
         threshold: 0,
       });
       observer.observe(host);

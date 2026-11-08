@@ -1,0 +1,22 @@
+/* Text enlargement must resize the reading and hit areas together. */
+@media (max-width: 899px) {
+  .tm-mobile[data-mobile-version][data-preview="v3"] .m-between .m-cycle-row {
+    grid-template-columns: minmax(72px, 104px) minmax(0, 1fr);
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .tm-mobile[data-mobile-version][data-preview="v3"] .m-between .m-cycle-controls {
+    min-width: 0;
+  }
+
+  .tm-mobile[data-mobile-version][data-preview="v3"] .m-between .m-cycle-controls button {
+    white-space: normal;
+    overflow-wrap: break-word;
+  }
+
+  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-collab-caption p {
+    flex-wrap: wrap;
+    row-gap: .35em;
+  }
+}
