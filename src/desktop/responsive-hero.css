@@ -1,7 +1,7 @@
 /* The same portrait and approved messages, composed for a wide viewport. */
 @media (min-width: 900px) {
   .opening.responsive-opening.surf--sand {
-    --responsive-hero-height: clamp(690px, 58vw, 850px);
+    --responsive-hero-height: calc(clamp(590px, calc(100svh - 88px), 900px) + var(--topbar-h));
     height: auto;
     min-height: var(--responsive-hero-height);
     padding: calc(var(--topbar-h) + 56px) 0 64px;
@@ -65,27 +65,30 @@
   .opening.responsive-opening.surf--sand .portrait-stage {
     position: absolute;
     inset: 0 0 0 auto;
-    width: min(55vw, 810px);
+    width: min(67vw, 980px);
     min-height: 0;
     height: 100%;
     margin: 0;
   }
   .opening.responsive-opening.surf--sand .portrait-cut {
-    width: min(100%, 760px);
-    height: auto;
-    max-height: calc(100% - var(--topbar-h) - 28px);
+    width: auto;
+    height: calc(100% - var(--topbar-h) + 75px);
+    max-width: calc(100% - 28px);
+    max-height: none;
     object-fit: contain;
     object-position: bottom right;
-    right: 0;
+    right: 12px;
     bottom: 0;
     left: auto;
-    transform: none;
+    transform: scale(1.02);
+    transform-origin: right bottom;
   }
   .opening.responsive-opening.surf--sand .portrait-monolith {
-    width: 112%;
-    height: 112%;
-    top: -3%;
-    right: -9%;
+    /* The original alpha masks are viewport-wide diagonal planes. */
+    width: 100vw;
+    height: 100%;
+    inset: 0 0 0 auto;
+    transform: none;
   }
   .opening.responsive-opening.surf--sand .portrait-shoulder { display: none; }
   .opening.responsive-opening.surf--sand.release-work-hero .portrait-monolith {

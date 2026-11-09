@@ -1,0 +1,70 @@
+{
+  "baseline": "02d0df1e755ee1ed419a4fdc0fb21ee995da10fa",
+  "authorization": "Owner 2026-11-09: on desktop and larger resolutions, the Practice branch with rings must extend from the viewport edge. Restore the original hero mask and portrait composition on Home and Collaboration, using the dark Home mask and copper Collaboration mask. Preserve the approved portrait, mobile layout, content, assets, stable iPhone handstand repair, and archived original site. Scope is limited to the two desktop responsive CSS files.",
+  "files": [
+    {
+      "path": "src/desktop/responsive-hero.css",
+      "beforeSha256": "6081e30125151a3906e2f44e0bac5fb61071c9284381b09966315354a7fe6c53",
+      "afterSha256": "407f57d8b535b24f25d1292fdac18043ad630018572535e421386fd880a446d5",
+      "replacements": [
+        {
+          "offset": 148,
+          "before": "    --responsive-hero-height: clamp(690px, 58vw, 850px);\n",
+          "after": "    --responsive-hero-height: calc(clamp(590px, calc(100svh - 88px), 900px) + var(--topbar-h));\n"
+        },
+        {
+          "offset": 2156,
+          "before": "    width: min(55vw, 810px);\n",
+          "after": "    width: min(67vw, 980px);\n"
+        },
+        {
+          "offset": 2298,
+          "before": "    width: min(100%, 760px);\n    height: auto;\n    max-height: calc(100% - var(--topbar-h) - 28px);\n",
+          "after": "    width: auto;\n    height: calc(100% - var(--topbar-h) + 75px);\n    max-width: calc(100% - 28px);\n    max-height: none;\n"
+        },
+        {
+          "offset": 2480,
+          "before": "    right: 0;\n",
+          "after": "    right: 12px;\n"
+        },
+        {
+          "offset": 2528,
+          "before": "    transform: none;\n",
+          "after": "    transform: scale(1.02);\n    transform-origin: right bottom;\n"
+        },
+        {
+          "offset": 2658,
+          "before": "    width: 112%;\n    height: 112%;\n    top: -3%;\n    right: -9%;\n",
+          "after": "    /* The original alpha masks are viewport-wide diagonal planes. */\n    width: 100vw;\n    height: 100%;\n    inset: 0 0 0 auto;\n    transform: none;\n"
+        }
+      ]
+    },
+    {
+      "path": "src/desktop/responsive-home-practice.css",
+      "beforeSha256": "60cd2ad34bb2ba544ab972f491d066fc82e6e8ee7496bede760331fa9108c4e8",
+      "afterSha256": "5603b018e35f8ad9d9b02490fadcc5aa7b4e923e9c66f31ccaa69821eec406a0",
+      "replacements": [
+        {
+          "offset": 9176,
+          "before": "    width:100%;\n    max-width:310px;\n",
+          "after": "    /* Continue through the wrap gutter and outer margin to the viewport edge. */\n    width:calc(100% + var(--branch-bleed));\n    height:clamp(560px,50vw,800px);\n    max-width:none;\n"
+        },
+        {
+          "offset": 9375,
+          "before": "    margin:0 auto;\n",
+          "after": "    margin:0 calc(-1 * var(--branch-bleed)) 0 0;\n    justify-self:end;\n"
+        },
+        {
+          "offset": 9602,
+          "before": "    height:auto;\n    max-height:620px;\n",
+          "after": "    height:100%;\n    max-height:none;\n"
+        },
+        {
+          "offset": 9664,
+          "before": "    object-position:center;\n",
+          "after": "    object-position:right center;\n"
+        }
+      ]
+    }
+  ]
+}

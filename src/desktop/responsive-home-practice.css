@@ -266,20 +266,23 @@
   [data-secondary-v8] .practice-work-layout>.secondary-illustration {
     position:relative;
     inset:auto;
-    width:100%;
-    max-width:310px;
+    /* Continue through the wrap gutter and outer margin to the viewport edge. */
+    width:calc(100% + var(--branch-bleed));
+    height:clamp(560px,50vw,800px);
+    max-width:none;
     min-width:0;
-    margin:0 auto;
+    margin:0 calc(-1 * var(--branch-bleed)) 0 0;
+    justify-self:end;
     align-self:center;
     transform:none;
   }
   [data-secondary-v8] .practice-work-layout>.secondary-illustration img {
     display:block;
     width:100%;
-    height:auto;
-    max-height:620px;
+    height:100%;
+    max-height:none;
     object-fit:contain;
-    object-position:center;
+    object-position:right center;
     transform:none;
   }
   [data-secondary-v8] .practice-work-layout .editorial-list {margin-top:28px;}
