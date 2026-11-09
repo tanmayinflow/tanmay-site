@@ -1,0 +1,38 @@
+{
+  "baseline": "e88882285aa6bffe42ac178f942a60f2c29997c6",
+  "authorization": "Owner 2026-11-09: keep the handstand a stable size while scrolling on iPhone, on Home and Collaboration. Publish the verified repair. Size the photograph using the stable small viewport; keep the live visible viewport for pin positioning. Preserve other rails, photographs, text and prior mobile gesture fixes.",
+  "files": [
+    {
+      "path": "src/mobile/preview-mobile-scroll.ts",
+      "beforeSha256": "12e5a0c53fa2ab92698ab33866553778d3d2af69309067d20946ff2f463ecf75",
+      "afterSha256": "d26f61aca83eb5754a747367da753ef42f14a8b31bc9f1579b4282c7781981f7",
+      "replacements": [
+        {
+          "offset": 1097,
+          "before": "",
+          "after": "  // Small viewport units stay constant as iPhone browser bars expand/collapse.\n  // Keep the photo fitted to that safe space, not the changing visible height.\n  const smallViewport=document.createElement('div');\n  smallViewport.dataset.previewSmallViewport='';smallViewport.setAttribute('aria-hidden','true');\n  smallViewport.style.cssText='position:fixed;left:0;top:0;width:0;height:100svh;visibility:hidden;pointer-events:none;contain:strict';\n  if(!CSS.supports('height','100svh'))smallViewport.style.height='100vh';\n  document.body.append(smallViewport);\n"
+        },
+        {
+          "offset": 3299,
+          "before": "   const flow=escaped||reduced.matches||innerWidth>=900||viewport<560||parseFloat(getComputedStyle(document.documentElement).fontSize)>20||(visualViewport?.scale||1)>1.01;\n",
+          "after": "   const stableViewport=smallViewport.getBoundingClientRect().height;\n   const handstandAvailable=stableViewport-24-(dock?.height||0)-12-2;\n   const flow=escaped||reduced.matches||innerWidth>=900||parseFloat(getComputedStyle(document.documentElement).fontSize)>20||(visualViewport?.scale||1)>1.01;\n"
+        },
+        {
+          "offset": 3870,
+          "before": "    host.dataset.pinned=flow?'false':'true';host.dataset.pageRail='true';row.style.transform='';\n",
+          "after": ""
+        },
+        {
+          "offset": 3950,
+          "before": "    if(portrait){portrait.style.height='';if(!flow){const room=available-(panel.offsetHeight-portrait.offsetHeight);portrait.style.height=Math.max(120,Math.min(portrait.offsetHeight,room))+'px';}}\n    const distance=flow||panel.offsetHeight>available?0:Math.max(0,row.scrollWidth-row.clientWidth);\n",
+          "after": "    const railAvailable=portrait?handstandAvailable:available;\n    const railFlow=flow||(portrait?stableViewport:viewport)<560;\n    host.dataset.pinned=railFlow?'false':'true';host.dataset.pageRail='true';row.style.transform='';\n    if(portrait){portrait.style.height='';if(!railFlow){const room=railAvailable-(panel.offsetHeight-portrait.offsetHeight);portrait.style.height=Math.max(120,Math.min(portrait.offsetHeight,Math.floor(room)))+'px';}}\n    const distance=railFlow||panel.offsetHeight>railAvailable?0:Math.max(0,row.scrollWidth-row.clientWidth);\n"
+        },
+        {
+          "offset": 8870,
+          "before": "   before.remove();after.remove();delete page.dataset.previewPageRoot;page.style.removeProperty('--preview-page-pin');\n",
+          "after": "   before.remove();after.remove();smallViewport.remove();delete page.dataset.previewPageRoot;page.style.removeProperty('--preview-page-pin');\n"
+        }
+      ]
+    }
+  ]
+}

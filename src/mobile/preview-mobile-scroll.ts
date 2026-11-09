@@ -16,6 +16,13 @@ export function usePreviewPageScroll(key:string) {
   const before=document.createElement('div'),after=document.createElement('div');
   for(const spacer of [before,after]){spacer.dataset.previewTravel='';spacer.setAttribute('aria-hidden','true');}
   page.before(before);page.after(after);
+  // Small viewport units stay constant as iPhone browser bars expand/collapse.
+  // Keep the photo fitted to that safe space, not the changing visible height.
+  const smallViewport=document.createElement('div');
+  smallViewport.dataset.previewSmallViewport='';smallViewport.setAttribute('aria-hidden','true');
+  smallViewport.style.cssText='position:fixed;left:0;top:0;width:0;height:100svh;visibility:hidden;pointer-events:none;contain:strict';
+  if(!CSS.supports('height','100svh'))smallViewport.style.height='100vh';
+  document.body.append(smallViewport);
   type Stage={host:HTMLElement;row:HTMLElement;start:number;distance:number;consumed:number;progress:number;manual?:RailGestureAnchor};
   let stages:Stage[]=[],total=0,frame=0,hashFrame=0,live=true,escaped=false,boundary=-1;
   const paint=()=>{
@@ -47,14 +54,18 @@ export function usePreviewPageScroll(key:string) {
    const dock=page.querySelector<HTMLElement>('.m-dock')?.getBoundingClientRect();
    const bottom=Math.min((visualViewport?.offsetTop||0)+viewport-12,dock&&dock.height>0?dock.top-12:Infinity);
    const available=bottom-pinTop-2;
-   const flow=escaped||reduced.matches||innerWidth>=900||viewport<560||parseFloat(getComputedStyle(document.documentElement).fontSize)>20||(visualViewport?.scale||1)>1.01;
+   const stableViewport=smallViewport.getBoundingClientRect().height;
+   const handstandAvailable=stableViewport-24-(dock?.height||0)-12-2;
+   const flow=escaped||reduced.matches||innerWidth>=900||parseFloat(getComputedStyle(document.documentElement).fontSize)>20||(visualViewport?.scale||1)>1.01;
    for(const host of hosts){
     if(innerWidth>=900){delete host.dataset.pageRail;continue;} // Local desktop rail owns its geometry.
     const panel=host.querySelector<HTMLElement>('.preview-benefits-pin')!,row=host.querySelector<HTMLElement>('.preview-benefits-track')!;
-    host.dataset.pinned=flow?'false':'true';host.dataset.pageRail='true';row.style.transform='';
     const portrait=host.querySelector<HTMLElement>('.preview-handstand-photo');
-    if(portrait){portrait.style.height='';if(!flow){const room=available-(panel.offsetHeight-portrait.offsetHeight);portrait.style.height=Math.max(120,Math.min(portrait.offsetHeight,room))+'px';}}
-    const distance=flow||panel.offsetHeight>available?0:Math.max(0,row.scrollWidth-row.clientWidth);
+    const railAvailable=portrait?handstandAvailable:available;
+    const railFlow=flow||(portrait?stableViewport:viewport)<560;
+    host.dataset.pinned=railFlow?'false':'true';host.dataset.pageRail='true';row.style.transform='';
+    if(portrait){portrait.style.height='';if(!railFlow){const room=railAvailable-(panel.offsetHeight-portrait.offsetHeight);portrait.style.height=Math.max(120,Math.min(portrait.offsetHeight,Math.floor(room)))+'px';}}
+    const distance=railFlow||panel.offsetHeight>railAvailable?0:Math.max(0,row.scrollWidth-row.clientWidth);
     if(distance){
      host.querySelector<HTMLElement>('.preview-benefits-window')!.scrollLeft=0;
      const start=panel.getBoundingClientRect().top-page.getBoundingClientRect().top-pinTop;
@@ -110,7 +121,7 @@ export function usePreviewPageScroll(key:string) {
    live=false;layout.dispose();resize.disconnect();cancelAnimationFrame(frame);cancelAnimationFrame(hashFrame);
    unbindSwipes.forEach(unbind=>unbind());
    window.removeEventListener('pageshow',queueLayout);visualViewport?.removeEventListener('resize',onViewport);visualViewport?.removeEventListener('scroll',onViewport);
-   before.remove();after.remove();delete page.dataset.previewPageRoot;page.style.removeProperty('--preview-page-pin');
+   before.remove();after.remove();smallViewport.remove();delete page.dataset.previewPageRoot;page.style.removeProperty('--preview-page-pin');
    window.removeEventListener('scroll',queue);window.removeEventListener('resize',onViewport);reduced.removeEventListener('change',configure);
    window.removeEventListener('hashchange',onHash);document.removeEventListener('click',onClick,true);window.removeEventListener('keydown',onKey);page.removeEventListener('load',queueLayout,true);
   };
