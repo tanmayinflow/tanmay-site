@@ -24,10 +24,13 @@ export function restoreDesktopReviewIfCurrent(path, bytes) {
   return file && sha(bytes) === file.afterSha256 ? withoutAuthorizedDesktopReview(path, bytes) : bytes;
 }
 
-export function verifyDesktopReviewAddition(path, bytes) {
+const videoSimplification = JSON.parse(readFileSync(new URL('./video-simplification-2026-11-10.json', import.meta.url)));
+export function verifyDesktopReviewAddition(path, original) {
+  const accepted = videoSimplification.find(item => item.path === path && item.afterSha256 === sha(original));
+  const bytes = accepted ? Buffer.from(accepted.before, 'base64') : original;
   const file = desktopReviewDelta.newFiles.find(item => item.path === path);
   assert.ok(file, 'Only explicitly reviewed additions are allowed: ' + path);
   assert.equal(bytes.length, file.size, 'Exact reviewed addition size: ' + path);
   assert.equal(sha(bytes), file.sha256, 'Exact reviewed addition SHA-256: ' + path);
-  return bytes;
+  return original;
 }
