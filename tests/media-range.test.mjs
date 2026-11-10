@@ -40,6 +40,15 @@ test('invalid bounds, conditional requests and HEAD keep HTTP semantics', async 
   assert.equal(head.status,200);assert.equal((await head.arrayBuffer()).byteLength,0);
 });
 
+test('ranges work when the internal asset binding omits Content-Length', async () => {
+  const response = await worker.fetch(request({Range:'bytes=40-49'}), {
+    ASSETS: {fetch: async () => new Response(data, {headers:{'Content-Type':'video/mp4'}})},
+  });
+  assert.equal(response.status,206);
+  assert.equal(response.headers.get('Content-Range'),'bytes 40-49/100');
+  assert.deepEqual(new Uint8Array(await response.arrayBuffer()),data.slice(40,50));
+});
+
 test('only the approved video is routed first; other routes and errors pass through', async () => {
   const config=JSON.parse(readFileSync(new URL('../wrangler.jsonc',import.meta.url)));
   assert.deepEqual(config.assets.run_worker_first,[videoPath]);
