@@ -1,8 +1,11 @@
 {
   "name": "tanmay-site",
+  "main": "worker/media-range.mjs",
   "compatibility_date": "2026-07-01",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/media/reviews/paulina-recenze-titulky.mp4"],
     "not_found_handling": "404-page"
   },
   "workers_dev": false
