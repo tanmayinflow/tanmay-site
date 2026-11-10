@@ -22,7 +22,7 @@ export default function ReviewVideo({ lang = "cs" }: { lang?: string }) {
         preload="none"
         width={720}
         height={1280}
-        poster="/media/reviews/paulina-recenze-titulky-poster.jpg"
+        poster="/media/reviews/paulina-poster-frame-2639.jpg"
         aria-label={czech
           ? "Video recenze klientky Pauliny, anglicky s českými titulky"
           : "Video review from client Paulina, in English with Czech subtitles"}
