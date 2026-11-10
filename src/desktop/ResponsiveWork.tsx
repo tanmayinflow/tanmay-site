@@ -5,9 +5,14 @@ import { RichText } from '../mobile/MobileRichText';
 import { mobilePreviewCopy as p } from '../mobile/PreviewDetails';
 import { previewText, previewWhatsApp } from '../preview-copy';
 import './responsive-work-story.css';
+import './responsive-work-flow.css';
 
 function Curve({ className = '' }: { className?: string }) {
   return <svg className={'responsive-work-curve ' + className} viewBox="0 0 88 110" fill="none" aria-hidden="true"><path d="M68 7C72 49 53 72 18 92" stroke="currentColor" strokeWidth="2" strokeDasharray="5 8" strokeLinecap="round"/><path d="m22 77-6 17 18 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>;
+}
+
+function JourneyArrow() {
+  return <svg className="responsive-work-curve responsive-work-curve--journey" viewBox="0 0 110 64" fill="none" aria-hidden="true" focusable="false"><path d="M7 34C36 17 68 17 99 34" stroke="currentColor" strokeWidth="2" strokeDasharray="5 8" strokeLinecap="round"/><path d="m88 21 13 14-18 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>;
 }
 
 /** Desktop uses the same approved content as the phone, arranged for reading across a wider surface. */
@@ -18,7 +23,7 @@ export function ResponsiveWorkNeeds({ lang }: { lang: string }) {
       <h2 className="h-display h2" id="responsive-work-needs-title">{c(p.needsTitle)}</h2>
       <div className="responsive-work-journey">
         <div><h3>{lang === 'en' ? 'Now' : 'Teď'}</h3><p>{c(p.now)}</p></div>
-        <Curve/>
+        <JourneyArrow/>
         <div className="responsive-work-destination"><h3>{lang === 'en' ? 'Where you want to be' : 'Kam chceš'}</h3><p>{c(p.destination)}</p></div>
       </div>
       <h3 className="responsive-work-barriers-title">{c(p.barriersTitle)}</h3>

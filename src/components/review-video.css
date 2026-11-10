@@ -1,0 +1,90 @@
+.review-video-card {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 300px);
+  align-items: center;
+  gap: clamp(24px, 4vw, 56px);
+  width: min(100%, 760px);
+  margin: clamp(36px, 5vw, 64px) auto 0;
+  padding: 24px;
+  box-sizing: border-box;
+  border: 0;
+  background: transparent;
+}
+
+/* A soft wash keeps the page's paper texture visible around the portrait. */
+.review-video-card::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -24px -12px;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 65% 48%, rgba(229, 216, 196, .12), transparent 69%),
+    radial-gradient(ellipse at 75% 60%, rgba(153, 92, 72, .11), transparent 67%);
+}
+
+/* The mobile page resets margins for every figure. */
+.tm-mobile .review-video-card { margin: clamp(36px, 5vw, 64px) auto 0; }
+
+.review-video-caption { display: grid; gap: 14px; align-content: center; }
+.review-video-label {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.review-video-title {
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: clamp(28px, 3.3vw, 38px);
+  font-weight: 400;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+.review-video-note { font-size: 14px; line-height: 1.6; opacity: .8; }
+.review-video-duration { display: block; margin-top: 4px; font-variant-numeric: tabular-nums; }
+.review-video-player { position: relative; width: 100%; max-width: 300px; justify-self: center; }
+.review-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 9 / 16;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #2b2a27;
+  box-shadow: 0 16px 34px -24px rgba(23, 23, 21, .45);
+}
+.review-video-play {
+  position: absolute;
+  top: 47%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 12px 22px;
+  border: 1px solid rgba(43, 42, 39, .12);
+  border-radius: 999px;
+  background: #e5d8c4;
+  color: #242520;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  touch-action: manipulation;
+  box-shadow: 0 4px 18px rgba(23, 23, 21, .12);
+}
+.review-video:focus-visible,
+.review-video-play:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+
+@media (max-width: 767px) {
+  .review-video-card { grid-template-columns: minmax(0, 1fr); gap: 22px; padding: 16px 0; }
+  .review-video-caption { text-align: center; gap: 10px; }
+  .review-video-duration { display: inline; margin-left: 12px; }
+}

@@ -4,6 +4,7 @@ import { CLIENT_REVIEWS } from '../components/home-reviews.data.js';
 import { Arrow, Chapter } from './MobileElements';
 import { StoryCard } from './MobileStoryCard';
 import { useCircularRail } from './useCircularRail';
+import ReviewVideo from '../components/ReviewVideo';
 
 const MOBILE_REVIEWS = [...CLIENT_REVIEWS.filter(r=>r.id==='gledis-kmonickova'),...CLIENT_REVIEWS.filter(r=>r.id!=='gledis-kmonickova')];
 function ReviewQuote(){return <span className="m-review-quote" aria-hidden="true">„</span>;}
@@ -41,5 +42,6 @@ export default function MobileReviews({lang,preview=false}:{lang:string;preview?
         <button type="button" className="m-carousel-arrow" onClick={()=>rail.step(1)} aria-label={lang==='en'?'Next review':'Další recenze'} aria-controls={rail.id}><Arrow/></button>
       </div>
     </div>
+    <ReviewVideo lang={lang}/>
   </Chapter>;
 }

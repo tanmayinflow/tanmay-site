@@ -1,0 +1,132 @@
+{
+  "baseline": "5ecf27ebd61ab62690768ab9b522498b83a4f1c3",
+  "files": [
+    {
+      "path": "src/App.tsx",
+      "beforeSha256": "f88504f90a48631c93ec715bc33ffece88821a20fcf66eda07d35184a749242c",
+      "afterSha256": "9cdccf78d40c62242dd74d7870b0ba65eef026c1367578be86b558d699f35679",
+      "replacements": [
+        {
+          "offset": 575,
+          "before": "",
+          "after": "import './desktop/responsive-material-edges.css';\n"
+        }
+      ]
+    },
+    {
+      "path": "src/components/HomeReferences.tsx",
+      "beforeSha256": "422a12bcd74a89b228e66276b023e2279502437d7a8c0f58d399c2664cfb225d",
+      "afterSha256": "fd94304547b93a35d418d2f6256c02b9a27e0fd8c34b999235306c5603f2ad13",
+      "replacements": [
+        {
+          "offset": 289,
+          "before": "",
+          "after": "import ReviewVideo from \"./ReviewVideo\";\n"
+        },
+        {
+          "offset": 8282,
+          "before": "",
+          "after": "        <ReviewVideo lang={lang}/>\n"
+        }
+      ]
+    },
+    {
+      "path": "src/desktop/ResponsiveHomeProcess.tsx",
+      "beforeSha256": "36a435eb9d17a632fb2dde25de585fc24cae9e17ec1d877a37243f68c995f7dd",
+      "afterSha256": "9d3806adc0282b4e23ee33939d3da3ff322b55bba62ef4146a6e45a03a5bec3b",
+      "replacements": [
+        {
+          "offset": 219,
+          "before": "function ProcessConnector({ work, reverse }: { work: boolean; reverse: boolean }) {\n",
+          "after": "function ProcessConnector({ reverse }: { reverse: boolean }) {\n"
+        },
+        {
+          "offset": 485,
+          "before": "    {work ? <>\n      <path d=\"M6 9 C30 9 32 40 79 43\"/>\n      <path d=\"M6 12 C29 13 29 52 79 55\"/>\n    </> : <>\n",
+          "after": ""
+        },
+        {
+          "offset": 588,
+          "before": "    </>}\n",
+          "after": ""
+        },
+        {
+          "offset": 1637,
+          "before": "          {index < steps.length - 1 && <ProcessConnector work={work} reverse={index === 1}/>}\n",
+          "after": "          {index < steps.length - 1 && <ProcessConnector reverse={index === 1}/>}\n"
+        }
+      ]
+    },
+    {
+      "path": "src/desktop/ResponsiveWork.tsx",
+      "beforeSha256": "5f772b6203d8e71a34c2e69c077577585fb1036533b80013abb212932f6cff02",
+      "afterSha256": "984f7a79446a86d988ed96259c0c6fa77875e9eae66a15d506065f8397fbf9f5",
+      "replacements": [
+        {
+          "offset": 379,
+          "before": "",
+          "after": "import './responsive-work-flow.css';\n"
+        },
+        {
+          "offset": 829,
+          "before": "",
+          "after": "}\n\nfunction JourneyArrow() {\n  return <svg className=\"responsive-work-curve responsive-work-curve--journey\" viewBox=\"0 0 110 64\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M7 34C36 17 68 17 99 34\" stroke=\"currentColor\" strokeWidth=\"2\" strokeDasharray=\"5 8\" strokeLinecap=\"round\"/><path d=\"m88 21 13 14-18 3\" stroke=\"currentColor\" strokeWidth=\"2\" strokeLinecap=\"round\" strokeLinejoin=\"round\"/></svg>;\n"
+        },
+        {
+          "offset": 1853,
+          "before": "        <Curve/>\n",
+          "after": "        <JourneyArrow/>\n"
+        }
+      ]
+    },
+    {
+      "path": "src/mobile/MobileReviews.tsx",
+      "beforeSha256": "0c3e6490af7f5360a0341964c10dbf4b1fbd2ce6a47f53ddc4c2c360c1aaf652",
+      "afterSha256": "6552b73496142945cffa9500cadbc534e64c6e3691f10e435cb04ed2b02ab7f3",
+      "replacements": [
+        {
+          "offset": 366,
+          "before": "",
+          "after": "import ReviewVideo from '../components/ReviewVideo';\r\n"
+        },
+        {
+          "offset": 4344,
+          "before": "",
+          "after": "    <ReviewVideo lang={lang}/>\r\n"
+        }
+      ]
+    }
+  ],
+  "newFiles": [
+    {
+      "path": "src/components/ReviewVideo.tsx",
+      "sha256": "b2d7e44316210c774865081907493832d5e9be84d290a6708f694472a08db300",
+      "size": 2781
+    },
+    {
+      "path": "src/components/review-video.css",
+      "sha256": "09068043dc7eca732a019c487cff8403d1a0baffaa01004ceec271c72b6df41f",
+      "size": 2665
+    },
+    {
+      "path": "src/desktop/responsive-material-edges.css",
+      "sha256": "684cd8f8238f8b6af983413f1b0baf6dd5861b618fe6557738b969152a7927f2",
+      "size": 2913
+    },
+    {
+      "path": "src/desktop/responsive-work-flow.css",
+      "sha256": "c21d9aa70fab79de27b9eda834f832ece664a0c01ea26c7427ebdaec4177e987",
+      "size": 1456
+    },
+    {
+      "path": "public/media/reviews/paulina-recenze-titulky.mp4",
+      "sha256": "9b3196960b170cc6a845acb6fdd921e35da5f49af9a35dc0f073b75256cc69d4",
+      "size": 24064548
+    },
+    {
+      "path": "public/media/reviews/paulina-recenze-titulky-poster.jpg",
+      "sha256": "670080df4e6f479683e7da2cb318bd2319bff5a3ccd70b27f9311a787ff1e856",
+      "size": 93084
+    }
+  ]
+}

@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { CLIENT_REVIEWS } from "./home-reviews.data.js";
 import "./home-reviews.css";
+import ReviewVideo from "./ReviewVideo";
 
 type Lang = "cs" | "en";
 const COUNT = CLIENT_REVIEWS.length;
@@ -149,6 +150,7 @@ export default function HomeReferences({ lang = "cs", preview = false }: { lang?
           </div>
           <p className="tmr-sr" aria-live="polite" aria-atomic="true">{announcement}</p>
         </div>
+        <ReviewVideo lang={lang}/>
       </div>
       {opened !== null && typeof document !== "undefined" && createPortal(
         <ReviewReader reviews={reviews} index={opened} lang={language} initialOriginal={openOriginal} onClose={closeReader}

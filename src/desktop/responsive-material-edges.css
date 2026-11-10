@@ -1,0 +1,73 @@
+/* Restore the original paper/ink edges on the larger-screen composition.
+   Mobile owns its material transitions below the desktop breakpoint. */
+@media (min-width:900px) {
+  body .site-page {
+    --desktop-material-edge-height:clamp(54px,6vw,88px);
+  }
+
+  /* The new handstand chapter follows paper, but has no edge in its markup. */
+  body .site-page[data-collaboration-v99] > div.site-ink.preview-cotton::before {
+    content:"";
+    display:block;
+    position:relative;
+    width:100%;
+    height:var(--desktop-material-edge-height);
+    pointer-events:none;
+    background-color:var(--sandstone);
+    background-image:var(--tex-sand);
+    background-size:768px 768px;
+    -webkit-mask:url('/media/material/edge-strata.png') center / 100% 100% no-repeat;
+    mask:url('/media/material/edge-strata.png') center / 100% 100% no-repeat;
+  }
+
+  /* Reuse the archived original full-width grain instead of the shallow new lip. */
+  body .site-page .responsive-work-offer {
+    padding-bottom:calc(clamp(64px,7vw,112px) + var(--desktop-material-edge-height));
+  }
+  body .site-page .responsive-work-offer::after {
+    height:var(--desktop-material-edge-height);
+    -webkit-mask-image:url('/media/material/edge-strata-top.png');
+    mask-image:url('/media/material/edge-strata-top.png');
+  }
+
+  /* About and Practice end in earth. Both sides keep the same torn paper edge. */
+  body .site-page .contact-coda.site-earth {
+    padding-bottom:calc(clamp(58px,8vw,104px) + var(--desktop-material-edge-height));
+  }
+  body .site-page .contact-coda.site-earth > .material-edge--linen {
+    height:var(--desktop-material-edge-height);
+    background-color:var(--sandstone);
+    background-image:var(--tex-sand);
+    background-size:768px 768px;
+    -webkit-mask-image:url('/media/material/edge-strata.png');
+    mask-image:url('/media/material/edge-strata.png');
+  }
+  body .site-page .contact-coda.site-earth::after {
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:-1px;
+    height:var(--desktop-material-edge-height);
+    pointer-events:none;
+    background-color:var(--sandstone);
+    background-image:var(--tex-sand);
+    background-size:768px 768px;
+    -webkit-mask:url('/media/material/edge-strata-top.png') center / 100% 100% no-repeat;
+    mask:url('/media/material/edge-strata-top.png') center / 100% 100% no-repeat;
+  }
+
+  /* Whitespace separates editorial content; controls and card outlines stay intact. */
+  body .site-page .proof-row.about-proof-v918,
+  body .site-page .proof-row.about-proof-v918 > .proof-item,
+  body .site-page .about-approach-v912d .editorial-row,
+  body .site-page .practice-work-v8 .editorial-row,
+  body .site-page .d-practice-copy-row > .anchor-light,
+  body .site-page .reflection-closing,
+  body .site-page .meaning-closing,
+  body .site-page .contact-coda.site-linen,
+  body .site-page .responsive-work-week {
+    border:0;
+    box-shadow:none;
+  }
+}

@@ -8,6 +8,7 @@ import { previewText, previewWhatsApp, previewMail } from "./preview-copy";
 import "./preview-v3.css";
 import './desktop/responsive-hero.css';
 import './desktop/responsive-home-practice.css';
+import './desktop/responsive-material-edges.css';
 import './desktop/responsive-accessibility.css';
 import { ResponsiveHomeProcess } from './desktop/ResponsiveHomeProcess';
 import { ResponsiveHomeAbout } from './desktop/ResponsiveHomeAbout';

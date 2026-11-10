@@ -1,0 +1,54 @@
+/* Keep the desktop reading direction explicit; the phone layout is independent. */
+@media (min-width: 900px) {
+  body .responsive-work-journey > .responsive-work-curve--journey {
+    width: 100%;
+    height: auto;
+    transform: none;
+  }
+
+  body .responsive-work-inclusions {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 116px;
+    max-width: 780px;
+    margin-inline: auto;
+    padding-bottom: 56px;
+  }
+
+  body .responsive-work-inclusions article,
+  body .responsive-work-inclusions article:nth-child(even) {
+    padding: 0;
+  }
+
+  body .responsive-work-inclusions article h3,
+  body .responsive-work-inclusions article p {
+    max-width: 34rem;
+  }
+
+  body .responsive-work-inclusions article:nth-child(even) h3,
+  body .responsive-work-inclusions article:nth-child(even) p {
+    margin-left: auto;
+  }
+
+  body .responsive-work-inclusions article .responsive-work-curve,
+  body .responsive-work-inclusions article:nth-child(2) .responsive-work-curve,
+  body .responsive-work-inclusions article:nth-child(3) .responsive-work-curve {
+    top: calc(100% + 14px);
+    right: 24px;
+    left: auto;
+    width: 68px;
+    height: 86px;
+    transform: scaleX(-1);
+  }
+
+  body .responsive-work-inclusions article:nth-child(even) .responsive-work-curve {
+    right: auto;
+    left: 24px;
+    transform: none;
+  }
+
+  body .responsive-home-process--work .responsive-home-process__connector {
+    color: #8b5141;
+    stroke-width: 2;
+    opacity: .75;
+  }
+}
