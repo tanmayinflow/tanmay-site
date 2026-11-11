@@ -46,6 +46,16 @@
     transform: scaleX(-1);
   }
 
+  body .responsive-work-inclusions article:first-child .responsive-work-curve {
+    right: auto;
+    left: calc(60% - 34px);
+  }
+
+  body .responsive-work-inclusions article:nth-child(2) .responsive-work-curve {
+    right: auto;
+    left: calc(40% - 34px);
+  }
+
   body .responsive-home-process--work .responsive-home-process__connector {
     color: #8b5141;
     stroke-width: 2;

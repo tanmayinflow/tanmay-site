@@ -58,6 +58,8 @@
   }
 
   /* Whitespace separates editorial content; controls and card outlines stay intact. */
+  body .site-page .definition-pair,
+  body .site-page .definition-pair > article,
   body .site-page .proof-row.about-proof-v918,
   body .site-page .proof-row.about-proof-v918 > .proof-item,
   body .site-page .about-approach-v912d .editorial-row,
