@@ -20,6 +20,8 @@
   z-index: -1;
   inset: -24px -12px;
   pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
   background:
     radial-gradient(ellipse at 65% 48%, rgba(229, 216, 196, .12), transparent 69%),
     radial-gradient(ellipse at 75% 60%, rgba(153, 92, 72, .11), transparent 67%);

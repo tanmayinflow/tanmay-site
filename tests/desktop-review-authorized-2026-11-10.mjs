@@ -26,9 +26,12 @@ export function restoreDesktopReviewIfCurrent(path, bytes) {
 
 const videoSimplification = JSON.parse(readFileSync(new URL('./video-simplification-2026-11-10.json', import.meta.url)));
 const ownerPoster = JSON.parse(readFileSync(new URL('./owner-poster-2026-11-10.json', import.meta.url)));
+const nameFade = JSON.parse(readFileSync(new URL('./paulin-name-fade-2026-11-11.json', import.meta.url)));
 export function verifyDesktopReviewAddition(path, original) {
-  const prior = path === ownerPoster.path && sha(original) === ownerPoster.afterSha256
-    ? Buffer.from(ownerPoster.before, 'base64') : original;
+  const correction = nameFade.find(item => item.path === path && item.afterSha256 === sha(original));
+  const corrected = correction ? Buffer.from(correction.before, 'base64') : original;
+  const prior = path === ownerPoster.path && sha(corrected) === ownerPoster.afterSha256
+    ? Buffer.from(ownerPoster.before, 'base64') : corrected;
   const accepted = videoSimplification.find(item => item.path === path && item.afterSha256 === sha(prior));
   const bytes = accepted ? Buffer.from(accepted.before, 'base64') : prior;
   const file = desktopReviewDelta.newFiles.find(item => item.path === path);

@@ -10,7 +10,7 @@ export default function ReviewVideo({ lang = "cs" }: { lang?: string }) {
     <figure id="paulina-recenze" className="review-video-card">
       <figcaption className="review-video-caption">
         <span className="review-video-label">{czech ? "Video recenze" : "Video review"}</span>
-        <span className="review-video-title">{czech ? "Paulina o spolupráci" : "Paulina on training together"}</span>
+        <span className="review-video-title">{czech ? "Paulin o spolupráci" : "Paulin on training together"}</span>
       </figcaption>
       <div className="review-video-player">
       <video
@@ -24,13 +24,13 @@ export default function ReviewVideo({ lang = "cs" }: { lang?: string }) {
         height={1280}
         poster="/media/reviews/paulina-poster-frame-2639.jpg"
         aria-label={czech
-          ? "Video recenze klientky Pauliny, anglicky s českými titulky"
-          : "Video review from client Paulina, in English with Czech subtitles"}
+          ? "Video recenze klientky Paulin, anglicky s českými titulky"
+          : "Video review from client Paulin, in English with Czech subtitles"}
       >
         <source src="/media/reviews/paulina-recenze-titulky.mp4" type="video/mp4" />
         {czech ? "Tvůj prohlížeč nepodporuje přehrávání videa. " : "Your browser does not support video playback. "}
         <a href="/media/reviews/paulina-recenze-titulky.mp4">
-          {czech ? "Otevřít video recenzi Pauliny" : "Open Paulina’s video review"}
+          {czech ? "Otevřít video recenzi Paulin" : "Open Paulin’s video review"}
         </a>
       </video>
       </div>
