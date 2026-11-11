@@ -1,4 +1,5 @@
-import { useId, useState } from 'react';
+import { useId, useRef, useState } from 'react';
+import { useResponsiveCycleMotion } from './useResponsiveCycleMotion';
 import CollaborationCycle from '../components/CollaborationCycle';
 import { copy } from '../mobile/MobileElements';
 import { RichText } from '../mobile/MobileRichText';
@@ -38,11 +39,13 @@ export function ResponsiveWorkNeeds({ lang }: { lang: string }) {
 }
 
 function ResponsiveWorkCycle({ lang }: { lang: string }) {
+  const root = useRef<HTMLDivElement>(null);
+  useResponsiveCycleMotion(root);
   const [selected, setSelected] = useState<number | null>(null);
   const uid = useId();
   const items = [29, 31, 33].map(index => ({ title: copy('PageSpoluprace', index, lang), text: copy('PageSpoluprace', index + 1, lang) }));
   const choose = (index: number) => setSelected(current => current === index ? null : index);
-  return <div className="responsive-work-cycle" onKeyDown={event => { if (event.key === 'Escape') setSelected(null); }}>
+  return <div ref={root} className="responsive-work-cycle" onKeyDown={event => { if (event.key === 'Escape') setSelected(null); }}>
     <div className="responsive-work-cycle-row"><div className="responsive-work-cycle-art"><CollaborationCycle/></div><div className="responsive-work-cycle-buttons">{items.map((item, index) => <button key={item.title} type="button" aria-expanded={selected === index} aria-controls={uid + '-' + index} onClick={() => choose(index)}>{item.title}<svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m7 5 5 5-5 5" stroke="currentColor" strokeWidth="1.4"/></svg></button>)}</div></div>
     {items.map((item, index) => <div key={item.title} id={uid + '-' + index} className="responsive-work-cycle-answer" hidden={selected !== index}><p><RichText>{item.text}</RichText></p></div>)}
   </div>;
@@ -50,7 +53,7 @@ function ResponsiveWorkCycle({ lang }: { lang: string }) {
 
 export function ResponsiveWorkOffer({ lang }: { lang: string }) {
   const c = (pair: readonly string[]) => previewText(pair, lang);
-  return <section className="site-ink preview-cotton responsive-work-offer" id="co-dostanes" aria-labelledby="responsive-work-offer-title"><div className="wrap">
+  return <section className="responsive-work-offer" id="co-dostanes" aria-labelledby="responsive-work-offer-title"><div className="wrap">
     <header className="responsive-work-offer-heading"><h2 className="h-display h2" id="responsive-work-offer-title">{c(p.startLabel)}</h2><p>{c(p.startTitle)}</p></header>
     <div className="responsive-work-inclusions">{p.startItems.map(([title, body], index) => <article key={title[0]}><h3>{c(title)}</h3><p>{c(body)}</p>{index < p.startItems.length - 1 && <Curve className={index % 2 ? 'is-mirrored' : ''}/>}</article>)}</div>
     <div className="responsive-work-week"><div><h3>{c(p.weekTitle).split(/(\([^)]*\))/).map((part, index) => part.startsWith('(') ? <span className="preview-week-example" key={index}>{part}</span> : part)}</h3><p>{c(p.week)}</p></div><ResponsiveWorkCycle lang={lang}/></div>

@@ -42,7 +42,7 @@
   body .responsive-work-week .preview-week-example {color:#b4a095;font-weight:400}
   body .responsive-work-week p {font:400 17px/1.75 var(--ff-body);margin:0}
   body .responsive-work-cycle-row {display:flex;justify-content:center;align-items:center;gap:24px}
-  body .responsive-work-cycle-art {flex:0 0 130px;width:130px}
+  body .responsive-work-cycle-art {flex:0 0 130px;width:130px;transform-origin:50% 50%;transition:none}
   body .responsive-work-cycle-art .collaboration-cycle-v919 {width:100%;height:auto;margin:0;position:static;opacity:1;transform:none}
   body .responsive-work-cycle-art img {display:block;width:100%;height:auto}
   body .responsive-work-cycle-buttons {display:flex;flex-direction:column;align-items:flex-start;min-width:0;gap:6px}
@@ -97,4 +97,8 @@
   body .site-page .page-section:has([data-about-heading="roots"]) .editorial-list {gap:12px}
   body .site-page .page-section:has([data-about-heading="roots"]) .editorial-row {padding-inline:16px}
   body .site-page .page-section:has([data-about-heading="roots"]) .editorial-row h3 {font-size:27px}
+}
+
+@media (min-width:900px) and (prefers-reduced-motion:reduce) {
+  body .responsive-work-cycle-art {transform:none!important}
 }

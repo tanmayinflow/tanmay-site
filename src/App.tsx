@@ -3422,8 +3422,8 @@ function PageSpolupracePreview({ lang }: any) {
 
 
     <ResponsiveWorkNeeds lang={lang}/>
-    <div className="site-ink preview-cotton"><HomeWorkPreview lang={lang}/></div>
-    <ResponsiveWorkOffer lang={lang}/>
+    <div className="site-ink preview-cotton"><HomeWorkPreview lang={lang}/>
+      <ResponsiveWorkOffer lang={lang}/></div>
     <ResponsiveHomeProcess lang={lang} work/>
 
 <div className="site-linen"><HomeReferences lang={lang} preview/></div><ResponsiveHomeAbout lang={lang} work/>

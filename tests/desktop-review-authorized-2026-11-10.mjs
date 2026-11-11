@@ -1,3 +1,4 @@
+import {restoreContinuousWorkCycle} from './continuous-work-cycle-2026-11-11.mjs';
 import {restoreDesktopFourFixes} from './desktop-four-fixes-2026-11-11.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -7,6 +8,7 @@ export const desktopReviewDelta = JSON.parse(readFileSync(new URL('./desktop-rev
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 
 export function withoutAuthorizedDesktopReview(path, bytes) {
+  bytes = restoreContinuousWorkCycle(path, bytes);
   const file = desktopReviewDelta.files.find(item => item.path === path);
   if (!file) return bytes;
   assert.equal(sha(bytes), file.afterSha256, 'Exact reviewed desktop flow, materials and local video integration: ' + path);
@@ -21,6 +23,7 @@ export function withoutAuthorizedDesktopReview(path, bytes) {
 }
 
 export function restoreDesktopReviewIfCurrent(path, bytes) {
+  bytes = restoreContinuousWorkCycle(path, bytes);
   const file = desktopReviewDelta.files.find(item => item.path === path);
   return file && sha(bytes) === file.afterSha256 ? withoutAuthorizedDesktopReview(path, bytes) : bytes;
 }
