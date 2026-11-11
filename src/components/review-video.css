@@ -63,3 +63,19 @@
   .review-video-card { grid-template-columns: minmax(0, 1fr); gap: 22px; padding: 16px 0; }
   .review-video-caption { text-align: center; gap: 10px; }
   }
+
+/* On wide layouts the wash follows the portrait, not the two-column card. */
+@media (min-width: 900px) {
+  .review-video-card::before { content: none; }
+  .review-video-player::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    --review-wash-side: clamp(24px, calc((100vw - 900px) / 2 + 24px), 110px);
+    inset: -72px calc(-1 * var(--review-wash-side));
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse closest-side, rgba(229, 216, 196, .18), transparent 100%),
+      radial-gradient(ellipse closest-side, rgba(153, 92, 72, .16), transparent 100%);
+  }
+}

@@ -71,3 +71,22 @@
     box-shadow:none;
   }
 }
+
+@media (min-width: 900px) {
+  body .site-page .responsive-work-needs { overflow: visible; }
+  body .site-page .responsive-work-needs::before {
+    content: "";
+    position: absolute;
+    z-index: 4;
+    left: 0;
+    right: 0;
+    top: calc(-1 * var(--desktop-material-edge-height) + 1px);
+    height: var(--desktop-material-edge-height);
+    pointer-events: none;
+    background-color: var(--sandstone);
+    background-image: var(--tex-sand);
+    background-size: 768px 768px;
+    -webkit-mask: url('/media/material/edge-strata-top.png') center / 100% 100% no-repeat;
+    mask: url('/media/material/edge-strata-top.png') center / 100% 100% no-repeat;
+  }
+}

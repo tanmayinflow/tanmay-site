@@ -1,7 +1,7 @@
 /* The same portrait and approved messages, composed for a wide viewport. */
 @media (min-width: 900px) {
   .opening.responsive-opening.surf--sand {
-    --responsive-hero-height: calc(clamp(590px, calc(100svh - 88px), 900px) + var(--topbar-h));
+    --responsive-hero-height: max(700px, 100svh);
     height: auto;
     min-height: var(--responsive-hero-height);
     padding: calc(var(--topbar-h) + 56px) 0 64px;
@@ -102,3 +102,23 @@
   .opening.responsive-opening.surf--sand .body-txt { font-size: 16px; }
 }
 
+
+@media (min-width: 900px) {
+  /* The dark outgoing edge starts below the first complete screen. */
+  .opening.responsive-opening.surf--sand:not(.release-work-hero) {
+    --responsive-hero-height: calc(max(700px, 100svh) + var(--hero-edge-h));
+  }
+  .opening.responsive-opening.surf--sand.release-work-hero { background-size: 768px 768px; }
+  /* Paper covers the copper before the portrait reaches its lower edge. */
+  .release-work-hero .portrait-monolith::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 190px;
+    background-color: var(--sandstone);
+    background-image: var(--tex-sand);
+    background-size: 768px 768px;
+    -webkit-mask: url('/media/material/edge-strata-top.png') center / 100% 100% no-repeat;
+    mask: url('/media/material/edge-strata-top.png') center / 100% 100% no-repeat;
+  }
+}

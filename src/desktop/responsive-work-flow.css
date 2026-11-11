@@ -37,13 +37,13 @@
     left: auto;
     width: 68px;
     height: 86px;
-    transform: scaleX(-1);
+    transform: none;
   }
 
   body .responsive-work-inclusions article:nth-child(even) .responsive-work-curve {
     right: auto;
     left: 24px;
-    transform: none;
+    transform: scaleX(-1);
   }
 
   body .responsive-home-process--work .responsive-home-process__connector {
