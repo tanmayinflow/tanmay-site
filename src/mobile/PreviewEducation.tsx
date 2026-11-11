@@ -8,7 +8,8 @@ export const mobileEducation = [
  {title:['Funkční trenér','Functional trainer'],school:'Vital Institut',hours:150,theory:68,practice:82,url:'https://vitalinstitut.cz/trenersky-kurz/funkcni-trener/'},
  {title:['Rehabilitační trenér','Rehabilitation trainer'],school:'Vital Institut',hours:150,theory:68,practice:82,url:'https://vitalinstitut.cz/trenersky-kurz/rehabilitacni-trener/'},
  {title:['Instruktor jógy','Yoga instructor'],school:'Kabir Yoga',detail:['Celkem 400 hodin.','400 hours in total.'],url:'https://kabiryoga.com/certifikovany-instruktorsky-kurz-jogy-yofyz-2020-osnova-a-podrobnosti/'},
- {title:['Studium psychologie','Psychology studies'],school:'Univerzita Palackého v Olomouci',detail:['2019–2024 · 5 let studia','2019–2024 · 5 years of study'],url:'https://psych.upol.cz/'}
+ {title:['Studium psychologie','Psychology studies'],school:'Univerzita Palackého v Olomouci',detail:['2019–2024 · 5 let studia','2019–2024 · 5 years of study'],url:'https://psych.upol.cz/'},
+ {title:['Buddhistická jóga a meditace','Buddhist yoga and meditation'],school:'Body Mandala',detail:['2023–dosud · týdenní studium a retreaty','2023–present · weekly study and retreats'],url:'https://www.bodymandala.org'}
 ] as const;
 
 function Credential({index,lang}:{index:number;lang:string}) {
@@ -20,7 +21,7 @@ function Credential({index,lang}:{index:number;lang:string}) {
 export function EducationColumns({lang,illustration=false}:{lang:string;illustration?:boolean}) {
  const n=lang==='en'?1:0;
  const groups=[
-  [{title:['Profesní kvalifikace','Professional qualification'],items:[0]},{title:['Jóga','Yoga'],items:[4]},{title:['Studium','Studies'],items:[5]}],
+  [{title:['Profesní kvalifikace','Professional qualification'],items:[0]},{title:['Jóga','Yoga'],items:[4,6]},{title:['Studium','Studies'],items:[5]}],
   [{title:['Pohyb a trénink','Movement and training'],items:[1,2,3]}],
  ];
  return <div className="preview-education-columns">{groups.map((column,i)=><div className="preview-education-column" key={i}>{column.map(group=><section className="preview-education-group" key={group.title[0]}><h3>{group.title[n]}</h3>{group.items.map(index=><Credential key={index} index={index} lang={lang}/>)}</section>)}{illustration&&i===1&&<img className="release-education-equipment" src="/media/refine-v9-17/equipment-linen-540.webp" width="540" height="347" alt={n?'Rings, a kettlebell and parallettes.':'Kruhy, kettlebell a bradla.'} loading="lazy"/>}</div>)}</div>;
