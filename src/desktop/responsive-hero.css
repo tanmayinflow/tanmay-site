@@ -108,17 +108,9 @@
   .opening.responsive-opening.surf--sand:not(.release-work-hero) {
     --responsive-hero-height: calc(max(700px, 100svh) + var(--hero-edge-h));
   }
-  .opening.responsive-opening.surf--sand.release-work-hero { background-size: 768px 768px; }
-  /* Paper covers the copper before the portrait reaches its lower edge. */
-  .release-work-hero .portrait-monolith::after {
-    content: "";
-    position: absolute;
-    inset: auto 0 0;
-    height: 190px;
-    background-color: var(--sandstone);
-    background-image: var(--tex-sand);
+  /* Mask and portrait share one lower edge; paper overlaps them after the first screen. */
+  .opening.responsive-opening.surf--sand.release-work-hero {
+    --responsive-hero-height: calc(max(700px, 100svh) + var(--desktop-material-edge-height));
     background-size: 768px 768px;
-    -webkit-mask: url('/media/material/edge-strata-top.png') center / 100% 100% no-repeat;
-    mask: url('/media/material/edge-strata-top.png') center / 100% 100% no-repeat;
   }
 }
