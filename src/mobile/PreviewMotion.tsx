@@ -21,6 +21,12 @@ export function useProcessConnectors(root:RefObject<HTMLOListElement>,key:string
     const width=included?76:96,height=included?88:84;
     // Offer arrows occupy their own space in normal flow. Font loading,
     // text enlargement and wrapping must never move them over the copy.
+    if(included&&i===0){
+     const item=arrow.closest('li')!,copy=item.querySelector('.preview-step-copy')!;
+     const range=document.createRange();range.selectNodeContents(copy);
+     const lines=Array.from(range.getClientRects()).filter(b=>b.width>0),last=lines[lines.length-1];
+     if(last)arrow.style.setProperty('--included-first-line-end',(last.right-item.getBoundingClientRect().left)+'px');
+    }
     if(!included){
      const item=arrow.closest('li')!,copy=item.querySelector('.preview-step-copy')!;
      const range=document.createRange();range.selectNodeContents(copy);

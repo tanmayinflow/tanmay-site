@@ -408,8 +408,8 @@
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-included-steps > li:not(:last-child) .preview-step-title {color:#ca795b}
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-included-steps > li:not(:last-child) {padding-bottom:0}
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-included-steps > li > .preview-curve-arrow {position:relative;inset:auto;translate:none;margin:24px 16px 24px auto;max-width:none;max-height:none}
- /* Inward connector placement belongs to desktop; retain the mobile composition. */
- .tm-mobile[data-mobile-version][data-preview="v3"] .preview-included-steps > li:first-child > .preview-curve-arrow {rotate:-8deg;width:55px!important;height:66px!important}
+ /* The first mobile connector follows the final text line without moving later steps. */
+ .tm-mobile[data-mobile-version][data-preview="v3"] .preview-included-steps > li:first-child > .preview-curve-arrow {rotate:-8deg;width:55px!important;height:66px!important;margin-top:6px;margin-bottom:42px;margin-left:clamp(0px,calc(var(--included-first-line-end,60%) - 48px),calc(100% - 55px));margin-right:auto}
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-included-steps > li:nth-child(2) > .preview-curve-arrow {rotate:10deg;width:71px!important;height:80px!important;margin-left:16px;margin-right:auto}
  .tm-mobile[data-mobile-version][data-preview="v3"] .preview-included-steps > li:nth-child(3) > .preview-curve-arrow {rotate:-11deg;width:92px!important;height:103px!important}
  .tm-mobile[data-mobile-version][data-preview="v3"] .m-interactive-cycle .m-figure-panel-inner p::before {content:none}

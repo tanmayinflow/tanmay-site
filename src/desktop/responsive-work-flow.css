@@ -40,20 +40,29 @@
     transform: none;
   }
 
-  body .responsive-work-inclusions article:nth-child(even) .responsive-work-curve {
+  /* Exact owner selection saved in the desktop editor on 11 November. */
+  body .responsive-work-inclusions article:nth-child(1) .responsive-work-curve {
+    top: calc(100% + -4px);
     right: auto;
-    left: 24px;
-    transform: scaleX(-1);
-  }
-
-  body .responsive-work-inclusions article:first-child .responsive-work-curve {
-    right: auto;
-    left: calc(60% - 34px);
+    left: calc(53.2% - 34px);
+    transform: rotate(-57deg) scaleX(1);
+    transform-origin: center;
   }
 
   body .responsive-work-inclusions article:nth-child(2) .responsive-work-curve {
+    top: calc(100% + 2px);
     right: auto;
-    left: calc(40% - 34px);
+    left: calc(35.1% - 34px);
+    transform: rotate(52deg) scaleX(-1);
+    transform-origin: center;
+  }
+
+  body .responsive-work-inclusions article:nth-child(3) .responsive-work-curve {
+    top: calc(100% + -4px);
+    right: auto;
+    left: calc(71.9% - 34px);
+    transform: rotate(-33deg) scaleX(1);
+    transform-origin: center;
   }
 
   body .responsive-home-process--work .responsive-home-process__connector {
