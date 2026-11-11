@@ -7,9 +7,9 @@ export const mobileEducation = [
  {title:['Kondiční trenér','Conditioning trainer'],school:'Vital Institut',hours:150,theory:66,practice:84,url:'https://vitalinstitut.cz/trenersky-kurz/kondicni-trener/'},
  {title:['Funkční trenér','Functional trainer'],school:'Vital Institut',hours:150,theory:68,practice:82,url:'https://vitalinstitut.cz/trenersky-kurz/funkcni-trener/'},
  {title:['Rehabilitační trenér','Rehabilitation trainer'],school:'Vital Institut',hours:150,theory:68,practice:82,url:'https://vitalinstitut.cz/trenersky-kurz/rehabilitacni-trener/'},
- {title:['Instruktor jógy','Yoga instructor'],school:'Kabir Yoga',detail:['Celkem 400 hodin.','400 hours in total.'],url:'https://kabiryoga.com/certifikovany-instruktorsky-kurz-jogy-yofyz-2020-osnova-a-podrobnosti/'},
- {title:['Studium psychologie','Psychology studies'],school:'Univerzita Palackého v Olomouci',detail:['2019–2024 · 5 let studia','2019–2024 · 5 years of study'],url:'https://psych.upol.cz/'},
- {title:['Buddhistická jóga a meditace','Buddhist yoga and meditation'],school:'Body Mandala',detail:['2023–dosud · týdenní studium a retreaty','2023–present · weekly study and retreats'],url:'https://www.bodymandala.org'}
+ {title:['Instruktor jógy','Yoga instructor'],school:'Kabir Yoga',detail:[<>Celkem <b>400 hodin</b>.</>,<><b>400 hours</b> in total.</>],url:'https://kabiryoga.com/certifikovany-instruktorsky-kurz-jogy-yofyz-2020-osnova-a-podrobnosti/'},
+ {title:['Studium psychologie','Psychology studies'],school:'Univerzita Palackého v Olomouci',detail:[<>2019–2024 · <b>5 let</b> studia</>,<>2019–2024 · <b>5 years</b> of study</>],url:'https://psych.upol.cz/'},
+ {title:['Buddhistická jóga a meditace','Buddhist yoga and meditation'],school:'Body Mandala',detail:[<>2023–<b>dosud</b> · týdenní studium a retreaty</>,<>2023–<b>present</b> · weekly study and retreats</>],url:'https://www.bodymandala.org'}
 ] as const;
 
 function Credential({index,lang}:{index:number;lang:string}) {

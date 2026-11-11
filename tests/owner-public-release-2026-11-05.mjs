@@ -1,3 +1,4 @@
+import {restoreEducationCta} from './education-cta-2026-11-11.mjs';
 import {restoreBodyMandala} from './body-mandala-2026-11-11.mjs';
 import assert from 'node:assert/strict';
 import {restoreSpacingIfCurrent} from './offer-spacing-authorized-2026-11-06.mjs';
@@ -7,6 +8,7 @@ import {createHash} from 'node:crypto';
 export const releaseDelta=JSON.parse(readFileSync(new URL('./owner-public-release-2026-11-05.json',import.meta.url)));
 const sha=b=>createHash('sha256').update(b).digest('hex');
 export function withoutAuthorizedRelease(path,bytes){
+ bytes=restoreEducationCta(path,bytes);
  bytes=restoreBodyMandala(path,bytes);
  bytes=restoreSpacingIfCurrent(path,bytes);
  bytes=restoreFirstLoadIfCurrent(path,bytes);
@@ -23,6 +25,7 @@ export function withoutAuthorizedRelease(path,bytes){
  return value;
 }
 export function restoreReleaseIfCurrent(path,bytes){
+ bytes=restoreEducationCta(path,bytes);
  bytes=restoreBodyMandala(path,bytes);
  bytes=restoreSpacingIfCurrent(path,bytes);
  bytes=restoreFirstLoadIfCurrent(path,bytes);

@@ -77,6 +77,9 @@ body .site-page .page-section:has([data-about-heading="roots"]) .editorial-row {
  body [data-preview="v3"] .collaboration-proof-v919 .proof-study {display:block;margin-top:24px}
  body [data-preview="v3"] .booking-actions {display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
  body [data-preview="v3"] .booking-actions>div {flex-basis:100%}
+ body [data-preview="v3"] .booking-inner .booking-actions {display:grid;grid-template-columns:auto auto;width:max-content;max-width:100%;margin-inline:auto}
+ body [data-preview="v3"] .booking-inner .booking-actions>div {grid-column:1/-1}
+ body [data-preview="v3"] .booking-inner .booking-actions>div>.contact-action--primary {width:100%;box-sizing:border-box}
 }
 @media(min-width:1200px) {
  body [data-preview="v3"] .preview-benefits-track {grid-template-columns:repeat(5,minmax(0,1fr))}
