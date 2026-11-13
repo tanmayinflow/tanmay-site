@@ -5,7 +5,7 @@ export default function PracticeLsitPhoto({lang}:{lang:string}) {
   return <figure className="practice-lsit">
     <span className="practice-lsit-earth" aria-hidden="true"/>
     <div className="practice-lsit-crop">
-      <img src="/media/practice-lsit-2026-11/lsit-feet-detail-20261113.webp" width={3268} height={2634}
+      <img src="/media/practice-lsit-2026-11/lsit-selected-feet-20261113.webp" width={3268} height={2634}
         alt={lang==='en'?'Kryštof Švec holding an L-sit on a rock by the sea.':'Kryštof Švec drží L-sit na skále u moře.'}
         loading="eager" fetchPriority="high" decoding="async"/>
     </div>
