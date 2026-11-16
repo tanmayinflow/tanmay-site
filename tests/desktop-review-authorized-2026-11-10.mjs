@@ -1,3 +1,4 @@
+import {restoreOlgaReview} from './olga-review-2026-11-16.mjs';
 import {restoreContinuousWorkCycle} from './continuous-work-cycle-2026-11-11.mjs';
 import {restoreDesktopFourFixes} from './desktop-four-fixes-2026-11-11.mjs';
 import assert from 'node:assert/strict';
@@ -33,7 +34,7 @@ const ownerPoster = JSON.parse(readFileSync(new URL('./owner-poster-2026-11-10.j
 const nameFade = JSON.parse(readFileSync(new URL('./paulin-name-fade-2026-11-11.json', import.meta.url)));
 const strongerBackdrop = JSON.parse(readFileSync(new URL('./paulin-backdrop-strength-2026-11-11.json', import.meta.url)));
 export function verifyDesktopReviewAddition(path, original) {
-  const latest = restoreDesktopFourFixes(path, original);
+  const latest = restoreDesktopFourFixes(path, restoreOlgaReview(path, original));
   const backdrop = path === strongerBackdrop.path && sha(latest) === strongerBackdrop.afterSha256
     ? Buffer.from(strongerBackdrop.before, 'base64') : latest;
   const correction = nameFade.find(item => item.path === path && item.afterSha256 === sha(backdrop));

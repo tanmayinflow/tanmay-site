@@ -1,6 +1,7 @@
 // Workers Static Assets do not implement byte ranges. Scope this adapter to
-// the supplied review so native players can seek without downloading it all.
+// the supplied reviews so native players can seek without downloading it all.
 export const videoPath = '/media/reviews/paulina-recenze-titulky.mp4';
+export const videoPaths = [videoPath, '/media/reviews/olga-recenze-titulky.mp4'];
 
 function rangeFor(value, size) {
   const match = /^bytes=(\d*)-(\d*)$/.exec(value || '');
@@ -14,7 +15,7 @@ function rangeFor(value, size) {
 
 export default {
   async fetch(request, env) {
-    if (new URL(request.url).pathname !== videoPath || !['GET', 'HEAD'].includes(request.method)) {
+    if (!videoPaths.includes(new URL(request.url).pathname) || !['GET', 'HEAD'].includes(request.method)) {
       return env.ASSETS.fetch(request);
     }
     const requestedRange = request.headers.get('Range');
@@ -41,7 +42,7 @@ export default {
       return new Response(null, { status: 416, headers });
     }
     if (!range) return new Response(bytes, { status: 200, headers });
-    // This one fixed asset is under 25 MiB. An ArrayBuffer response gives the
+    // Each allowlisted asset is under 25 MiB. An ArrayBuffer response gives the
     // runtime an exact Content-Length, required by Safari's native player.
     headers.set('Content-Range', `bytes ${range.start}-${range.end}/${size}`);
     headers.set('Content-Length', String(range.end - range.start + 1));

@@ -1,12 +1,13 @@
 import { useId } from "react";
 import "./review-video.css";
+import OlgaReviewVideo from "./OlgaReviewVideo";
 
 /** Supplied review; owner confirmed publication consent on 2026-11-10. */
 export default function ReviewVideo({ lang = "cs" }: { lang?: string }) {
   const czech = lang !== "en";
   const videoId = useId();
 
-  return (
+  return (<>
     <figure id="paulina-recenze" className="review-video-card">
       <figcaption className="review-video-caption">
         <span className="review-video-label">{czech ? "Video recenze" : "Video review"}</span>
@@ -35,5 +36,6 @@ export default function ReviewVideo({ lang = "cs" }: { lang?: string }) {
       </video>
       </div>
     </figure>
-  );
+    <OlgaReviewVideo lang={lang}/>
+  </>);
 }
