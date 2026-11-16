@@ -1,6 +1,7 @@
 import { useId } from "react";
 import "./review-video.css";
 import OlgaReviewVideo from "./OlgaReviewVideo";
+import MariaReviewVideo from "./MariaReviewVideo";
 
 /** Supplied review; owner confirmed publication consent on 2026-11-10. */
 export default function ReviewVideo({ lang = "cs" }: { lang?: string }) {
@@ -37,5 +38,6 @@ export default function ReviewVideo({ lang = "cs" }: { lang?: string }) {
       </div>
     </figure>
     <OlgaReviewVideo lang={lang}/>
+    <MariaReviewVideo lang={lang}/>
   </>);
 }
