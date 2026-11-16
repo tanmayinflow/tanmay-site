@@ -8,6 +8,7 @@ export default function ReviewVideoCarousel({ children, names, lang }: { childre
   const slides = Children.toArray(children);
   const [active, setActive] = useState(fromHash);
   const activeRef = useRef(active);
+  const hashJump = useRef(false);
   const viewport = useRef<HTMLDivElement>(null);
   const uid = useId();
   const czech = lang !== "en";
@@ -32,14 +33,37 @@ export default function ReviewVideoCarousel({ children, names, lang }: { childre
     });
     resize.observe(el);
     let hashFrame = 0;
+    const overflow = el.style.overflowX;
+    const snap = el.style.scrollSnapType;
+    const restoreScroll = () => { el.style.overflowX = overflow; el.style.scrollSnapType = snap; };
     const followHash = () => {
       const index = anchors.indexOf(window.location.hash.slice(1));
       if (index < 0) return;
       cancelAnimationFrame(hashFrame);
-      hashFrame = requestAnimationFrame(() => goTo(index, false));
+      // A fragment link takes precedence over an unfinished native touch pan.
+      // Briefly stop that scroll context, then align after the browser's own
+      // fragment and route-focus handlers. Normal swipes stay entirely native.
+      hashJump.current = true;
+      activeRef.current = index;
+      setActive(index);
+      el.querySelectorAll<HTMLElement>(".review-video-slide").forEach((slide, i) => {
+        slide.inert = i !== index;
+        slide.querySelectorAll("video").forEach(video => video.pause());
+      });
+      el.style.overflowX = "hidden";
+      el.style.scrollSnapType = "none";
+      el.scrollTo({ left: index * el.clientWidth, behavior: "instant" });
+      hashFrame = requestAnimationFrame(() => {
+        el.scrollTo({ left: index * el.clientWidth, behavior: "instant" });
+        hashFrame = requestAnimationFrame(() => {
+          restoreScroll();
+          el.scrollTo({ left: index * el.clientWidth, behavior: "instant" });
+          hashJump.current = false;
+        });
+      });
     };
     window.addEventListener("hashchange", followHash);
-    return () => { cancelAnimationFrame(hashFrame); resize.disconnect(); window.removeEventListener("hashchange", followHash); };
+    return () => { cancelAnimationFrame(hashFrame); hashJump.current = false; restoreScroll(); resize.disconnect(); window.removeEventListener("hashchange", followHash); };
   }, [goTo]);
 
   useEffect(() => {
@@ -53,6 +77,7 @@ export default function ReviewVideoCarousel({ children, names, lang }: { childre
     <div className="review-video-viewport" id={uid} ref={viewport} tabIndex={0}
       aria-label={czech ? "Video recenze. Posouvej tahem nebo šipkami." : "Video reviews. Swipe or use arrow keys."}
       onScroll={event => {
+        if (hashJump.current) return;
         const el = event.currentTarget;
         const next = Math.max(0, Math.min(names.length - 1, Math.round(el.scrollLeft / Math.max(1, el.clientWidth))));
         if (next === activeRef.current) return;

@@ -30,8 +30,8 @@
   "additions": [
     {
       "path": "src/components/ReviewVideoCarousel.tsx",
-      "size": 5095,
-      "sha256": "fe8b8df109505a93624b5645450d21b4697cc63df42e999ae555e3ac85d2ba8d"
+      "size": 6343,
+      "sha256": "dc9a1b0d46628ff6442c9332754a678b2a0672b14cb51bf7d6efc710aaf986a5"
     },
     {
       "path": "src/components/ReviewVideoPlayer.tsx",
