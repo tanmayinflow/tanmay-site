@@ -1,7 +1,7 @@
 // Workers Static Assets do not implement byte ranges. Scope this adapter to
 // the supplied reviews so native players can seek without downloading it all.
 export const videoPath = '/media/reviews/paulina-recenze-titulky.mp4';
-export const videoPaths = [videoPath, '/media/reviews/olga-recenze-titulky.mp4', '/media/reviews/maria-recenze-titulky.mp4'];
+export const videoPaths = [videoPath, '/media/reviews/olga-recenze-titulky.mp4', '/media/reviews/maria-recenze-titulky.mp4', '/media/reviews/barbora-recenze-titulky-en.mp4'];
 
 function rangeFor(value, size) {
   const match = /^bytes=(\d*)-(\d*)$/.exec(value || '');

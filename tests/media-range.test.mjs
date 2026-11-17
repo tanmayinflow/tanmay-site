@@ -52,9 +52,9 @@ test(path + ': ranges work when the internal asset binding omits Content-Length'
 
 }
 
-test('only the three supplied videos are routed first; other routes and errors pass through', async () => {
+test('only the four supplied videos are routed first; other routes and errors pass through', async () => {
   const config=JSON.parse(readFileSync(new URL('../wrangler.jsonc',import.meta.url)));
-  assert.deepEqual(videoPaths, [videoPath, '/media/reviews/olga-recenze-titulky.mp4', '/media/reviews/maria-recenze-titulky.mp4']);
+  assert.deepEqual(videoPaths, [videoPath, '/media/reviews/olga-recenze-titulky.mp4', '/media/reviews/maria-recenze-titulky.mp4', '/media/reviews/barbora-recenze-titulky-en.mp4']);
   assert.deepEqual(config.assets.run_worker_first,videoPaths);
   assert.equal(config.assets.not_found_handling,'404-page');
   assert.equal(config.assets.binding,'ASSETS');
