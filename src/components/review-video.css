@@ -83,7 +83,7 @@
 
 /* The video rail follows the site's written-review scroll-snap and arrow pattern. */
 .review-video-carousel { width: min(100%, 760px); margin: clamp(36px, 5vw, 64px) auto 0; scroll-margin-top: 92px; }
-.review-video-viewport { display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none; touch-action: pan-x pan-y pinch-zoom; }
+.review-video-viewport { display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; overflow-anchor: none; scrollbar-width: none; touch-action: pan-x pan-y pinch-zoom; }
 .review-video-viewport::-webkit-scrollbar { display: none; }
 .review-video-slide { flex: 0 0 100%; min-width: 0; width: 100%; box-sizing: border-box; scroll-snap-align: start; scroll-snap-stop: always; }
 .review-video-carousel .review-video-card { width: 100%; margin: 0; padding: 48px 24px; scroll-margin-top: 92px; }
@@ -100,9 +100,8 @@
 .review-video-controls { display: flex; align-items: center; justify-content: center; gap: 10px; padding-top: 4px; }
 .review-video-controls button { flex: 0 0 48px; display: grid; place-items: center; width: 48px; height: 48px; border: 0; background: transparent; color: inherit; cursor: pointer; }
 .review-video-controls button > span { font-size: 26px; line-height: 1; }
-.review-video-controls button[aria-disabled="true"] { opacity: .36; cursor: default; }
-.review-video-controls button:hover:not([aria-disabled="true"]) { color: var(--copper, #b76e50); }
-.review-video-status { min-width: 0; text-align: center; font-size: 14px; line-height: 1.5; }
+.review-video-controls button:hover { color: var(--copper, #b76e50); }
+.review-video-announcement { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .review-video-viewport:focus-visible, .review-video-carousel button:focus-visible { outline: 2px solid var(--copper, #b76e50); outline-offset: -3px; }
 .review-video-stage .review-video:focus-visible { outline-offset: -3px; }
 @media (max-width: 767px) {

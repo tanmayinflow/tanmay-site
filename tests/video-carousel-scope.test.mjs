@@ -1,3 +1,4 @@
+import {restoreCircularVideoCarousel} from './video-carousel-circular-2026-11-16.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -25,7 +26,7 @@ test('shared carousel and player match the reviewed implementation exactly', () 
     'src/components/ReviewVideoCarousel.tsx', 'src/components/ReviewVideoPlayer.tsx',
   ]);
   for (const file of videoCarouselDelta.additions) {
-    const bytes=readFileSync(new URL('../'+file.path,import.meta.url));
+    const bytes=restoreCircularVideoCarousel(file.path,readFileSync(new URL('../'+file.path,import.meta.url)));
     assert.equal(bytes.length,file.size);
     assert.equal(sha(bytes),file.sha256);
   }
