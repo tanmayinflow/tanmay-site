@@ -1,3 +1,4 @@
+import {restoreWrittenReviewLoop} from './written-review-loop-2026-11-17.mjs';
 import {restoreMariaReview} from './maria-review-2026-11-16.mjs';
 import {restoreOlgaReview} from './olga-review-2026-11-16.mjs';
 import {restoreContinuousWorkCycle} from './continuous-work-cycle-2026-11-11.mjs';
@@ -10,6 +11,7 @@ export const desktopReviewDelta = JSON.parse(readFileSync(new URL('./desktop-rev
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 
 export function withoutAuthorizedDesktopReview(path, bytes) {
+  bytes = restoreWrittenReviewLoop(path, bytes);
   bytes = restoreContinuousWorkCycle(path, bytes);
   const file = desktopReviewDelta.files.find(item => item.path === path);
   if (!file) return bytes;
@@ -25,6 +27,7 @@ export function withoutAuthorizedDesktopReview(path, bytes) {
 }
 
 export function restoreDesktopReviewIfCurrent(path, bytes) {
+  bytes = restoreWrittenReviewLoop(path, bytes);
   bytes = restoreContinuousWorkCycle(path, bytes);
   const file = desktopReviewDelta.files.find(item => item.path === path);
   return file && sha(bytes) === file.afterSha256 ? withoutAuthorizedDesktopReview(path, bytes) : bytes;

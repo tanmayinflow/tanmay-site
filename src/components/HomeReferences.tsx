@@ -4,11 +4,9 @@ import { createPortal } from "react-dom";
 import { CLIENT_REVIEWS } from "./home-reviews.data.js";
 import "./home-reviews.css";
 import ReviewVideo from "./ReviewVideo";
+import { useCircularRail } from "../mobile/useCircularRail";
 
 type Lang = "cs" | "en";
-const COUNT = CLIENT_REVIEWS.length;
-const prefersReducedMotion = () =>
-  typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /** Client words, not marketing excerpts. The preview is the complete first paragraph.
  * Native scroll-snap supports touch and trackpads, with buttons/keys as alternatives.
@@ -18,56 +16,41 @@ export default function HomeReferences({ lang = "cs", preview = false }: { lang?
   const reviews = preview ? ['gledis-kmonickova','lucie-kanska','mariana-stojkovova','zuzana-hofman'].map(id => CLIENT_REVIEWS.find(r => r.id === id)!) : CLIENT_REVIEWS;
   const language: Lang = lang === "en" ? "en" : "cs";
   const tr = (cs: string, en: string) => language === "cs" ? cs : en;
-  const [active, setActive] = useState(0);
+  const rail = useCircularRail(reviews.length);
+  const { active, goTo } = rail;
   const [opened, setOpened] = useState<number | null>(null);
   const [announcement, setAnnouncement] = useState("");
   const [openOriginal, setOpenOriginal] = useState(false);
   const slides = useRef<(HTMLElement | null)[]>([]);
-  const viewport = useRef<HTMLDivElement>(null);
+  const viewport = rail.ref;
   const activeRef = useRef(0);
   const trigger = useRef<HTMLButtonElement | null>(null);
   const readerButtons = useRef<(HTMLButtonElement | null)[]>([]);
-  const raf = useRef(0);
-
-  const goTo = useCallback((index: number, smooth = true) => {
-    const i = Math.max(0, Math.min(COUNT - 1, index));
-    const el = viewport.current;
-    if (!el) return;
-    el.scrollTo({ left: i * el.clientWidth, behavior: smooth && !prefersReducedMotion() ? "smooth" : "auto" });
-  }, []);
-
+  const endPointer = rail.viewportProps.onPointerUp;
+  const pointerInRail = useRef(false);
+  // A mouse selection can end outside the rail; release its navigation guard too.
   useEffect(() => {
-    const el = viewport.current;
-    if (!el) return;
-    const update = () => {
-      cancelAnimationFrame(raf.current);
-      raf.current = requestAnimationFrame(() => {
-        const i = Math.max(0, Math.min(COUNT - 1, Math.round(el.scrollLeft / Math.max(1, el.clientWidth))));
-        if (i === activeRef.current) return;
-        activeRef.current = i;
-        setActive(i);
-        setAnnouncement(language === "cs"
-          ? `Recenze ${i + 1} ze ${COUNT}: ${reviews[i].name}`
-          : `Review ${i + 1} of ${COUNT}: ${reviews[i].name}`);
-      });
+    const release = () => {
+      if (!pointerInRail.current) return;
+      pointerInRail.current = false;
+      endPointer();
     };
-    el.addEventListener("scroll", update, { passive: true });
-    let previousWidth = el.clientWidth;
-    const resize = () => {
-      if (el.clientWidth === previousWidth) return;
-      previousWidth = el.clientWidth;
-      el.scrollTo({ left: activeRef.current * previousWidth, behavior: "auto" });
-    };
-    const observer = typeof ResizeObserver !== "undefined" ? new ResizeObserver(resize) : null;
-    observer?.observe(el);
-    window.addEventListener("resize", resize);
+    const blur = () => { pointerInRail.current = false; };
+    document.addEventListener("pointerup", release);
+    document.addEventListener("pointercancel", release);
+    window.addEventListener("blur", blur);
     return () => {
-      cancelAnimationFrame(raf.current);
-      observer?.disconnect();
-      el.removeEventListener("scroll", update);
-      window.removeEventListener("resize", resize);
+      document.removeEventListener("pointerup", release);
+      document.removeEventListener("pointercancel", release);
+      window.removeEventListener("blur", blur);
     };
-  }, [language]);
+  }, [endPointer]);
+  useEffect(() => {
+    activeRef.current = active;
+    setAnnouncement(language === "cs"
+      ? `Recenze ${active + 1} ze ${reviews.length}: ${reviews[active].name}`
+      : `Review ${active + 1} of ${reviews.length}: ${reviews[active].name}`);
+  }, [active, language]);
 
   // Follow the active paragraph's height instead of leaving an empty tall card.
   // The opacity/content never depends on an entrance animation.
@@ -100,53 +83,57 @@ export default function HomeReferences({ lang = "cs", preview = false }: { lang?
           </div>
           <div className="tmr-controls" role="group" aria-label={tr("Posouvání recenzí", "Review navigation")}>
             <button className="tmr-arrow" type="button" aria-label={tr("Předchozí recenze", "Previous review")}
-              aria-controls="home-review-slides" aria-disabled={active === 0} onClick={() => goTo(active - 1)}>
+              aria-controls={rail.id} onClick={() => rail.step(-1)}>
               <span aria-hidden="true">←</span>
             </button>
             <button className="tmr-arrow" type="button" aria-label={tr("Další recenze", "Next review")}
-              aria-controls="home-review-slides" aria-disabled={active === COUNT - 1} onClick={() => goTo(active + 1)}>
+              aria-controls={rail.id} onClick={() => rail.step(1)}>
               <span aria-hidden="true">→</span>
             </button>
           </div>
         </header>
         <div className="tmr-carousel" role="region" aria-roledescription={tr("karusel", "carousel")}
           aria-label={tr("Zkušenosti klientek", "Client experiences")}>
-          <div className="tmr-viewport" id="home-review-slides" ref={viewport} tabIndex={0}
+          <div className="tmr-viewport" id={rail.id} ref={viewport} tabIndex={0}
             aria-label={tr("Recenze. Posouvejte šipkami nebo tahem.", "Reviews. Use arrow keys or swipe.")}
-            onKeyDown={e => {
-              if (e.altKey || e.metaKey || e.ctrlKey) return;
-              const dest = e.key === "ArrowRight" ? active + 1 : e.key === "ArrowLeft" ? active - 1
-                : e.key === "Home" ? 0 : e.key === "End" ? COUNT - 1 : null;
-              if (dest !== null) { e.preventDefault(); goTo(dest); }
-            }}>
-            {reviews.map((review, i) => (
-              <article key={review.id} className="tmr-slide" role="group" ref={node => { slides.current[i] = node; }}
-                aria-roledescription={tr("recenze", "slide")} aria-label={`${i + 1} / ${COUNT}: ${review.name}`}
-                aria-hidden={i !== active ? true : undefined} data-review-id={review.id}>
+            {...rail.viewportProps}
+            onPointerDown={() => { pointerInRail.current = true; rail.viewportProps.onPointerDown(); }}>
+            {rail.slots.map(({physical, index: i, clone}) => {
+              const review = reviews[i];
+              return <article key={physical} className="tmr-slide" role="group"
+                ref={node => { if (!clone) slides.current[i] = node; }}
+                aria-roledescription={tr("recenze", "slide")} aria-label={`${i + 1} / ${reviews.length}: ${review.name}`}
+                aria-hidden={clone || i !== active ? true : undefined} data-review-id={review.id}
+                data-carousel-index={i} data-carousel-clone={clone ? "true" : undefined}
+                onClick={clone ? event => {
+                  const original = (event.target as HTMLElement).closest(".tmr-original");
+                  if (!original && !(event.target as HTMLElement).closest(".tmr-read")) return;
+                  goTo(i); setOpenOriginal(Boolean(original)); setOpened(i);
+                } : undefined}>
                 <div className="tmr-attribution">
                   <span className="tmr-quote-mark" aria-hidden="true">“</span>
                   <h3>{review.name}</h3>
                   {language === "en" && <span className="tmr-note">Translated from Czech
-                    {review.cs.length === 1 && <button type="button" className="tmr-original"
+                    {review.cs.length === 1 && (clone ? <span className="tmr-original">Czech original</span> : <button type="button" className="tmr-original"
                       ref={node => { readerButtons.current[i] = node; }} tabIndex={i === active ? 0 : -1}
                       aria-haspopup="dialog" aria-controls="home-review-reader"
-                      onClick={e => { trigger.current = e.currentTarget; setOpenOriginal(true); setOpened(i); }}>Czech original</button>}
+                      onClick={e => { trigger.current = e.currentTarget; setOpenOriginal(true); setOpened(i); }}>Czech original</button>)}
                   </span>}
                 </div>
                 <div className="tmr-reading">
                   <blockquote className="tmr-excerpt" lang={language}><p>{review[language][0]}</p></blockquote>
                   {review.cs.length > 1 && <div className="tmr-reading-foot">
-                    <button type="button" className="tmr-read" aria-haspopup="dialog" aria-controls="home-review-reader"
+                    {clone ? <span className="tmr-read"><span className="tmr-read-label">{tr("Celé znění", "Full review")}</span><span aria-hidden="true">+</span></span> : <button type="button" className="tmr-read" aria-haspopup="dialog" aria-controls="home-review-reader"
                       ref={node => { readerButtons.current[i] = node; }} tabIndex={i === active ? 0 : -1}
                       aria-label={tr(`Celé znění recenze: ${review.name}`, `Full review: ${review.name}`)}
                       onClick={e => { trigger.current = e.currentTarget; setOpenOriginal(false); setOpened(i); }}>
                       <span className="tmr-read-label">{tr("Celé znění", "Full review")}</span>
                       <span aria-hidden="true">+</span>
-                    </button>
+                    </button>}
                   </div>}
                 </div>
-              </article>
-            ))}
+              </article>;
+            })}
           </div>
           <p className="tmr-sr" aria-live="polite" aria-atomic="true">{announcement}</p>
         </div>
@@ -154,7 +141,7 @@ export default function HomeReferences({ lang = "cs", preview = false }: { lang?
       </div>
       {opened !== null && typeof document !== "undefined" && createPortal(
         <ReviewReader reviews={reviews} index={opened} lang={language} initialOriginal={openOriginal} onClose={closeReader}
-          onNavigate={i => { setOpened(i); goTo(i, false); }} />, document.body)}
+          onNavigate={i => { setOpened(i); goTo(i); }} />, document.body)}
     </section>
   );
 }
@@ -226,10 +213,10 @@ function ReviewReader({ reviews = CLIENT_REVIEWS, index, lang, initialOriginal, 
           </blockquote>
         </div>
         <footer className="tmr-dialog-foot">
-          <button type="button" aria-disabled={index === 0} onClick={() => { if (index > 0) onNavigate(index - 1); }}>
+          <button type="button" onClick={() => onNavigate((index - 1 + reviews.length) % reviews.length)}>
             <span aria-hidden="true">←</span> {tr("Předchozí", "Previous")}
           </button>
-          <button type="button" aria-disabled={index === COUNT - 1} onClick={() => { if (index < COUNT - 1) onNavigate(index + 1); }}>
+          <button type="button" onClick={() => onNavigate((index + 1) % reviews.length)}>
             {tr("Další recenze", "Next review")} <span aria-hidden="true">→</span>
           </button>
         </footer>

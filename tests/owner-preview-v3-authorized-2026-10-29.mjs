@@ -1,3 +1,4 @@
+import {restoreWrittenReviewLoop} from './written-review-loop-2026-11-17.mjs';
 import assert from 'node:assert/strict';
 import {restoreFirstLoadIfCurrent} from './first-load-authorized-2026-11-06.mjs';
 import {withoutAuthorizedFeedback} from './owner-preview-feedback-authorized-2026-10-29.mjs';
@@ -6,6 +7,7 @@ import {createHash} from 'node:crypto';
 export const previewDelta=JSON.parse(readFileSync(new URL('./owner-preview-v3-authorized-2026-10-29.json',import.meta.url)));
 const sha=b=>createHash('sha256').update(b).digest('hex');
 export function withoutAuthorizedPreview(path,bytes){
+ bytes=restoreWrittenReviewLoop(path,bytes);
  bytes=restoreFirstLoadIfCurrent(path,bytes);
  const file=previewDelta.files.find(f=>f.path===path);
  if(!file||sha(bytes)===file.beforeSha256)return bytes;
