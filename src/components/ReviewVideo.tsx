@@ -4,12 +4,13 @@ import ReviewVideoCarousel from "./ReviewVideoCarousel";
 import OlgaReviewVideo from "./OlgaReviewVideo";
 import MariaReviewVideo from "./MariaReviewVideo";
 import BarboraReviewVideo from "./BarboraReviewVideo";
+import VladkaReviewVideo from "./VladkaReviewVideo";
 
 /** Supplied review; owner confirmed publication consent on 2026-11-10. */
 export default function ReviewVideo({ lang = "cs" }: { lang?: string }) {
   const czech = lang !== "en";
 
-  return (<ReviewVideoCarousel lang={lang} names={["Polin Kireccioglu", "Olga Malnichenko", "Maria Treibtich", "Barbora Čemusová"]}>
+  return (<ReviewVideoCarousel lang={lang} names={["Polin Kireccioglu", "Olga Malnichenko", "Maria Treibtich", "Barbora Čemusová", "Vladimíra Stuchlá"]}>
     <figure id="paulina-recenze" className="review-video-card">
       <figcaption className="review-video-caption">
         <span className="review-video-label">{czech ? "Video recenze" : "Video review"}</span>
@@ -21,5 +22,6 @@ export default function ReviewVideo({ lang = "cs" }: { lang?: string }) {
     <OlgaReviewVideo lang={lang}/>
     <MariaReviewVideo lang={lang}/>
     <BarboraReviewVideo lang={lang}/>
+    <VladkaReviewVideo lang={lang}/>
   </ReviewVideoCarousel>);
 }

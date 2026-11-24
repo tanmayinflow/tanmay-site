@@ -1,6 +1,6 @@
 import { Children, useCallback, useEffect, useId, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 
-const anchors = ["paulina-recenze", "olga-recenze", "maria-recenze", "barbora-recenze"];
+const anchors = ["paulina-recenze", "olga-recenze", "maria-recenze", "barbora-recenze", "vladka-recenze"];
 const fromHash = () => typeof window === "undefined" ? 0 : Math.max(0, anchors.indexOf(window.location.hash.slice(1)));
 
 /** Real players form a ring. CSS order moves cards without replacing video nodes. */
