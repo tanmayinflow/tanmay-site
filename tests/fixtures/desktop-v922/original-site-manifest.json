@@ -1526,8 +1526,8 @@
   },
   {
     "path": "src/App.tsx",
-    "bytes": 210176,
-    "sha256": "8f350c59016d977aa630c99b38d61ca446e0461ed8779f57cfbb0015e0501be4"
+    "bytes": 206401,
+    "sha256": "cd2c49dc73f90f37a8516d66106ee0bdaef112c22bf0b39c255bc502ba75c23e"
   },
   {
     "path": "src/components/collaboration-faq.css",
@@ -1601,8 +1601,8 @@
   },
   {
     "path": "src/site.js",
-    "bytes": 10206,
-    "sha256": "9cbc4172602c2b40c8b1b343ecc0a5f1be9b087cac28be9b755780f2c8f7b393"
+    "bytes": 8535,
+    "sha256": "6845a3f6966b354c7ada945332b1072ef0d463388a893acfe380a1f8c4718c81"
   },
   {
     "path": "src/visual-v9-13.ts",
