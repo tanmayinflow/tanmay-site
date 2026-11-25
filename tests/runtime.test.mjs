@@ -29,6 +29,10 @@ test('all 327 original shared files remain exact except precisely authorized cop
   const entries=JSON.parse(readFileSync(join(fixtures,'original-site-manifest.json'),'utf8')).filter(r=>(r.path.startsWith('src/')||r.path.startsWith('public/'))&&r.path!=='src/App.tsx');
   assert.equal(entries.length,327);
   for(const r of entries){
+    if (/^public\/og\/(?:denik|post-p[123])-(?:cs|en)\.jpg$/.test(r.path)) {
+      assert.equal(existsSync(join(site,r.path)),false,'Unpublished journal cards must stay out of public source');
+      continue;
+    }
     if(r.path===pricingDelta.path){
       verifyAuthorizedPricingBytes(readFileSync(join(site,r.path)),r.sha256);
       continue;

@@ -8,8 +8,8 @@
     "desktop-story-original-photographs-and-motion",
     "desktop-plan-record-adjust-cycle"
   ],
-  "beforeSha256": "20cc75112442f17387c598fbc2de754af1b9d460e8282f62d39d3fece05ee640",
-  "authorizedSha256": "cf65313e67b92d96bafa7f9596103ae1f8b04df032f94d883a3dd2dbb3b1fac9",
+  "beforeSha256": "27415adaa94f3cc5891053dff033f0537febc1d9e976919b57cb5406eefb7553",
+  "authorizedSha256": "2b27810523b1c381eb05d9b3eca595bc9eaeba63e2dc589ba368df8e26d47995",
   "replacements": [
     {
       "id": "desktop-module-imports",

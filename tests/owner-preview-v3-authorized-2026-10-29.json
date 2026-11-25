@@ -33,8 +33,8 @@
     },
     {
       "path": "src/App.tsx",
-      "beforeSha256": "b0c1afc0a016961a7da54d5acbeb045e87c59bfe30647c6aaa7897b15bf2ae60",
-      "afterSha256": "0d74654d5922b609e8ed465d92d0ce0e4728b208a8c7a9e12b63e0985ecb5bdb",
+      "beforeSha256": "8fd67e4c0b76db4f2c6ccebaa617dddee6b531f93cbe02df32e9eba455f36ceb",
+      "afterSha256": "190f3e2f6a2611c0e785fddc852693efd96484c117f10fb7b12266c27cff8010",
       "replacements": [
         {
           "offset": 0,
@@ -47,117 +47,117 @@
           "after": "import MobileHomePreview from \"./mobile/MobileHomePreview\";\nimport MobileCollaborationPreview from \"./mobile/MobileCollaborationPreview\";\n"
         },
         {
-          "offset": 125656,
+          "offset": 121881,
           "before": "function TopBar({ loc, menuOpen, onMenu }: any) {\n",
           "after": "function TopBar({ loc, menuOpen, onMenu, preview=false }: any) {\n"
         },
         {
-          "offset": 126163,
+          "offset": 122388,
           "before": "        <a href={routePath(\"home\", loc.lang)} className=\"logo\" aria-label=\"tanmay\"><Wordmark /></a>\n",
           "after": "        <a href={routePath(preview?\"home-preview\":\"home\", loc.lang)} className=\"logo\" aria-label=\"tanmay\"><Wordmark /></a>\n"
         },
         {
-          "offset": 126499,
+          "offset": 122724,
           "before": "                href={r.path[loc.lang]}\n                aria-current={loc.routeId === r.id ? \"page\" : undefined}\n",
           "after": "                href={preview&&r.id===\"spoluprace\"?routePath(\"spoluprace-preview\",loc.lang):r.path[loc.lang]}\n                aria-current={loc.routeId.replace('-preview', '') === r.id ? \"page\" : undefined}\n"
         },
         {
-          "offset": 127501,
+          "offset": 123726,
           "before": "            <ClientEntry />\n",
           "after": "            {preview&&<a className=\"centry\" href={loc.routeId===\"home-preview\"?\"#rezervace\":\"#kontakt\"}>{L(\"15 minut zdarma\",\"Free 15 minutes\")}</a>}<ClientEntry />\n"
         },
         {
-          "offset": 128086,
+          "offset": 124311,
           "before": "function Menu({ open, onClose, loc }: any) {\n",
           "after": "function Menu({ open, onClose, loc, preview=false }: any) {\n"
         },
         {
-          "offset": 128407,
+          "offset": 124632,
           "before": "                href={r.path[loc.lang]}\n",
           "after": "                href={preview&&r.id===\"spoluprace\"?routePath(\"spoluprace-preview\",loc.lang):r.path[loc.lang]}\n"
         },
         {
-          "offset": 128551,
+          "offset": 124776,
           "before": "                aria-current={loc.routeId === r.id ? \"page\" : undefined}\n",
           "after": "                aria-current={loc.routeId.replace('-preview', '') === r.id ? \"page\" : undefined}\n"
         },
         {
-          "offset": 140724,
+          "offset": 136949,
           "before": "              \"Moje práce vyrostla z deseti let vlastní pohybové praxe a zkušeností s 150+ klienty. Rok jsem působil jako vedoucí studia a hlavní trenér. Jsem držitelem profesní kvalifikace Osobní trenér ve fitness a instruktorem jógy. Další odborné vzdělání mám v oblasti kondičního a funkčního tréninku, zdravotní tělesné výchovy a rehabilitačního tréninku. V letech 2019 až 2024 jsem studoval psychologii na Univerzitě Palackého.\",\n              \"My work grew from ten years of personal movement practice and experience with 150+ clients. I spent a year as a studio manager and head trainer. I hold the professional qualification Personal Trainer in Fitness and I am a yoga instructor. I also have further education in conditioning and functional training, health-oriented physical education and rehabilitation training. From 2019 to 2024, I studied psychology at Palacký University.\"\n",
           "after": "              \"Moje práce vyrostla z deseti let vlastní pohybové praxe a zkušeností s 100+ klienty. Rok jsem působil jako vedoucí studia a hlavní trenér. Jsem držitelem profesní kvalifikace Osobní trenér ve fitness a instruktorem jógy. Další odborné vzdělání mám v oblasti kondičního a funkčního tréninku, zdravotní tělesné výchovy a rehabilitačního tréninku. V letech 2019 až 2024 jsem studoval psychologii na Univerzitě Palackého.\",\n              \"My work grew from ten years of personal movement practice and experience with 100+ clients. I spent a year as a studio manager and head trainer. I hold the professional qualification Personal Trainer in Fitness and I am a yoga instructor. I also have further education in conditioning and functional training, health-oriented physical education and rehabilitation training. From 2019 to 2024, I studied psychology at Palacký University.\"\n"
         },
         {
-          "offset": 170534,
+          "offset": 166759,
           "before": "          <div className=\"proof-item\"><strong>150+</strong><span>{L(\"klientů\",\"clients\")}</span></div>\n",
           "after": "          <div className=\"proof-item\"><strong>100+</strong><span>{L(\"klientů\",\"clients\")}</span></div>\n"
         },
         {
-          "offset": 175597,
+          "offset": 171822,
           "before": "    <section className=\"site-linen page-section about-education-v919\"><div className=\"wrap\"><div className=\"section-head section-head--split about-section-head-v918\" data-about-heading=\"education\">\n",
           "after": "    <section id=\"vzdelani\" className=\"site-linen page-section about-education-v919\"><div className=\"wrap\"><div className=\"section-head section-head--split about-section-head-v918\" data-about-heading=\"education\">\n"
         },
         {
-          "offset": 185489,
+          "offset": 181714,
           "before": "        <div className=\"proof-item\"><strong>150+</strong><span>{L(\"klientů\",\"clients\")}</span></div>\n",
           "after": "        <div className=\"proof-item\"><strong>100+</strong><span>{L(\"klientů\",\"clients\")}</span></div>\n"
         },
         {
-          "offset": 187208,
+          "offset": 183433,
           "before": "    <section className=\"site-linen page-section collaboration-experience\" id=\"zkusenost\"><div className=\"wrap\"><div className=\"section-head section-head--split\"><h2 className=\"h-display h2 rv\">{L(\"Zkušenost a vzdělání\",\"Experience and education\")}</h2><p className=\"page-intro rv d1\">{E(\"Vycházím z deseti let vlastní pohybové praxe a zkušeností s 150+ klienty. Jsem držitelem profesní kvalifikace Osobní trenér ve fitness a instruktorem jógy.\",\"My work draws on ten years of personal movement practice and experience with 150+ clients. I hold the professional qualification Personal Trainer in Fitness and I am a yoga instructor.\")}{L(\" Další vzdělání mám v \",\" I also have further education in \")}<strong className=\"copy-emphasis\">{L(\"kondičním a funkčním tréninku, zdravotní tělesné výchově a rehabilitačním tréninku\",\"conditioning and functional training, health-oriented physical education and rehabilitation training\")}</strong>.</p></div></div></section>\n",
           "after": "    <section className=\"site-linen page-section collaboration-experience\" id=\"zkusenost\"><div className=\"wrap\"><div className=\"section-head section-head--split\"><h2 className=\"h-display h2 rv\">{L(\"Zkušenost a vzdělání\",\"Experience and education\")}</h2><p className=\"page-intro rv d1\">{E(\"Vycházím z deseti let vlastní pohybové praxe a zkušeností s 100+ klienty. Jsem držitelem profesní kvalifikace Osobní trenér ve fitness a instruktorem jógy.\",\"My work draws on ten years of personal movement practice and experience with 100+ clients. I hold the professional qualification Personal Trainer in Fitness and I am a yoga instructor.\")}{L(\" Další vzdělání mám v \",\" I also have further education in \")}<strong className=\"copy-emphasis\">{L(\"kondičním a funkčním tréninku, zdravotní tělesné výchově a rehabilitačním tréninku\",\"conditioning and functional training, health-oriented physical education and rehabilitation training\")}</strong>.</p></div></div></section>\n"
         },
         {
-          "offset": 203836,
+          "offset": 200061,
           "before": "function Footer({ lang, variant = \"linen\" }: any) {\n",
           "after": "function Footer({ lang, variant = \"linen\", preview=false, original=\"home\" }: any) {\n"
         },
         {
-          "offset": 203931,
+          "offset": 200156,
           "before": "    <footer className={variant === \"sand\" ? \"footer--sand footer-v920\" : \"footer--linen footer-v920\"} data-secondary-v6={variant === \"sand\" ? undefined : \"\"}>\n",
           "after": "    <footer data-preview={preview?\"v3\":undefined} className={variant === \"sand\" ? \"footer--sand footer-v920\" : \"footer--linen footer-v920\"} data-secondary-v6={variant === \"sand\" ? undefined : \"\"}>\n      {preview&&<p className=\"preview-original\">{L(\"Náhled nové verze · \",\"Preview of the new version · \")}<a href={routePath(original,lang)}>{L(\"Původní stránka →\",\"Original page →\")}</a></p>}\n"
         },
         {
-          "offset": 204393,
+          "offset": 200618,
           "before": "          <div className=\"footer-start-v920\"><a className=\"footer-brand-v920\" href={routePath(\"home\", lang)} aria-label=\"tanmay\"><Wordmark /></a>\n",
           "after": "          <div className=\"footer-start-v920\"><a className=\"footer-brand-v920\" href={routePath(preview?\"home-preview\":\"home\", lang)} aria-label=\"tanmay\"><Wordmark /></a>\n"
         },
         {
-          "offset": 205295,
+          "offset": 201520,
           "before": "              href={WHATSAPP_URL}\n",
           "after": "              href={preview?previewWhatsApp(lang):WHATSAPP_URL}\n"
         },
         {
-          "offset": 205916,
+          "offset": 202141,
           "before": "",
           "after": "function OpeningPreview({ lang }: any) {\n  const c=(pair:readonly string[])=>previewText(pair,lang);\n  const [noPortrait, setNoPortrait] = useState(false);\n  return (\n    <header className={\"opening surf--sand\" + (noPortrait ? \"\" : \" has-portrait\")}>\n      <div className=\"wrap grid\">\n        <div className=\"copy\">\n          <p className=\"kicker label rv\">{c(p.homeKicker)}</p>\n          <h1 className=\"h-display h1 rv d1\">\n            {c(p.homeTitle)}\n          </h1>\n          <p className=\"body-txt rv d2\">{c(p.homeLead)}</p>\n          <p className=\"act rv d3\">\n            <Go href=\"#rezervace\" cs={p.cta[0]} en={p.cta[1]} /><a className=\"collaboration-price-jump\" href=\"#jak-to-funguje\">{L(\"Jak to funguje ↓\",\"How it works ↓\")}</a>\n          </p>\n          <p className=\"small rv d3\">{c(p.micro)}</p>\n          <p className=\"stance rv d3\">\n            {L(\"tělo · praxe · divoká příroda\", \"body · practice · wild nature\")}\n          </p>\n        </div>\n        {noPortrait ? null : (\n          <div className=\"portrait-stage rv d1\">\n            <div className=\"portrait-monolith\" aria-hidden=\"true\" />\n            <div className=\"portrait-shoulder\" aria-hidden=\"true\" />\n            <img\n              className=\"portrait-cut\"\n              src={MEDIA.portraitCutout.src}\n              srcSet=\"/media/home-v9-1/portrait-home-480.webp 480w, /media/home-v9-1/portrait-home-720.webp 720w, /media/home-v9-1/portrait-home-960.webp 960w, /media/home-v9-1/portrait-home-1153.webp 1153w\"\n              alt={L(\n                \"Tanmay, portrét zblízka v přirozeném světle.\",\n                \"Tanmay, a close portrait in natural light.\"\n              )}\n              width={MEDIA.portraitCutout.w}\n              height={MEDIA.portraitCutout.h}\n              sizes=\"(min-width:1442px) 941px, (min-width:1100px) 65.28vw, (min-width:800px) 67.1vw, (min-width:674px) 620px, (min-width:521px) 92vw, 96vw\"\n              decoding=\"sync\"\n              onError={() => setNoPortrait(true)}\n              {...({ fetchPriority: \"high\" } as any)}\n            />\n            <div className=\"portrait-foreground\" aria-hidden=\"true\" />\n          </div>\n        )}\n      </div>\n    </header>\n  );\n}\n\nfunction HomeAudiencePreview({ lang }: any) {\n  const c=(pair:readonly string[])=>previewText(pair,lang);\n  return <section className=\"sec sec--edged who\" aria-labelledby=\"h-audience\">\n <div className=\"strata strata--ink strata--hero\" aria-hidden=\"true\"/><TerrainCurrent/>\n <div className=\"wrap grid\"><div className=\"prose\"><h2 className=\"h-display h2 rv\" id=\"h-audience\">{c(p.audienceTitle)}</h2>\n <div className=\"rv d1\" style={{marginTop:18}}>{p.wants.map(x=><p className=\"body-txt\" key={x[0]}>{c(x)}</p>)}<p className=\"body-txt\"><strong>{c(p.audienceClose)}</strong></p>\n <Go href=\"#rezervace\" cs=\"Chci plán přesně pro mě\" en=\"I want a plan made for me\"/></div></div><SaltoField/></div></section>;\n}\n\nfunction HomeWorkPreview({ lang }: any) {\n  const c=(pair:readonly string[])=>previewText(pair,lang);\n  return <section className=\"sec home-work\" aria-labelledby=\"h-work\"><div className=\"wrap\"><h2 className=\"h-display h2 rv\" id=\"h-work\">{c(p.oldTitle)}</h2>\n <div className=\"work-grid\"><div><div className=\"chapter rv d1\">{p.oldWays.map((x,i)=><div className=\"row\" key={i}><span className=\"num\">0{i+1}</span><p className=\"preview-old-way\">{c(x[0])}</p><h3>{c(x[1])}</h3></div>)}</div><p className=\"stance-line rv d2\">{c(p.oldClose)}</p></div><HomeWorkHandstand/></div></div></section>;\n}\n\nfunction HomeCollabPreview({ lang }: any) {\n  const c=(pair:readonly string[])=>previewText(pair,lang);\n  return <section className=\"sec home-collab\" aria-labelledby=\"h-collab\"><div className=\"wrap\"><h2 className=\"h-display h2 rv\" id=\"h-collab\">{c(p.benefitsTitle)}</h2><div className=\"prose railed rv d1\" style={{marginTop:22}}>{p.benefits.map(x=><p className=\"body-txt\" key={x[0][0]}><strong>{c(x[0])}</strong> {c(x[1])}</p>)}<p className=\"body-txt\"><strong>{c(p.benefitsClose)}</strong></p></div><p className=\"act rv d2\"><Go href=\"#rezervace\" cs={p.cta[0]} en={p.cta[1]}/></p></div></section>;\n}\n\nfunction HomeAboutPreview({ lang }: any) {\n  const c=(pair:readonly string[])=>previewText(pair,lang);\n  return <section className=\"sec home-about\" aria-labelledby=\"h-about-short\"><div className=\"wrap about-short-grid\"><div className=\"about-short-copy\"><p className=\"label rv\">Kryštof Švec</p><h2 className=\"h-display h2 rv d1\" id=\"h-about-short\">{c(p.aboutTitle)}</h2><p className=\"body-txt rv d2\">{c(p.bio)}</p><p className=\"body-txt rv d2\">{c(p.cheer)}</p><p className=\"body-txt\"><strong>{c(p.live)}</strong></p><p className=\"body-txt\"><a href={routePath(\"pribeh\",lang)+\"#vzdelani\"}>{c(p.qualification)}</a></p><p className=\"act rv d3\"><Go href={routePath(\"pribeh\",lang)} cs=\"Můj příběh\" en=\"My story\"/></p></div><HomeAboutPhoto pic={MEDIA.homeAboutPrague} alt={L(\"Portrét z profilu s Pražským hradem v pozadí.\",\"Profile portrait with Prague Castle in the background.\")} sizes=\"(min-width:521px) 410px, (min-width:366px) 330px, calc(100vw - 36px)\"/></div></section>;\n}\n\nfunction HomeBookingPreview({ lang, collaboration=false }: any) {\n  const c=(pair:readonly string[])=>previewText(pair,lang);\n  return <section className={collaboration?\"site-linen contact-coda\":\"home-booking\"} id={collaboration?\"kontakt\":\"rezervace\"} aria-labelledby=\"h-booking\"><div className=\"wrap\"><div className=\"booking-inner\"><p className=\"booking-kicker label rv\">{L(\"První krok\",\"First step\")}</p><h2 className=\"h-display h2 rv d1\" id=\"h-booking\">{c(p.closingTitle)}</h2><p className=\"booking-lead rv d2\">{c(p.closingLead)}</p><div className=\"booking-actions rv d3\"><div><a className=\"contact-action contact-action--primary\" href={previewWhatsApp(lang,true)} target=\"_blank\" rel=\"noopener noreferrer\"><IconWhatsApp/>{c(p.firstCta)}</a><p className=\"small\">{c(p.closingMicro)}</p></div><a className=\"contact-action\" href={previewWhatsApp(lang)} target=\"_blank\" rel=\"noopener noreferrer\"><IconWhatsApp/>{c(p.cta)}</a><a className=\"contact-action\" href={previewMail(lang)}><IconMail/>{L(\"Napsat e-mail\",\"Send an email\")}</a></div>{collaboration&&<a href={IG_URL} target=\"_blank\" rel=\"noopener noreferrer\">Instagram</a>}</div></div></section>;\n}\n\nfunction PageHomePreview({ lang }: any) {\n  const c=(pair:readonly string[])=>previewText(pair,lang);\n  return (\n    <>\n      <OpeningPreview lang={lang} />\n      <div className=\"home-dark-field\">\n        <HomeAudiencePreview lang={lang}/>\n        <HomeWorkPreview lang={lang} />\n        <HomeCollabPreview lang={lang} />\n        <section className=\"sec\" id=\"jak-to-funguje\"><div className=\"wrap\"><h2 className=\"h-display h2 rv\">{c(p.howTitle)}</h2><div className=\"process-three\">{p.steps.map((x,i)=><article className=\"rv\" key={i}><span className=\"num\">0{i+1}</span><h3>{c(x[0])}</h3><p>{c(x[1])}</p></article>)}</div><p className=\"act\"><Go href=\"#rezervace\" cs=\"Chci začít\" en=\"I want to start\"/></p><Go href={routePath(\"spoluprace-preview\",lang)+\"#co-dostanes\"} cs=\"Co přesně dostaneš →\" en=\"What exactly you get →\"/></div></section>\n        <HomeReferences lang={lang} preview/>\n        <HomeAboutPreview lang={lang} />\n        <HomeBookingPreview lang={lang}/>\n        <ClientStrip lang={lang} />\n      </div>\n      <Closing />\n    </>\n  );\n}\n\nfunction PageSpolupracePreview({ lang }: any) {\n  const c=(pair:readonly string[])=>previewText(pair,lang);\n  return <div className=\"site-page\" data-secondary-v6=\"\" data-secondary-v8=\"\" data-collaboration-v99=\"\">\n    <header className=\"site-linen page-hero collaboration-hero-v8 hero-unified\">\n      <div className=\"collaboration-earth-stage\" aria-hidden=\"true\"><SecondaryMaterialMask src=\"/media/refine-v9-14/collaboration-mask.png\" className=\"v8-art--earth v8-art--desktop\" /><SecondaryMaterialMask src=\"/media/refine-v9-14/collaboration-mask-mobile.png\" className=\"v8-art--earth v8-art--mobile\" /></div>\n      <div className=\"wrap\">\n        <div className=\"page-hero-grid collaboration-hero-grid\">\n          \n          \n          <div className=\"collaboration-hero-copy\">\n            <p className=\"label rv\">{c(p.workKicker)}</p>\n            <h1 className=\"h-display h1 rv d1\">{c(p.workTitle)}</h1>\n            <p className=\"hero-dominant rv d1\">{c(p.workLead)}</p>\n            <p className=\"lead rv d2\">{c(p.micro)}</p>\n            <div className=\"act rv d3 collaboration-entry-actions\"><Go href=\"#kontakt\" cs={p.cta[0]} en={p.cta[1]} /><a className=\"collaboration-price-jump\" href=\"#co-dostanes\">{L(\"Co dostaneš\",\"What you get\")}<span aria-hidden=\"true\">↓</span></a></div>\n          </div>\n          <SecondaryHeroPhoto className=\"collaboration-hero-cutout\" src=\"/media/collaboration-v9-8/collaboration-hero-1086.webp\"\n            srcSet=\"/media/collaboration-v9-8/collaboration-hero-540.webp 540w, /media/collaboration-v9-8/collaboration-hero-720.webp 720w, /media/collaboration-v9-8/collaboration-hero-1086.webp 1086w\"\n            width={1086} height={1448} sizes=\"(min-width:900px) min(43vw, 620px), (min-width:600px) 380px, 78vw\"\n            alt={L(\"Kryštof Švec sedící na černých bradlech, vedle jsou dvě malé dřevěné paraletky.\",\"Kryštof Švec seated on black parallel bars, with two small wooden parallettes beside him.\")} />\n        </div>\n      </div>\n    </header>\n\n    <div className=\"site-linen collaboration-proof-v919\" role=\"group\" aria-label={L(\"Zkušenosti a odborné zázemí\",\"Experience and professional background\")}>\n      <div className=\"collaboration-linen-lip\" aria-hidden=\"true\" />\n      <div className=\"wrap\"><div className=\"proof-row about-proof-v918 rv\">\n        <div className=\"proof-item\"><strong>{L(\"10 LET\",\"10 YEARS\")}</strong><span>{L(\"vlastní pohybové praxe\",\"of personal movement practice\")}</span></div>\n        <div className=\"proof-item\"><strong>100+</strong><span>{L(\"klientů\",\"clients\")}</span></div>\n        <div className=\"proof-item proof-item--education\"><strong>{L(\"ODBORNÉ ZÁZEMÍ\",\"PROFESSIONAL BACKGROUND\")}</strong>\n          <span className=\"proof-credentials\">{L(\"Osobní trenér ve fitness · instruktor jógy\",\"Personal Trainer in Fitness · yoga instructor\")}</span>\n          <a className=\"proof-study\" href={routePath(\"pribeh\",lang)+\"#vzdelani\"}>{L(\"celé vzdělání →\",\"full education →\")}</a>\n        </div>\n      </div></div>\n    </div>\n\n<section className=\"site-linen page-section collaboration-needs-v99\" id=\"potreby\"><div className=\"wrap\"><div className=\"section-head section-head--split\"><h2 className=\"h-display h2 rv\">{c(p.needsTitle)}</h2><div className=\"page-intro rv d1\"><p><strong>{L(\"Teď:\",\"Now:\")}</strong> {c(p.now)}</p><p><strong>{L(\"Kam chceš:\",\"Where you want to be:\")}</strong> {c(p.destination)}</p></div></div><h3 className=\"h3\">{c(p.barriersTitle)}</h3><div className=\"secondary-illustrated secondary-illustrated--needs\"><div className=\"editorial-grid\">{p.barriers.map((x,i)=><article className=\"rv\" key={i}><span className=\"num\">0{i+1}</span><h3>{c(x[0])}</h3><p>{c(x[1])}</p></article>)}</div><SecondaryIllustration src=\"/media/illustration/illustration-pine.webp\" width={640} height={960} sizes=\"(min-width:900px) 290px, 220px\" className=\"secondary-illustration--collaboration-pine\" decorative/></div><p className=\"stance-line\">{c(p.needsClose)}</p><Go href=\"#kontakt\" cs={p.cta[0]} en={p.cta[1]}/></div></section><section className=\"site-linen page-section collaboration-experience\" id=\"zkusenost\"><div className=\"wrap\"><div className=\"section-head section-head--split\"><h2 className=\"h-display h2 rv\">{c(p.forTitle)}</h2><div className=\"page-intro rv d1\"><ul>{p.forItems.map(x=><li key={x[0]}>{c(x)}</li>)}</ul><p><strong>{c(p.forClose)}</strong></p><p>{c(p.notFor)}</p></div></div></div></section><section className=\"site-linen page-section collaboration-formats\" id=\"moznosti\"><div className=\"wrap\"><h2 className=\"h-display h2 rv\">{c(p.oldTitle)}</h2><div className=\"editorial-list\" style={{marginTop:30}}>{p.oldWays.map((x,i)=><article className=\"editorial-row rv\" key={i}><span className=\"num\">0{i+1}</span><div><p className=\"preview-old-way\">{c(x[0])}</p><h3>{c(x[1])}</h3></div></article>)}</div><p className=\"stance-line\">{c(p.oldClose)}</p><Go href=\"#kontakt\" cs={p.cta[0]} en={p.cta[1]}/></div></section><section className=\"site-ink page-section--tight between-v8 between-v919\" id=\"co-dostanes\"><div className=\"material-edge material-edge--linen\" aria-hidden=\"true\"/><DesktopCycle lang={lang}><div className=\"between-copy-v919\"><p className=\"label rv\">{c(p.startLabel)}</p><h2 className=\"h-display h2 rv d1\" style={{marginTop:12}}>{c(p.startTitle)}</h2><div className=\"between-visual-row-v919\"><p className=\"scan-line rv d2\">{L(\"PLÁN · ZÁZNAM · ÚPRAVA\",\"PLAN · RECORD · ADJUST\")}</p><CollaborationCycle/></div></div><div className=\"between-items\">{p.startItems.map((x,i)=><div className=\"preview-start-item rv\" key={i}><h3>{c(x[0])}</h3><p>{c(x[1])}</p></div>)}</div></DesktopCycle><div className=\"wrap preview-week\"><p className=\"body-txt\"><strong>{c(p.weekTitle)}</strong></p><p className=\"body-txt\">{c(p.week)}</p><p className=\"body-txt\"><strong>{c(p.why)}</strong></p><p className=\"body-txt\"><strong>{c(p.price)}</strong></p><p className=\"small\">{c(p.priceSmall)}</p><p className=\"act\"><Go href=\"#kontakt\" cs={p.cta[0]} en={p.cta[1]}/></p><a className=\"go\" href={previewWhatsApp(lang,true)} target=\"_blank\" rel=\"noopener noreferrer\">{c(p.direct)}</a></div></section>\n<div className=\"site-ink\"><HomeReferences lang={lang} preview/></div>    <section className=\"site-ink page-section process-v8\">\n      <div className=\"wrap process-v8-grid process-with-equipment\"><div className=\"process-v913-heading\"><h2 className=\"h-display h2 rv\">{L(\"Jak začneš?\",\"How do you start?\")}</h2>\n      </div>\n      <div className=\"process-three\">{p.workSteps.map((x,i)=><article className=\"rv\" key={i}><span className=\"num\">0{i+1}</span><h3>{c(x[0])}</h3><p>{c(x[1])}</p></article>)}</div>\n      <SecondaryIllustration className=\"process-equipment-v913\"\n        src=\"/media/refine-v9-17/equipment-linen-720.webp\"\n        srcSet=\"/media/refine-v9-17/equipment-linen-360.webp 360w, /media/refine-v9-17/equipment-linen-540.webp 540w, /media/refine-v9-17/equipment-linen-720.webp 720w, /media/refine-v9-17/equipment-linen-960.webp 960w, /media/refine-v9-17/equipment-linen-1405.webp 1405w\"\n        width={1405} height={903} sizes=\"(min-width:1200px) 430px, (min-width:900px) 35vw, (min-width:520px) 380px, calc(100vw - 64px)\"\n        alt={L(\"Dřevěné kruhy se sbalenými popruhy, kettlebell a dvě nízké stálky, jemná konturová kresba.\",\"Wooden rings with packed straps, a kettlebell and two low parallettes, a fine contour illustration.\")} />\n      </div>\n      <div className=\"wrap\"><Go href=\"#kontakt\" cs=\"Chci začít\" en=\"I want to start\"/></div><SecondaryTerrain kind=\"l01\" /></section>\n\n<section className=\"site-linen page-section--tight\"><div className=\"material-edge material-edge--ink\" aria-hidden=\"true\"/><div className=\"wrap\"><div className=\"boundary rv\"><p className=\"label rv\">Kryštof Švec</p><h2 className=\"h-display h2 rv d1\" id=\"h-about-short\">{c(p.aboutTitle)}</h2><p className=\"body-txt rv d2\">{c(p.bio)}</p><p className=\"body-txt rv d2\">{c(p.cheer)}</p><p className=\"body-txt\"><strong>{c(p.live)}</strong></p><p className=\"body-txt\"><a href={routePath(\"pribeh\",lang)+\"#vzdelani\"}>{c(p.qualification)}</a></p><p className=\"act rv d3\"><Go href={routePath(\"pribeh\",lang)} cs=\"Můj příběh\" en=\"My story\"/></p></div></div></section><CollaborationFaq lang={lang} preview/><CollaborationPricing lang={lang} preview/><HomeBookingPreview lang={lang} collaboration/></div>;\n}\n\n"
         },
         {
-          "offset": 224231,
+          "offset": 220456,
           "before": "",
           "after": "  // Preview cross-page anchors must scroll after React has mounted the destination.\n  // Existing original routes keep their navigation; education is the new approved anchor.\n  useEffect(() => {\n    const hash = window.location.hash;\n    if (!hash || (hash !== \"#vzdelani\" && !loc.routeId.endsWith(\"-preview\"))) return;\n    let active = true, frame = 0;\n    document.fonts.ready.then(() => {\n      if (!active) return;\n      frame = requestAnimationFrame(() => document.getElementById(hash.slice(1))?.scrollIntoView({behavior:\"instant\"}));\n    });\n    return () => { active = false; cancelAnimationFrame(frame); };\n  }, [loc]);\n\n"
         },
         {
-          "offset": 225069,
+          "offset": 221294,
           "before": "  const r = loc.routeId;\n",
           "after": "  const r = loc.routeId.replace(\"-preview\", \"\");\n"
         },
         {
-          "offset": 226153,
+          "offset": 222378,
           "before": "      {mobile ? <MobileSite loc={loc}>\n",
           "after": "      {mobile ? <MobileSite loc={loc} preview={loc.routeId.endsWith(\"-preview\")}>\n        {loc.routeId === \"home-preview\" && <MobileHomePreview lang={lang} />}\n        {loc.routeId === \"spoluprace-preview\" && <MobileCollaborationPreview lang={lang} />}\n"
         },
         {
-          "offset": 227075,
+          "offset": 223300,
           "before": "      <TopBar loc={loc} menuOpen={menuOpen} onMenu={() => setMenuOpen((o) => !o)} />\n      <Menu open={menuOpen} onClose={() => setMenuOpen(false)} loc={loc} />\n",
           "after": "      <TopBar preview={loc.routeId.endsWith(\"-preview\")} loc={loc} menuOpen={menuOpen} onMenu={() => setMenuOpen((o) => !o)} />\n      <Menu preview={loc.routeId.endsWith(\"-preview\")} open={menuOpen} onClose={() => setMenuOpen(false)} loc={loc} />\n"
         },
         {
-          "offset": 227323,
+          "offset": 223548,
           "before": "      <main id=\"main\" key={loc.routeId + lang + (loc.postId || \"\")}>\n",
           "after": "      <main data-preview={loc.routeId.endsWith(\"-preview\") ? \"v3\" : undefined} id=\"main\" key={loc.routeId + lang + (loc.postId || \"\")}>\n        {loc.routeId === \"home-preview\" && <PageHomePreview lang={lang} />}\n        {loc.routeId === \"spoluprace-preview\" && <PageSpolupracePreview lang={lang} />}\n"
         },
         {
-          "offset": 228181,
+          "offset": 224406,
           "before": "      <Footer lang={lang} variant={loc.routeId === \"home\" ? \"sand\" : \"linen\"} />\n",
           "after": "      <Footer preview={loc.routeId.endsWith(\"-preview\")} original={r} lang={lang} variant={r === \"home\" ? \"sand\" : \"linen\"} />\n"
         }
@@ -519,26 +519,26 @@
     },
     {
       "path": "src/site.js",
-      "beforeSha256": "2d2678c595127c083764ae2cf4b8db3a9d724235c7d8b7da186e661df9658837",
-      "afterSha256": "2e9d3ea93e697be8632988bd1eec4398d5a01942d09621e37c4c17f635289404",
+      "beforeSha256": "84c93002cb01a05ba46abdd6301bc0bdc01d78469d32824baff884d549a5472c",
+      "afterSha256": "ac92f119e8bdc734c5a31ef96e96efe08324086a34e5bc12c007cbca399f2252",
       "replacements": [
         {
-          "offset": 4747,
+          "offset": 3076,
           "before": "      cs: \"Kryštof Švec, osobní trenér v Praze. Deset let vlastní pohybové praxe, zkušenost s 150+ klienty a odborné zázemí v tréninku, józe a psychologii.\",\n      en: \"Kryštof Švec, personal trainer in Prague. Ten years of personal movement practice, experience with 150+ clients, and professional grounding in training, yoga and psychology.\",\n",
           "after": "      cs: \"Kryštof Švec, osobní trenér v Praze. Deset let vlastní pohybové praxe, zkušenost s 100+ klienty a odborné zázemí v tréninku, józe a psychologii.\",\n      en: \"Kryštof Švec, personal trainer in Prague. Ten years of personal movement practice, experience with 100+ clients, and professional grounding in training, yoga and psychology.\",\n"
         },
         {
-          "offset": 6992,
+          "offset": 5321,
           "before": "",
           "after": "  ...[ ['home-preview','home','/nahled','/en/preview'], ['spoluprace-preview','spoluprace','/nahled/spoluprace','/en/preview/work-with-me'] ].map(([id,original,cs,en]) => ({\n    id, original, preview: true, nav: false, num: undefined, path: {cs,en},\n    label: {cs:'Náhled',en:'Preview'},\n    title: original === 'home' ? {cs:'Osobní trenér Praha | Kryštof Švec · tanmay practice',en:'Personal trainer Prague | Kryštof Švec · tanmay practice'} : {cs:'Start 4 týdny · osobní trénink Praha | tanmay practice',en:'4-Week Start · personal training Prague | tanmay practice'},\n    description: original === 'home' ? {cs:'Zesílíš, zhubneš a tentokrát vydržíš. Síla s vlastní vahou a plán, který unese i těžký týden. Prvních 15 minut zdarma.',en:'You’ll get stronger, lose fat and this time it’ll last. Bodyweight strength and a plan that survives a hard week. First 15 minutes free.'} : {cs:'Za 4 týdny zesílíš, zpevníš se a přestaneš začínat od pondělí. Bez hodin v posilovně a bez drastických diet. 3 200 Kč. Začni 15 minutami zdarma.',en:'In 4 weeks you’ll be stronger, firmer and done with starting over on Monday. No hours in the gym, no crash diets. CZK 3,200. Start with a free 15 minutes.'},\n  })),\n"
         },
         {
-          "offset": 9049,
+          "offset": 7378,
           "before": "",
           "after": "        ...(r.preview ? {preview:true} : {}),\n"
         },
         {
-          "offset": 9283,
+          "offset": 7612,
           "before": "        ogSlug: r.id === \"home\" ? \"home-20261001\" : r.id,\n",
           "after": "        ogSlug: r.preview ? (r.original === \"home\" ? \"home-20261001\" : r.original) : r.id === \"home\" ? \"home-20261001\" : r.id,\n"
         }

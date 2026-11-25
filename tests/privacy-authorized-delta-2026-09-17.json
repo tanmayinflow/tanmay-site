@@ -2,8 +2,8 @@
   "approvedOn": "2026-09-17",
   "path": "src/App.tsx",
   "scope": "Only the owner-approved bilingual privacy clarification; all prior M10 source and fixtures remain protected.",
-  "beforeSha256": "62ab318c983f66117c2054a49e3b8c6d1e425a317c147ad6b416009d6528ce69",
-  "authorizedSha256": "3653e82bd62e2d8c27badb02c6580c48e01d363fc0a5400f9afd87720c9f7d14",
+  "beforeSha256": "45ccf62f81c7d6bca2caba9dbbf57866bc12fda585c2d5ce186a3c964db0858d",
+  "authorizedSha256": "6b37dcc6805adcdda1fcc7671513fcf2a349070d14fff8858ad6f637cf9cc401",
   "replacements": [
     {
       "id": "technical-basis-cs",

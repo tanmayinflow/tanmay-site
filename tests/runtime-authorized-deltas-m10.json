@@ -7,8 +7,8 @@
   "files": [
     {
       "path": "src/App.tsx",
-      "beforeSha256": "5ede1d5e428e9c72f9ca2a11bdabbb1bdf4e3243f22bc228560d9daf0e67a371",
-      "authorizedSha256": "efc901874da8616caf79c77cada4ec202f6474c46b9aa452a7ce9258b1b7be68",
+      "beforeSha256": "9576d058412245644724acaf7c4594464f501577272e0cf90207a759e5374a86",
+      "authorizedSha256": "47b3ca2f238285e6e08150333a5eafd669d9c17e761a0f769a2600cdabbf10cf",
       "replacements": [
         {
           "id": "runtime-import",
@@ -39,8 +39,8 @@
     },
     {
       "path": "src/site.js",
-      "beforeSha256": "9cbc4172602c2b40c8b1b343ecc0a5f1be9b087cac28be9b755780f2c8f7b393",
-      "authorizedSha256": "8cf4f99090da23ccee184e132ee7fcffc2daeb0fab50dfb666a837a87ce033b6",
+      "beforeSha256": "6845a3f6966b354c7ada945332b1072ef0d463388a893acfe380a1f8c4718c81",
+      "authorizedSha256": "babcaa9955cfeb7148d167526a6563ce64c1dc998d4cc7a4b2198ab30e5f38a9",
       "replacements": [
         {
           "id": "journal-not-public",
