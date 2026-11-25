@@ -32,44 +32,7 @@ export const LANGS = ["cs", "en"];
  * Journal entries. Titles, dates and excerpts are real authored text.
  * Nothing here is generated. Three real notes are three real notes.
  */
-export const POSTS = [
-  {
-    id: "p1",
-    date: "2026-06",
-    slug: { cs: "sedel-jsem-hodinu-nic-se-nestalo", en: "i-sat-for-an-hour-nothing-happened" },
-    title: { cs: "Seděl jsem hodinu. Nic se nestalo.", en: "I sat for an hour. Nothing happened." },
-    tag: { cs: "Praxe", en: "Practice" },
-    when: { cs: "červen 2026", en: "June 2026" },
-    excerpt: {
-      cs: "Ráno. Polštář, čaj, les za oknem ještě ve tmě. Sedl jsem si s tím, že dnes to bude hluboké. Nebylo.",
-      en: "Morning. Cushion, tea, the forest outside still dark. I sat down expecting depth. There was none.",
-    },
-  },
-  {
-    id: "p2",
-    date: "2026-05",
-    slug: { cs: "co-me-dnes-ten-pohyb-stal", en: "what-the-movement-cost-me-today" },
-    title: { cs: "Co mě dnes ten pohyb stál", en: "What the movement cost me today" },
-    tag: { cs: "Tělo", en: "Body" },
-    when: { cs: "květen 2026", en: "May 2026" },
-    excerpt: {
-      cs: "Stoj na rukou na padlém kmeni. Mokré dřevo, studené dlaně. Dvacet pokusů, tři vteřiny rovnováhy.",
-      en: "A handstand on a fallen trunk. Wet wood, cold palms. Twenty attempts, three seconds of balance.",
-    },
-  },
-  {
-    id: "p3",
-    date: "2026-04",
-    slug: { cs: "les-nehodnoti", en: "the-forest-does-not-judge" },
-    title: { cs: "Les nehodnotí", en: "The forest does not judge" },
-    tag: { cs: "Divoká příroda", en: "Wild nature" },
-    when: { cs: "duben 2026", en: "April 2026" },
-    excerpt: {
-      cs: "Vracím se na stejné místo už třetí rok. Stejný kopec, stejné buky, jiné světlo.",
-      en: "I keep returning to the same place, third year now. Same hill, same beeches, different light.",
-    },
-  },
-];
+export const POSTS = [];
 
 /**
  * Public routes. `nav` marks the deliberately short primary header navigation.

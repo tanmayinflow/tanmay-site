@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
-import worker, { videoPath, videoPaths } from '../worker/media-range.mjs';
+import { readFileSync, statSync } from 'node:fs';
+import worker, { videoPath, videoPaths, videoSizes } from '../worker/media-range.mjs';
 
 const data = Uint8Array.from({ length: 100 }, (_, i) => i);
 function env() {
@@ -46,11 +46,29 @@ test(path + ': ranges work when the internal asset binding omits Content-Length'
     ASSETS: {fetch: async () => new Response(data, {headers:{'Content-Type':'video/mp4'}})},
   });
   assert.equal(response.status,206);
-  assert.equal(response.headers.get('Content-Range'),'bytes 40-49/100');
+  const expectedSize=statSync(new URL('../public'+path,import.meta.url)).size;
+  assert.equal(videoSizes.get(path),expectedSize);
+  assert.equal(response.headers.get('Content-Range'),'bytes 40-49/'+expectedSize);
   assert.deepEqual(new Uint8Array(await response.arrayBuffer()),data.slice(40,50));
 });
 
 }
+
+test('a short range cancels the upstream stream before reading the whole video', async () => {
+  let pulls = 0;
+  let cancelled = false;
+  const stream = new ReadableStream({
+    pull(controller) { pulls++; controller.enqueue(new Uint8Array(1024)); },
+    cancel() { cancelled = true; },
+  });
+  const request = new Request('https://tanmaypractice.com'+videoPath, {headers:{Range:'bytes=20-23'}});
+  const response = await worker.fetch(request,{ASSETS:{fetch:async()=>new Response(stream)}});
+  assert.equal(response.status,206);
+  assert.equal(response.headers.get('Content-Length'),'4');
+  assert.equal((await response.arrayBuffer()).byteLength,4);
+  assert.equal(cancelled,true);
+  assert.ok(pulls<4);
+});
 
 test('only the five supplied videos are routed first; other routes and errors pass through', async () => {
   const config=JSON.parse(readFileSync(new URL('../wrangler.jsonc',import.meta.url)));

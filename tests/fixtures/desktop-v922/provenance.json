@@ -12,14 +12,14 @@
     {
       "file": "original-site-manifest.json",
       "source": "WORKING/audit/original-site-manifest.json",
-      "bytes": 57707,
-      "sha256": "160aaf58809262a89748d325215c31eb55b0460825999a54c40739c8e31070ae"
+      "bytes": 57706,
+      "sha256": "a23523e10ee7689bd2d1ce40681b2d2ab35cbccfb1e54c07c50702c7d6f6217a"
     },
     {
       "file": "site/src/App.tsx",
       "source": "DESKTOP-LOCKED-V9.22/site/src/App.tsx",
-      "bytes": 210176,
-      "sha256": "8f350c59016d977aa630c99b38d61ca446e0461ed8779f57cfbb0015e0501be4"
+      "bytes": 206401,
+      "sha256": "cd2c49dc73f90f37a8516d66106ee0bdaef112c22bf0b39c255bc502ba75c23e"
     },
     {
       "file": "site/src/components/CollaborationFaq.tsx",
@@ -30,8 +30,8 @@
     {
       "file": "site/src/site.js",
       "source": "DESKTOP-LOCKED-V9.22/site/src/site.js",
-      "bytes": 10206,
-      "sha256": "9cbc4172602c2b40c8b1b343ecc0a5f1be9b087cac28be9b755780f2c8f7b393"
+      "bytes": 8535,
+      "sha256": "6845a3f6966b354c7ada945332b1072ef0d463388a893acfe380a1f8c4718c81"
     },
     {
       "file": "site/public/_redirects",

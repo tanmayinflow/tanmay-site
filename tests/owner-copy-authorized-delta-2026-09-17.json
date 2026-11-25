@@ -4,8 +4,8 @@
   "files": [
     {
       "path": "src/App.tsx",
-      "beforeSha256": "3653e82bd62e2d8c27badb02c6580c48e01d363fc0a5400f9afd87720c9f7d14",
-      "authorizedSha256": "20cc75112442f17387c598fbc2de754af1b9d460e8282f62d39d3fece05ee640",
+      "beforeSha256": "6b37dcc6805adcdda1fcc7671513fcf2a349070d14fff8858ad6f637cf9cc401",
+      "authorizedSha256": "27415adaa94f3cc5891053dff033f0537febc1d9e976919b57cb5406eefb7553",
       "replacements": [
         {
           "id": "practice-title-cs",

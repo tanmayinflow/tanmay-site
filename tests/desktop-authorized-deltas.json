@@ -28,8 +28,8 @@
     },
     {
       "path": "src/App.tsx",
-      "originalSha256": "8f350c59016d977aa630c99b38d61ca446e0461ed8779f57cfbb0015e0501be4",
-      "authorizedSha256": "5ede1d5e428e9c72f9ca2a11bdabbb1bdf4e3243f22bc228560d9daf0e67a371",
+      "originalSha256": "cd2c49dc73f90f37a8516d66106ee0bdaef112c22bf0b39c255bc502ba75c23e",
+      "authorizedSha256": "9576d058412245644724acaf7c4594464f501577272e0cf90207a759e5374a86",
       "replacements": [
         {
           "id": "practice-meaning-part-cs",

@@ -3,8 +3,8 @@
   "files": [
     {
       "path": "src/App.tsx",
-      "beforeSha256": "f88504f90a48631c93ec715bc33ffece88821a20fcf66eda07d35184a749242c",
-      "afterSha256": "9cdccf78d40c62242dd74d7870b0ba65eef026c1367578be86b558d699f35679",
+      "beforeSha256": "cb138760e70a51ae07add86a4447f75770f0ddf2a87f5b4370e080c9c4ca53ca",
+      "afterSha256": "083af1778b49c64e316fd01e1661cce32c477c1fe532bc8fe559e56bab560e05",
       "replacements": [
         {
           "offset": 575,

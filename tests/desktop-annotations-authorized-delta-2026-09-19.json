@@ -2,8 +2,8 @@
   "approvedOn": "2026-09-19",
   "baselineCommit": "7ca88dd0baa311539689daec4cd6e57a19141863",
   "path": "src/App.tsx",
-  "beforeSha256": "cf65313e67b92d96bafa7f9596103ae1f8b04df032f94d883a3dd2dbb3b1fac9",
-  "authorizedSha256": "46aff47cbbb3e279116bc7a8188f2bdba9fe98f242852772e992f502d3139576",
+  "beforeSha256": "2b27810523b1c381eb05d9b3eca595bc9eaeba63e2dc589ba368df8e26d47995",
+  "authorizedSha256": "15b28d7687e1592046eb1bb5716d99839d8a4d63a7f6876619b0c1b22a3c9482",
   "replacements": [
     {
       "id": "meaning-import",
