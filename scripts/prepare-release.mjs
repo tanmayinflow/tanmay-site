@@ -2,6 +2,7 @@
 import { existsSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import { resolve, join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { verifyPublicOutput } from './check-publication.mjs';
 const site = fileURLToPath(new URL('../', import.meta.url));
 const dist = resolve(site, 'dist');
 const demo = resolve(dist, 'media/demo');
@@ -19,4 +20,5 @@ function checkReferences(dir) {
 }
 checkReferences(dist);
 rmSync(demo, { recursive: true, force: true });
+verifyPublicOutput(dist);
 console.log('Release output excludes unused historical demo media; source originals retained.');
