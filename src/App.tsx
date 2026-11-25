@@ -2090,56 +2090,7 @@ const EVENTS = [
 ];
 
 /** Skutečné autorské zápisy. Nic z toho není vygenerované. */
-const BODIES: Record<string, { cs: string[]; en: string[] }> = {
-  p1: {
-    cs: [
-      "Ráno. Polštář, čaj, les za oknem ještě ve tmě. Sedl jsem si s tím, že dnes to bude hluboké. Nebylo.",
-      "Hodinu jsem poslouchal vlastní mysl, jak přepočítává týden. Nohy usnuly. Záda protestovala. Několikrát jsem otevřel oči a díval se, kolik zbývá.",
-      "Dřív bych to nazval špatnou meditací. Dnes už vím, že si tím jen chráním představu o sobě. Praxe není výkon, který se povede nebo nepovede. Praxe je návrat. Tisíckrát odejít, tisíckrát se vrátit.",
-      "Zítra si sednu znovu. Možná se zase nic nestane.",
-      "To byla ta praxe.",
-    ],
-    en: [
-      "Morning. Cushion, tea, the forest outside still dark. I sat down expecting depth. There was none.",
-      "For an hour I listened to my own mind recalculating the week. My legs fell asleep. My back protested. Several times I opened my eyes to see how much was left.",
-      "I used to call that a bad meditation. Now I know I was only protecting an image of myself. Practice is not a performance that succeeds or fails. Practice is return. Leaving a thousand times, coming back a thousand times.",
-      "Tomorrow I will sit again. Maybe nothing will happen again.",
-      "That was the practice.",
-    ],
-  },
-  p2: {
-    cs: [
-      "Stoj na rukou na padlém kmeni. Mokré dřevo, studené dlaně. Dvacet pokusů, tři vteřiny rovnováhy.",
-      "Po nehodě mi řekli, že se nebudu hýbat. Neříkám to, abych ohromil. Říkám to, protože každý pokus o rovnováhu je od té doby rozhovor, ne boj.",
-      "Co mě to dnes stálo: kůži na dlaních, hodinu času, kus pýchy.",
-      "Co mi to vrátilo: tři vteřiny, kdy nebylo nic jiného než dech, dřevo a tíha.",
-      "Tělo není projekt. Tělo je místo, kde žiju. Starám se o něj jako o dům, ve kterém chci zestárnout.",
-    ],
-    en: [
-      "A handstand on a fallen trunk. Wet wood, cold palms. Twenty attempts, three seconds of balance.",
-      "After the accident they told me I would not move again. I don't say this to impress. I say it because every attempt at balance since then is a conversation, not a fight.",
-      "What it cost me today: skin off my palms, an hour of time, a piece of pride.",
-      "What it gave back: three seconds in which there was nothing but breath, wood and weight.",
-      "The body is not a project. The body is where I live. I care for it like a house I want to grow old in.",
-    ],
-  },
-  p3: {
-    cs: [
-      "Vracím se na stejné místo už třetí rok. Stejný kopec, stejné buky, jiné světlo.",
-      "V zimě mě to místo učilo, co je nepohodlí. Na jaře, co je trpělivost. Dnes tam bylo ticho, které nehodnotí. Les nereaguje na to, kým se snažím být. Reaguje jen na to, co dělám. Proto je to zrcadlo.",
-      "Sedl jsem si k potoku a chvíli nedělal nic. Žádný obsah, žádný trénink. Jen pozornost.",
-      "Cestou dolů jsem potkal srnce. Stáli jsme a dívali se na sebe, dokud to jemu nestačilo.",
-      "Co se učím v lese, se pak děje i jinde. U stolu. Ve vztahu. V tramvaji.",
-    ],
-    en: [
-      "I keep returning to the same place, third year now. Same hill, same beeches, different light.",
-      "In winter the place taught me what discomfort is. In spring, what patience is. Today there was a silence that does not judge. The forest does not respond to who I am trying to be. It responds only to what I do. That is why it is a mirror.",
-      "I sat by the stream and did nothing for a while. No content, no training. Just attention.",
-      "On the way down I met a roe deer. We stood looking at each other until he had had enough.",
-      "What I learn in the forest starts happening elsewhere too. At the table. In a relationship. On the tram.",
-    ],
-  },
-};
+const BODIES: Record<string, { cs: string[]; en: string[] }> = {};
 
 
 // ----------------------------------------------------------------------
